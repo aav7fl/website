@@ -1,45 +1,24 @@
-![preview Long Haul](/preview.jpg)
+# My Personal Website
 
-Long Haul is a minimal jekyll theme built with COMPASS / SASS / SUSY and focuses on long form blog plosts. It is meant to used as a starting point for a jekyll blog/website.
+[![Build Status](https://travis-ci.org/aav7fl/aav7fl.github.io.svg?branch=source)](https://travis-ci.org/aav7fl/aav7fl.github.io) [![Greenkeeper badge](https://badges.greenkeeper.io/aav7fl/aav7fl.github.io.svg)](https://greenkeeper.io/)
 
-If you really enjoy Long Haul and want to give me credit somewhere on the send or tweet out your experience with Long Haul and tag me [@brianmaierjr](https://twitter.com/brianmaier).
+![Kyle Niewiada logo](https://cloud.githubusercontent.com/assets/3487107/22938412/b6252638-f2a9-11e6-9623-603320928bac.png)
 
-####[View Demo](http://brianmaierjr.com/long-haul)
+https://www.kyleniewiada.org/
+
+This is my personal website that I tweak and write about projects I have worked on.
+
+**Check out [the repo Wiki](https://github.com/aav7fl/aav7fl.github.io/wiki) for the latest documentation and information.**
 
 ## Features
+- Mobile responsive
+- Uses modern HTML5 and CSS3
+- AMP validated ([Accelerated Mobile Pages](https://www.ampproject.org/))
+- Ready for Travis continuous integration
+- Basic Testing
 
-- Minimal, Type Focused Design
-- Built with SASS + COMPASS
-- Layout with SUSY Grid
-- SVG Social Icons
-- Responsive Nav Menu
-- XML Feed for RSS Readers
-- Contact Form via Formspree
-- 5 Post Loop with excerpt on Home Page
-- Previous / Next Post Navigation
-- Estimated Reading Time for posts
-- Stylish Drop Cap on posts
-- A Better Type Scale for all devices
+---
 
-## Setup
+`source` [default] branch contains the website source code.
 
-1. [Install Jekyll](http://jekyllrb.com)
-2. Fork the [Long Haul repo](http://github.com/brianmaierjr/long-haul)
-3. Clone it
-4. Run Jekyll `jekyll serve -w`
-5. Run `compass watch`
-6. Customize!
-
-## Site Settings
-
-The main settings can be found inside the `_config.yml` file:
-
-- **name:** name of your site
-- **description:** description of your site
-- **url:** your url
-- **paginate:** the amount of posts displayed on homepage
-- **navigation:** these are the links in the main site navigation
-
-## License
-
-This is [MIT](LICENSE) with no added caveats, so feel free to use this Jekyll theme on your site without linking back to me or using a disclaimer.
+`master` branch contains the generated website.
