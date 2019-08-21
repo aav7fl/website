@@ -90,7 +90,7 @@ permalink: /resume/
 ### Jekyll
 
 - Setup, modify, and maintain this Jekyll website
-- [Source code](https://github.com/aav7fl/aav7fl.github.io)
+- [Source code](https://github.com/aav7fl/website)
 
 ### Experience with:
 

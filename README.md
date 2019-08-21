@@ -1,14 +1,14 @@
 # My Personal Website
 
-[![Build Status](https://travis-ci.org/aav7fl/aav7fl.github.io.svg?branch=source)](https://travis-ci.org/aav7fl/aav7fl.github.io) [![Greenkeeper badge](https://badges.greenkeeper.io/aav7fl/aav7fl.github.io.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/aav7fl/website.svg?branch=master)](https://travis-ci.com/aav7fl/website) 
 
-![Kyle Niewiada logo](https://cloud.githubusercontent.com/assets/3487107/22938412/b6252638-f2a9-11e6-9623-603320928bac.png)
+[![Kyle Niewiada logo](https://user-images.githubusercontent.com/3487107/63467880-73b38880-c434-11e9-97d9-46c6d3e2f1ec.png)](https://www.kyleniewiada.org/)
 
 https://www.kyleniewiada.org/
 
 This is my personal website that I tweak and write about projects I have worked on.
 
-**Check out [the repo Wiki](https://github.com/aav7fl/aav7fl.github.io/wiki) for the latest documentation and information.**
+**Check out [the repo Wiki](https://github.com/aav7fl/website/wiki) for the latest documentation and information.**
 
 ## Features
 - Mobile responsive
@@ -19,6 +19,6 @@ This is my personal website that I tweak and write about projects I have worked 
 
 ---
 
-`source` [default] branch contains the website source code.
+`master` [default] branch contains the website source code.
 
-`master` branch contains the generated website.
+`gh-pages` branch contains the generated website.
