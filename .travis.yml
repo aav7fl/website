@@ -2,7 +2,7 @@ language: node_js
 sudo: false
 branches:
   except:
-  - master
+  - gh-pages
 node_js:
   - '10'
 cache:
@@ -39,7 +39,7 @@ deploy:
   script: "./_scripts/deploy.sh"
   skip_cleanup: true
   on:
-    branch: source
+    branch: master
 
 notifications:
   email:
