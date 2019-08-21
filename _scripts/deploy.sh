@@ -18,7 +18,7 @@ cp -R ../${GH_REPO}/_site/* .
 # Make sure we have the updated .travis.yml file so tests won't run on master.
 cp ../${GH_REPO}/.travis.yml .
 cp ../${GH_REPO}/CNAME .
-git config --global user.email "travis@travis-ci.org"
+git config --global user.email "travis@travis-ci.com"
 git config --global user.name "Travis CI"
 
 # Commit and push generated content to `master` branch.

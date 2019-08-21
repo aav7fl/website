@@ -12,13 +12,13 @@ tag: "large project"
 description: "My Jekyll website needed an update; so I fixed that. This is how I added tests, Travis-CI builds, Accelerated Mobile Pages, SEO improvements, and more."
 ---
 
-When I took a look at my website last year, it needed help. There wasn't a whole lot wrong, but there definitely were areas that needed improvement. For starters, I wasn't testing anything (don't judge me). How would I test things? By overkilling the project and setting up [Travis-CI](https://travis-ci.org/) of course.
+When I took a look at my website last year, it needed help. There wasn't a whole lot wrong, but there definitely were areas that needed improvement. For starters, I wasn't testing anything (don't judge me). How would I test things? By overkilling the project and setting up [Travis-CI](https://travis-ci.com/) of course.
 
 Next, my website felt a little bulky. The CSS was over-the-top, I didn't need a JavaScript header menu, I had unnecessary nested HTML tags, and still didn't like how some of the elements collapsed on mobile devices.
 
 The last major change that I wanted to implement was **AMP** ([accelerated mobile pages](https://www.ampproject.org/)) to make is easier for mobile devices hitting my blog. This led down a rabbit hole of further changes.
 
-> Link to the [website source code](https://github.com/aav7fl/aav7fl.github.io/tree/2ff155a26e3c91837f35e794433fce7f3f020a30) right before this blog post was released; but it may be helpful to check out later revisions of code to see how things have changed.
+> Link to the [website source code](https://github.com/aav7fl/website/tree/2ff155a26e3c91837f35e794433fce7f3f020a30) right before this blog post was released; but it may be helpful to check out later revisions of code to see how things have changed.
 
 {% include toc.html %}
 
@@ -71,14 +71,14 @@ AllCops:
 
 Adding tests were great. But I also liked the idea that if I was away from my build environment I could make a small change on my phone, test it, and deploy to production. This was a bit of a pipe dream for me. I knew as soon as I added tests, I wouldn't be able to rely completely on GitHub builds. Likewise, if I wanted to add special plugins or RubyGems, say goodbye to GitHub builds.
 
-But [Travis-CI](https://travis-ci.org/) saves the day! Travis-CI will watch for code changes in my repo, fetch it, test it, and if it passes it could push my `_site/` folder to my GH-Pages branch (where GitHub will deploy online). Pretty cool, huh?
+But [Travis-CI](https://travis-ci.com/) saves the day! Travis-CI will watch for code changes in my repo, fetch it, test it, and if it passes it could push my `_site/` folder to my GH-Pages branch (where GitHub will deploy online). Pretty cool, huh?
 
 I stumbled across this idea from Savas Labs who wrote a blog post last fall on how they [deploy to GitHub Pages using Travis-CI](https://savaslabs.com/2016/10/25/deploy-jekyll-with-travis.html). They were not the first, but I liked some of the ideas that they used. They would bring in pull requests to the source branch, test it, and deploy to a master branch for GH-Pages based on test results. I have followed suit. I made some changes to the scripts, like how I cache different directories and rely on the built in Node.JS versions, but the idea is still the same.
 
 I'm actually a little proud of this, but my build time is now around 1½ minutes, and deploying only takes another 15 seconds. This was accomplished by:
 - Caching Bundler
 - Caching Node_Modules
-- Resolving [RVM and Node_Modules `which` conflict](https://github.com/aav7fl/aav7fl.github.io/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23). This shaved nearly a minute off the build!
+- Resolving [RVM and Node_Modules `which` conflict](https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23). This shaved nearly a minute off the build!
 
 Read more on [Travis-CI caching docs](https://docs.travis-ci.com/user/caching/).
 
@@ -211,7 +211,7 @@ Then the video `include` would properly insert the video for both AMP and defaul
 
 In the code above, it first checks to see if the video type from the post is a "normal" embedded video, or a YouTube video (not shown). Next, it checks to see if the webpage layout is of type `amp`. If this is also true, then it will insert the correct HTML layout for an AMP video. Otherwise, it will insert the video with normal HTML5.
 
-> You can find more information or any updates to my implementation on the [repo Wiki](https://github.com/aav7fl/aav7fl.github.io/wiki).
+> You can find more information or any updates to my implementation on the [repo Wiki](https://github.com/aav7fl/website/wiki).
 
 ### Results
 
@@ -250,7 +250,7 @@ end
 
 ### Website Wiki
 
-I added a [wiki to my website repo](https://github.com/aav7fl/aav7fl.github.io/wiki)
+I added a [wiki to my website repo](https://github.com/aav7fl/website/wiki)
 so others could build out their own project from my website if they wanted to. Additionally, the `README.md` for my repo was becoming far too large to include all of the information about how to build, customize, and deploy my website. This meant that I could make separate changes to the documentation without adding another code commit.
 
 ### Less Code is More

@@ -1,5 +1,5 @@
 {
-  "name": "aav7fl.github.io",
+  "name": "website",
   "version": "1.0.3",
   "description": "https://www.kyleniewiada.org/",
   "main": "index.js",
@@ -8,11 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aav7fl/aav7fl.github.io.git"
+    "url": "git+https://github.com/aav7fl/website.git"
   },
   "author": "Kyle Niewiada",
   "license": "ISC",
-  "homepage": "https://github.com/aav7fl/aav7fl.github.io#readme",
+  "homepage": "https://github.com/aav7fl/website#readme",
   "devDependencies": {
     "amphtml-validator": "^1.0.22",
     "browser-sync": "^2.24.1",
