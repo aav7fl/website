@@ -13,17 +13,10 @@ cache:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-  - GH_USERNAME: aav7fl
-  - GH_REPO: websites
-  - GH_SOURCE_BRANCH: master
-  - GH_DEST_BRANCH: gh-pages
-  - secure: ol4s+iUpSC3U0+dhIcefHohs02ehUIpOHTnsd6MNGFIkFK65rP13ytQfhwcLsZtUBx6T+gA+ECRvJc/Ild4rRYPfyjr0Ao/7khQJX6sU9rXxxmoKVgIe+Fz6e9W89atZoLVLjeHmEQSZUkzyOAl6F+25h4Q26sB7aRvoTPcnRGAMG4lDwz/SC5gXS7ENN1f+7avm2bB08TRc5ic/PQu5q01/vlyA6El2/VOWF8z+Q51eAtDeQGlkm2kQ66poK8H8olZzg+bYn/Vrjq9umQ09Ic2R+/zbChRPaoVYcRw7tp0N3EyT4hJU1WGQ6CZbNfv2+c5TMCEBe16Fit0Ad6/g9bqZhKZuGBm7GpB3DXbi8Zuv2faq/2hgQ6TAPF9VNrKpufbS0c2OtlKcjXGlueeLf6aEHuCM9sDQkxs2akW0hM000h0Plw9rjnla0q4bnNv9GjC4fH4c5ICjCBXNMhtUYcR6ij2jop3F/3VztsP6oY3E9PzqKuAR7KgP8nYe4mbk3rwGGFYUiC+2UC/MDm6FCwkXlc3RhGLBKwjDZ6dkCpp2kAb0j6nhKPJhB61i1N45PysAyqYcMI9jL+YU1gMUE27nhZgTakdgNPLagcFcbUXyrPLq7G4TR2GP0ZojwXGYRQXZU8bB8ROBR/oaucT67dtsyyE51ZnSqxTT9RmxCVo=
 
 before_install:
   # Workaround for npm which rvm issue https://github.com/travis-ci/travis-ci/issues/5092#issuecomment-245937070
-  - if [ -f node_modules/.bin/which ]; then mv node_modules/.bin/which node_modules/.bin/which.backup; fi
-  - rvm install 2.5.1 && rvm use 2.5.1
-  - if [ -f node_modules/.bin/which.backup ]; then mv node_modules/.bin/which.backup node_modules/.bin/which; fi
+  - PATH="/bin:$PATH" rvm use $(< .ruby-version) --install --binary --fuzzy
   - gem install bundler
 
 install:
@@ -34,15 +27,17 @@ script:
   - bundle exec rake test
 
 deploy:
-  provider: script
-  script: "./_scripts/deploy.sh"
+  provider: pages
   skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: _site
   on:
-    branch: gh-pages
+    branch: master
 
 notifications:
   email:
     recipients:
-      - secure: "cL/IOqpuDo0WOURQLaVHXoh0nzgDRADh82EQB/hYDMNA5Bsaj4HrxJ6JtX71e2xgAjm1x6Z0knMGTOz/Z1xXG1bcJkVr6wkDmBcGgHZczE/7UnKh3hHIP79BGQ8z25bZ088ApwGoD7tPD8iIhogMhgBBR9WJC4MpAMH1lyDqtabKsCFWwBSZnp1CTkD0FVSZBW9LECuLEor0AyjbA3gCqX05M0QnUaH6dmLkD21ei6/xTE33FL1ciH/IHd60R5NyffIAI5nhQ+TyWvQ/X/2VWd5gZFrdvu4xd9V5mfZBAuNkNtfGQJvyG9Zgr4E7tT7o9D1JOXA7s+eRZXYDEvw7v6GXqS3BjTWEW8O62QHBnYli9n87BdXAjP2tYFVy+aVBi8Lmid9ARD5pWrdtZfdO+bmI6FXCINsLsoabH0F4rettZMsVUaI/iIyFtDFHMyoqQrmEw9svLf+7BIdDq9MDizXJ2/wJJdqXM2xqMaQFdDf/FP5vFse1X5vEF2rHpYKhGBZr07P4XhUaJvC8TVtZKgX+VhjDSZA5GDh31dVm021VqwjGCXwRTp2fiKl8I+wgiwggRqzdap6fPo0n30N656LPLjXAEl0ZJjNpJRhJ6Szx/58zdVPFP+ef4HWx/hz1EOrhF/cYrHX28TeWSNzFtcmrOG2DqnazMrJBqO5uVOE="
+      - $NOTIFICATION_EMAIL
     on_success: never
     on_failure: always
