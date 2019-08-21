@@ -9,14 +9,13 @@ cache:
   directories:
     - node_modules
     - vendor/bundle
+    - /home/travis/.rvm/
 
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
 before_install:
-  # Workaround for npm which rvm issue https://github.com/travis-ci/travis-ci/issues/5092#issuecomment-245937070
-  - PATH="/bin:$PATH" rvm use $(< .ruby-version) --install --binary --fuzzy
   - gem install bundler
 
 install:
