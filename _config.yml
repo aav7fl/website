@@ -23,15 +23,13 @@ sass:
   style: compressed
 
 exclude:
-  - CNAME
-  - config.rb 
+  - browserconfig.xml
   - gulpfile.js
   - LICENSE.txt
   - package.json
+  - package-lock.json
   - Rakefile
-  - script
   - spec
-  - vendor
 
 plugins:
   - amp-jekyll
