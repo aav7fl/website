@@ -66,6 +66,8 @@ As I read through the compatibility notes, I came across two findings:
 
 The comment about controller input was several months old, so I was hopeful that maybe it was fixed? I downloaded the latest `Cxbx-Reloaded` build, loaded up my `Star Wars: Obi-Wan` backup, and _anticipated_ that the controller issue had been fixed. But to my dismay, the game still wasn’t accepting controller input.
 
+> [Cxbx-Reloaded/game-compatibility/Star Wars Obi-Wan [4C410001]](https://github.com/Cxbx-Reloaded/game-compatibility/issues/666)
+
 Unsure of what I could do with this project, I navigated to their Discord channel and asked if anyone had any idea what to do. I even toyed around with the idea of offering a bounty if someone else could fix the issue. In the end, the friendly developers suggested running `Cxbx-Reloaded` with the logs turned on for `Xapi` (logging controller input).
 
 ```
@@ -139,7 +141,7 @@ If you’re like me, you’re probably noticing something here. Everything looks
 
 After a quick discussion on how they should resolve it, they offered me the opportunity to create the PR to implement the fix. The fix was to include a different header with the controller capabilities header `struct` that prevented it from adding an unused byte in the memory layout.
 
-[Cxbx-Reloaded Pull Request #1708](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708)
+> [Cxbx-Reloaded Pull Request #1708](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708)
 
 About an hour later, the pull request was merged. As a bonus side effect, the community has begun discovering other games with controller input issues that were solved with this fix.
 
