@@ -87,7 +87,7 @@ Unsure of what I could do with this project, I navigated to their Discord channe
 );
 ```
 
-That’s exactly what I did. Almost immediately after I posted my log, they spotted an irregularity where the Star Wars game was closing the controller almost instantly after connecting with it. They suggested I crack open a debugger, place breakpoints in certain methods, and see if anything returned was out of place.
+That’s exactly what I did. Almost immediately after I posted my log, they spotted an irregularity where the Star Wars game was closing the controller almost instantly after connecting with it. They suggested I crack open a debugger, place breakpoints in functions, and see if anything returned was out of place.
 
 I wasn’t exactly thrilled to dig into this. The whole project was unfamiliar, I hadn’t touched C++ in several years, and setting up a dev environment on Windows is never fun.
 
