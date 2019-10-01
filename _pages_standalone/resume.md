@@ -94,11 +94,11 @@ permalink: /resume/
 
 ### Experience with:
 
-- Java, C++, SQL, HTML, CSS
+- Java, Angular, React Native, Kotlin, SQL, HTML, CSS
 
 ### Familiar with:
 
-- Ruby, C, C#, Python, Liquid, Markdown, TI-Basic
+- Ruby, C, C++, C#, Python, Liquid, Markdown, TI-Basic
 
 ---
 
@@ -119,11 +119,16 @@ permalink: /resume/
 
 ## Projects
 
-### Created Web API and Web App
+### Fixed Controller Input on Xbox Emulator Project
 
-- Created an open source web API and ASP.NET web application connecting organizations and volunteers through gamification
-- [Source code](https://github.com/aav7fl/GVSU-capstone-project)
-- [Blog post](/blog/2016/04/charma-gamifying-volunteer-process/)
+- Traced through machine instructions to discover a compiler was padding an extra byte into memory causing many games to reject controller input
+- [Blog post](/blog/2019/08/fixing-star-wars-obi-wan/)
+- [GitHub PR](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708)
+
+### Enhanced the Jekyll SEO Tag Plugin
+
+- Contributed to the open source Jekyll SEO Tag plugin introducing new functionality with SEO tags
+- [GitHub PR](https://github.com/jekyll/jekyll-seo-tag/pull/151)
 
 ### Rebuilt Zelda Save File
 
