@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Running locally? Try `bundle exec rake` to avoid conflicts with system ruby
+
 require 'English'
 require 'html-proofer'
 require 'rspec/core/rake_task'
@@ -62,9 +64,8 @@ task :html_proofer do
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*/#comment-.*}, # Internal Disqus comments
-      %r{.*pj64-emu.com/.*}, # PJ-64 has weird SSL that fail HTML Proofer
       %r{.*kodewerx.org/.*}, # This site responses weirdly..
-      %r{https://www.kyleniewiada.org/amp/.*} # Interal AMP Pages.
+      %r{https://www.kyleniewiada.org/amp/.*} # Interal linked AMP Pages.
     ]
   ).run
 end
@@ -82,16 +83,6 @@ task :amp do
   end
 end
 
-desc 'Test JSON-LD'
-task :json do
-  puts 'Testing JSON-LD against Google Structured Data Testing
-   Tool...'.yellow.bold
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = 'spec/*_spec.rb'
-  end
-  Rake::Task['spec'].execute
-end
-
 desc 'Run RuboCop'
 task :rubocop do
   puts 'Running RuboCop Validator...'.yellow.bold
@@ -101,7 +92,6 @@ end
 desc 'Run all tests except the JSON validator'
 task :test do
   Rake::Task['build'].invoke
-  # Rake::Task['json'].invoke
   Rake::Task['rubocop'].invoke
   Rake::Task['html_proofer'].invoke
   Rake::Task['amp'].invoke
