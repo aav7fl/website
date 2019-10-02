@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Running locally? Try `bundle exec rake` to avoid conflicts with system ruby
+
 require 'English'
 require 'html-proofer'
 require 'rspec/core/rake_task'

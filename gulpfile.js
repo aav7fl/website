@@ -5,8 +5,10 @@ var browserSync = require('browser-sync').create();
 
 // Task for building blog when something changed:
 gulp.task('build', shell.task(['bundle exec jekyll build > /dev/null 2>&1 && bundle exec jekyll build --watch --drafts --incremental']));
-// gulp.task('build', shell.task(['rake build_watch']));
-    
+
+// Gulp task for running rake tests:
+gulp.task('test', shell.task(['bundle exec rake test']));
+
 //--incremental --verbose
 // Task for serving blog with Browsersync
 gulp.task('serve', function () {
