@@ -30,7 +30,7 @@ GEM
     eventmachine (1.2.7)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    fastimage (2.1.5)
+    fastimage (2.1.7)
     ffi (1.11.1)
     forwardable-extended (2.6.0)
     html-proofer (3.11.1)
