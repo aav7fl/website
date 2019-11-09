@@ -74,7 +74,11 @@ desc 'Test website AMP validation'
 task :amp do
   puts 'Running AMP Validator...'.yellow.bold
   amp_dir = '_site/amp'
-  system("find #{amp_dir} -iname '*.html' | xargs -L1 amphtml-validator")
+  puts 'Listing all files for testing.'.yellow.bold
+  # Fail if we didn't find any amp files to test
+  system("find #{amp_dir} -iname '*.html'" \
+    "| egrep '.*'" \
+    '| xargs -L1 amphtml-validator')
   if $CHILD_STATUS.exitstatus.zero?
     puts 'AMP Validator finished successfully.'.green
   else
