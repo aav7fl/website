@@ -293,13 +293,13 @@
 
 <p><code class="highlighter-rouge">_includes/amp-check.html</code></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="na">seo_text</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">seo</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="nv">seo_text</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">seo</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="p">%}</span>
 
 <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">src</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"SEO"</span><span class="w"> </span><span class="p">%}</span>
   &lt;!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it --&gt;
   <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">canonical_amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">canonical_amp_removed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">remove_first</span><span class="p">:</span><span class="w"> </span>site.ampdir<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{{</span><span class="w"> </span><span class="nv">seo_text</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">replace</span><span class="p">:</span><span class="w"> </span>canonical_amp<span class="p">,</span><span class="w"> </span>canonical_amp_removed<span class="w"> </span><span class="p">}}</span>
+  <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">canonical_amp_removed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">remove_first</span><span class="p">:</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">ampdir</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="p">%}</span>
+  <span class="p">{{</span><span class="w"> </span><span class="nv">seo_text</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">replace</span><span class="p">:</span><span class="w"> </span><span class="nv">canonical_amp</span><span class="p">,</span><span class="w"> </span><span class="nv">canonical_amp_removed</span><span class="w"> </span><span class="p">}}</span>
 <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
@@ -334,10 +334,10 @@
 
 <p>I would add a video to my post with:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span><span class="na">video</span><span class="p">.</span><span class="na">html</span><span class="err">
-</span><span class="w">  </span><span class="na">src</span><span class="o">=</span><span class="s2">"/assets/files/2016/03/bug_example.mp4"</span><span class="err">
-</span><span class="w">  </span><span class="na">poster</span><span class="o">=</span><span class="s2">"/assets/files/2016/03/bug_example_poster.png"</span><span class="err">
-</span><span class="w">  </span><span class="na">controls</span><span class="o">=</span><span class="s2">"loop"</span><span class="err">
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span><span class="nx">video.html</span><span class="err">
+</span><span class="w">  </span><span class="nx">src="/assets/files/2016/03/bug_example.mp4</span><span class="s2">"
+  poster="</span><span class="nx">/assets/files/2016/03/bug_example_poster.png</span><span class="s2">"
+  controls="</span><span class="nv">loop</span>"<span class="err">
 </span><span class="p">%}</span>
 </code></pre></div></div>
 
