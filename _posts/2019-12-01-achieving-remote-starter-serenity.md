@@ -66,9 +66,9 @@ After six hours of waiting and walking around the neighborhood, they wrapped up 
 
 I made a deep dive into researching what I had just purchased and how I could fix my problems. I found out that both my remote starter and bypass module had installation manuals, but these manuals were only available to dealers of their products.
 
-### Fixing the Neglected
+## Fixing the Neglected
 
-#### Disabling the Double Alarms
+### Disabling the Double Alarms
 
 > The car's default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This let's everyone know that the car is _twice_ as secure.
 
@@ -84,7 +84,7 @@ I'm not sure why I couldn't figure this one out on my own `/s`. The quality of l
 
 _Solved_
 
-#### Sending a Double Unlock Pulse With the New Remote
+### Sending a Double Unlock Pulse With the New Remote
 
 > The car requires the user to press the unlock button twice on the new remote with frame-perfect timing in order to unlock all doors. Since there is a long delay with the new remote, this makes it difficult. If the user isn't fast enough, it will only unlock the driver door.
 
@@ -98,7 +98,7 @@ Remember the steps that I needed to follow to disable the lock/unlock beep of my
 
 Let's break down the steps that I needed to follow to have my remote starter send a double pulse to unlock my vehicle.
 
-##### Remote Starter Programming
+#### Remote Starter Programming
 
 The installation manual breaks down programming the remote starter into these concepts.
 
@@ -128,7 +128,7 @@ As a bonus, the whole neighborhood gets to hear these lovely chirps/alarms while
 
 _Solved_
 
-#### Enabling the Rear Defogger in Cold Weather
+### Enabling the Rear Defogger in Cold Weather
 
 > The remote starter doesn't turn on the rear defogger because no one thought I would care about that.
 
@@ -144,7 +144,7 @@ I went through the complicated programming menu (demonstrated earlier) and chang
 
 But when I tried to start my car through the remote starter, nothing happened. The car clicked a few times and then stopped. Upon further investigation, it turns out the auto shop didn't connect the wiring harness for the rear defogger but instead hooked up the `remote start activation` incorrectly.
 
-##### A Poorly Written Manual
+#### A Poorly Written Manual
 
 Below is a table showing the wiring harness connector codes for my remote starter. If you look closely at `Wire 2` (Rear Defogger) and `Wire 11` (Remote starter activation) you will notice something interesting.
 
@@ -190,7 +190,7 @@ This meant that _by chance_ my rear defogger wire was the one currently initiati
 
 After discovering the mistake made by the installation tech, I swapped the remote starter activation and rear defogger wires to their correct specification. But now I had and dangling rear defogger wire with no idea where it needed to be connected to.
 
-##### Where to Run the Defogger Wire
+#### Where to Run the Defogger Wire
 
 Feeling like I was out of my league, I made a call to the auto shop to ask if they knew what to do. The auto shop said they would probably need to install custom relay and charge $50 for the installation.
 
@@ -202,7 +202,7 @@ My next idea was that maybe I could create this custom relay myself. I thought a
 
 I imagined that I could simply connect to the ground on the physical switch in order to mimic a button press. Unfortunately, without building my own relay, sourcing a ground, and creating a protoboard (to change the current), I quickly realized this wouldn't work. It was _possible_, but likely a last resort option.
 
-##### The Bypass Module
+#### The Bypass Module
 
 One of the components that the auto shop installed in my vehicle was a bypass module. A bypass module allows the remote starter to operate while making the vehicle computers believe there is a key in the ignition.
 
@@ -212,7 +212,7 @@ Just like my remote starter, the bypass module installation documentation was hi
 
 Even worse, each _trim level_ of each _vehicle model_ for each _firmware release_ had its own unique installation documentation. That meant if I got my hands on the installation documentation for my specific bypass module, it was almost guaranteed to be for the wrong vehicle. _Good grief_.
 
-###### Successfully Failing
+##### Successfully Failing
 
 As expected, my searches came up empty when I tried to find bypass module documentation for my vehicle. What I _did_ find was that I was a very small handful of PDF documents from Google searches that came from the manufacturer's website. Unusually, it did not require me to be logged in to view the indexed PDF manuals.
 
@@ -235,7 +235,7 @@ I read through the manual and to my dismay learned that my bypass module did not
 
 > After this project was over, I contacted the company through a number of channels inquiring if they had a [bug bounty program](https://hackerone.com/bug-bounty-programs) to disclose their vulnerability. But they never got back to me… so… ok then. To each their own.
 
-##### Reaching Out to Experts
+#### Reaching Out to Experts
 
 After pouring through different Subaru forms trying to piece together how individuals connected their own rear defogger to a remote starter, another solution was presented. I learned that most Subaru vehicles had a wire in their BCM (Body Control Module) that could trigger the rear defogger. Since I had already identified a rear defogger trigger wire in my remote starter system, this sounded like something that might work for me! But how could I confidently identify which wire I needed to connect? Not on my own, that's for sure.
 
