@@ -16,7 +16,7 @@ Style/Documentation:
 Naming/FileName:
   Enabled: false
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Exclude:
     - spec/**/*
 
