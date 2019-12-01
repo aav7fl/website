@@ -1,4 +1,441 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://www.kyleniewiada.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.kyleniewiada.org/" rel="alternate" type="text/html" /><updated>2019-11-30T15:09:04-05:00</updated><id>https://www.kyleniewiada.org/feed.xml</id><title type="html">Kyle Niewiada’s Website</title><subtitle>My little corner of the Internet where I write about projects I've figured out</subtitle><author><name>Kyle Niewiada</name></author><entry><title type="html">Reviving a Game Because of Nostalgia</title><link href="https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan/" rel="alternate" type="text/html" title="Reviving a Game Because of Nostalgia" /><published>2019-08-30T17:36:00-04:00</published><updated>2019-08-30T17:36:00-04:00</updated><id>https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan</id><content type="html" xml:base="https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan/">&lt;p&gt;When I dive into a project, I generally have some inkling how I am going to work through it. I have a pretty high confidence on how long it will take or what the outcome will be. For whatever reason, last weekend I had the urge to play my favorite childhood Xbox game, &lt;code class=&quot;highlighter-rouge&quot;&gt;Star Wars: Obi-Wan&lt;/code&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://www.kyleniewiada.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.kyleniewiada.org/" rel="alternate" type="text/html" /><updated>2019-12-01T13:51:20-05:00</updated><id>https://www.kyleniewiada.org/feed.xml</id><title type="html">Kyle Niewiada’s Website</title><subtitle>My little corner of the Internet where I write about projects I've figured out</subtitle><author><name>Kyle Niewiada</name></author><entry><title type="html">Achieving Remote Starter Serenity</title><link href="https://www.kyleniewiada.org/blog/2019/12/achieving-remote-starter-serenity/" rel="alternate" type="text/html" title="Achieving Remote Starter Serenity" /><published>2019-12-01T12:54:00-05:00</published><updated>2019-12-01T12:54:00-05:00</updated><id>https://www.kyleniewiada.org/blog/2019/12/achieving-remote-starter-serenity</id><content type="html" xml:base="https://www.kyleniewiada.org/blog/2019/12/achieving-remote-starter-serenity/">&lt;p&gt;Modern cars are like expensive computers with an engine and wheels. Any car from the last decade has loads of electronic systems that rely on special computers to operate. My 2009 Subaru Impreza is no exception. If I want to improve my experience with that computer, I need to locate the correct wiring diagrams and software to speak with it. Making any modification to the wiring in my vehicle requires confidence.&lt;/p&gt;
+
+&lt;p&gt;Since cars have over a thousand wires, and I’m &lt;em&gt;not confident&lt;/em&gt; on modifications made to my car, I’ve installed automotive fire extinguisher. This is the saga of achieving serenity with my remote starter.&lt;/p&gt;
+
+&lt;div class=&quot;line-separator&quot;&gt;&lt;/div&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#uncomfortable-car-climate&quot; id=&quot;markdown-toc-uncomfortable-car-climate&quot;&gt;Uncomfortable Car Climate&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#my-quest-for-a-remote-starter&quot; id=&quot;markdown-toc-my-quest-for-a-remote-starter&quot;&gt;My Quest for a Remote Starter&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#asking-the-dealership&quot; id=&quot;markdown-toc-asking-the-dealership&quot;&gt;Asking the Dealership&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#the-aftermarket-supplier&quot; id=&quot;markdown-toc-the-aftermarket-supplier&quot;&gt;The Aftermarket Supplier&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#remote-starter-results&quot; id=&quot;markdown-toc-remote-starter-results&quot;&gt;Remote Starter Results&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#what-i-learned&quot; id=&quot;markdown-toc-what-i-learned&quot;&gt;What I Learned&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#what-was-neglected&quot; id=&quot;markdown-toc-what-was-neglected&quot;&gt;What Was Neglected&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fixing-the-neglected&quot; id=&quot;markdown-toc-fixing-the-neglected&quot;&gt;Fixing the Neglected&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#disabling-the-double-alarms&quot; id=&quot;markdown-toc-disabling-the-double-alarms&quot;&gt;Disabling the Double Alarms&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#sending-a-double-unlock-pulse-with-the-new-remote&quot; id=&quot;markdown-toc-sending-a-double-unlock-pulse-with-the-new-remote&quot;&gt;Sending a Double Unlock Pulse With the New Remote&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#remote-starter-programming&quot; id=&quot;markdown-toc-remote-starter-programming&quot;&gt;Remote Starter Programming&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#enabling-the-rear-defogger-in-cold-weather&quot; id=&quot;markdown-toc-enabling-the-rear-defogger-in-cold-weather&quot;&gt;Enabling the Rear Defogger in Cold Weather&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#a-poorly-written-manual&quot; id=&quot;markdown-toc-a-poorly-written-manual&quot;&gt;A Poorly Written Manual&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#where-to-run-the-defogger-wire&quot; id=&quot;markdown-toc-where-to-run-the-defogger-wire&quot;&gt;Where to Run the Defogger Wire&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#the-bypass-module&quot; id=&quot;markdown-toc-the-bypass-module&quot;&gt;The Bypass Module&lt;/a&gt;            &lt;ul&gt;
+              &lt;li&gt;&lt;a href=&quot;#successfully-failing&quot; id=&quot;markdown-toc-successfully-failing&quot;&gt;Successfully Failing&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#reaching-out-to-experts&quot; id=&quot;markdown-toc-reaching-out-to-experts&quot;&gt;Reaching Out to Experts&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#recap&quot; id=&quot;markdown-toc-recap&quot;&gt;Recap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#takeaways&quot; id=&quot;markdown-toc-takeaways&quot;&gt;Takeaways&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#final-thoughts&quot; id=&quot;markdown-toc-final-thoughts&quot;&gt;Final Thoughts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;div class=&quot;line-separator&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;uncomfortable-car-climate&quot;&gt;Uncomfortable Car Climate&lt;/h2&gt;
+
+&lt;p&gt;I am in the unfortunate position where my car lives outside without any shelter from the punishing temperatures. In the summertime, my car bakes in the sunlight. In the winter, ice glazes over the windows. My car comes from the time period where clunky touch screens were starting to take over vehicle dashboards, Bluetooth was a rising option, and tape decks were no longer included.&lt;/p&gt;
+
+&lt;p&gt;My 2009 Subaru Impreza was born in the middle of this awkward time. It didn’t have the optional remote starter, no in-car phone calling, nor did it include a fancy satellite radio setup. Nope– it was a normal car lacking any subscription services. This was &lt;em&gt;fine&lt;/em&gt; news for me, though. Now I wouldn’t need to fight DRM to the death in my duel to improve my experience.&lt;/p&gt;
+
+&lt;p&gt;To make seasonal living with my Subaru more tolerable, I began looking into remote starter options. I wanted a single button press to create the ideal micro-environment for my commute to work and back. No more would I spend time scraping ice off my windows each winter morning.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019/12/snow_covered_car.jpg&quot; alt=&quot;Subaru covered in a blizzard snow drift&quot; /&gt;&lt;em&gt;My car exposed to the wicked weather&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;my-quest-for-a-remote-starter&quot;&gt;My Quest for a Remote Starter&lt;/h2&gt;
+
+&lt;h3 id=&quot;asking-the-dealership&quot;&gt;Asking the Dealership&lt;/h3&gt;
+
+&lt;p&gt;The first step I took in installing a remote starter in my vehicle was contacting the local Subaru dealership. I wanted to see if they could install a factory remote starter in my vehicle I had read about before. Here’s what they said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Subaru did offer a remote starter for your vehicle at one time. Unfortunately, that remote starter accessory kit has been discontinued, and not replaced. You would have to contact an aftermarket supplier.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;the-aftermarket-supplier&quot;&gt;The Aftermarket Supplier&lt;/h3&gt;
+
+&lt;p&gt;After searching around the local auto shops, I found an affordable one that would be able to install a remote starter. The local shop was a little bit different though. They took no appointments for their work; it was a first come, first served model. It seems like they had enough demand to warrant this. If you wanted your remote starter installed that day, you needed to arrive long before they opened to get a spot in line– especially later in the fall season.&lt;/p&gt;
+
+&lt;p&gt;Lacking affordable options, I did just that. I dragged my wife along with me to the special auto shop about 30 minutes before they opened. I found myself fourth in line. Not terrible; not great.&lt;/p&gt;
+
+&lt;p&gt;Once they opened, we all shuffled out of the cold weather into the small shop. When it was my turn at the counter, I showed them which remote starter system I was looking to buy. They showed me which bypass system I would need in order to make the remote starter work with my vehicle. I reluctantly agreed to the purchase and they queued me up for the install.&lt;/p&gt;
+
+&lt;p&gt;After six hours of waiting and walking around the neighborhood, they wrapped up the installation. The tech came out to the waiting room and turned over my keys. In a hurry, they showed me what button would lock and unlock my car, and then which button I need to press for the remote starter.&lt;/p&gt;
+
+&lt;h2 id=&quot;remote-starter-results&quot;&gt;Remote Starter Results&lt;/h2&gt;
+
+&lt;h3 id=&quot;what-i-learned&quot;&gt;What I Learned&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The shop didn’t take the time to polish any of the settings.&lt;/li&gt;
+  &lt;li&gt;Only authorized dealers or installers have access to the programming and installation documents for the remote starter and bypass modules.&lt;/li&gt;
+  &lt;li&gt;I don’t like the secrecy behind the products in the remote starter industry.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Expected&lt;/strong&gt;: The remote starter is installed and configured in a way that isn’t a nuisance.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Actual&lt;/strong&gt;: The auto shop wired up the car so a button could turn it on and off. No extra features or convenience programming. No questioning the customer on what they would like set up.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-was-neglected&quot;&gt;What Was Neglected&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The car’s default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This lets everyone know that the car is &lt;em&gt;twice&lt;/em&gt; as secure.&lt;/li&gt;
+  &lt;li&gt;The car requires the user to press the unlock button twice on the new remote with frame-perfect timing in order to unlock all doors. Since there is a long delay with the new remote, this makes it difficult. If the user isn’t fast enough, it will only unlock the driver door.&lt;/li&gt;
+  &lt;li&gt;The remote starter doesn’t turn on the rear defogger because no one thought I would care about that.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I made a deep dive into researching what I had just purchased and how I could fix my problems. I found out that both my remote starter and bypass module had installation manuals, but these manuals were only available to dealers of their products.&lt;/p&gt;
+
+&lt;h2 id=&quot;fixing-the-neglected&quot;&gt;Fixing the Neglected&lt;/h2&gt;
+
+&lt;h3 id=&quot;disabling-the-double-alarms&quot;&gt;Disabling the Double Alarms&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The car’s default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This lets everyone know that the car is &lt;em&gt;twice&lt;/em&gt; as secure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This one was a super simple Google search away. All I had to do was:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Sit in the driver seat.&lt;/li&gt;
+  &lt;li&gt;Press and hold the unlock button on the driver side door.&lt;/li&gt;
+  &lt;li&gt;Within 10 seconds insert and remove the key from the ignition six times.&lt;/li&gt;
+  &lt;li&gt;While still holding the unlock button, open and close the driver’s door.&lt;/li&gt;
+  &lt;li&gt;That’s it. The hazard lights should flash confirming the change.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’m not sure why I couldn’t figure this one out on my own &lt;code class=&quot;highlighter-rouge&quot;&gt;/s&lt;/code&gt;. The quality of life with my remote starter was improving.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Solved&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;sending-a-double-unlock-pulse-with-the-new-remote&quot;&gt;Sending a Double Unlock Pulse With the New Remote&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The car requires the user to press the unlock button twice on the new remote with frame-perfect timing in order to unlock all doors. Since there is a long delay with the new remote, this makes it difficult. If the user isn’t fast enough, it will only unlock the driver door.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is where things start getting trickier. I own the remote starter system. So surely, I would have the right to reprogram it myself. Right?&lt;/p&gt;
+
+&lt;p&gt;The manufacturer doesn’t believe so. In fact, they’ve hidden away their installation manual and made it only available to partnered installers.&lt;/p&gt;
+
+&lt;p&gt;Following the trend of my last problem, the installation manual to the remote starter was easy to find. A quick search later I had the full installation manual to my remote starter system. Reading through the documentation I made a new discovery. It was full of programming options. Some of them required a (proprietary?) bit writer, but most of the options could be programmed with a stupid amount of chirping and beeping.&lt;/p&gt;
+
+&lt;p&gt;Remember the steps that I needed to follow to disable the lock/unlock beep of my car? The remote starter programming takes that to a whole new level if the user doesn’t own the proprietary bit writer.&lt;/p&gt;
+
+&lt;p&gt;Let’s break down the steps that I needed to follow to have my remote starter send a double pulse to unlock my vehicle.&lt;/p&gt;
+
+&lt;h4 id=&quot;remote-starter-programming&quot;&gt;Remote Starter Programming&lt;/h4&gt;
+
+&lt;p&gt;The installation manual breaks down programming the remote starter into these concepts.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There are multiple &lt;code class=&quot;highlighter-rouge&quot;&gt;pages of menus&lt;/code&gt; in the vehicle configuration.&lt;/li&gt;
+  &lt;li&gt;Each &lt;code class=&quot;highlighter-rouge&quot;&gt;menu page&lt;/code&gt; contains several &lt;code class=&quot;highlighter-rouge&quot;&gt;menu items&lt;/code&gt; that can be reprogrammed.&lt;/li&gt;
+  &lt;li&gt;Each &lt;code class=&quot;highlighter-rouge&quot;&gt;menu item&lt;/code&gt; contains several &lt;code class=&quot;highlighter-rouge&quot;&gt;options&lt;/code&gt; to choose between.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to change an &lt;code class=&quot;highlighter-rouge&quot;&gt;option&lt;/code&gt;, I must navigate to the correct &lt;code class=&quot;highlighter-rouge&quot;&gt;menu page&lt;/code&gt;, navigate to the correct &lt;code class=&quot;highlighter-rouge&quot;&gt;menu item&lt;/code&gt;, and finally cycle through the &lt;code class=&quot;highlighter-rouge&quot;&gt;options&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To change the unlock pulse behavior of my remote starter, it looks something like this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open the passenger door.&lt;/li&gt;
+  &lt;li&gt;Turn the ignition on then off.&lt;/li&gt;
+  &lt;li&gt;Press and hold the programming button in the vehicle until the vehicle chirps &lt;strong&gt;3 times&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Release the button (You’re now in &lt;code class=&quot;highlighter-rouge&quot;&gt;Menu Page 3&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Press and hold the programming button in the vehicle until the vehicle chirps &lt;strong&gt;7 times&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Release the button (You’re now in &lt;code class=&quot;highlighter-rouge&quot;&gt;Menu Item 7&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Press and hold the programming button in the vehicle to begin modifying the value.&lt;/li&gt;
+  &lt;li&gt;Press and release the unlock button &lt;em&gt;on the remote&lt;/em&gt; to switch the value in &lt;code class=&quot;highlighter-rouge&quot;&gt;Menu Item 7&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Option 2&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Release the programming button in the vehicle to finish modifying the value.&lt;/li&gt;
+  &lt;li&gt;The vehicle will chirp twice (to verify the selection of &lt;code class=&quot;highlighter-rouge&quot;&gt;Option 2&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Shut the passenger door to exit programming mode and the vehicle will chirp once again.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Those were the steps I needed to follow in order to change the remote unlock feature on my remote starter to send a double pulse. So yea, another easy task for us consumers &lt;code class=&quot;highlighter-rouge&quot;&gt;/s&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a bonus, the whole neighborhood gets to hear these lovely chirps/alarms while stumbling through the menus. Make sure you’re on good standings with your neighbors &lt;em&gt;before&lt;/em&gt; violating their ears with repeated chirping.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Solved&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;enabling-the-rear-defogger-in-cold-weather&quot;&gt;Enabling the Rear Defogger in Cold Weather&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The remote starter doesn’t turn on the rear defogger because no one thought I would care about that.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is the complicated feature which took the bulk of my time on this project. While digging through the installation manual of my remote starter, I discovered that it contained functionality to enable a defogger system when it was below a certain temperature in the vehicle. I &lt;em&gt;wanted&lt;/em&gt; this feature.&lt;/p&gt;
+
+&lt;p&gt;Quite often I would turn on my car in the winter and it would not get warm enough to melt the ice on my back window. What’s the point of a remote starter if it doesn’t get warm enough to make my car easier to scrape off?&lt;/p&gt;
+
+&lt;p&gt;I pulled apart the ignition wiring in my vehicle to inspect the work completed by the auto shop. I noticed that they had already attached the remote starter &lt;code class=&quot;highlighter-rouge&quot;&gt;blue/white striped&lt;/code&gt; defogger wire to something in my ignition system. I assumed that since that wire was hooked up, I was good to go.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019/12/wiring_harness.jpg&quot; alt=&quot;Subaru wiring harness with remote starter&quot; /&gt;&lt;em&gt;Remote starter hooked up to my Subaru&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I went through the complicated programming menu (demonstrated earlier) and changed the behavior of the defogger wire to trigger when starting the car.&lt;/p&gt;
+
+&lt;p&gt;But when I tried to start my car through the remote starter, nothing happened. The car clicked a few times and then stopped. Upon further investigation, it turns out the auto shop didn’t connect the wiring harness for the rear defogger but instead hooked up the &lt;code class=&quot;highlighter-rouge&quot;&gt;remote start activation&lt;/code&gt; incorrectly.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-poorly-written-manual&quot;&gt;A Poorly Written Manual&lt;/h4&gt;
+
+&lt;p&gt;Below is a table showing the wiring harness connector codes for my remote starter. If you look closely at &lt;code class=&quot;highlighter-rouge&quot;&gt;Wire 2&lt;/code&gt; (Rear Defogger) and &lt;code class=&quot;highlighter-rouge&quot;&gt;Wire 11&lt;/code&gt; (Remote starter activation) you will notice something interesting.&lt;/p&gt;
+
+&lt;p&gt;The color codes are &lt;strong&gt;basically the same&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Wire 2&lt;/code&gt; = &lt;code class=&quot;highlighter-rouge&quot;&gt;Blue/White&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Wire 11&lt;/code&gt; = &lt;code class=&quot;highlighter-rouge&quot;&gt;White/Blue&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Why???&lt;/em&gt;&lt;/p&gt;
+
+&lt;table class=&quot;table-post&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Wire&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Color Code&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PNK/WHITE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA IGNITION 2/ACCESSORY  OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;BLUE/WHITE&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;(-) 200mA 2ND STATUS /REAR DEFOGGER OUTPUT&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;RED/WHITE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA TRUNK RELEASE OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;BLACK/YELLOW&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA DOME LIGHT OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;DARK BLUE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA STATUS OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;6&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;WHITE/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA AUX 5 OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;7&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;WHITE/VIOLET&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA 2nd UNLOCK OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;8&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ORANGE/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA AUX 6 OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;9&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GRAY&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) HOOD PIN INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;10&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;BLUE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) TRUNK PIN/INSTANT TRIGGER INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;11&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;WHITE/BLUE&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;(-) REMOTE START ACTIVATION INPUT&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;12&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;VIOLET/WHITE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;TACHOMETER INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;13&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;BLACK/WHITE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) PARKING BRAKE INPUT/EMERGENCY INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;14&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GREEN/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA FACTORY ALARM DISARM OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;15&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GREEN&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) DOOR INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;16&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;BROWN/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA HORN HONK OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;17&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PINK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA IGNITION 1 OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;18&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;VIOLET&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(+) DOOR INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;19&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;VIOLET/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA AUX 4 OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;20&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;BROWN&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(+) BRAKE SHUTDOWN INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;21&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;VIOLET/YELLOW&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA STARTER OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;22&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GRAY/BLACK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) DIESEL WTS (WAIT-TO-START) INPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;23&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ORANGE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA ACCESSORY OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;24&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GREEN/WHITE&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;(-) 200mA FACTORY ALARM ARM OUTPUT&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Guess how the auto shop hooked up my vehicle? That’s right. The installation technician didn’t count the wire pinout and instead relied on the awful color coding.&lt;/p&gt;
+
+&lt;p&gt;This meant that &lt;em&gt;by chance&lt;/em&gt; my rear defogger wire was the one currently initiating my vehicle startup. When I had reprogrammed the behavior of defogger wire earlier, I was instead changing the starter activation behavior (since the defogger wire was hooked up to it instead).&lt;/p&gt;
+
+&lt;p&gt;After discovering the mistake made by the installation tech, I swapped the remote starter activation and rear defogger wires to their correct specification. But now I had and dangling rear defogger wire with no idea where it needed to be connected to.&lt;/p&gt;
+
+&lt;h4 id=&quot;where-to-run-the-defogger-wire&quot;&gt;Where to Run the Defogger Wire&lt;/h4&gt;
+
+&lt;p&gt;Feeling like I was out of my league, I made a call to the auto shop to ask if they knew what to do. The auto shop said they would probably need to install custom relay and charge $50 for the installation.&lt;/p&gt;
+
+&lt;p&gt;Just like last time, they said it would be first come, first served. I was far from thrilled to do business with them since they had already made a wiring mistake, and never made any effort to discuss the extra convenience features with me.&lt;/p&gt;
+
+&lt;p&gt;I followed up with a phone call to Best Buy as they were also listed as an authorized installer for my remote starter. But Best Buy didn’t want to touch my car after they learned that the other auto shop installed my system.&lt;/p&gt;
+
+&lt;p&gt;My next idea was that maybe I could create this custom relay myself. I thought at first that I could run the remote starter defogger wire straight to the rear defogger &lt;em&gt;button&lt;/em&gt; in my dashboard. I tore apart my center console and exposed the PCB to the button.&lt;/p&gt;
+
+&lt;p&gt;I imagined that I could simply connect to the ground on the physical switch in order to mimic a button press. Unfortunately, without building my own relay, sourcing a ground, and creating a protoboard (to change the current), I quickly realized this wouldn’t work. It was &lt;em&gt;possible&lt;/em&gt;, but likely a last resort option.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-bypass-module&quot;&gt;The Bypass Module&lt;/h4&gt;
+
+&lt;p&gt;One of the components that the auto shop installed in my vehicle was a bypass module. A bypass module allows the remote starter to operate while making the vehicle computers believe there is a key in the ignition.&lt;/p&gt;
+
+&lt;p&gt;I came across a few forum posts that discussed the possibility exposing extra features through a bypass module. Such features included controlling the heated seats, climate control, and starting the defogger system. I figured now was the time to investigate whether this was possible with my set up. If it was possible, then the installation was about to get a lot easier.&lt;/p&gt;
+
+&lt;p&gt;Just like my remote starter, the bypass module installation documentation was hidden behind another pay walled website.&lt;/p&gt;
+
+&lt;p&gt;Even worse, each &lt;em&gt;trim level&lt;/em&gt; of each &lt;em&gt;vehicle model&lt;/em&gt; for each &lt;em&gt;firmware release&lt;/em&gt; had its own unique installation documentation. That meant if I got my hands on the installation documentation for my specific bypass module, it was almost guaranteed to be for the wrong vehicle. &lt;em&gt;Good grief&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;successfully-failing&quot;&gt;Successfully Failing&lt;/h5&gt;
+
+&lt;p&gt;As expected, my searches came up empty when I tried to find bypass module documentation for my vehicle. What I &lt;em&gt;did&lt;/em&gt; find was that I was a very small handful of PDF documents from Google searches that came from the manufacturer’s website. Unusually, it did not require me to be logged in to view the indexed PDF manuals.&lt;/p&gt;
+
+&lt;p&gt;I took that idea and ran with it. If I could figure out how the URL was being generated for each PDF manual, I should be able to access the correct manual on their website without ever needing to login.&lt;/p&gt;
+
+&lt;p&gt;I went back to the download page for the bypass module documentation on my vehicle. I was trying to scrape together information such as firmware revision, release dates, and vehicle codes so I could rebuild the URL for my PDF manual.&lt;/p&gt;
+
+&lt;p&gt;It was then where I uncovered my best luck yet. I noticed on the webpage that if I attempted to initiate the download of the manual without being logged in, it would redirect me to a login page. But in that process, it would pass along a URL parameter that contained the exact path to the final PDF destination.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://fake-bypass-module.example.com/login?ReturnUrl=https%3A%2F%2Fblobs.example.com%2F1234%2F11.349%2FSubaru-Model-v1.pdf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I extracted the PDF URL, decoded the HTML formatting, and was able to successfully download the installation manual to my bypass module.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Success?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I read through the manual and to my dismay learned that my bypass module did not contain any programming for a rear defogger. After all of that hard work, I was back to square one.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;After this project was over, I contacted the company through a number of channels inquiring if they had a &lt;a href=&quot;https://hackerone.com/bug-bounty-programs&quot;&gt;bug bounty program&lt;/a&gt; to disclose their vulnerability. But they never got back to me… so… ok then. To each their own.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;reaching-out-to-experts&quot;&gt;Reaching Out to Experts&lt;/h4&gt;
+
+&lt;p&gt;After poring through different Subaru forums trying to piece together how individuals connected their own rear defogger to a remote starter, another solution was presented. I learned that most Subaru vehicles had a wire in their BCM (Body Control Module) that could trigger the rear defogger. Since I had already identified a rear defogger trigger wire in my remote starter system, this sounded like something that might work for me! But how could I confidently identify which wire I needed to connect? Not on my own, that’s for sure.&lt;/p&gt;
+
+&lt;p&gt;Investigating the BCMs under the steering wheel in my vehicle revealed clusters of wires emerging from various grey modules. Since I was unable to confidently identify which wire controlled the rear defogger gate, I turned to the Internet communities for help.&lt;/p&gt;
+
+&lt;p&gt;I stumbled upon a website called &lt;a href=&quot;https://www.the12volt.com/&quot;&gt;The 12 Volt&lt;/a&gt;. It’s a community of members trying to help others with correct and safe wiring on different equipment.&lt;/p&gt;
+
+&lt;p&gt;After spending some time looking through different wire schematics, I believed I had found the information I was looking for. I &lt;a href=&quot;https://www.the12volt.com/installbay/forum_posts.asp?tid=144898&quot;&gt;created a community post&lt;/a&gt; to confirm my findings. After some validation from another community member, I went to work back in my car.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Fun fact: Without the correct tools, I had no easy way of validating my work unless it was below 55° inside the vehicle. If it were warmer than that, the circuit enabling the rear defogger would not trigger. Essentially, I was forced to perform this work in the cold.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I cut into the wire &lt;code class=&quot;highlighter-rouge&quot;&gt;BCM GREY 35 PIN CONN, PIN 16&lt;/code&gt; under my steering column and spliced in the &lt;code class=&quot;highlighter-rouge&quot;&gt;BLUE/WHITE&lt;/code&gt; wire from my remote starter. Pinching all the wires together with my cold fingertips, I hit the remote starter button. Just like magic, the car started up. Moments later the orange light indicator for the rear defogger illuminated. &lt;em&gt;Success&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019/12/rear_defogger_on.jpg&quot; alt=&quot;Subaru interior climate controls&quot; /&gt;&lt;em&gt;Subaru interior climate controls with the rear defogger active&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Under cold weather conditions, my remote starter would now trigger the rear defogger in my vehicle allowing ice to melt off in the winter.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Solved&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
+
+&lt;p&gt;Here’s a quick recap of everything I fixed with my remote starter installation.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The car’s default alarm no longer chirps &lt;em&gt;in addition to&lt;/em&gt; the remote starter when I lock/unlock the vehicle.&lt;/li&gt;
+  &lt;li&gt;I’m no longer required to have frame-perfect timing on the remote in order to unlock all of the car doors.&lt;/li&gt;
+  &lt;li&gt;When it’s cold outside, my remote starter will automatically turn on the rear defogger to begin melting any potential ice/defog the window.&lt;/li&gt;
+  &lt;li&gt;I’ve equipped an automotive fire extinguisher for safety.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;takeaways&quot;&gt;Takeaways&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The remote starter industry loves to hide all their manuals behind paywalls.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;White/Blue&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Blue/White&lt;/code&gt; wires are easy to mix up.&lt;/li&gt;
+  &lt;li&gt;Cold temperature triggers are annoying because they require work to be completed while it’s cold.&lt;/li&gt;
+  &lt;li&gt;Fire extinguishers make you feel better when you lack confidence with the wiring job.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;This project lasted for over a year. It began merely a week after I had my remote starter installed. But since I couldn’t determine why the rear defogger wasn’t working (and instead disabling my car), I shelved the project.&lt;/p&gt;
+
+&lt;p&gt;It wasn’t until my second year with the remote starter that I decided to conquer this issue (only to learn two of the wires had been installed incorrectly).&lt;/p&gt;
+
+&lt;p&gt;Because of this whole ordeal, I lacked confidence with job completed by the auto shop (and my own follow-up wiring). Their attention to detail was far from ideal. To put my mind at ease, I decided to purchase an automotive fire extinguisher. It is now happily installed on the rails behind the passenger seat in my vehicle.&lt;/p&gt;
+
+&lt;p&gt;If one day you’re riding with me in the car, you hop into the passenger seat, and it doesn’t adjust as far back as far as you’d like– you’ll know why.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019/12/fire_extinguisher.jpg&quot; alt=&quot;Fire extinguisher installed behind passenger seat&quot; /&gt;&lt;em&gt;Automotive fire extinguisher installed for safety&lt;/em&gt;&lt;/p&gt;</content><author><name>{&quot;image&quot;=&gt;&quot;/assets/img/kyle.jpg&quot;, &quot;twitter&quot;=&gt;&quot;CrypticCitrus&quot;}</name></author><category term="large project" /><summary type="html">Modern cars are like expensive computers with an engine and wheels. Any car from the last decade has loads of electronic systems that rely on special computers to operate. My 2009 Subaru Impreza is no exception. If I want to improve my experience with that computer, I need to locate the correct wiring diagrams and software to speak with it. Making any modification to the wiring in my vehicle requires confidence.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.kyleniewiada.org/assets/img/2019/12/rear_defogger_on.jpg" /><media:content medium="image" url="https://www.kyleniewiada.org/assets/img/2019/12/rear_defogger_on.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Reviving a Game Because of Nostalgia</title><link href="https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan/" rel="alternate" type="text/html" title="Reviving a Game Because of Nostalgia" /><published>2019-08-30T17:36:00-04:00</published><updated>2019-08-30T17:36:00-04:00</updated><id>https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan</id><content type="html" xml:base="https://www.kyleniewiada.org/blog/2019/08/fixing-star-wars-obi-wan/">&lt;p&gt;When I dive into a project, I generally have some inkling how I am going to work through it. I have a pretty high confidence on how long it will take or what the outcome will be. For whatever reason, last weekend I had the urge to play my favorite childhood Xbox game, &lt;code class=&quot;highlighter-rouge&quot;&gt;Star Wars: Obi-Wan&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Running games on the original hardware is always the best option, but I’m adamant about being able to preserve my content in the distant future. Besides, I can’t always have every console hooked up to the TV; some need to live in storage. I like the idea of having the option of emulation to preserve my games and saves for their future. In fact, that’s what my whole &lt;a href=&quot;/blog/2015/04/transferring-n64-saves/&quot;&gt;Nintendo 64 backup project&lt;/a&gt; was about a few years ago.&lt;/p&gt;
 
@@ -1194,143 +1631,4 @@ I threw on USB debugging, connected my phone to the computer, and wrote the foll
 
 &lt;p&gt;These changes should allow for the removal of annoying applications that do not follow the proper guidelines or rules when it comes to Windows taskbar notifications. Sometimes programs have unintended consequences when the programmer makes assumptions about how and when a user will interact with their program. I was hit with a combination of a program that did not properly register notifications as well as provide no advanced options to disable such notifications (there &lt;em&gt;are&lt;/em&gt; other advanced options under the program).&lt;/p&gt;
 
-&lt;p&gt;If anyone out there has a better method or would like to point out any unforeseen consequences with this, please let me know. For everyone else, this should help tame such applications inside their Windows taskbar.&lt;/p&gt;</content><author><name>{&quot;image&quot;=&gt;&quot;/assets/img/kyle.jpg&quot;, &quot;twitter&quot;=&gt;&quot;CrypticCitrus&quot;}</name></author><category term="small project" /><summary type="html">A few weeks ago a Windows application on my computer was broadcasting notifications that I did not care for. I have an application that communicates with my uninterruptible power supply to shut down my machine in the event of a power outage after a few minutes. If this program estimates less than five minutes of reserve power, the program will broadcast a notification in the system taskbar (with sound!) letting me know.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" /><media:content medium="image" url="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Streaming a Virtual Reality Spectator View to My Raspberry Pi 2</title><link href="https://www.kyleniewiada.org/blog/2016/05/raspberry-pi-steam-vr-streaming/" rel="alternate" type="text/html" title="Streaming a Virtual Reality Spectator View to My Raspberry Pi 2" /><published>2016-05-31T16:44:00-04:00</published><updated>2016-05-31T16:44:00-04:00</updated><id>https://www.kyleniewiada.org/blog/2016/05/raspberry-pi-steam-vr-streaming</id><content type="html" xml:base="https://www.kyleniewiada.org/blog/2016/05/raspberry-pi-steam-vr-streaming/">&lt;p&gt;I think virtual reality is a lot of fun. I had a friend in college demo an Oculus DK1 to me and I was pretty amazed; even though I was running it on a laptop and the display drivers turned everything into wireframe models. I remember getting my hands on my first Google Cardboard, sliding my phone in, and exploring the world through Google Earth. When the HTC Vive went on sale with its advertised room-scale, I bought it. My first real chance to become heavily immersed in a virtual world.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;UPDATE (10/27/2016): After the most recent Raspbian update, I need to use an external powered USB hub for my wireless adapter. This is necessary to use the 5 GHz band which requires more power.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;However, my HTC Vive setup did not fit in my room. I ended up running some cables to put it in the room next door. But there was a problem. I wanted to let those around me in the VR room see what I was seeing. I had to figure out a way to mirror or broadcast my desktop to the other room.&lt;/p&gt;
-
-&lt;p&gt;My first thought was that I was going to use my Steam Link as a way to rebroadcast desktop. After all, it’s another product by Valve and its primary function is for streaming games. I thought this was going to work because it had the feature to minimize the Steam Big Picture application and use the desktop instead. But as I began to find out, this did not work with all Steam VR applications and the usability of the HTC Vive suffered.&lt;/p&gt;
-
-&lt;p&gt;If I launched games from my Steam Link, I could no longer use the VR menu. If I tried to launch the Steam Link after I was in the VR menu, it would refuse because I was already “in game”. I tried using alternative software such as Splashtop (Remote software) to stream it to my device, but it was unable to draw the desktop unless I forced it; this interfered with my Vive yet again.&lt;/p&gt;
-
-&lt;p&gt;After failing to use the Steam Link and Splashtop, I came across others mentioning Nvidia’s GameStream as an alternative to streaming gameplay. Nvidia has a built-in feature with their new-ish graphics cards that allow one to stream their gaming setup to an Nvidia Shield tablet. I did not own a Nvidia Shield tablet. Luckily there was an open source client alternative, &lt;a href=&quot;https://github.com/irtimmer/moonlight-embedded&quot;&gt;Moonlight Embedded&lt;/a&gt;, that would allow streaming to a number of different clients. Sure, I could have probably set up a VNC server/VNC client but who knows how long it would have taken for me to get optimized for streaming games, and where was the fun in that?&lt;/p&gt;
-
-&lt;p&gt;It was settled. I was going to install Moonlight Embedded to my Raspberry Pi 2. Here is my setup so far.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-i-used&quot;&gt;What I used:&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Raspberry Pi 2 running Raspbian Jessie (May 2016) using NOOBS
-    &lt;ul&gt;
-      &lt;li&gt;Including peripherals such as micoSD card, HDMI cable, case, mouse, keyboard, USB micro power adapter, a method to connect to home network such as wireless adapter or ethernet.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Computer with Windows 10&lt;/li&gt;
-  &lt;li&gt;Nvidia GTX 970 graphics card&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/irtimmer/moonlight-embedded&quot;&gt;Moonlight Embedded&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;setting-up-the-pi&quot;&gt;Setting Up the Pi&lt;/h2&gt;
-
-&lt;p&gt;The first thing that I did was install the latest Raspbian Jessie release on my Raspberry Pi 2 &lt;a href=&quot;https://www.raspberrypi.org/downloads/noobs/&quot;&gt;using NOOBS&lt;/a&gt;. &lt;s&gt;I originally was using the TP-LINK TL-WDN3200 wireless adapter with my Raspberry Pi to connect on the 5 GHz network. But as I found out later, this was a problematic adapter.&lt;/s&gt;  I was able to get the TP-LINK TL-WDN3200 working perfectly. I needed to remove DHCPCD (and the default network manager) and use WICD to manage my wireless adapter as DHCPCD appeared to make some kind of aggressive roaming check every minute creating a severe lag on my wireless signal. Make sure the Raspberry Pi is connected to the Internet before continuing.&lt;/p&gt;
-
-&lt;p&gt;After my installation was finished, I followed the Moonlight Embedded directions found in the &lt;a href=&quot;https://github.com/irtimmer/moonlight-embedded/wiki/Packages&quot;&gt;documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Adding the line:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;deb http://archive.itimmer.nl/raspbian/moonlight jessie main
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;to this file:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/apt/sources.list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And running the following to install Moonlight Embedded.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get update
-apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;moonlight-embedded
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Once everything was complete, Moonlight Embedded was installed on my Pi and ready to use.&lt;/p&gt;
-
-&lt;h2 id=&quot;setting-up-the-computer&quot;&gt;Setting Up the Computer&lt;/h2&gt;
-
-&lt;p&gt;I switched over to my desktop, opening up Nvidia GeForce Experience, and added the information below as a custom Shield game. Out of the box, Moonlight Embedded will launch you to the Steam Big Picture mode and leave you with the same problem as the Steam Link; getting stuck with Steam’s streaming mess. However, with Nvidia GeForce Experience, we can add the ability to stream the desktop without interfering with SteamVR at all. In Nvidia GeForce Experience, add the custom game to GameStream found below .&lt;/p&gt;
-
-&lt;p&gt;The application below is Windows’ built-in remote desktop software. It is what I use it to access my PC machine from the Pi in a separate room.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/2016/05/GFEWindow.png&quot; alt=&quot;Adding remote desktop as Nvidia GameStream custom game&quot; /&gt;&lt;em&gt;Adding remote desktop as a Nvidia GameStream custom game&lt;/em&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Name: RemoteDesktop
-Target: &quot;C:\Windows\System32\mstsc.exe&quot;
-Start in: C:\Windows\System32
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;finishing-the-pi&quot;&gt;Finishing the Pi&lt;/h2&gt;
-
-&lt;p&gt;To finish the setup, Raspberry Pi needs to be paired as a GameStream client to your PC.&lt;/p&gt;
-
-&lt;p&gt;To initiate pairing, type the following on your Raspberry Pi terminal:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;moonlight pair 192.168.1.X
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Replace 192.168.1.X with your PC’s IP, which can be found by typing &lt;code class=&quot;highlighter-rouge&quot;&gt;ipconfig&lt;/code&gt; into the Windows command prompt and matching it with your network interface&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Once pairing has been initiated, a window will pop up on the Windows desktop prompting for a code to be entered. Type in the pairing code presented on the Raspberry Pi into your desktop window, and then you should be successfully paired.&lt;/p&gt;
-
-&lt;p&gt;I created a handy streaming script for my own needs to start streaming on the Raspberry Pi found below. It adds in a few extra lines to disable screen blanking such that my remote session does not freeze or become unusable if my Raspberry Pi enters standby mode. However, none of the extra lines will be necessary &lt;em&gt;unless&lt;/em&gt; you change your /boot/config.txt to turn off the monitor when the screen blanks. Make sure to give the script execute permissions and you should be able to run it.&lt;/p&gt;
-
-&lt;p&gt;Check out the rest of the &lt;a href=&quot;https://github.com/irtimmer/moonlight-embedded/tree/master/docs&quot;&gt;documentation arguments&lt;/a&gt;. Your settings will probably differ.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#Disable screen saver blanking.&lt;/span&gt;
-xset s off
-
-&lt;span class=&quot;c&quot;&gt;#Disable Energy Star features.&lt;/span&gt;
-xset &lt;span class=&quot;nt&quot;&gt;-dpms&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#Start the Moonlight stream. Make sure to replace the remote address with your own computer's IP.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#This is probably the only necessary command unless you make other changes to Raspbian&lt;/span&gt;
-moonlight stream &lt;span class=&quot;nt&quot;&gt;-1080&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-60fps&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-bitrate&lt;/span&gt; 20000 &lt;span class=&quot;nt&quot;&gt;-localaudio&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-app&lt;/span&gt; RemoteDesktop 192.168.1.X
-
-&lt;span class=&quot;c&quot;&gt;#Enable screen saver blanking&lt;/span&gt;
-xset s off
-
-&lt;span class=&quot;c&quot;&gt;#Turn off power saving screen features.&lt;/span&gt;
-xset s on
-
-&lt;span class=&quot;c&quot;&gt;#Enable Energy Star features.&lt;/span&gt;
-xset +dpms
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Don’t forget! Ctrl+Alt+Shift+Q quits the streaming session.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;my-problems-and-solutions&quot;&gt;My Problems and Solutions&lt;/h2&gt;
-
-&lt;p&gt;My installation wasn’t very smooth. I had a lot of problems along the way that kept setting me back and extended the project duration for a couple days.&lt;/p&gt;
-
-&lt;h3 id=&quot;my-raspberry-pi-was-extremely-slow-at-downloading&quot;&gt;My Raspberry Pi was extremely slow at downloading.&lt;/h3&gt;
-
-&lt;p&gt;It was not receiving enough power so I do use a different USB adapter to give it more. I didn’t realize that’s what the flashing logo on the top right corner meant. But once I did figure it out, my download speeds over my network soared past the 1 Mbit that I was getting before.&lt;/p&gt;
-
-&lt;h3 id=&quot;audio-would-not-stream&quot;&gt;Audio would not stream.&lt;/h3&gt;
-
-&lt;p&gt;My audio wouldn’t stream at first to my Raspberry Pi because I wasn’t using the &lt;code class=&quot;highlighter-rouge&quot;&gt;-localaudio&lt;/code&gt; flag. This meant that the primary sound device was changing, then SteamVR was also attempting to change the primary audio device to the HTC Vive, and they were both conflicting with each other. If I did manage to have it to stream to the special Nvidia audio driver, I found it to stutter quite a bit. So I resolved this issue by using the local audio flag to prevent my sound device from changing, and mirroring the SteamVR audio to my primary sound driver on my computer.&lt;/p&gt;
-
-&lt;h3 id=&quot;wireless-streaming-stuttered-every-60-seconds-for-10-seconds&quot;&gt;Wireless streaming stuttered every 60 seconds for 10 seconds.&lt;/h3&gt;
-
-&lt;s&gt;My wireless adapter was the primary culprit to this. There was some issue with it either being powered or sharing band with on the USB bus with my Raspberry Pi. I switched to my handy [IOGear Ethernet/Wireless adapter](http://www.amazon.com/IOGEAR-Universal-Ethernet-Adapter-GWU627/dp/B004UAKCS6) and have had little problems streaming 20 Mbit streams. This adapter might not work for everybody. It uses the 2.4 GHz band which is commonly known to be quite crowded. My Raspberry Pi is near the wireless access point, so it has little interference.&lt;/s&gt;
-
-&lt;p&gt;I was able to get my 5 GHz wireless adapter working after uninstalling the newly introduced DHCPCD wireless manager and switching to WICD. I also added “max_usb_current=1” “/boot/config.txt” to prevent my wireless adapter from using all available power from the USB ports. Everything works flawlessly now over wireless.&lt;/p&gt;
-
-&lt;h3 id=&quot;my-hdmi-monitor-would-not-turn-off-after-screen-blanking-with-the-pi&quot;&gt;My HDMI monitor would not turn off after screen blanking with the Pi.&lt;/h3&gt;
-
-&lt;p&gt;I added the undocumented/unsupported &lt;code class=&quot;highlighter-rouge&quot;&gt;hdmi_blanking 1&lt;/code&gt; to the bottom of my &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot/config.txt&lt;/code&gt; file and rebooted. This allowed my monitor to enter standby mode when the Raspberry Pi screen blanked.&lt;/p&gt;
-
-&lt;h3 id=&quot;if-my-monitor-turned-off-in-a-remote-session-i-could-not-turn-it-back-on-without-killing-the-session&quot;&gt;If my monitor turned off in a remote session, I could not turn it back on without killing the session.&lt;/h3&gt;
-
-&lt;p&gt;Because I enabled the ability for the monitor to shut down when the screen blanked off, if I was in a remote session and my Pi entered standby mode, I would be unable to escape because my Pi did not see any wake events as they were all being handed off to my remote session. My solution to this was just a bit more of a lazy hack. I decided to create a script (listed above) that turns off the power saving features before I enter streaming modesave file and restore them after ending the stream. This ensures that I will not get stuck with a monitor in standby while streaming.&lt;/p&gt;
-
-&lt;h3 id=&quot;i-had-buffering-issues&quot;&gt;I had buffering issues.&lt;/h3&gt;
-
-&lt;s&gt;I solved this simply by playing with the bit rate level. I decided to stick with 10 Mbits for a 720p 60fps stream. In the past 10 days, I've only had the stream freeze once. It's successful enough for me.&lt;/s&gt;
-
-&lt;p&gt;The stream no longer freezes on me after getting the 5 GHz adapter working and the compression artifacts are extremely minimal. It looks great in 1080p/60 FPS.&lt;/p&gt;</content><author><name>{&quot;image&quot;=&gt;&quot;/assets/img/kyle.jpg&quot;, &quot;twitter&quot;=&gt;&quot;CrypticCitrus&quot;}</name></author><category term="medium project" /><summary type="html">I think virtual reality is a lot of fun. I had a friend in college demo an Oculus DK1 to me and I was pretty amazed; even though I was running it on a laptop and the display drivers turned everything into wireframe models. I remember getting my hands on my first Google Cardboard, sliding my phone in, and exploring the world through Google Earth. When the HTC Vive went on sale with its advertised room-scale, I bought it. My first real chance to become heavily immersed in a virtual world.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.kyleniewiada.org/assets/img/2016/05/banner2.jpg" /><media:content medium="image" url="https://www.kyleniewiada.org/assets/img/2016/05/banner2.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;If anyone out there has a better method or would like to point out any unforeseen consequences with this, please let me know. For everyone else, this should help tame such applications inside their Windows taskbar.&lt;/p&gt;</content><author><name>{&quot;image&quot;=&gt;&quot;/assets/img/kyle.jpg&quot;, &quot;twitter&quot;=&gt;&quot;CrypticCitrus&quot;}</name></author><category term="small project" /><summary type="html">A few weeks ago a Windows application on my computer was broadcasting notifications that I did not care for. I have an application that communicates with my uninterruptible power supply to shut down my machine in the event of a power outage after a few minutes. If this program estimates less than five minutes of reserve power, the program will broadcast a notification in the system taskbar (with sound!) letting me know.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" /><media:content medium="image" url="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
