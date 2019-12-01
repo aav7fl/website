@@ -42,7 +42,7 @@ After searching around the local auto shops, I found an affordable one that woul
 
 Lacking affordable options, I did just that. I dragged my wife along with me to the special auto shop about 30 minutes before they opened. I found myself fourth in line. Not terrible; not great.
 
-Once they opened, we all shuffled out of the cold weather into the small shop. When it was my turn at the counter, I showed them which remote starter system is looking to buy. They showed me which bypass system I would need in order to make the remote starter work with my vehicle. I reluctantly agreed to the purchase and they queued me up for the install.
+Once they opened, we all shuffled out of the cold weather into the small shop. When it was my turn at the counter, I showed them which remote starter system I was looking to buy. They showed me which bypass system I would need in order to make the remote starter work with my vehicle. I reluctantly agreed to the purchase and they queued me up for the install.
 
 After six hours of waiting and walking around the neighborhood, they wrapped up the installation. The tech came out to the waiting room and turned over my keys. In a hurry, they showed me what button would lock and unlock my car, and then which button I need to press for the remote starter.
 
@@ -50,17 +50,17 @@ After six hours of waiting and walking around the neighborhood, they wrapped up 
 
 ### What I Learned
 
-1. The shop I didn't take the time to polish any of the settings.
+1. The shop didn't take the time to polish any of the settings.
 2. Only authorized dealers or installers have access to the programming and installation documents for the remote starter and bypass modules.
 3. I don't like the secrecy behind the products in the remote starter industry.
 
 **Expected**: The remote starter is installed and configured in a way that isn't a nuisance.
 
-**Actual**: The auto shop wired up the car so a button could turn it on and off. No extra features or convenience programming. No questioning the customer on what they would like setup.
+**Actual**: The auto shop wired up the car so a button could turn it on and off. No extra features or convenience programming. No questioning the customer on what they would like set up.
 
 ### What Was Neglected
 
-1. The car's default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This let's everyone know that the car is _twice_ as secure.
+1. The car's default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This lets everyone know that the car is _twice_ as secure.
 2. The car requires the user to press the unlock button twice on the new remote with frame-perfect timing in order to unlock all doors. Since there is a long delay with the new remote, this makes it difficult. If the user isn't fast enough, it will only unlock the driver door.
 3. The remote starter doesn't turn on the rear defogger because no one thought I would care about that.
 
@@ -70,7 +70,7 @@ I made a deep dive into researching what I had just purchased and how I could fi
 
 ### Disabling the Double Alarms
 
-> The car's default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This let's everyone know that the car is _twice_ as secure.
+> The car's default alarm will chirp alongside the aftermarket remote starter system whenever locking/unlocking. This lets everyone know that the car is _twice_ as secure.
 
 This one was a super simple Google search away. All I had to do was:
 
@@ -237,7 +237,7 @@ I read through the manual and to my dismay learned that my bypass module did not
 
 #### Reaching Out to Experts
 
-After pouring through different Subaru forms trying to piece together how individuals connected their own rear defogger to a remote starter, another solution was presented. I learned that most Subaru vehicles had a wire in their BCM (Body Control Module) that could trigger the rear defogger. Since I had already identified a rear defogger trigger wire in my remote starter system, this sounded like something that might work for me! But how could I confidently identify which wire I needed to connect? Not on my own, that's for sure.
+After poring through different Subaru forums trying to piece together how individuals connected their own rear defogger to a remote starter, another solution was presented. I learned that most Subaru vehicles had a wire in their BCM (Body Control Module) that could trigger the rear defogger. Since I had already identified a rear defogger trigger wire in my remote starter system, this sounded like something that might work for me! But how could I confidently identify which wire I needed to connect? Not on my own, that's for sure.
 
 Investigating the BCMs under the steering wheel in my vehicle revealed clusters of wires emerging from various grey modules. Since I was unable to confidently identify which wire controlled the rear defogger gate, I turned to the Internet communities for help.
 
