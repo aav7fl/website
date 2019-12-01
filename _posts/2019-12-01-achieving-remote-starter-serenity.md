@@ -14,7 +14,7 @@ description: "Tuning a remote starter install from a local auto shop. Silencing 
 
 Modern cars are like expensive computers with an engine and wheels. Any car from the last decade has loads of electronic systems that rely on special computers to operate. My 2009 Subaru Impreza is no exception. If I want to improve my experience with that computer, I need to locate the correct wiring diagrams and software to speak with it. Making any modification to the wiring in my vehicle requires confidence. 
 
-Since cars have over a thousand wires, and I'm _not confident_ on modifications made to my car, I've installed automotive fire extinguisher. This is the saga of achieving serenity with my remote starter.
+Since cars have over a thousand wires, and I'm _not confident_ on modifications made to my car, I've installed an automotive fire extinguisher. This is the saga of achieving serenity with my remote starter.
 
 {% include toc.html %}
 
@@ -22,7 +22,7 @@ Since cars have over a thousand wires, and I'm _not confident_ on modifications 
 
 I am in the unfortunate position where my car lives outside without any shelter from the punishing temperatures. In the summertime, my car bakes in the sunlight. In the winter, ice glazes over the windows. My car comes from the time period where clunky touch screens were starting to take over vehicle dashboards, Bluetooth was a rising option, and tape decks were no longer included.
 
-My 2009 Subaru Impreza was born in the middle of this awkward time. It didn't have the optional remote starter, no in-car phone calling, nor did it include a fancy satellite radio setup. Nope-- it was a normal car lacking any subscription services. This was _fine_ news for me, though. Now I wouldn't need to fight DRM to the death in my duel to improve my experience.
+My 2009 Subaru Impreza was born in the middle of this awkward time. It didn't have the optional remote starter, no in-car phone calling, nor did it include a fancy satellite radio setup. Nope-- it was a normal car lacking any subscription services. This was _fine_ news for me though. Now I wouldn't need to fight DRM to the death in my duel to improve my experience.
 
 To make seasonal living with my Subaru more tolerable, I began looking into remote starter options. I wanted a single button press to create the ideal micro-environment for my commute to work and back. No more would I spend time scraping ice off my windows each winter morning.
 
