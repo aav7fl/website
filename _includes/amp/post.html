@@ -5,7 +5,7 @@
 
       <h2 class="meta">{{ page.author | default: site.author }}</h3>
 
-      <h3 class="meta">{{ page.date | date: '%B %d, %Y' }} | {{ page.content | number_of_words | divided_by:120 | ceil }} Minute Read</h3>
+      <h3 class="meta">{{ page.date | date: '%B %d, %Y' }} | {{ page.content | number_of_words | divided_by:200 | ceil }} Minute Read</h3>
 
       {% if page.image %}
       <div class="featuredImage">
