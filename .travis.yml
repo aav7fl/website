@@ -1,8 +1,7 @@
 language: node_js
-sudo: false
 branches:
-  except:
-  - gh-pages
+  only:
+  - master
 node_js:
   - '10'
 cache:
@@ -11,19 +10,17 @@ cache:
     - vendor/bundle
     - /home/travis/.rvm/
 
-branches:
-  only:
-  - master
-
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
 before_install:
+  # https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html
+  - gem update --system
   - gem install bundler
 
 install:
-  - bundle install --deployment
+  - bundle install 
   - npm install
 
 script:
@@ -31,7 +28,6 @@ script:
 
 deploy:
   provider: pages
-  skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: _site
