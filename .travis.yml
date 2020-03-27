@@ -1,8 +1,7 @@
 language: node_js
-sudo: false
 branches:
-  except:
-  - gh-pages
+  only:
+  - master
 node_js:
   - '10'
 cache:
@@ -10,10 +9,6 @@ cache:
     - node_modules
     - vendor/bundle
     - /home/travis/.rvm/
-
-branches:
-  only:
-  - master
 
 env:
   global:
@@ -31,7 +26,6 @@ script:
 
 deploy:
   provider: pages
-  skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: _site
