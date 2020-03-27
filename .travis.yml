@@ -20,7 +20,7 @@ before_install:
   - gem install bundler
 
 install:
-  - bundle install --deployment
+  - bundle install 
   - npm install
 
 script:
