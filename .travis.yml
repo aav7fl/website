@@ -31,6 +31,8 @@ deploy:
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: _site
+  # Remove skip_cleanup with Deployment v2
+  skip_cleanup: true 
   on:
     branch: master
 
