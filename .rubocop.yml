@@ -1,8 +1,12 @@
-Metrics/BlockLength:
+Layout/HeredocIndentation:
   Exclude:
     - spec/**/*
 
-Metrics/LineLength:
+Layout/LineLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/BlockLength:
   Exclude:
     - spec/**/*
 
@@ -10,15 +14,20 @@ Metrics/MethodLength:
   Exclude:
     - spec/**/*
 
-Style/Documentation:
-  Enabled: false
-
 Naming/FileName:
   Enabled: false
 
-Layout/HeredocIndentation:
-  Exclude:
-    - spec/**/*
+Style/Documentation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 AllCops:
   Exclude:
