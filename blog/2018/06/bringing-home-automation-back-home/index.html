@@ -55,7 +55,7 @@
   
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 
-<meta name="generator" content="Jekyll v4.0.1" />
+<meta name="generator" content="Jekyll v4.1.0" />
 
 <meta name="author" content="Kyle Niewiada" />
 <meta property="og:locale" content="en_US" />
@@ -76,7 +76,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus" />
 <meta property="fb:app_id" content="137961485759" />
 <script type="application/ld+json">
-{"description":"How I am bringing home automation back home to control devices in my apartment with the help of Home Assistant and Node-RED.","image":{"height":948,"width":1920,"url":"https://www.kyleniewiada.org/assets/img/2018/06/banner.png","@type":"imageObject"},"@type":"BlogPosting","headline":"Bringing Home Automation Back Home","datePublished":"2018-06-03T16:47:00-04:00","dateModified":"2019-08-30T19:02:18-04:00","author":{"@type":"Person","name":"Kyle Niewiada"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2018/06/bringing-home-automation-back-home/"},"url":"https://www.kyleniewiada.org/blog/2018/06/bringing-home-automation-back-home/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"description":"How I am bringing home automation back home to control devices in my apartment with the help of Home Assistant and Node-RED.","image":{"height":948,"width":1920,"url":"https://www.kyleniewiada.org/assets/img/2018/06/banner.png","@type":"imageObject"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2018/06/bringing-home-automation-back-home/"},"headline":"Bringing Home Automation Back Home","dateModified":"2019-08-30T19:15:01-04:00","datePublished":"2018-06-03T16:47:00-04:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"author":{"@type":"Person","name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2018/06/bringing-home-automation-back-home/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -214,7 +214,7 @@
 
 <p>If you think about that xkcd comic from earlier, this is a ridiculously complicated flow when I could just ignore the vacuum automation and use its built-in scheduling. But that’s not how we do things around here, is it?</p>
 
-<p>There are a few other notes on this vacuum flow. I give my vacuum the courtesy of turning on all the lights when it starts running so it can see objects in a clear view. One may also notice the <code class="highlighter-rouge">node-red-contrib-persist</code> node which maintains the last known state between flow redeploys. I also have an <code class="highlighter-rouge">rbe</code> (Report by Exception) node which allows me to ignore repeated commands. This ensures that the vacuum doesn’t schedule itself more than once per day by accident.</p>
+<p>There are a few other notes on this vacuum flow. I give my vacuum the courtesy of turning on all the lights when it starts running so it can see objects in a clear view. One may also notice the <code class="language-plaintext highlighter-rouge">node-red-contrib-persist</code> node which maintains the last known state between flow redeploys. I also have an <code class="language-plaintext highlighter-rouge">rbe</code> (Report by Exception) node which allows me to ignore repeated commands. This ensures that the vacuum doesn’t schedule itself more than once per day by accident.</p>
 
 <blockquote>
   <p>Be careful with this one. If you mess up and reset your trigger condition at 1 AM and it starts vacuuming, your significant other will not be very happy when they are awoken by a vacuum and bright lights. <em>Speaking from experience…</em></p>
@@ -228,9 +228,9 @@
 
 <ul>
   <li>Dim the kitchen and living room lights if I am watching something on Plex or Chromecast.
- On <code class="highlighter-rouge">pause</code>/<code class="highlighter-rouge">stop</code>, restore the lights back to full brightness only if the sun is above a certain horizon angle.
+ On <code class="language-plaintext highlighter-rouge">pause</code>/<code class="language-plaintext highlighter-rouge">stop</code>, restore the lights back to full brightness only if the sun is above a certain horizon angle.
     <ul>
-      <li>But wait, now if someone is cooking in the kitchen while the other person is trying to watch a show, the cook will have trouble seeing. Ok, insert a <code class="highlighter-rouge">cooking mode</code> <code class="highlighter-rouge">input_boolean</code> to prevent dimming specific lights. Solved.</li>
+      <li>But wait, now if someone is cooking in the kitchen while the other person is trying to watch a show, the cook will have trouble seeing. Ok, insert a <code class="language-plaintext highlighter-rouge">cooking mode</code> <code class="language-plaintext highlighter-rouge">input_boolean</code> to prevent dimming specific lights. Solved.</li>
     </ul>
   </li>
 </ul>
@@ -245,7 +245,7 @@
 
 <p><img src="/assets/img/2018/06/automation_colorloop.png" alt="Hue Colorloop Flow" /><em>Hue Colorloop Flow</em></p>
 
-<p>In case you’re wondering what’s inside the <code class="highlighter-rouge">colorwave</code> node, it’s a piece of JavaScript that I hacked together to rotate through the peak color coordinates on each RGB channel for the best looking light. It’s probably more complicated than it needs to be, but breaking it down like this helps me understand what each component of the code is performing. I make use of the <code class="highlighter-rouge">flow</code> variables a lot to keep the configuration parameters easy to change.</p>
+<p>In case you’re wondering what’s inside the <code class="language-plaintext highlighter-rouge">colorwave</code> node, it’s a piece of JavaScript that I hacked together to rotate through the peak color coordinates on each RGB channel for the best looking light. It’s probably more complicated than it needs to be, but breaking it down like this helps me understand what each component of the code is performing. I make use of the <code class="language-plaintext highlighter-rouge">flow</code> variables a lot to keep the configuration parameters easy to change.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">flow</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">transitionTime</span><span class="dl">"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">rainbow</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">#FF0000</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#FF8000</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#FFFF00</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#80FF00</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#00FF00</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#00FF80</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#00FFFF</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#0080FF</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#7F00FF</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#FF00FF</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#FF007F</span><span class="dl">"</span><span class="p">];</span>
@@ -275,7 +275,7 @@
   <li>When someone arrives home, turn on the lights (+ set the bedroom to their favorite color scene), and broadcast their arrival over all Google Home speakers.
  We also have it set up to turn off all lights and switch to Eco mode if every person has left the apartment.
     <ul>
-      <li>But what if the other person is sleeping? Then we need to make sure that we add in a <code class="highlighter-rouge">sleeping mode</code> <code class="highlighter-rouge">input_boolean</code> that disables the announcement and prevents changing the bedroom lights.</li>
+      <li>But what if the other person is sleeping? Then we need to make sure that we add in a <code class="language-plaintext highlighter-rouge">sleeping mode</code> <code class="language-plaintext highlighter-rouge">input_boolean</code> that disables the announcement and prevents changing the bedroom lights.</li>
     </ul>
   </li>
 </ul>

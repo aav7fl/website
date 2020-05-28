@@ -55,7 +55,7 @@
   
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 
-<meta name="generator" content="Jekyll v4.0.1" />
+<meta name="generator" content="Jekyll v4.1.0" />
 
 <meta name="author" content="Kyle Niewiada" />
 <meta property="og:locale" content="en_US" />
@@ -76,7 +76,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus" />
 <meta property="fb:app_id" content="137961485759" />
 <script type="application/ld+json">
-{"description":"How to back up and restore your cats from the Google Android Nougat Neko Easter Egg without root using ADB.","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/01/banner.jpg","@type":"imageObject"},"@type":"BlogPosting","headline":"Backing Up Android Nougat Easter Egg Cats (No Root)","datePublished":"2017-01-04T05:37:00-05:00","dateModified":"2019-08-30T19:02:18-04:00","author":{"@type":"Person","name":"Kyle Niewiada"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2017/01/backing-up-android-nougat-cats/"},"url":"https://www.kyleniewiada.org/blog/2017/01/backing-up-android-nougat-cats/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"description":"How to back up and restore your cats from the Google Android Nougat Neko Easter Egg without root using ADB.","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/01/banner.jpg","@type":"imageObject"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2017/01/backing-up-android-nougat-cats/"},"headline":"Backing Up Android Nougat Easter Egg Cats (No Root)","dateModified":"2019-08-30T19:15:01-04:00","datePublished":"2017-01-04T05:37:00-05:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"author":{"@type":"Person","name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2017/01/backing-up-android-nougat-cats/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -171,7 +171,7 @@ I threw on USB debugging, connected my phone to the computer, and wrote the foll
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adb</span> <span class="n">backup</span> <span class="o">-</span><span class="n">f</span> <span class="no">C</span><span class="p">:\</span><span class="no">CatsBackup_</span><span class="o">%</span><span class="n">date</span><span class="ss">:~</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="o">%%</span><span class="n">date</span><span class="ss">:~</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="o">%%</span><span class="n">date</span><span class="ss">:~</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="o">%</span><span class="p">.</span><span class="nf">ab</span> <span class="n">com</span><span class="p">.</span><span class="nf">android</span><span class="p">.</span><span class="nf">egg</span> <span class="o">-</span><span class="nb">system</span>
 </code></pre></div></div>
 
-<p>When the command above is run in Windows Command Prompt, a few screens will appear on the phone to confirm the backup and possibly enter a password to encrypt it. ADB will create a small file with today’s date on my C: drive named <code class="highlighter-rouge">CatsBackup_20170104.ab</code> (January 04, 2017) and it will contain the backup data for my cats. If you’re not using Windows Command Prompt, go ahead and change the file name to whatever you’d like. I just wanted to make it scriptable for myself.</p>
+<p>When the command above is run in Windows Command Prompt, a few screens will appear on the phone to confirm the backup and possibly enter a password to encrypt it. ADB will create a small file with today’s date on my C: drive named <code class="language-plaintext highlighter-rouge">CatsBackup_20170104.ab</code> (January 04, 2017) and it will contain the backup data for my cats. If you’re not using Windows Command Prompt, go ahead and change the file name to whatever you’d like. I just wanted to make it scriptable for myself.</p>
 
 <p>To restore, simply run:</p>
 
@@ -190,7 +190,7 @@ I threw on USB debugging, connected my phone to the computer, and wrote the foll
   <p>Update November 11, 2017: I recently upgraded my phone to the Pixel 2 and it must have been a weird upgrade process because my Neko game was a frozen-like state. This is because the activation activity had not occurred so the game was not allowed to run. To manually activate the game on Android Oreo, you just need to run the following ADB Shell command. A little cat will pop up on the bottom of your screen like a toast notification and you should be good to go (except the notifications when you find a cat are broken/sharing the cat crashes the app after it successfully exports).</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell am start -n com.android.egg/.neko.NekoActivationActivity
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell am start -n com.android.egg/.neko.NekoActivationActivity
 </code></pre></div></div>
 
 

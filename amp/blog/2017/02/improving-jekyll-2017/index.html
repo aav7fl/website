@@ -35,7 +35,7 @@
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 
-<meta name="generator" content="Jekyll v4.0.1">
+<meta name="generator" content="Jekyll v4.1.0">
 
 <meta name="author" content="Kyle Niewiada">
 <meta property="og:locale" content="en_US">
@@ -56,7 +56,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus">
 <meta property="fb:app_id" content="137961485759">
 <script type="application/ld+json">
-{"description":"My Jekyll website needed an update; so I fixed that. This is how I added tests, Travis-CI builds, Accelerated Mobile Pages, SEO improvements, and more.","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/02/banner.png","@type":"imageObject"},"@type":"BlogPosting","headline":"Improving Jekyll in 2017","datePublished":"2017-02-22T05:34:00-05:00","dateModified":"2019-08-30T19:02:18-04:00","author":{"@type":"Person","name":"Kyle Niewiada"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/02/improving-jekyll-2017/"},"url":"/blog/2017/02/improving-jekyll-2017/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"description":"My Jekyll website needed an update; so I fixed that. This is how I added tests, Travis-CI builds, Accelerated Mobile Pages, SEO improvements, and more.","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/02/banner.png","@type":"imageObject"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/02/improving-jekyll-2017/"},"headline":"Improving Jekyll in 2017","dateModified":"2019-08-30T19:15:01-04:00","datePublished":"2017-02-22T05:34:00-05:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"author":{"@type":"Person","name":"Kyle Niewiada"},"url":"/blog/2017/02/improving-jekyll-2017/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -183,7 +183,7 @@
 
 <h2 id="testing">Testing</h2>
 
-<p>My website needed testing. I had no excuse. With every new feature added, there was another chance that something would slip by and ruin my production release. After adding AMP, I would manually validate each page in Google Chrome using the <code class="highlighter-rouge">#development=1</code> tag in my URL. For every change the HTML layout, I would miss a close tag. This needed to change.</p>
+<p>My website needed testing. I had no excuse. With every new feature added, there was another chance that something would slip by and ruin my production release. After adding AMP, I would manually validate each page in Google Chrome using the <code class="language-plaintext highlighter-rouge">#development=1</code> tag in my URL. For every change the HTML layout, I would miss a close tag. This needed to change.</p>
 
 <h3 id="html-proofer">HTML Proofer</h3>
 
@@ -195,9 +195,9 @@
 
 <p>After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. <a href="https://github.com/ampproject/amphtml/tree/master/validator/nodejs">amphtml-validator</a> to the rescue; a Node.js package command line tool that validates AMP HTML files.</p>
 
-<p>With a little Ruby-Fu, I was able to add the Node.js package execution to my Rakefile. It finds all of the <code class="highlighter-rouge">*.html</code> files in my AMP directory and passes them one at a time to the amphtml-validator. I check the exit status of the Node.js package, let the user know if it fails, and continue with my day.</p>
+<p>With a little Ruby-Fu, I was able to add the Node.js package execution to my Rakefile. It finds all of the <code class="language-plaintext highlighter-rouge">*.html</code> files in my AMP directory and passes them one at a time to the amphtml-validator. I check the exit status of the Node.js package, let the user know if it fails, and continue with my day.</p>
 
-<p><code class="highlighter-rouge">Rakefile</code></p>
+<p><code class="language-plaintext highlighter-rouge">Rakefile</code></p>
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desc</span> <span class="s1">'Test website AMP validation'</span>
 <span class="n">task</span> <span class="ss">:amp</span> <span class="k">do</span>
   <span class="nb">puts</span> <span class="s1">'Running AMP Validator...'</span><span class="p">.</span><span class="nf">yellow</span><span class="p">.</span><span class="nf">bold</span>
@@ -218,7 +218,7 @@
 
 <p>I added this to my project by installing the RuboCop RubyGem and adding its config file. The config file excludes a directory that would currently break a Travis-CI build.</p>
 
-<p><code class="highlighter-rouge">.rubocop.yml</code></p>
+<p><code class="language-plaintext highlighter-rouge">.rubocop.yml</code></p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">AllCops</span><span class="pi">:</span>
   <span class="na">Exclude</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">vendor/**/*</span> <span class="c1"># Ignore Travis-CI build directory</span>
@@ -228,7 +228,7 @@
 
 <p>Adding tests were great. But I also liked the idea that if I was away from my build environment I could make a small change on my phone, test it, and deploy to production. This was a bit of a pipe dream for me. I knew as soon as I added tests, I wouldn’t be able to rely completely on GitHub builds. Likewise, if I wanted to add special plugins or RubyGems, say goodbye to GitHub builds.</p>
 
-<p>But <a href="https://travis-ci.com/">Travis-CI</a> saves the day! Travis-CI will watch for code changes in my repo, fetch it, test it, and if it passes it could push my <code class="highlighter-rouge">_site/</code> folder to my GH-Pages branch (where GitHub will deploy online). Pretty cool, huh?</p>
+<p>But <a href="https://travis-ci.com/">Travis-CI</a> saves the day! Travis-CI will watch for code changes in my repo, fetch it, test it, and if it passes it could push my <code class="language-plaintext highlighter-rouge">_site/</code> folder to my GH-Pages branch (where GitHub will deploy online). Pretty cool, huh?</p>
 
 <p>I stumbled across this idea from Savas Labs who wrote a blog post last fall on how they <a href="https://savaslabs.com/2016/10/25/deploy-jekyll-with-travis.html">deploy to GitHub Pages using Travis-CI</a>. They were not the first, but I liked some of the ideas that they used. They would bring in pull requests to the source branch, test it, and deploy to a master branch for GH-Pages based on test results. I have followed suit. I made some changes to the scripts, like how I cache different directories and rely on the built in Node.JS versions, but the idea is still the same.</p>
 
@@ -236,7 +236,7 @@
 <ul>
   <li>Caching Bundler</li>
   <li>Caching Node_Modules</li>
-  <li>Resolving <a href="https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23">RVM and Node_Modules <code class="highlighter-rouge">which</code> conflict</a>. This shaved nearly a minute off the build!</li>
+  <li>Resolving <a href="https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23">RVM and Node_Modules <code class="language-plaintext highlighter-rouge">which</code> conflict</a>. This shaved nearly a minute off the build!</li>
 </ul>
 
 <p>Read more on <a href="https://docs.travis-ci.com/user/caching/">Travis-CI caching docs</a>.</p>
@@ -251,9 +251,9 @@
 
 <h3 id="amp-sitemap-conflict">AMP Sitemap Conflict</h3>
 
-<p>In order to avoid duplicate results, AMP pages are not <a href="https://twitter.com/JohnMu/status/786588362706673664">necessary in the sitemap</a> unless they are standalone pages. Referencing them in the <code class="highlighter-rouge">&lt;head&gt;</code> of the normal page is enough. Because <a href="https://github.com/jekyll/jekyll-sitemap">jekyll-sitemap</a> knew nothing about my AMP ambitions, I had to manually set a default in my <code class="highlighter-rouge">amp.html</code> layout frontmatter to stop them from being included.</p>
+<p>In order to avoid duplicate results, AMP pages are not <a href="https://twitter.com/JohnMu/status/786588362706673664">necessary in the sitemap</a> unless they are standalone pages. Referencing them in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the normal page is enough. Because <a href="https://github.com/jekyll/jekyll-sitemap">jekyll-sitemap</a> knew nothing about my AMP ambitions, I had to manually set a default in my <code class="language-plaintext highlighter-rouge">amp.html</code> layout frontmatter to stop them from being included.</p>
 
-<p><code class="highlighter-rouge">_layouts/amp.html</code></p>
+<p><code class="language-plaintext highlighter-rouge">_layouts/amp.html</code></p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">layout</span><span class="pi">:</span> <span class="s">amp</span>
 <span class="na">sitemap</span><span class="pi">:</span> <span class="no">false</span>
@@ -266,11 +266,11 @@
 
 <p>Next, my AMP pages had conflicts with  <a href="https://github.com/jekyll/jekyll-seo-tag">Jekyll-SEO-Tag</a>. Every AMP page would list its canonical URL as itself, when in reality it should be linking to the normal version of the webpage.</p>
 
-<p><del>This was solved by cheating. I call it cheating because it’s not a robust solution. If I happen to include the <code class="highlighter-rouge">site.ampdir</code> anywhere in my SEO tags on an AMP page, that text will be removed.</del></p>
+<p><del>This was solved by cheating. I call it cheating because it’s not a robust solution. If I happen to include the <code class="language-plaintext highlighter-rouge">site.ampdir</code> anywhere in my SEO tags on an AMP page, that text will be removed.</del></p>
 
-<p>The new method of changing the canonical url on AMP pages is accomplished by removing the first instance of <code class="highlighter-rouge">site.ampdir</code> in my <code class="highlighter-rouge">page.url</code> on pages whose layout is of type <code class="highlighter-rouge">amp</code>. I then rebuild the canonical url in the same format as Jekyll SEO Tag and update the JSON-LD with a small replace filter.</p>
+<p>The new method of changing the canonical url on AMP pages is accomplished by removing the first instance of <code class="language-plaintext highlighter-rouge">site.ampdir</code> in my <code class="language-plaintext highlighter-rouge">page.url</code> on pages whose layout is of type <code class="language-plaintext highlighter-rouge">amp</code>. I then rebuild the canonical url in the same format as Jekyll SEO Tag and update the JSON-LD with a small replace filter.</p>
 
-<p>If my AMP Page canonical URL contained <code class="highlighter-rouge">/amp</code> like so:</p>
+<p>If my AMP Page canonical URL contained <code class="language-plaintext highlighter-rouge">/amp</code> like so:</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>href="https://www.kyleniewiada.org/amp/blog/2017/02/improving-jekyll-2017/"
 </code></pre></div></div>
 <p>It would now be altered to:</p>
@@ -279,7 +279,7 @@
 
 <p>Whenever I grab the SEO tag, I make sure to run in through my “parser” first to fix it. Here’s how I do it.</p>
 
-<p><code class="highlighter-rouge">_includes/amp-check.html</code></p>
+<p><code class="language-plaintext highlighter-rouge">_includes/amp-check.html</code></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="nv">seo_text</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">seo</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="p">%}</span>
 
@@ -291,7 +291,7 @@
 <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
-<p>Now all I need to do is call the Jekyll-SEO-Tag with <code class="highlighter-rouge">{% include amp-check.html src="SEO" %}</code> in the <code class="highlighter-rouge">&lt;head&gt;</code> of my layout. Problem solved.</p>
+<p>Now all I need to do is call the Jekyll-SEO-Tag with <code class="language-plaintext highlighter-rouge">{% include amp-check.html src="SEO" %}</code> in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of my layout. Problem solved.</p>
 
 <h3 id="amp-videos">AMP Videos</h3>
 
@@ -299,15 +299,15 @@
 
 <h4 id="fixing-the-head">Fixing the &lt;Head&gt;</h4>
 
-<p>To get that <em>special JS file</em>, I decided the easiest way would be to add a frontmatter variable in each post stating which special AMP JS files were needed. Then I would make a check for it in the <code class="highlighter-rouge">&lt;head&gt;</code>. For example, a blog post with an embedded video would have:</p>
+<p>To get that <em>special JS file</em>, I decided the easiest way would be to add a frontmatter variable in each post stating which special AMP JS files were needed. Then I would make a check for it in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>. For example, a blog post with an embedded video would have:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">amp</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">video</span>
 </code></pre></div></div>
 
-<p>Then the AMP <code class="highlighter-rouge">&lt;head&gt;</code> layout would include:</p>
+<p>Then the AMP <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> layout would include:</p>
 
-<p><code class="highlighter-rouge">_includes/amp/head.html</code></p>
+<p><code class="language-plaintext highlighter-rouge">_includes/amp/head.html</code></p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if page.amp contains 'video' %}
   <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">custom-element=</span><span class="s">"amp-video"</span> <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0/amp-video-0.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -316,9 +316,9 @@
 
 <h4 id="fixing-the-post">Fixing the Post</h4>
 
-<p>Now that the <code class="highlighter-rouge">&lt;head&gt;</code> had the correct dependencies, I had to figure out how to embed the video file in my blog post in the appropriate way for each page layout.</p>
+<p>Now that the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> had the correct dependencies, I had to figure out how to embed the video file in my blog post in the appropriate way for each page layout.</p>
 
-<p>This was accomplished with a small <code class="highlighter-rouge">include</code> that would take in the parameters from a post specifying the video type and other special properties.</p>
+<p>This was accomplished with a small <code class="language-plaintext highlighter-rouge">include</code> that would take in the parameters from a post specifying the video type and other special properties.</p>
 
 <p>I would add a video to my post with:</p>
 
@@ -329,9 +329,9 @@
 </span><span class="p">%}</span>
 </code></pre></div></div>
 
-<p>Then the video <code class="highlighter-rouge">include</code> would properly insert the video for both AMP and default layouts.</p>
+<p>Then the video <code class="language-plaintext highlighter-rouge">include</code> would properly insert the video for both AMP and default layouts.</p>
 
-<p><code class="highlighter-rouge">_includes/video.html</code></p>
+<p><code class="language-plaintext highlighter-rouge">_includes/video.html</code></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Method to implement AMP-Video. --&gt;
 <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">height</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">default</span><span class="p">:</span><span class="w"> </span><span class="s2">"420"</span><span class="w"> </span><span class="p">%}</span>
@@ -355,7 +355,7 @@
 <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
-<p>In the code above, it first checks to see if the video type from the post is a “normal” embedded video, or a YouTube video (not shown). Next, it checks to see if the webpage layout is of type <code class="highlighter-rouge">amp</code>. If this is also true, then it will insert the correct HTML layout for an AMP video. Otherwise, it will insert the video with normal HTML5.</p>
+<p>In the code above, it first checks to see if the video type from the post is a “normal” embedded video, or a YouTube video (not shown). Next, it checks to see if the webpage layout is of type <code class="language-plaintext highlighter-rouge">amp</code>. If this is also true, then it will insert the correct HTML layout for an AMP video. Otherwise, it will insert the video with normal HTML5.</p>
 
 <blockquote>
   <p>You can find more information or any updates to my implementation on the <a href="https://github.com/aav7fl/website/wiki">repo Wiki</a>.</p>
@@ -363,7 +363,7 @@
 
 <h3 id="results">Results</h3>
 
-<p>Now when I run the <code class="highlighter-rouge">amphtml-validator</code> tests, all of my AMP pages pass.</p>
+<p>Now when I run the <code class="language-plaintext highlighter-rouge">amphtml-validator</code> tests, all of my AMP pages pass.</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running AMP Validator...
 _site/amp/blog/2013/04/somewhere-to-start/index.html: PASS
@@ -386,7 +386,7 @@ AMP Validator finished successfully.
 
 <p>The only custom RubyGem that I am using is Jekyll-SEO-Tag. Well… a fork of Jekyll-SEO-Tag. That is, until they hopefully accept my <a href="https://github.com/jekyll/jekyll-seo-tag/pull/151">pull request</a>. My pull request corrects and updates the JSON-LD for a blog post to meet Google’s current recommendations. But for now, I have a special entry in my Gemfile pointing to my fork.</p>
 
-<p><code class="highlighter-rouge">Gemfile</code></p>
+<p><code class="language-plaintext highlighter-rouge">Gemfile</code></p>
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
   <span class="n">git</span> <span class="s1">'https://github.com/aav7fl/jekyll-seo-tag.git'</span> <span class="k">do</span>
     <span class="n">gem</span> <span class="s1">'jekyll-seo-tag'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'testing'</span>
@@ -397,7 +397,7 @@ AMP Validator finished successfully.
 <h3 id="website-wiki">Website Wiki</h3>
 
 <p>I added a <a href="https://github.com/aav7fl/website/wiki">wiki to my website repo</a>
-so others could build out their own project from my website if they wanted to. Additionally, the <code class="highlighter-rouge">README.md</code> for my repo was becoming far too large to include all of the information about how to build, customize, and deploy my website. This meant that I could make separate changes to the documentation without adding another code commit.</p>
+so others could build out their own project from my website if they wanted to. Additionally, the <code class="language-plaintext highlighter-rouge">README.md</code> for my repo was becoming far too large to include all of the information about how to build, customize, and deploy my website. This meant that I could make separate changes to the documentation without adding another code commit.</p>
 
 <h3 id="less-code-is-more">Less Code is More</h3>
 
@@ -407,19 +407,19 @@ so others could build out their own project from my website if they wanted to. A
   <li>Removed CSS normalize/Strongly simplified</li>
   <li>Removed complicated JavaScript header navigation (CSS3 only now)</li>
   <li>Switched post-navigation and footer to use Flexbox that collapses responsively</li>
-  <li>Switched to HTML5 tags (<code class="highlighter-rouge">&lt;main&gt;</code>, <code class="highlighter-rouge">&lt;article&gt;</code>, <code class="highlighter-rouge">&lt;footer&gt;</code>)</li>
+  <li>Switched to HTML5 tags (<code class="language-plaintext highlighter-rouge">&lt;main&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;article&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;footer&gt;</code>)</li>
   <li>Fixed SVG banner image bugs that existed in Edge/IE and iOS Safari
     <ul>
       <li>Edge/IE would not dislpay the SVG banner if it met the following conditions:
         <ul>
           <li>Set as a CSS background-image</li>
-          <li>Displayed with <code class="highlighter-rouge">background-size: cover;</code>
+          <li>Displayed with <code class="language-plaintext highlighter-rouge">background-size: cover;</code>
 </li>
           <li>Stretched too wide (it would disappear immediately).
-This was resolved by adding <code class="highlighter-rouge">x="0" y="0"</code> to the <code class="highlighter-rouge">&lt;filter&gt;</code> tag in my SVG file. What a bug…</li>
+This was resolved by adding <code class="language-plaintext highlighter-rouge">x="0" y="0"</code> to the <code class="language-plaintext highlighter-rouge">&lt;filter&gt;</code> tag in my SVG file. What a bug…</li>
         </ul>
       </li>
-      <li>iOS Safari would display the banner with a smokey-white haze when using the Gaussian Blur filter as it somehow conflicted with the background layer. This was resolved by removing the background fill from the SVG and instead handling it with the <code class="highlighter-rouge">&lt;DIV&gt;</code> <code class="highlighter-rouge">background:</code>.</li>
+      <li>iOS Safari would display the banner with a smokey-white haze when using the Gaussian Blur filter as it somehow conflicted with the background layer. This was resolved by removing the background fill from the SVG and instead handling it with the <code class="language-plaintext highlighter-rouge">&lt;DIV&gt;</code> <code class="language-plaintext highlighter-rouge">background:</code>.</li>
     </ul>
   </li>
   <li>Added favicon sets (like Apple-Touch-Icon) using <a href="https://realfavicongenerator.net/">RealFaviconGenerator</a> with updated colors</li>

@@ -35,7 +35,7 @@
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 
-<meta name="generator" content="Jekyll v4.0.1">
+<meta name="generator" content="Jekyll v4.1.0">
 
 <meta name="author" content="Kyle Niewiada">
 <meta property="og:locale" content="en_US">
@@ -56,7 +56,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus">
 <meta property="fb:app_id" content="137961485759">
 <script type="application/ld+json">
-{"description":"How I used my Raspberry Pi 2 to stream my desktop using Moonlight Embedded for my HTC Vive virtual reality spectator view without interfering with SteamVR.","image":{"height":455,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2016/05/banner2.jpg","@type":"imageObject"},"@type":"BlogPosting","headline":"Streaming a Virtual Reality Spectator View to My Raspberry Pi 2","datePublished":"2016-05-31T16:44:00-04:00","dateModified":"2019-08-30T19:02:18-04:00","author":{"@type":"Person","name":"Kyle Niewiada"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2016/05/raspberry-pi-steam-vr-streaming/"},"url":"/blog/2016/05/raspberry-pi-steam-vr-streaming/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"description":"How I used my Raspberry Pi 2 to stream my desktop using Moonlight Embedded for my HTC Vive virtual reality spectator view without interfering with SteamVR.","image":{"height":455,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2016/05/banner2.jpg","@type":"imageObject"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2016/05/raspberry-pi-steam-vr-streaming/"},"headline":"Streaming a Virtual Reality Spectator View to My Raspberry Pi 2","dateModified":"2019-08-30T19:15:01-04:00","datePublished":"2016-05-31T16:44:00-04:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"author":{"@type":"Person","name":"Kyle Niewiada"},"url":"/blog/2016/05/raspberry-pi-steam-vr-streaming/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -209,7 +209,7 @@ Start in: C:\Windows\System32
 </code></pre></div></div>
 
 <blockquote>
-  <p>Replace 192.168.1.X with your PC’s IP, which can be found by typing <code class="highlighter-rouge">ipconfig</code> into the Windows command prompt and matching it with your network interface</p>
+  <p>Replace 192.168.1.X with your PC’s IP, which can be found by typing <code class="language-plaintext highlighter-rouge">ipconfig</code> into the Windows command prompt and matching it with your network interface</p>
 </blockquote>
 
 <p>Once pairing has been initiated, a window will pop up on the Windows desktop prompting for a code to be entered. Type in the pairing code presented on the Raspberry Pi into your desktop window, and then you should be successfully paired.</p>
@@ -252,7 +252,7 @@ xset +dpms
 
 <h3 id="audio-would-not-stream">Audio would not stream.</h3>
 
-<p>My audio wouldn’t stream at first to my Raspberry Pi because I wasn’t using the <code class="highlighter-rouge">-localaudio</code> flag. This meant that the primary sound device was changing, then SteamVR was also attempting to change the primary audio device to the HTC Vive, and they were both conflicting with each other. If I did manage to have it to stream to the special Nvidia audio driver, I found it to stutter quite a bit. So I resolved this issue by using the local audio flag to prevent my sound device from changing, and mirroring the SteamVR audio to my primary sound driver on my computer.</p>
+<p>My audio wouldn’t stream at first to my Raspberry Pi because I wasn’t using the <code class="language-plaintext highlighter-rouge">-localaudio</code> flag. This meant that the primary sound device was changing, then SteamVR was also attempting to change the primary audio device to the HTC Vive, and they were both conflicting with each other. If I did manage to have it to stream to the special Nvidia audio driver, I found it to stutter quite a bit. So I resolved this issue by using the local audio flag to prevent my sound device from changing, and mirroring the SteamVR audio to my primary sound driver on my computer.</p>
 
 <h3 id="wireless-streaming-stuttered-every-60-seconds-for-10-seconds">Wireless streaming stuttered every 60 seconds for 10 seconds.</h3>
 
@@ -262,7 +262,7 @@ xset +dpms
 
 <h3 id="my-hdmi-monitor-would-not-turn-off-after-screen-blanking-with-the-pi">My HDMI monitor would not turn off after screen blanking with the Pi.</h3>
 
-<p>I added the undocumented/unsupported <code class="highlighter-rouge">hdmi_blanking 1</code> to the bottom of my <code class="highlighter-rouge">/boot/config.txt</code> file and rebooted. This allowed my monitor to enter standby mode when the Raspberry Pi screen blanked.</p>
+<p>I added the undocumented/unsupported <code class="language-plaintext highlighter-rouge">hdmi_blanking 1</code> to the bottom of my <code class="language-plaintext highlighter-rouge">/boot/config.txt</code> file and rebooted. This allowed my monitor to enter standby mode when the Raspberry Pi screen blanked.</p>
 
 <h3 id="if-my-monitor-turned-off-in-a-remote-session-i-could-not-turn-it-back-on-without-killing-the-session">If my monitor turned off in a remote session, I could not turn it back on without killing the session.</h3>
 

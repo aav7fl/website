@@ -35,7 +35,7 @@
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 
-<meta name="generator" content="Jekyll v4.0.1">
+<meta name="generator" content="Jekyll v4.1.0">
 
 <meta name="author" content="Kyle Niewiada">
 <meta property="og:locale" content="en_US">
@@ -56,7 +56,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus">
 <meta property="fb:app_id" content="137961485759">
 <script type="application/ld+json">
-{"description":"How I use the new webhooks endpoints added to Home Assistant to trigger dimming the lights when my media starts on Plex.","image":{"height":398,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2018/10/banner.jpg","@type":"imageObject"},"@type":"BlogPosting","headline":"How I Dim My Hue Lights with a Plex Webhook","datePublished":"2018-10-18T16:47:00-04:00","dateModified":"2019-08-30T19:02:18-04:00","author":{"@type":"Person","name":"Kyle Niewiada"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/10/dimming-lights-with-plex-and-homeassistant/"},"url":"/blog/2018/10/dimming-lights-with-plex-and-homeassistant/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"description":"How I use the new webhooks endpoints added to Home Assistant to trigger dimming the lights when my media starts on Plex.","image":{"height":398,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2018/10/banner.jpg","@type":"imageObject"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/10/dimming-lights-with-plex-and-homeassistant/"},"headline":"How I Dim My Hue Lights with a Plex Webhook","dateModified":"2019-08-30T19:15:01-04:00","datePublished":"2018-10-18T16:47:00-04:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"author":{"@type":"Person","name":"Kyle Niewiada"},"url":"/blog/2018/10/dimming-lights-with-plex-and-homeassistant/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -153,9 +153,9 @@
 
 <ol>
   <li>I prefer to avoid exposing local network applications to the internet without it being necessary.</li>
-  <li>I prefer to access local network applications with <code class="highlighter-rouge">SSL</code>. If it’s an internal app, I will use a self-signed certificate by my local CA. If it’s an external facing app, I look to sign it with Let’s Encrypt. In my head, this makes me feel a little bit better in case a device on my network is compromised and begins snooping.</li>
-  <li>The Node-RED webhook endpoint is unable to run both <code class="highlighter-rouge">HTTP</code> &amp; <code class="highlighter-rouge">HTTPS</code> at the same time. I’m not quite sure why this occurred, but it may have something to do with the Node-RED implementation I am using. This means I cannot use SSL locally on Node-RED if I want to use the webhook from Plex.</li>
-  <li>Without setting up a (reverse?) proxy through nginx (or the likes) and using an external CA like <a href="https://letsencrypt.org/">Let’s Encrypt</a>, I’m unable to <code class="highlighter-rouge">POST</code> requests from Plex webhooks because Plex does not recognize my local CA (and why would it?) causing them to fail.</li>
+  <li>I prefer to access local network applications with <code class="language-plaintext highlighter-rouge">SSL</code>. If it’s an internal app, I will use a self-signed certificate by my local CA. If it’s an external facing app, I look to sign it with Let’s Encrypt. In my head, this makes me feel a little bit better in case a device on my network is compromised and begins snooping.</li>
+  <li>The Node-RED webhook endpoint is unable to run both <code class="language-plaintext highlighter-rouge">HTTP</code> &amp; <code class="language-plaintext highlighter-rouge">HTTPS</code> at the same time. I’m not quite sure why this occurred, but it may have something to do with the Node-RED implementation I am using. This means I cannot use SSL locally on Node-RED if I want to use the webhook from Plex.</li>
+  <li>Without setting up a (reverse?) proxy through nginx (or the likes) and using an external CA like <a href="https://letsencrypt.org/">Let’s Encrypt</a>, I’m unable to <code class="language-plaintext highlighter-rouge">POST</code> requests from Plex webhooks because Plex does not recognize my local CA (and why would it?) causing them to fail.</li>
 </ol>
 
 <h2 id="sticking-with-home-assistant-webhooks">Sticking with Home Assistant webhooks</h2>
@@ -163,14 +163,14 @@
 <p>That means the solution I chose to use were the newly introduced webhooks for Home Assistant.</p>
 
 <blockquote>
-  <p>My rationale behind this decision is that because I am already exposing Home Assistant externally, and I would prefer not to open another attack vector with Node-RED, I might as well just use the <code class="highlighter-rouge">HTTPS</code> endpoint on Home Assistant. If I was not already exposing Home Assistant externally, I likely would have kept using the non-ssl webhook from Node-RED locally.</p>
+  <p>My rationale behind this decision is that because I am already exposing Home Assistant externally, and I would prefer not to open another attack vector with Node-RED, I might as well just use the <code class="language-plaintext highlighter-rouge">HTTPS</code> endpoint on Home Assistant. If I was not already exposing Home Assistant externally, I likely would have kept using the non-ssl webhook from Node-RED locally.</p>
 </blockquote>
 
-<p>On this <a href="https://community.home-assistant.io/t/plex-webhooks-wip/73095">Home Assistant community post</a>, rossdargan had this great idea to parse the incoming <code class="highlighter-rouge">JSON</code> (disguised in a <code class="highlighter-rouge">form-data</code> message), and push it back to the local MQTT server so it could be read properly by the automations. I added the following to my <code class="highlighter-rouge">automations.yaml</code> and it worked great. I’m still not completely satisfied with the parsing though. I do wish it was using a proper parsing library instead..</p>
+<p>On this <a href="https://community.home-assistant.io/t/plex-webhooks-wip/73095">Home Assistant community post</a>, rossdargan had this great idea to parse the incoming <code class="language-plaintext highlighter-rouge">JSON</code> (disguised in a <code class="language-plaintext highlighter-rouge">form-data</code> message), and push it back to the local MQTT server so it could be read properly by the automations. I added the following to my <code class="language-plaintext highlighter-rouge">automations.yaml</code> and it worked great. I’m still not completely satisfied with the parsing though. I do wish it was using a proper parsing library instead..</p>
 
 <h3 id="parsing-and-sending-the-payload-to-mqtt">Parsing and sending the payload to MQTT</h3>
 
-<p>Plex webhooks have a problem where they send their <code class="highlighter-rouge">json</code> payload with a <code class="highlighter-rouge">Content-Type</code> header of <code class="highlighter-rouge">form-data</code> instead of <code class="highlighter-rouge">application/json</code>. That’s why we have have to parse the “<code class="highlighter-rouge">data</code>” from the payload first, and repost it through a local MQTT channel before being able to interpret it as a <code class="highlighter-rouge">json</code> object.</p>
+<p>Plex webhooks have a problem where they send their <code class="language-plaintext highlighter-rouge">json</code> payload with a <code class="language-plaintext highlighter-rouge">Content-Type</code> header of <code class="language-plaintext highlighter-rouge">form-data</code> instead of <code class="language-plaintext highlighter-rouge">application/json</code>. That’s why we have have to parse the “<code class="language-plaintext highlighter-rouge">data</code>” from the payload first, and repost it through a local MQTT channel before being able to interpret it as a <code class="language-plaintext highlighter-rouge">json</code> object.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c1"># Home Assistant automations.yaml</span>
@@ -192,28 +192,28 @@
 
 <p>After that automation is set, we can listen to the MQTT channel and check its conditions. In the automation below, I check to see who is watching TV and which player UUID they are using. I’m not sure the best way to find the UUID other than checking the logs or debugging the Plex webhook messages.</p>
 
-<p>Once these conditions are met, I check the playback state of the event being received. If it’s starting/resuming, I flip on a boolean value for <code class="highlighter-rouge">plex_playback</code>. If it’s stopping/pausing, I flip that boolean value off.</p>
+<p>Once these conditions are met, I check the playback state of the event being received. If it’s starting/resuming, I flip on a boolean value for <code class="language-plaintext highlighter-rouge">plex_playback</code>. If it’s stopping/pausing, I flip that boolean value off.</p>
 
 <p>That boolean value is what I use to determine the playback state for my other automations in Node-RED. In my case, it works like this:</p>
 
-<p>If <code class="highlighter-rouge">plex_playback</code> value is turned on, I will check the following conditions in Node-RED before dimming the lights.</p>
+<p>If <code class="language-plaintext highlighter-rouge">plex_playback</code> value is turned on, I will check the following conditions in Node-RED before dimming the lights.</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">Is anyone cooking in the kitchen?</code> If true, don’t dim the kitchen lights.</li>
+<code class="language-plaintext highlighter-rouge">Is anyone cooking in the kitchen?</code> If true, don’t dim the kitchen lights.</li>
   <li>
-<code class="highlighter-rouge">Is this content the morning news?</code> If true, don’t dim any lights. I need to wake up.</li>
+<code class="language-plaintext highlighter-rouge">Is this content the morning news?</code> If true, don’t dim any lights. I need to wake up.</li>
   <li>
-<code class="highlighter-rouge">Is the master light override control on?</code> If true, leave all lights where they are.</li>
+<code class="language-plaintext highlighter-rouge">Is the master light override control on?</code> If true, leave all lights where they are.</li>
 </ul>
 
-<p>If <code class="highlighter-rouge">plex_playback</code> value is turned off, I will check the following conditions in Node-RED before brightening the lights.</p>
+<p>If <code class="language-plaintext highlighter-rouge">plex_playback</code> value is turned off, I will check the following conditions in Node-RED before brightening the lights.</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">Is the sun angle lower than 8°</code> If true, don’t brighten the lights. It’s too late at night for that.</li>
+<code class="language-plaintext highlighter-rouge">Is the sun angle lower than 8°</code> If true, don’t brighten the lights. It’s too late at night for that.</li>
   <li>
-<code class="highlighter-rouge">Is the master light override control on?</code> If true, leave all lights where they are.</li>
+<code class="language-plaintext highlighter-rouge">Is the master light override control on?</code> If true, leave all lights where they are.</li>
 </ul>
 
 <p>Here’s the automation for changing the boolean value:</p>
@@ -243,7 +243,7 @@
 </code></pre></div></div>
 
 <blockquote>
-  <p>After HomeAssistant introduced their <a href="https://www.nabucasa.com/config/webhooks/">Cloud Webhook</a> in <code class="highlighter-rouge">0.84.0</code>, my <code class="highlighter-rouge">payload_template</code> for the incoming WebHooks needed to be changed to <code class="highlighter-rouge">{{ (trigger.data | string)[154:][:-55] }}</code> until HomeAssistant is able to handle JSON payloads in multipart data WebHooks. It’s a <em>terrible</em> solution and entirely based on assumed headers of the payload, but it works for now.</p>
+  <p>After HomeAssistant introduced their <a href="https://www.nabucasa.com/config/webhooks/">Cloud Webhook</a> in <code class="language-plaintext highlighter-rouge">0.84.0</code>, my <code class="language-plaintext highlighter-rouge">payload_template</code> for the incoming WebHooks needed to be changed to <code class="language-plaintext highlighter-rouge">{{ (trigger.data | string)[154:][:-55] }}</code> until HomeAssistant is able to handle JSON payloads in multipart data WebHooks. It’s a <em>terrible</em> solution and entirely based on assumed headers of the payload, but it works for now.</p>
 </blockquote>
 
 <h2 id="conclusion">Conclusion</h2>
