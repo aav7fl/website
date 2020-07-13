@@ -83,7 +83,7 @@ Here was the plan:
 
 In under a few seconds I should be able to detect a person walking near a camera and be immediately notified of their presence. I still don't know _who_ the person is, but I can't imagine it's too difficult to capture faces from TensorFlow and send them through a trained network of known faces.
 
-> I decided to use the [faster_rcnn_inception_v2_coco](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) model based on the [recommendation from this post](https://josiahvorst.com/image-processing-made-easy-home-assistant-tensorflow/).
+> I decided to use the [faster_rcnn_inception_v2_coco](https://github.com/tensorflow/models/blob/5245161c96cc057dc7a883ef4283ed7fab735bcf/research/object_detection/g3doc/tf1_detection_zoo.md) model based on the [recommendation from this post](https://josiahvorst.com/image-processing-made-easy-home-assistant-tensorflow/).
 
 The best part about my plan is that all of it (except the Pushover notification) was supposed to be handled locally.
 
