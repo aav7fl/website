@@ -16,11 +16,11 @@ About a year ago I [went on a crusade](/blog/2019/05/trading-nest-for-tensorflow
 
 ## The Wrong Decision
 
-I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to have a local network on a mostly uncongested wireless spectrum. The reality was that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215) and it’s not always possible to apply an update (unless you have a responsible manufacturer and a Z-Wave plus device). This means you might be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment, and I frequently noticed state changes would get lost on the network if the node was too far away from the nearest repeater.
+I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to have a local network on a mostly uncongested wireless spectrum. The reality was that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215) and it's not always possible to apply an update (unless you have a responsible manufacturer and a Z-Wave plus device). This means you might be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment, and I frequently noticed state changes would get lost on the network if the node was too far away from the nearest repeater.
 
 ## Fuel to the Fire
 
-To add on to my frustration, the 7x Zooz Zen15 smart plugs that I purchased (across four different batches) required at three separate RMA’s within one year. Each of the RMA’s was due to faulty power reading spikes which would cause the overcharge protection to trigger and shut off the plug. 
+To add on to my frustration, the 7x Zooz Zen15 smart plugs that I purchased (across four different batches) required at three separate RMA's within one year. Each of the RMA's was due to faulty power reading spikes which would cause the overcharge protection to trigger and shut off the plug. 
 
 Through some extensive testing I found this to be a fault within the plug each time. I was able to prove this by placing a Kill A Watt electricity usage monitor between the wall and the Zen15 plug. The Kill A Watt was able to contradict any readings broadcast by the Zen15… Except this kept happening even with brand-new replacements. 
 
