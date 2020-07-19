@@ -12,52 +12,53 @@ tag: "medium project"
 description: "How I'm deploying smart plugs flashed with ESPHome to supersede Z-Wave. My ESPHome plugs are cheaper, easier to manage, and more reliable than ever before."
 ---
 
-About a year ago I [went on a crusade](/blog/2019/05/trading-nest-for-tensorflow/) to transition my smart home devices to something that could be controlled locally. The goal was to remove any need for external cloud services. One of the ways that I did this was through Z-Wave. For the uninitiated, the Z-Wave protocol operates on a different frequency than the 2.4 GHz spectrum (at least in the US). This leads to less interference from poorly shielded microwaves, slower Wi-Fi devices, and avoids spectrum congestion from devices like Hue bulbs (which operate closely to some 2.4 GHz Wi-Fi channels).
+About a year ago [I went on a crusade](/blog/2019/05/trading-nest-for-tensorflow/) to transition my smart home devices to something that could be controlled locally. The goal was to remove any need for external cloud services. One of the ways that I did this was though buying Z-Wave devices. For the uninitiated, the Z-Wave protocol operates on a different frequency than the 2.4 GHz spectrum. This leads to less interference from poorly shielded microwaves, slower Wi-Fi devices, and avoids spectrum congestion from devices like Hue bulbs (which operate closely to some 2.4 GHz Wi-Fi channels).
 
 ## The Wrong Decision
 
-I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to have a local network on a mostly uncongested wireless spectrum. The reality was that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215) and it's not always possible to apply an update (unless you have a responsible manufacturer and a Z-Wave plus device). This means you might be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment, and I frequently noticed state changes would get lost on the network if the node was too far away from the nearest repeater.
+I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to operate on an uncongested wireless spectrum. The reality is that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215). It's not always possible to apply an update unless you have a responsible manufacturer and the ability to apply the patch. This means you could be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment. I frequently notice state changes will get lost on the if the Z-Wave device is too far away from the nearest repeater.
 
 ## Fuel to the Fire
 
-To add on to my frustration, the 7x Zooz Zen15 smart plugs that I purchased (across four different batches) required at three separate RMA's within one year. Each of the RMA's was due to faulty power reading spikes which would cause the overcharge protection to trigger and shut off the plug. 
+To add on to my frustration, the 7x Zooz Zen15 smart plugs that I purchased (across four different batches) required three separate RMA's within one year. Each of the RMA's was due to faulty power reading spikes which would cause the overcharge protection to trigger and shut off the plug. 
 
-Through some extensive testing I found this to be a fault within the plug each time. I was able to prove this by placing a Kill A Watt electricity usage monitor between the wall and the Zen15 plug. The Kill A Watt was able to contradict any readings broadcast by the Zen15… Except this kept happening even with brand-new replacements. 
+Through some extensive testing I found this to be a fault within the plug each time. I was able to prove this by placing a Kill A Watt electricity usage monitor between the wall and the Zen15 plug. The Kill A Watt was able to contradict any readings broadcast by the Zen15. Except this kept happening with brand-new replacements after only a few months. 
 
-There could be a lot of contributing factors to the failures of the plugs. Maybe they are more sensitive to electrical fluctuations than other devices in our house. The only thing that I know is I have given up on them. 
-After repeated failures of the Zen15 plugs and buggy firmware from shipped devices I was ready to distance* myself as much as possible from Z-Wave. 
+There are probably a lot of contributing factors to the failures of the plugs I'm not seeing. Maybe they are more sensitive to electrical fluctuations than other devices in our house. The only thing that I know is I have given up on them. 
 
-> *The joke is on Z-Wave since the signal would never reach that far anyway. 🔥
+After repeated failures of the Zen15 plugs and buggy firmware from Z-Wave devices I was ready to distance* myself as much as possible from Z-Wave. 
+
+> *Pun intended. Except Z-Wave wouldn't get the joke since the signal would never reach that far. 🔥
 
 ## Thinking Back to ESPHome
 
-Around this time last year, I also [modified a noise machine with a NodeMCU board](/blog/2019/02/hacking-my-noise-machine/) to control the power control and state of the box. The board I installed inside was flashed with ESPHome-- a wonderful custom firmware that can be applied to ESP8266 and ESP32 devices. My experience with managing and updating ESPHome devices has been so smooth that it motivated me to migrate away from my Z-Wave plugs.
+Around this time last year, [I modified a noise machine with a NodeMCU board](/blog/2019/02/hacking-my-noise-machine/) to control the power and state reporting of the box. The board I installed inside the noise machine was flashed with [ESPHome](https://esphome.io/)-- a wonderful custom firmware that can be applied to ESP8266 and ESP32 devices. My experience with managing and updating ESPHome devices has been so smooth that it influenced my final decision on what to replace my Z-Wave plugs with.
 
-On my quest for new smart plugs, it had to meet and updated criteria:
+On my quest for new smart plugs I was looking for the plug to:
 
 - Handle 15 A
 - Maintain a stable connection
 - Fit a small profile
-- Easy to update
+- Update easily
 - Obfuscate or resolve states before emitting to simplify upstream controls
 
-After a bit of hunting around the /r/HomeAssistant subreddit, I ended up with the Sonoff S31 smart plugs with ESPHome. 
+After a bit of hunting around the [`/r/HomeAssistant`](https://www.reddit.com/r/HomeAssistant) subreddit, I ended up picking the Sonoff S31 smart plugs with ESPHome. 
 
-I chose these specific plugs because disassembling/reassembling them is nondestructive. It has plastic edges that slide out to reveal hidden screws. This means I can reassemble them without chipping plastic or gouging edges.
+I chose these specific plugs because disassembling/reassembling them is nondestructive. They have plastic edges that slide out to reveal hidden screws. This means I can reassemble them without chipping plastic or gouging edges.
 
 ![Disassembled Sonoff S31 plugs](/assets/img/2020/07/sonoff_s31_plugs_disassembled.jpg)*Sonoff S31 plugs disassembled and ready to flash*
 
 ## Preparing
 
-The Sonoff S31 plugs require a USB to serial adapter and a small bit of soldering to flash ESPHome onto. This is usually the part where I would show a picture of my smart plugs with the soldered wires coming off of them. _Not a chance_ 👎. The truth is that my soldering job on these plugs was awful. Cold joints and singed pads everywhere. Thankfully after flashing each plug, I was able to remove my terrible solder negating most ill effects.
+The Sonoff S31 plugs require a USB to serial adapter and a [small bit of soldering](https://tasmota.github.io/docs/devices/Sonoff-S31/) to flash ESPHome onto. This is usually the part where I would show a picture of my smart plugs with the soldered wires leading off. _Not a chance_ 👎. The truth is that my soldering job on these plugs was awful. Cold joints and singed pads everywhere. Thankfully after flashing each plug, I was able to remove my terrible solder negating most ill effects.
 
 ![Sonoff S31 plugs alongside a USB to serial adapter](/assets/img/2020/07/sonoff_s31_plugs.jpg)*Sonoff S31 plugs flashed with ESPHome ready for calibration*
 
-On the other hand, this project finally motivated me to upgrade my soldering iron and get properly sized tips since the tip I was using was wider than the pads themselves (and consequently heating up adjacent pads each time). In the end I only destroyed 1 of 9 Sonoff S31 plugs I purchased. That is an ~89% success rate! 
+On the other hand, this project finally motivated me to upgrade my soldering iron and get properly sized tips. The tip I was using before was wider than the pads themselves! (and consequently heating up adjacent pads each time). In the end I only destroyed 1 of 9 Sonoff S31 plugs I purchased. That is an ~89% success rate! 🎉
 
 ## Configuring
 
-Here is an example of an ESPHome configuration for one of my smart plugs.
+Here is a sample from my ESPHome configuration for one of my deployed smart plugs.
 
 ```yaml
 # Basic Config
@@ -184,26 +185,32 @@ switch:
     id: relay        
 ```
 
-Note that there are custom calibration points around the power monitoring. I wanted extremely accurate power consumption metrics on each plug. Armed with a hairdryer, Kill A Watt electricity usage monitor, phone camera stream, log viewer, and a tool for capturing screenshots, I was able to collect custom data points for electricity usage on each plug. These custom data points allow me to set perfect calibrations for each individual plug.
+> Note that there are custom calibration data points around the electricity monitoring sensors. I wanted extremely accurate power consumption metrics on each plug. 
 
-![Results of recorded vs measured values for Sonoff s31 plugs](/assets/img/2020/07/sonoff_s31_calibration.png)*Custom calibration values for each Sonoff plug*
+Armed with a hairdryer, Kill A Watt electricity usage monitor, phone camera stream, log viewer, and a tool for capturing screenshots I was able to collect custom data points for electricity usage on each plug. These custom data points allow me to set perfect calibrations for each individual plug rather than assuming identical profiles for each device.
 
-> [Frenck has an excellent blog post](https://frenck.dev/calibrating-an-esphome-flashed-power-plug/) that goes over how to calibrate an ESPHome power plug. I would highly recommend giving it a read.
+![Results of recorded vs measured values for Sonoff S31 plugs](/assets/img/2020/07/sonoff_s31_calibration.png)*Custom calibration values for one of my ESPHome plugs*
 
-After that everything was easy. I connected them to home assistant and added them to my dashboard. There were not any surprises after I finished my calibrations.
+> Frenck has an excellent blog post that goes over [how to calibrate an ESPHome power plug](https://frenck.dev/calibrating-an-esphome-flashed-power-plug/). I would highly recommend giving it a read.
+
+After calibration, everything else was easy. [Following the docs](https://www.home-assistant.io/integrations/esphome/), I connected the ESPHome devices up to Home Assistant and placed them on my dashboard.
+
+
+![Home Assistant dashboard showing ESPHome plugs, power, and energy usage](/assets/img/2020/07/home_assistant_power_dashboard.png)*Home Assistant dashboard with ESPHome plugs added*
+
 
 ## What Will I Do with the Data?
 
 My plan is to use the electricity data to adjust living habits and support new automations. 
 
-For example, I want to know how much power (and consequently cost) our dehumidifier is consuming. This allows me to have as a comparison against our comfort level for each humidity setting. The lower we want the humidity, the higher the power consumption/cost. My goal is to reach a happy medium.
+For example, I want to know how much power (and consequently cost) our dehumidifier is consuming. This allows me to have as a comparison against our comfort level for each humidity setting. The lower we want the humidity, the higher the power consumption/cost. My goal is to approach a happy medium.
 
-I also want to feed my curiosity on how much power devices consume throughout the course of a 24-hour period. But not _just_ the total consumption-- Also the rate of consumption throughout a given window. 
+I also want to feed my curiosity on how much power devices consume throughout the course of a 24-hour period. But not _just_ the total consumption-- I want to see the rate of consumption throughout a given window. 
 
 ## Conclusion 
 
-This project to replace my Z-Wave smart plugs came about because I was frustrated with the intricacies of Z-Wave, disappointed in the stability, accustomed to state reporting errors, and had a hard time justifying the expensive hardware cost. The low-power devices are nice, but I do not think they warrant my time to keep them running. 
+This project to replace my Z-Wave smart plugs came about because I was frustrated with the intricacies of Z-Wave, disappointed in the stability, accustomed to state reporting errors, and had a hard time justifying the expensive hardware cost. The low-power devices are nice, but I do not think they warrant the time spent troubleshooting to keep them working. 
 
 After selling 6x Zooz Zen15 plugs, my Z-Wave network has shrunk to a thermostat, 1 button, and an unused wall plug (acting as a repeater because Z-Wave reception is so poor). I think I can envision a future where I have removed the remaining devices.
 
-I was driven by frustration to replace my Z-Wave plugs with something reliable and easy to manage. In the end my solution with ESPHome plugs were cheaper, easier to manage, and more reliable. Now every smart plug on my network can be controlled locally. The best part is that they _actually_ work. That is all I ever wanted.
+I was driven by frustration to replace my Z-Wave plugs with something reliable and easy to manage. In the end my solution with ESPHome plugs were cheaper, easier to manage, and more reliable. Now every smart plug on my network can be controlled reliably. The best part is that they _actually_ work. That is all I ever wanted.
