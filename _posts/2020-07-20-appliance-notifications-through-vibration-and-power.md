@@ -22,7 +22,7 @@ This one was easy. To detect the running state of our washing machine, I only ne
 
 In my last blog post I wrote about how I [deployed a handful of ESPHome smart plugs](/blog/2020/07/replacing-z-wave-with-esphome/). One of those plugs became a dedicated device to monitoring the power consumption of our washing machine. After running one cycle to see a baseline power usage, I was able to determine that at no point during does the washing machine drop below 3 W of power consumption.
 
-Since my plug was running ESPHome, I just needed to add a new binary sensor to the device based on the plug’s power consumption.
+Since my plug was running ESPHome, I just needed to add a new binary sensor to the device based on the plug's power consumption.
 
 ```yaml
 binary_sensor:
@@ -75,11 +75,11 @@ Originally I thought using a CT clamp was going to be a good idea but in the end
 
 This was another reasonable idea but because it is very device specific and I am not as comfortable running a sensor to the internal board of the dryer, I ruled this one out early on. 
 
-Our dryer does not have a digital display. In fact, it does not even have a light for the inside drum when you open the door. It is quite lacking with few features. Our dryer strongly follows the “keep it stupid simple” policy. 
+Our dryer does not have a digital display. In fact, it does not even have a light for the inside drum when you open the door. It is quite lacking with few features. Our dryer strongly follows the "keep it stupid simple" policy. 
 
 If I were to connect a NodeMCU to the main circuit board, I would have to spend time figuring out which leads to run a sensor to. This is probably the cleanest approach, but I wanted to avoid a solution that was device specific. Whatever solution I came up with needed to be generic for anyone to replicate in the future. 
 
-Keeping it generic also reduces the “re-factoring in real life” when the dryer gets replaced someday.
+Keeping it generic also reduces the "re-factoring in real life" when the dryer gets replaced someday.
 
 #### 3. Use a Wireless Sensor on the Drum to Track Movement
 
