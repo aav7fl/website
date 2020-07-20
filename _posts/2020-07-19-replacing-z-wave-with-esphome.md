@@ -16,7 +16,7 @@ About a year ago [I went on a crusade](/blog/2019/05/trading-nest-for-tensorflow
 
 ## The Wrong Decision
 
-I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to operate on an uncongested wireless spectrum. The reality is that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215). It's not always possible to apply an update unless you have a responsible manufacturer and the ability to apply the patch. This means you could be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment. I frequently notice state changes will get lost on the if the Z-Wave device is too far away from the nearest repeater.
+I am willing to admit that I made the wrong decision last year when I decided to buy into Z-Wave. On paper, it was a dream to operate on an uncongested wireless spectrum. The reality is that [some Z-Wave devices ship with bugs](https://github.com/OpenZWave/open-zwave/issues/2215). It's not always possible to apply an update unless you have a responsible manufacturer and the ability to apply the patch. This means you could be permanently reliant on downstream patches to get the full functionality out of the device. The broadcast range for Z-Wave devices is not great for our small apartment. I frequently notice state changes will get lost if the Z-Wave device is too far away from the nearest repeater.
 
 ## Fuel to the Fire
 
