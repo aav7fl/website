@@ -12,7 +12,7 @@ tag: "medium project"
 description: "How I'm deploying smart plugs flashed with ESPHome to supersede Z-Wave. My ESPHome plugs are cheaper, easier to manage, and more reliable than ever before."
 ---
 
-About a year ago [I went on a crusade](/blog/2019/05/trading-nest-for-tensorflow/) to transition my smart home devices to something that could be controlled locally. The goal was to remove any need for external cloud services. One of the ways that I did this was though buying Z-Wave devices. For the uninitiated, the Z-Wave protocol operates on a different frequency than the 2.4 GHz spectrum. This leads to less interference from poorly shielded microwaves, slower Wi-Fi devices, and avoids spectrum congestion from devices like Hue bulbs (which operate closely to some 2.4 GHz Wi-Fi channels).
+About a year ago [I went on a crusade](/blog/2019/05/trading-nest-for-tensorflow/) to transition my smart home devices to something that could be controlled locally. The goal was to remove any need for external cloud services. One of the ways that I did this was through buying Z-Wave devices. For the uninitiated, the Z-Wave protocol operates on a different frequency than the 2.4 GHz spectrum. This leads to less interference from poorly shielded microwaves, slower Wi-Fi devices, and avoids spectrum congestion from devices like Hue bulbs (which operate closely to some 2.4 GHz Wi-Fi channels).
 
 ## The Wrong Decision
 
@@ -54,7 +54,9 @@ The Sonoff S31 plugs require a USB to serial adapter and a [small bit of solderi
 
 ![Sonoff S31 plugs alongside a USB to serial adapter](/assets/img/2020/07/sonoff_s31_plugs.jpg)*Sonoff S31 plugs flashed with ESPHome ready for calibration*
 
-On the other hand, this project finally motivated me to upgrade my soldering iron and get properly sized tips. The tip I was using before was wider than the pads themselves! (and consequently heating up adjacent pads each time). In the end I only destroyed 1 of 9 Sonoff S31 plugs I purchased. That is an ~89% success rate! 🎉
+On the other hand, this project finally motivated me to upgrade my soldering iron and get properly sized tips. The tip I was using before was wider than the pads themselves (and consequently heating up adjacent pads each time)!
+
+> In the end I only destroyed 1 of 9 Sonoff S31 plugs I purchased. That is an ~89% success rate! 🎉
 
 ## Configuring
 
@@ -185,7 +187,7 @@ switch:
     id: relay        
 ```
 
-> Note that there are custom calibration data points around the electricity monitoring sensors. I wanted extremely accurate power consumption metrics on each plug. 
+> Note that there are custom calibration data points around the electricity monitoring sensors. I wanted extremely accurate power consumption metrics from each plug.
 
 Armed with a hairdryer, Kill A Watt electricity usage monitor, phone camera stream, log viewer, and a tool for capturing screenshots I was able to collect custom data points for electricity usage on each plug. These custom data points allow me to set perfect calibrations for each individual plug rather than assuming identical profiles for each device.
 
@@ -198,8 +200,7 @@ After calibration, everything else was easy. [Following the docs](https://www.ho
 
 ![Home Assistant dashboard showing ESPHome plugs, power, and energy usage](/assets/img/2020/07/home_assistant_power_dashboard.png)*Home Assistant dashboard with ESPHome plugs added*
 
-
-## What Will I Do with the Data?
+## What Will I Do With the Data?
 
 My plan is to use the electricity data to adjust living habits and support new automations. 
 
