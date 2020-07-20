@@ -1,6 +1,6 @@
 ---
-title: "Using Vibrations and Power to Notify When Washing Machine and Dryer Finishes"
-date: "2020-07-19 10:59"
+title: "Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish"
+date: "2020-07-26 08:00"
 comments: true
 image:
   path: /assets/img/2020/07/dryer_vibration_monitor.jpg
@@ -12,7 +12,7 @@ tag: "small project"
 description: "How I notify and detect the completion of my washing machine and dryer through the use of a vibration sensor, NodeMCU, smart plug, and ESPHome."
 ---
 
-My washing machine and dryer do not have an audible notification upon completion. When they finish they go silent 🔇. Because I live in a small space, I usually shut the door to the laundry room to reduce noise leakage in the rest of the living areas. On more than one occasion I have missed the end of the washer/dryer cycle because of other ambient noises mask them. Rather than letting the clothes wrinkle up in the dryer or stay forgotten overnight in the washer, I would rather receive an audible alert upon a cycle completion.
+My washing machine and dryer do not have an audible notification upon completion. When they finish they go silent 🔇. Because I live in a small space, I usually shut the door to the laundry room to reduce noise leakage in the main living area. On more than one occasion I have missed the end of the washer/dryer cycle because other ambient noises mask them. Rather than letting the clothes wrinkle up in the dryer or stay forgotten overnight in the washer, I would rather receive an audible alert upon a cycle completion.
 
 The process of detecting the completion state of each appliance is its own task.
 
@@ -20,7 +20,7 @@ The process of detecting the completion state of each appliance is its own task.
 
 This one is easy. To detect the running state of the washing machine I need to monitor the power consumption on the standard wall plug. 
 
-In my last blog post I wrote about how I [deployed a handful of ESPHome smart plugs](/blog/2020/07/replacing-z-wave-with-esphome/). One of those plugs became a dedicated device to monitoring the power consumption of the washing machine. After running one cycle to see a baseline power usage, I was able to determine that at no point during does the washing machine drop below 3 W of power consumption.
+In my last blog post I wrote about how I [deployed a handful of ESPHome smart plugs](/blog/2020/07/replacing-z-wave-with-esphome/). One of those plugs became a dedicated device to monitoring the power consumption of the washing machine. After running one cycle to see a baseline power usage, I was able to determine that at no point during any cycle does the washing machine drop below 3 W of power consumption.
 
 Since my plug is running ESPHome, I just need to add a new `binary_sensor` to the device based on the plug's power consumption.
 
@@ -42,7 +42,7 @@ binary_sensor:
       }    
 ```
 
-## ♨️Identifying Dryer State
+## ♨️Identifying the Dryer State
 
 Tracking the state of the dryer is a bit trickier. Since the dryer is connected to a 240V outlet, it essentially eliminates any reasonably priced smart plug.
 
@@ -50,7 +50,7 @@ This left me with four options (that I could come up with):
 
 1. Open the dryer and hook up a CT clamp (magnetic induction sensor) to the 240V hot wire
 2. Open the dryer and connect a NodeMCU sensor input to a nonlethal connector on the main circuit board
-3. Throw a wireless sensor on the drum and track when it stops moving (or a handful of nickles so I can hear it better `/s`)
+3. Throw a wireless sensor on the drum and track when it stops moving (or a handful of nickels so I can hear it better `/s`)
 4. Mount a vibration sensor to the side of the dryer and detect when the dryer stops shaking
 
 ### Reviewing Dryer Status Options
@@ -59,13 +59,13 @@ I chose to use option 4, the vibration sensor. Let us walk through each idea abo
 
 #### 1. Open the Dryer and Attach a CT Clamp
 
-Originally I thought using a CT clamp was going to be a good idea. In the end I opted against it. Ordering a CT clamp and another board to read data from it would require more parts that I didn't feel like purchasing. I am also not too comfortable working around devices that are running 240V. I am sure everything would have been fine considering the CT clamp is a passive sensor, but that added costs caused me to choose a different option. I might revisit the option someday.
+Originally I thought using a CT clamp was going to be a good idea. In the end I opted against it. Ordering a CT clamp and another board to read data from it would require more parts that I didn't feel like purchasing. I am also not too comfortable working around devices that are running 240V. I am sure everything would have been fine considering the CT clamp is a passive sensor, but the added costs caused me to choose a different option. I might revisit this option someday.
 
 #### 2. Connecting a NodeMCU to the Dryer Main Circuit Board
 
-This was another reasonable idea but because it is very device specific. Because I can't easily replicate this behavior across all dryers, I ruled it out early on. 
+This was another reasonable idea because it is very device specific. Because I can't easily replicate this behavior across all dryers, I ruled it out early on. 
 
-My dryer does not have a digital display. In fact, it does not even have a light for the inside drum when you open the door. It lacking quite a few features. The dryer strongly follows the "keep it stupid simple" policy. 
+My dryer does not have a digital display. In fact, it does not even have a light for the inside drum when you open the door. It is lacking quite a few features. The dryer strongly follows the "keep it stupid simple" policy.
 
 If I were to connect a NodeMCU to the main circuit board, I would have to spend time figuring out which leads to run a sensor to. This is probably the clean approach, but I wanted to avoid a solution that was device specific. Whatever solution I came up with needed to be generic for anyone to replicate in the future. 
 
@@ -91,7 +91,7 @@ The sensor most people use for their dryer detection is the `SW-420 vibration se
 
 When I see most people use a vibration sensor to track the dryer status, they consider the dryer as `running` when the vibration sensor is _first_ triggered. After `15s` without any re-triggers, they mark the dryer status as `done`.
 
-This might be fine for people that have their dryer in a closet hidden in the back room. For me, the dryer is in a high traffic room. This means it is easy to bump the dryer sensor and create a false positive event. Other concerns include large thunder strikes and the nearby semi-trucks from a busy road who are known to set off car alarms.
+This might be fine for people that have their dryer in a closet hidden in the back room. For me, the dryer is in a high traffic room. This means it is easy to bump the dryer sensor and create a false positive event. Other concerns include large thunder strikes and the nearby semi-trucks from a busy road that are known to set off car alarms.
 
 To avoid false positives, I decided to treat the vibration sensor like a `pulse counter`. I then take a `moving median window` of the `pulse counter` rate to eliminate any outliers that are not producing consistent vibration. 
 
@@ -138,7 +138,7 @@ binary_sensor:
 
 I then create a `binary_sensor` from the `pulse_counter` sensor expose it to Home Assistant. 
 
-The `binary_sensor` helps obfuscates the of the raw `pulse counter` values that I do not need to send over the network. It also reduces the refactoring need in Home Assistant since the state will determined entirely on the NodeMCU node.
+The `binary_sensor` helps obfuscates the of the raw `pulse counter` values that I do not need to send over the network. It also reduces the refactoring need in Home Assistant since the state will be determined entirely on the NodeMCU node.
 
 ![Monitoring contraption attached to the side of a dryer](/assets/img/2020/07/dryer_monitor_installed.jpg)*Dryer monitoring contraption installed*
 
@@ -160,7 +160,7 @@ The catch is that I do not want any alerts to be sent out unless they are _actio
 
 ## Conclusion
 
-This is an automation that I have been wishing on for a while but have not spent the time to examine all approaches until recently.
+This is an automation that I have been dreaming about for a while but have not spent the time to examine all approaches until recently.
 
 I feel content with my low-cost approach on each appliance and I admire the fact that they are mostly generic. This will allow me to continue using these methods in the future unless there are unforeseen changes.
 
