@@ -50,13 +50,17 @@ I chose these specific plugs because disassembling/reassembling them is nondestr
 
 ## Preparing
 
-The Sonoff S31 plugs require a USB to serial adapter and a [small bit of soldering](https://tasmota.github.io/docs/devices/Sonoff-S31/) to flash ESPHome onto. This is usually the part where I would show a picture of my smart plugs with the soldered wires leading off. _Not a chance_ 👎. The truth is that my soldering job on these plugs was awful. Cold joints and singed pads everywhere. Thankfully after flashing each plug, I was able to remove my terrible solder negating most ill effects.
+The Sonoff S31 plugs require a USB to serial adapter and a [small bit of soldering](https://tasmota.github.io/docs/devices/Sonoff-S31/) to flash ESPHome onto. This is usually the part where I would show a picture of my smart plugs with the soldered wires leading off. 
+
+~~_Not a chance_ 👎. The truth is that my soldering job on these plugs was awful. Cold joints and singed pads everywhere. Thankfully after flashing each plug, I was able to remove my terrible solder negating most ill effects.~~
+
+> **EDIT (2020-07-23)**: During my reflection phase I was motivated to upgrade my soldering iron and try again. _What a difference that made_. I also discovered that my Dupont wires were copper-clad aluminum instead of pure copper. This made soldering to the cheap wires problematic. To make it easier (and less destructive) I attempted the _temporary_ solder joint again with the Dupont connector pins with passable results.
+
+![Flashing a Sonoff S31 plug soldered to a USB to serial adapter](/assets/img/2020/07/sonoff_s31_hookup.jpg)*Flashing a Sonoff S31 plug with my ESPHome firmware*
+
+> In the end I only destroyed 1 of 10 Sonoff S31 plugs I purchased. That is a 90% success rate! 🎉
 
 ![Sonoff S31 plugs alongside a USB to serial adapter](/assets/img/2020/07/sonoff_s31_plugs.jpg)*Sonoff S31 plugs flashed with ESPHome ready for calibration*
-
-On the other hand, this project finally motivated me to upgrade my soldering iron and get properly sized tips. The tip I was using before was wider than the pads themselves (and consequently heating up adjacent pads each time)!
-
-> In the end I only destroyed 1 of 9 Sonoff S31 plugs I purchased. That is an ~89% success rate! 🎉
 
 ## Configuring
 
