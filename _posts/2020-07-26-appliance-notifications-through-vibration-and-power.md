@@ -125,7 +125,7 @@ binary_sensor:
     name: "Dryer Running"
     device_class: vibration
     filters:
-      - delayed_on_off: 10s # Avoid debounce shaking from washing machine in close proximity
+      - delayed_on_off: 120s # Avoid debounce shaking from washing machine in close proximity
     lambda: |-
       if (id(vibration_pulse_rate).state >= 240) {
         // Dryer is running
