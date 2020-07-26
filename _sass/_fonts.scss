@@ -4,7 +4,7 @@
 /* open-sans-300 - latin */
 @font-face {
   font-family: 'Open Sans';
-  font-display: optional;
+  font-display: swap;
   font-style: normal;
   font-weight: 300;
   src: local('Open Sans Light'), local('OpenSans-Light'),
@@ -14,7 +14,7 @@
 /* open-sans-regular - latin */
 @font-face {
   font-family: 'Open Sans';
-  font-display: optional;
+  font-display: swap;
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'),
@@ -24,7 +24,7 @@
 /* open-sans-600 - latin */
 @font-face {
   font-family: 'Open Sans';
-  font-display: optional;
+  font-display: swap;
   font-style: normal;
   font-weight: 600;
   src: local('Open Sans Semibold'), local('OpenSans-Semibold'),
