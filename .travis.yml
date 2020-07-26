@@ -2,6 +2,8 @@ language: node_js
 branches:
   only:
   - master
+dist: xenial
+os: linux
 node_js:
   - '10'
 cache:
@@ -28,7 +30,8 @@ script:
 
 deploy:
   provider: pages
-  github_token: $GITHUB_TOKEN
+  strategy: git
+  token: $GITHUB_TOKEN
   keep_history: true
   local_dir: _site
   # Remove skip_cleanup with Deployment v2
