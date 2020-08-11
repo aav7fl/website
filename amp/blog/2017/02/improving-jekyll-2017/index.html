@@ -56,7 +56,7 @@
 <meta name="twitter:creator" content="@CrypticCitrus">
 <meta property="fb:app_id" content="137961485759">
 <script type="application/ld+json">
-{"url":"/blog/2017/02/improving-jekyll-2017/","description":"My Jekyll website needed an update; so I fixed that. This is how I added tests, Travis-CI builds, Accelerated Mobile Pages, SEO improvements, and more.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@type":"BlogPosting","headline":"Improving Jekyll in 2017","dateModified":"2019-11-30T15:07:34-05:00","datePublished":"2017-02-22T05:34:00-05:00","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/02/banner.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/02/improving-jekyll-2017/"},"author":{"@type":"Person","name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
+{"url":"/blog/2017/02/improving-jekyll-2017/","description":"My Jekyll website needed an update; so I fixed that. This is how I added tests, Travis-CI builds, Accelerated Mobile Pages, SEO improvements, and more.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"@type":"BlogPosting","headline":"Improving Jekyll in 2017","dateModified":"2020-08-11T06:45:43-04:00","datePublished":"2017-02-22T05:34:00-05:00","image":{"height":400,"width":700,"url":"https://www.kyleniewiada.org/assets/img/2017/02/banner.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/02/improving-jekyll-2017/"},"author":{"@type":"Person","name":"Kyle Niewiada"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -193,7 +193,7 @@
 
 <h3 id="amphtml-validator">amphtml-validator</h3>
 
-<p>After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. <a href="https://github.com/ampproject/amphtml/tree/master/validator/nodejs">amphtml-validator</a> to the rescue; a Node.js package command line tool that validates AMP HTML files.</p>
+<p>After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. <a href="https://github.com/ampproject/amphtml/tree/master/validator/js/nodejs">amphtml-validator</a> to the rescue; a Node.js package command line tool that validates AMP HTML files.</p>
 
 <p>With a little Ruby-Fu, I was able to add the Node.js package execution to my Rakefile. It finds all of the <code class="language-plaintext highlighter-rouge">*.html</code> files in my AMP directory and passes them one at a time to the amphtml-validator. I check the exit status of the Node.js package, let the user know if it fails, and continue with my day.</p>
 
