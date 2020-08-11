@@ -34,7 +34,7 @@ Cool, right? After I set up the RubyGem, I found some broken HTML tags, a few 40
 
 ### amphtml-validator
 
-After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. [amphtml-validator](https://github.com/ampproject/amphtml/tree/master/validator/nodejs) to the rescue; a Node.js package command line tool that validates AMP HTML files.
+After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. [amphtml-validator](https://github.com/ampproject/amphtml/tree/master/validator/js/nodejs) to the rescue; a Node.js package command line tool that validates AMP HTML files.
 
 With a little Ruby-Fu, I was able to add the Node.js package execution to my Rakefile. It finds all of the `*.html` files in my AMP directory and passes them one at a time to the amphtml-validator. I check the exit status of the Node.js package, let the user know if it fails, and continue with my day.
 
