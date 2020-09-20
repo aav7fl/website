@@ -1,7 +1,7 @@
 language: node_js
 branches:
   only:
-  - master
+  - main
 dist: xenial
 os: linux
 node_js:
@@ -31,13 +31,13 @@ script:
 deploy:
   provider: pages
   strategy: git
-  token: $GITHUB_TOKEN
+  token: $TOKEN
   keep_history: true
   local_dir: _site
   # Remove skip_cleanup with Deployment v2
   skip_cleanup: true 
   on:
-    branch: master
+    branch: main
 
 notifications:
   email:
