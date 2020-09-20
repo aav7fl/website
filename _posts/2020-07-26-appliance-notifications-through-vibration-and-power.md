@@ -44,6 +44,8 @@ binary_sensor:
 
 ## ♨️Identifying the Dryer State
 
+> Update (2020-09-20): After a month of using the vibration sensor with the dryer outlined below, I decided to switch to using a clamp style split phase energy meter. If you're interested in my current monitoring method, [you can read about my post here](/blog/2020/09/dryer-notification-addendum/).
+
 Tracking the state of the dryer is a bit trickier. Since the dryer is connected to a 240V outlet, it essentially eliminates any reasonably priced smart plug.
 
 This left me with four options (that I could come up with):
