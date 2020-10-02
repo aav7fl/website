@@ -1,35 +1,5 @@
-Layout/HeredocIndentation:
-  Exclude:
-    - spec/**/*
-
-Layout/LineLength:
-  Exclude:
-    - spec/**/*
-
-Metrics/BlockLength:
-  Exclude:
-    - spec/**/*
-
-Metrics/MethodLength:
-  Exclude:
-    - spec/**/*
-
-Naming/FileName:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
 AllCops:
+  NewCops: enable  
   Exclude:
     - vendor/**/* # Ignore Travis-CI build directory
     - node_modules/**/* # Ignore node modules directory
