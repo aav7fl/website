@@ -31,9 +31,10 @@ permalink: /resume/
 
 <div class="date">Jul 2019 - Present</div>
 
-- Expand Gordon Now Chat across many internal and external facing applications
-- Build multilingual functionality with Gordon Now Chat to serve customers across the US and Canada
 - Augment support by building a machine learning model to correctly detect chat sentiment and react accordingly
+- Manage and upgrade older Terraform/Helm configurations for transient workloads in Kubernetes clusters
+- Design and build an asynchronous live chat solution inside of an app to work with a non-asynchronous chat provider
+- Build multilingual functionality with Gordon Now Chat to serve customers across the US and Canada
 
 ### Associate Software Engineer at Gordon Food Service
 
@@ -118,6 +119,11 @@ permalink: /resume/
 ---
 
 ## Projects
+
+### Monitoring Electric Dryer State Using a CT Clamp
+
+- How I now monitor my aging 240V electric dryer with a CT clamp to send a notification when the cycle is complete
+- [Blog post](https://www.kyleniewiada.org/blog/2020/09/dryer-notification-addendum/)
 
 ### Fixed Controller Input on Xbox Emulator Project
 
