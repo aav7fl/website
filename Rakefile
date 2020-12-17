@@ -65,6 +65,7 @@ task :html_proofer do
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{.*kodewerx.org/.*}, # This site responses weirdly..
+      %r{.*twitter.com/.*}, # This site now hates HTML Proofer
       %r{https://www.kyleniewiada.org/amp/.*} # Interal linked AMP Pages.
     ]
   ).run
