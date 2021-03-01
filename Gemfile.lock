@@ -26,7 +26,7 @@ GEM
     eventmachine (1.2.7-x64-mingw32)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    fastimage (2.2.2)
+    fastimage (2.2.3)
     ffi (1.14.2)
     ffi (1.14.2-x64-mingw32)
     forwardable-extended (2.6.0)
