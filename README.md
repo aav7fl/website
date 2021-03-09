@@ -19,8 +19,6 @@ This is my personal website that I tweak and write about projects I have worked 
 
 ---
 
-`master` [default] branch contains the website source code.
+`main` [default] branch contains the website source code.
 
 `gh-pages` branch contains the generated website.
-
-`build bump 1`
