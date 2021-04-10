@@ -1,5 +1,5 @@
 ---
-title: Fixing the Google Assistant on my Android Work Profile
+title: Fixing the Google Assistant on My Android Work Profile
 date: '2021-04-10 17:13'
 comments: true
 image:
