@@ -30,7 +30,7 @@ Knowing full well that I was in need of a new solution, I started looking at wha
 
 ### Problem 1: Avoid Cloud APIs Like the Plague
 
-My thermostat needed to be replaced if I was to continue using it in the same way. A device that usually stays in your house for _decades_ hadn't passed its second birthday. I _thrilled_ to be buying a new thermostat so soon.
+My thermostat needed to be replaced if I was to continue using it in the same way. A device that usually stays in your house for _decades_ hadn't passed its second birthday. I'm _thrilled_ to be buying a new thermostat so soon.
 
 This transformation led me down the path of seeking [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave), a wireless communications protocol commonly used in home automation. I was seeking full control of a device that I could communicate with even if the Internet went out. This meant avoiding Wi-Fi based thermostats because I felt that most of the options weren't that great unless I was ready to spend large sums of money. I was still getting over the burn of my Nest E thermostat purchase.
 
