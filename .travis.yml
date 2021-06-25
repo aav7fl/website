@@ -2,7 +2,7 @@ language: node_js
 branches:
   only:
   - main
-dist: xenial
+dist: bionic
 os: linux
 node_js:
   - 'lts/*'
