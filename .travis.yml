@@ -5,7 +5,7 @@ branches:
 dist: xenial
 os: linux
 node_js:
-  - '10'
+  - 'lts/*'
 cache:
   directories:
     - node_modules
