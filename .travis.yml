@@ -2,10 +2,10 @@ language: node_js
 branches:
   only:
   - main
-dist: xenial
+dist: bionic
 os: linux
 node_js:
-  - '10'
+  - 'lts/*'
 cache:
   directories:
     - node_modules
