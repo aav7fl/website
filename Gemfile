@@ -15,12 +15,6 @@ gem 'nokogiri'
 gem 'rspec'
 gem 'rubocop'
 
-# group :jekyll_plugins do
-#   gem 'jekyll-seo-tag',
-#       git: 'https://github.com/jekyll/jekyll-seo-tag.git',
-#       branch: 'master'
-# end
-
 group :jekyll_plugins do
   gem 'amp-jekyll',
       git: 'https://github.com/aav7fl/amp-jekyll.git',
