@@ -1,6 +1,0 @@
-AllCops:
-  NewCops: enable  
-  Exclude:
-    - vendor/**/* # Ignore Travis-CI build directory
-    - node_modules/**/* # Ignore node modules directory
-  SuggestExtensions: false

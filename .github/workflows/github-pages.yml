@@ -1,0 +1,28 @@
+name: Jekyll Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6 # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Build
+        run: bundle exec rake build
+      - name: Deploy # Taken from: https://github.com/Leo3418/leo3418.github.io/tree/jekyll/.github/workflows
+        run: |
+          cd _site/
+          git init -b gh-pages-tmp
+          git config user.name ${{ github.actor }}
+          git config user.email ${{ github.actor }}@users.noreply.github.com
+          git remote add origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+          git add .
+          git commit -m "Deploy site built from commit ${{ github.sha }}"
+          git push -f -u origin gh-pages
