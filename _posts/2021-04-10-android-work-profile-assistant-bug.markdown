@@ -51,7 +51,7 @@ Luckily, there's a solution to launching the Google Assistant in the work profil
 ### Requirements (that I know of?):
 
 - [Google Assistant](https://play.google.com/store/apps/details?id=com.google.android.apps.googleassistant) is installed on the Android work profile
-- [ADB](https://developer.android.com/studio/command-line/adb) is setup and connected to the device
+- ADB (Android Debug Bridge) is setup and connected to the device
 - The `Default Assistant App` on your _personal_ profile is the Google Assistant. We need this set to extract the correct `voice_interaction_service` from our personal profile. 
 
 > It probably doesn't hurt to keep the assistant the same between the personal and work profiles to reduce complications between the two spaces. But it's not clear if that's a requirement going forward.
