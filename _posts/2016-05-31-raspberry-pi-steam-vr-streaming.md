@@ -134,7 +134,7 @@ My audio wouldn't stream at first to my Raspberry Pi because I wasn't using the 
 
 ### Wireless streaming stuttered every 60 seconds for 10 seconds.
 
-<s>My wireless adapter was the primary culprit to this. There was some issue with it either being powered or sharing band with on the USB bus with my Raspberry Pi. I switched to my handy [IOGear Ethernet/Wireless adapter](http://www.amazon.com/IOGEAR-Universal-Ethernet-Adapter-GWU627/dp/B004UAKCS6) and have had little problems streaming 20 Mbit streams. This adapter might not work for everybody. It uses the 2.4 GHz band which is commonly known to be quite crowded. My Raspberry Pi is near the wireless access point, so it has little interference.</s>
+<s>My wireless adapter was the primary culprit to this. There was some issue with it either being powered or sharing band with on the USB bus with my Raspberry Pi. I switched to my handy [IOGear Ethernet/Wireless adapter](https://www.amazon.com/IOGEAR-Universal-Ethernet-Adapter-GWU627/dp/B004UAKCS6) and have had little problems streaming 20 Mbit streams. This adapter might not work for everybody. It uses the 2.4 GHz band which is commonly known to be quite crowded. My Raspberry Pi is near the wireless access point, so it has little interference.</s>
 
 I was able to get my 5 GHz wireless adapter working after uninstalling the newly introduced DHCPCD wireless manager and switching to WICD. I also added "max_usb_current=1" "/boot/config.txt" to prevent my wireless adapter from using all available power from the USB ports. Everything works flawlessly now over wireless.
 

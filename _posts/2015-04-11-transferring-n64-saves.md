@@ -49,7 +49,7 @@ Here is how I did it.
 
 ### Dumping My ROM
 
-Star Wars, Mario Party, and Super Mario 64 use EEPROM to store their game save. This made my project easy. I followed a known method by using a DexDrive. The first thing that I did was dump each game using the GameShark’s parallel port with the open source software [N64RD](https://github.com/parasyte/n64rd) using the command below. (Others have tried using GameShark's software, but it has been problematic. Using N64RD seems to be the way to go). This program allowed me to back up each of my games for later use in my project. It also allowed me to dump my ram, but that is coming later. I used [this wiki](http://doc.kodewerx.org/hacking_n64.html) to know what addresses and offsets for the RAM and ROM space I needed.
+Star Wars, Mario Party, and Super Mario 64 use EEPROM to store their game save. This made my project easy. I followed a known method by using a DexDrive. The first thing that I did was dump each game using the GameShark’s parallel port with the open source software [N64RD](https://github.com/parasyte/n64rd) using the command below. (Others have tried using GameShark's software, but it has been problematic. Using N64RD seems to be the way to go). This program allowed me to back up each of my games for later use in my project. It also allowed me to dump my ram, but that is coming later. I used kodewerx's Hacking N64 wiki to know what addresses and offsets for the RAM and ROM space I needed.
 
 ```shell
 $ ./n64rd -dgame.z64 -a 0xB0000000 -l 0x02000000
@@ -65,13 +65,13 @@ I took known game save copies from the internet for each of my EEPROM games and 
 
 ### Hitting a Wall
 
-The first thing that I tried was dumping the SRAM by using the GameShark. However, I was unable to find any documentation on how to pull the SRAM data or if it was even accessible from the GameShark. But I did find [someone](https://assemblergames.com/threads/dumping-n64-game-saves-with-a-gameshark-with-lpt-access.31850/#post-517929) who was trying to dump the contents of their SRAM into the memory pack controller by uploading it with [gsuploader](https://github.com/ppcasm/gsuploader). According to their post, they had some luck with a few games but were unlucky with others.
+The first thing that I tried was dumping the SRAM by using the GameShark. However, I was unable to find any documentation on how to pull the SRAM data or if it was even accessible from the GameShark. But I did find someone on AssemblerGames who was trying to dump the contents of their SRAM into the memory pack controller by uploading it with [gsuploader](https://github.com/ppcasm/gsuploader). According to their post, they had some luck with a few games but were unlucky with others.
 
 I was unable to get sram2mpk.bin working with my Ocarina of Time game. I spent a whole day attempting to load the program, but every time it locked up on me and dumped no information. I was able to verify (with the help of Lawrence) that gsuploader was working correctly by loading up an older project named [Neon64](https://github.com/mikeryan/n64dev), an NES emulator for the N64. Below is an image of my N64 running Super Mario Bros 3 with the help of Neon64.
 
 ![Super Mario Bros 3 on the N64](/assets/img/2015/04/2015-03-21_19.19.01.jpg)*Super Mario Bros 3 on the N64*
 
-This led me to conclude that sram2mpk.bin was unlikely to work for my game. I thought I had reached a dead-end. That is until I discovered [this wiki](http://wiki.spinout182.com/w/Ocarina_of_Time:_Save_Format) that documented the Ocarina of Time save file.
+This led me to conclude that sram2mpk.bin was unlikely to work for my game. I thought I had reached a dead-end. That is until I discovered spinout182's (defunct) wiki that documented the Ocarina of Time save file.
 
 ### A New Plan
 
@@ -87,7 +87,7 @@ After opening up the RAM dump with my hex editor, I followed up to the address 0
 
 Once I had my save file, I converted it from N64 native to something that an emulator could read (big endian -> little endian).
 
-I used [uCON64](http://ucon64.sourceforge.net/#ucon64) to do just that and convert Big Endian->Little Endian (or vise versa) with this command:
+I used [uCON64](https://ucon64.sourceforge.io/) to do just that and convert Big Endian->Little Endian (or vise versa) with this command:
 
 ```shell
 ucon64 --n64 --nint --dint --swap2 save.sra
@@ -102,15 +102,15 @@ ucon64 --n64 --nint --dint --swap2 save.sra
 
 ![Byte swapped memory dump (Little Endian)](/assets/img/2015/04/memoryDumpSwap.png)*Byte swapped memory dump (Little Endian)*
 
-I tried grafting over my completed save data from RAM into an existing Ocarina of Time save file. However, when I tried to load it up, I discovered that the save file was corrupt. I took a look back at what I had done. I talked it over with Lawrence and we concluded that my save file checksum that was dumped from RAM was probably bad. After referencing the [wiki](http://wiki.spinout182.com/w/Ocarina_of_Time:_Save_Format) yet again, I tried to see if I could calculate and verify my own checksum.
+I tried grafting over my completed save data from RAM into an existing Ocarina of Time save file. However, when I tried to load it up, I discovered that the save file was corrupt. I took a look back at what I had done. I talked it over with Lawrence and we concluded that my save file checksum that was dumped from RAM was probably bad. After referencing the spinout182's (defunct) wiki yet again, I tried to see if I could calculate and verify my own checksum.
 
 ### Discovering the Checksum
 
-I tried using the algorithm from the wiki, but I was unable to get it to work. So instead I decided to work it out on my own. After a lot of digging around to see how the checksum is calculated, I was able to figure out the exact algorithm used. I took an existing Ocarina of Time save file, converted it back to N64 native (little endian -> big endian), and ran it against a large list of checksum/crc algorithms with many MANY programs. I found one that matched; and it was using [010 Editor](http://www.sweetscape.com/010editor). The name: UShort (16 bit) – Big Endian.
+I tried using the algorithm from the wiki, but I was unable to get it to work. So instead I decided to work it out on my own. After a lot of digging around to see how the checksum is calculated, I was able to figure out the exact algorithm used. I took an existing Ocarina of Time save file, converted it back to N64 native (little endian -> big endian), and ran it against a large list of checksum/crc algorithms with many MANY programs. I found one that matched; and it was using [010 Editor](https://www.sweetscape.com/010editor). The name: UShort (16 bit) – Big Endian.
 
 ![Finding the save file checksum](/assets/img/2015/04/Checksum.png)
 
-Lawrence and I were unable to find any information online about this algorithm and we wished to leave a way that others could follow these instructions using open source software. Lawrence contacted SweetScape (the company who created the 010 Editor) asking if they could make available for us more information on the algorithm used. [Graeme Sweet](http://www.sweetscape.com/companyinfo/) very generously provided us with information on how “UShort (16 bit) – Big Endian” was calculated. Lawrence and I created a software tool ([Ocarina Checksum Checker](https://github.com/Vi1i/OcarinaChecksumChecker)) to calculate the checksum of an Ocarina of Time save file in native N64 format. The working source code has been posted. The instructions on how to run and calculate it can be found on the GitHub page. We hope to develope this further.
+Lawrence and I were unable to find any information online about this algorithm and we wished to leave a way that others could follow these instructions using open source software. Lawrence contacted SweetScape (the company who created the 010 Editor) asking if they could make available for us more information on the algorithm used. [Graeme Sweet](https://www.sweetscape.com/companyinfo/) very generously provided us with information on how “UShort (16 bit) – Big Endian” was calculated. Lawrence and I created a software tool ([Ocarina Checksum Checker](https://github.com/Vi1i/OcarinaChecksumChecker)) to calculate the checksum of an Ocarina of Time save file in native N64 format. The working source code has been posted. The instructions on how to run and calculate it can be found on the GitHub page. We hope to develope this further.
 
 ### Putting it All Together
 
@@ -122,7 +122,7 @@ Now that I had the correct checksum algorithm, I recalculated my memory dump and
 
 I managed to up-convert a younger piece of my childhood (with help) into the present digital age. I had many roadblocks and a few of my ideas were unexplored. If I had to do it all over again, I wouldn’t do it any other way. This was fun.
 
-It didn’t take long before I learned that the community had made a [high definition texture pack]( http://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic) for specific graphic plug-ins. Of course I had to give it a try. It looks magnificent. This was the result.
+It didn’t take long before I learned that the community had made a [high definition texture pack]( https://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic) for specific graphic plug-ins. Of course I had to give it a try. It looks magnificent. This was the result.
 
 ![Zelda Ocarina of Time with high resolution texture pack](/assets/img/2015/04/zelda01.jpg)
 
@@ -145,10 +145,10 @@ Materials I needed to complete my project:
 Software and resources I used:
 
 - [N64RD](https://github.com/parasyte/n64rd)
-- [010 Editor](http://www.sweetscape.com/010editor/)
-- [uCON64](http://ucon64.sourceforge.net/#ucon64)
+- [010 Editor](https://www.sweetscape.com/010editor/)
+- [uCON64](https://ucon64.sourceforge.io/)
 - [Project64](https://www.pj64-emu.com/public-releases)
-- [Zelda high definition texture pack]( http://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic)
+- [Zelda high definition texture pack]( https://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic)
 - [Our Custom Ocarina Checksum Checker](https://github.com/Vi1i/OcarinaChecksumChecker)
 
 **EDIT (March 10, 2016):**

@@ -16,7 +16,7 @@ redirect_from:
 
 Now, I understand that some people like to have posts that show progress they've made before and after a project. I'm sorry to say that I don't have that many posts of the "before". I only thought about documentation half-way through. Without further delay, my (mostly restored?) Marantz 2220b as told by a lurker.
 
-I originally made this thread on [AudioKarma](http://www.audiokarma.org/forums/showthread.php?p=7108861), but thought this would also be an appropriate place to write this post.
+I originally made this thread on [AudioKarma](https://www.audiokarma.org/forums/showthread.php?p=7108861), but thought this would also be an appropriate place to write this post.
 
 Before I begin, I started this project to restore my own Marantz 2220b. I've had the little guy...er...rather not so little, for roughly two years. In that time, I have loved having it as my main (and only) amp (and it happily replaced my Sony amp from the 90s).
 
@@ -31,11 +31,11 @@ While researching for information about my Marantz amp, I decided I should repla
 
 I had one problem. Like other people who own an older Marantz with plastic lamp housings, many of them have melted, become broken/brittle or lost shape. I was no exception. My lamp housing was partially melted and my tabs were broken off. They are hard to find in acceptable condition, and when one is found, it costs an arm and a leg to obtain.
 
-I did however discover that a user here on AK (Kudos to [bikemandan](http://www.audiokarma.org/forums/index.php?members/bikemandan.78937/)!) [posted a 3D model](http://www.audiokarma.org/forums/showthread.php?t=467773) of a lamp housing he had created. I was able to use that as a starting point for my restoration.
+I did however discover that a user here on AK (Kudos to [bikemandan](https://www.audiokarma.org/forums/index.php?members/bikemandan.78937/)!) [posted a 3D model](https://www.audiokarma.org/forums/showthread.php?t=467773) of a lamp housing he had created. I was able to use that as a starting point for my restoration.
 
 After a bit of research, I concluded that his lamp housing had a very good chance of fitting perfectly with my model (it was about 90% perfect for me). I used his model to help re-create a version more suitable for both my 2220B, and a 3D printer. My result was this.
 
-![3D model of  Marantz 2220B light housing](/assets/img/2013/09/small/2220B_Lamp_housing_edit_preview_featured.jpg)*Link to file on [Thingiverse](http://www.thingiverse.com/thing:150349)*
+![3D model of  Marantz 2220B light housing](/assets/img/2013/09/small/2220B_Lamp_housing_edit_preview_featured.jpg)*Link to file on [Thingiverse](https://www.thingiverse.com/thing:150349)*
 
 Now I was tasked with trying to find a place to print it. I discovered that 3D printing was expensive! Luckily, I had two friends who both had 3D printers. Unluckily, neither of them had theirs working with no ETA.  
 That is when I found out that my local university had just very recently purchased a Makerbot Replicator 2\.
@@ -142,7 +142,7 @@ Headphones: Sony MDR-V6 circa early 1990s
 
 Blue LED Fuses were purchased from ebay user investmentaudio.  
 LED Stereo "bulb" + Amber indicator LED were purchased from ebay user wlyn5455.  
-[Original Lamp Housing Design](http://www.thingiverse.com/thing:30132)  
-[My Lamp Housing Re-Design](http://www.thingiverse.com/thing:150349)
+[Original Lamp Housing Design](https://www.thingiverse.com/thing:30132)  
+[My Lamp Housing Re-Design](https://www.thingiverse.com/thing:150349)
 
 Keep listening

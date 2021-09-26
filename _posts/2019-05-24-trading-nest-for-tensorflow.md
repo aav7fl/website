@@ -46,7 +46,7 @@ The Nest camera had a critical flaw. If the Internet went out, it stopped workin
 
 It was essential that I replace the Nest camera with one that allowed for local streaming and recording to the device if something went down.
 
-Instead of throwing more money at the problem, I decided to go the hobbyist route. After getting some strong recommendations for [Wyze 2 cameras](https://www.amazon.com/dp/B076H3SRXG) from my coworkers, I decided to pick one up.
+Instead of throwing more money at the problem, I decided to go the hobbyist route. After getting some strong recommendations for Wyze 2 cameras from my coworkers, I decided to pick one up.
 
 I was excited to use the Wyze 2 camera because they recently announced their beta firmware was adding support for [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol). This feature would allow me to stream the network video to any local device that I wanted, bypassing the Internet completely.
 
@@ -83,7 +83,7 @@ Here was the plan:
 
 In under a few seconds I should be able to detect a person walking near a camera and be immediately notified of their presence. I still don't know _who_ the person is, but I can't imagine it's too difficult to capture faces from TensorFlow and send them through a trained network of known faces.
 
-> I decided to use the [faster_rcnn_inception_v2_coco](https://github.com/tensorflow/models/blob/5245161c96cc057dc7a883ef4283ed7fab735bcf/research/object_detection/g3doc/tf1_detection_zoo.md) model based on the [recommendation from this post](https://josiahvorst.com/image-processing-made-easy-home-assistant-tensorflow/).
+> I decided to use the [faster_rcnn_inception_v2_coco](https://github.com/tensorflow/models/blob/5245161c96cc057dc7a883ef4283ed7fab735bcf/research/object_detection/g3doc/tf1_detection_zoo.md) model based on the a recommendation from a user online.
 
 The best part about my plan is that all of it (except the Pushover notification) was supposed to be handled locally.
 
