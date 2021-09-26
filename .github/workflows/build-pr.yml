@@ -1,0 +1,45 @@
+name: Build and test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6 # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Build
+        run: bundle exec rake build
+      - name: HTML Proofer
+        uses: anishathalye/proof-html@v1
+        with:
+          directory: _site/
+          url_ignore_re: |
+            .*apple.com/.*
+            .*savaslabs.com/.*
+            .*/#comment-.*
+            https://www.kyleniewiada.org/amp/.*
+            https://www.linkedin.com.*
+            .*twitter.com/.*
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install NPM dependencies
+        run: npm install
+      - name: AMP validation
+        run: find _site/amp -iname '*.html' | egrep '.*' | xargs -L1 npx amphtml-validator
