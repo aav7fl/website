@@ -12,6 +12,7 @@ gem 'jekyll-redirect-from'
 gem 'jekyll-seo-tag'
 gem 'jekyll-sitemap'
 gem 'rake'
+gem "webrick"
 
 group :jekyll_plugins do
   gem 'amp-jekyll',

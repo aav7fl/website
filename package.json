@@ -14,9 +14,6 @@
   "license": "ISC",
   "homepage": "https://github.com/aav7fl/website#readme",
   "devDependencies": {
-    "amphtml-validator": "^1.0.35",
-    "browser-sync": "^2.27.5",
-    "gulp": "^4.0.2",
-    "gulp-shell": "^0.8.0"
+    "amphtml-validator": "^1.0.35"
   }
 }

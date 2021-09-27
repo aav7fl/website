@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Running locally? Try `bundle exec rake` to avoid conflicts with system ruby
 
 require 'jekyll'
@@ -15,29 +13,30 @@ task :build, [:options] do |_t, args|
   Jekyll::Commands::Build.process(args[:options])
 end
 
-task :build_watch do
-  # Build the site with custom options such as drafts enabled.
-  puts 'Building site with drafts...'.yellow.bold
-  options = {
-    incremental: true,
-    show_drafts: true,
-    watch: true
-  }
-  Rake::Task['build'].invoke(options)
-end
-
 task :serve do
   puts 'Serving site...'.yellow.bold
-  options = {
+
+  buildOptions = {
     incremental: true,
-    serving: true,
-    show_drafts: true,
-    watch: true
+    watch: true,
   }
-  Jekyll::Commands::Serve.process(options)
+  
+  serveOptions = {
+    livereload: true,
+    livereload_port: 35729,
+    open_url: true,
+  }
+
+  build = Thread.new { Jekyll::Commands::Build.process(buildOptions) }
+  serve = Thread.new { Jekyll::Commands::Serve.process(serveOptions) }
+
+  commands = [build, serve]
+  commands.each { |c| c.join }
 end
 
 task :clean do
   puts 'Cleaning up _site...'.yellow.bold
   Jekyll::Commands::Clean.process({})
 end
+
+task :default => [:serve]
