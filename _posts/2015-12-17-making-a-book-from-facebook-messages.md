@@ -15,7 +15,7 @@ redirect_from: "/blog/making-a-book-from-facebook-messages/"
 
 Back in October, I wanted to create a meaningful gift for someone very special to me for a special occasion. After brainstorming for a while, I came up with a crazy idea of creating a hardcover book from our earliest conversations on Facebook (I guess I can mark it off as a positive that the information giant held on to this).
 
-The first issue that I needed to address was locating a shop to print a single hardcover book. I started researching self-publishing services and discovered quickly that many required a minimum quantity before they would accept orders. The businesses that did accept a small order had a steep cost for single book. I continued researching until I stumbled upon [lulu.com]( http://www.lulu.com/home). This is where I found the most appropriate pricing for my specific project. I will note however that people may be able to find more appropriate pricing and (especially) more control if they use a local print shop. With my printshop selected, I moved sites to tackle my next issue.
+The first issue that I needed to address was locating a shop to print a single hardcover book. I started researching self-publishing services and discovered quickly that many required a minimum quantity before they would accept orders. The businesses that did accept a small order had a steep cost for single book. I continued researching until I stumbled upon [lulu.com]( https://www.lulu.com/home). This is where I found the most appropriate pricing for my specific project. I will note however that people may be able to find more appropriate pricing and (especially) more control if they use a local print shop. With my printshop selected, I moved sites to tackle my next issue.
 
 ## Fixing Facebook Messages
 
@@ -37,7 +37,7 @@ After my messages were in their correct order, I shifted focus on how I was goin
 
 First, I created a reasonable even spacing between each conversation to make it easier on the eyes (0pt spacing before each paragraph and 6pt spacing after each paragraph). This also condensed the length of my book to something far more practical. I set the font to Times New Roman/Size 11.
 
-Next, I used the macro found in an answer by the user macropod on [this Microsoft answers post](https://answers.microsoft.com/message/bd688c86-bd63-e011-8dfc-68b599b31bf5?threadId=822f62cc-ac63-e011-8dfc-68b599b31bf5). This macro allowed me to replace multiple words in bulk. I used the macro to insert a tab character (\t) between each name and the date timestamp following. Then I set up a right aligned tab stop. This forced every timestamp to align on the right-hand side of the page demonstrated in the image above.
+Next, I used the macro found in an answer by the user macropod on a hidden Microsoft answers post. This macro allowed me to replace multiple words in bulk. I used the macro to insert a tab character (\t) between each name and the date timestamp following. Then I set up a right aligned tab stop. This forced every timestamp to align on the right-hand side of the page demonstrated in the image above.
 
 ![Finding and replacing text with tabs](/assets/img/2015/12/replace.png)
 
