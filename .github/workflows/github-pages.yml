@@ -25,4 +25,4 @@ jobs:
           git remote add origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
           git add .
           git commit -m "Deploy site built from commit ${{ github.sha }}"
-          git push -f -u origin gh-pages
+          git push -f -u origin gh-pages-tmp
