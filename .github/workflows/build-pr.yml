@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -17,16 +17,7 @@ jobs:
       - name: Build
         run: bundle exec rake build
       - name: HTML Proofer
-        uses: anishathalye/proof-html@v1
-        with:
-          directory: _site/
-          url_ignore_re: |
-            .*apple.com/.*
-            .*savaslabs.com/.*
-            .*/#comment-.*
-            https://www.kyleniewiada.org/amp/.*
-            https://www.linkedin.com.*
-            .*twitter.com/.*
+        run: bundle exec rake html_proofer
       - name: Cache node modules
         uses: actions/cache@v2
         env:
