@@ -16,7 +16,7 @@ If you’re around me enough, you learn that I love to use voice commands. I’v
 
 ![No Google profile for contact found](/assets/img/2016/07/noaccountphone.png)*No Google profile found on my phone*
 
-It worked fine if I was sending an SMS, but never with a Hangouts message. There are a [few](https://productforums.google.com/forum/#!topic/hangouts/8Qm5O5ekTG4) [examples](https://productforums.google.com/forum/#!topic/hangouts/spcmG8qtgiA) of others finding their own solution or having a server-side fix rolled out. But this was not the solution for me. I tried everything from factory resetting my phone, sideloading the Google contacts app, even loading an Android ROM on a backup phone and retrying the voice commands. But nothing worked.
+It worked fine if I was sending an SMS, but never with a Hangouts message. There are a few examples of others finding their own solution or having a server-side fix rolled out on the Google Support Forums. But this was not the solution for me. I tried everything from factory resetting my phone, sideloading the Google contacts app, even loading an Android ROM on a backup phone and retrying the voice commands. But nothing worked.
 
 ## First There Were Three
 

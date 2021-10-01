@@ -75,7 +75,7 @@ End Sub
 
 'Removes empty paragraphs located at the end of the document
 Sub removeEmptyPara()
-    'http://www.extendoffice.com/documents/word/647-word-remove-empty-paragraphs.html
+    'https://www.extendoffice.com/documents/word/647-word-remove-empty-paragraphs.html
     Selection.Find.ClearFormattin
     Selection.Find.Replacement.ClearFormatting
     With Selection.Find
@@ -104,7 +104,7 @@ End Sub
 
 Sub findTotal()
 
-    'based on http://stackoverflow.com/questions/6425595/word-vba-how-to-select-text-between-two-substrings-and-assign-to-variable
+    'based on https://stackoverflow.com/questions/6425595/word-vba-how-to-select-text-between-two-substrings-and-assign-to-variable
 
     Dim firstTerm As String
     Dim secondTerm As String
