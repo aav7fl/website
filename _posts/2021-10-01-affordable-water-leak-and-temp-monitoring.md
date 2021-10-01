@@ -238,22 +238,13 @@ blueprint:
   description: Send a notification when any configured moisture sensor becomes moist
   domain: automation
   input:
-    notifications_enabled:
-      name: Notifications State
-      description: Input Boolean to control all notifications across all automations (excluding overrides)
-      selector:
-        entity:
-          domain: input_boolean
     actions:
       name: Actions
       description: Notifications or similar to be run. {{ trigger.event.data.new_state.attributes.friendly_name }} is replaced with
         the name of triggered device that is moist.
       selector:
         action: {}          
-          
-variables:
-  notifications_enabled: !input notifications_enabled
-          
+
 trigger:
   - event_data: {}
     event_type: state_changed
@@ -371,9 +362,6 @@ trigger:
 
 condition:
   - '{{ sensors != '''' }}'
-  - condition: template
-    value_template: '{{ states[notifications_enabled].state == "on" }}'
-
 
 action:
 - choose: []
