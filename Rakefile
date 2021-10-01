@@ -1,5 +1,6 @@
 # Running locally? Try `bundle exec rake` to avoid conflicts with system ruby
 
+require 'html-proofer'
 require 'jekyll'
 
 task :build, [:options] do |_t, args|
@@ -32,6 +33,27 @@ task :serve do
 
   commands = [build, serve]
   commands.each { |c| c.join }
+end
+
+desc 'Test website with html_proofer'
+task :html_proofer do
+  puts 'Running html proofer...'.yellow.bold
+  HTMLProofer.check_directory(
+    '_site/',
+    allow_hash_href: 'true',
+    check_html: 'true',
+    check_opengraph: 'true',
+    file_ignore: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
+    internal_domains: ['www.kyleniewiada.org'],
+    url_ignore:
+    [
+      %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
+      %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
+      %r{.*/#comment-.*}, # Internal Disqus comments
+      %r{https://www.linkedin.com.*}, # They always return a 999
+      %r{.*twitter.com/.*} # This site now hates HTML Proofer
+    ]
+  ).run
 end
 
 task :clean do

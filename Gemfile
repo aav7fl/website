@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'fastimage'
+gem 'html-proofer'
 gem 'jekyll'
 gem 'jekyll-feed'
 gem 'jekyll-gist'
@@ -12,7 +13,7 @@ gem 'jekyll-redirect-from'
 gem 'jekyll-seo-tag'
 gem 'jekyll-sitemap'
 gem 'rake'
-gem "webrick"
+gem 'webrick'
 
 group :jekyll_plugins do
   gem 'amp-jekyll',
