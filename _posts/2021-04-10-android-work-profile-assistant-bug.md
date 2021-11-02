@@ -95,7 +95,7 @@ Luckily, there's a solution to launching the Google Assistant in the work profil
 3. Grant `WRITE_SECURE_SETTINGS` permissions to the app.
 
     ```bash
-     ➜  ~ pm grant io.github.muntashirakon.setedit android.permission.WRITE_SECURE_SETTINGS
+     ➜  ~ pm grant by4a.setedit22 android.permission.WRITE_SECURE_SETTINGS
     ```
 
 4. Open up the `SetEdit` app on the device.
