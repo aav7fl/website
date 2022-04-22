@@ -58,6 +58,13 @@ Luckily, there's a solution to launching the Google Assistant in the work profil
 
 ### Steps
 
+> Before we get started, I later learned how to fix this using only `adb` by issuing the following two commands. One sets the default assistant setting, and the other seting the voice interaction service to use the Google Assistant. It's set to run under `user 10`, which is my work profile.
+    
+    ```bash
+    ➜  ~ adb shell settings put --user 10 secure assistant com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService
+    ➜  ~ adb shell settings put --user 10 secure voice_interaction_service com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService
+    ```
+
 1. First we find out the `user` id of the work profile. Here I can see that it's `10`.
 
     ```bash
@@ -96,13 +103,6 @@ Luckily, there's a solution to launching the Google Assistant in the work profil
 
     ```bash
      ➜  ~ adb shell pm grant --user 10 by4a.setedit22 android.permission.WRITE_SECURE_SETTINGS
-    ```
-    
-    > Later I found out I fix this without using `adb` by issuing the following two commands. One sets the default assistant setting, and the other seting the voice interaction service to use the Google Assistant:
-    
-    ```bash
-    ➜  ~ adb shell settings put --user 10 secure assistant com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService
-    ➜  ~ adb shell settings put --user 10 secure voice_interaction_service com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService
     ```
 
 4. Open up the `SetEdit` app on the device.
