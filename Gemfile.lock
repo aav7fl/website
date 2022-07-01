@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/aav7fl/amp-jekyll.git
-  revision: 9f7ae0c6c8132e34bca167a40e6a6d45f8381bec
-  tag: 1.0.3
+  revision: 4afd220368372403f28e34416d1f87bdef150664
+  tag: 1.0.4
   specs:
     amp-jekyll (1.0.2)
       fastimage (>= 1.8.0)
@@ -96,7 +96,11 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
+    mini_portile2 (2.8.0)
     multipart-post (2.1.1)
+    nokogiri (1.13.6)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
     octokit (4.21.0)
@@ -131,6 +135,7 @@ GEM
     yell (2.2.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
