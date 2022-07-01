@@ -99,30 +99,28 @@ Here's my Home Assistant config. It provides the sensor's temperature, humidity,
 
 ```yaml
 # Your sensor ID will vary. I've put in a placeholder of 5555 below.
-binary_sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-Tower/5555/battery_ok
-    json_attributes_topic: rtl_433/Acurite-Tower/5555
-    device_class: battery
-    name: "Backyard Temperature Battery"
-    unique_id: backyard_temperature_battery
-    payload_on: 0
-    payload_off: 1
-sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-Tower/5555/temperature_C
-    json_attributes_topic: rtl_433/Acurite-Tower/5555
-    device_class: temperature
-    name: "Backyard temperature"
-    unique_id: backyard_temperature
-    unit_of_measurement: "°C"
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-Tower/5555/humidity
-    json_attributes_topic: rtl_433/Acurite-Tower/5555
-    device_class: humidity
-    name: "Backyard humidity"
-    unique_id: backyard_humidity
-    unit_of_measurement: "%"
+mqtt:
+  binary_sensor:
+    - state_topic: rtl_433/Acurite-Tower/5555/battery_ok
+      json_attributes_topic: rtl_433/Acurite-Tower/5555
+      device_class: battery
+      name: "Backyard Temperature Battery"
+      unique_id: backyard_temperature_battery
+      payload_on: 0
+      payload_off: 1
+  sensor:
+    - state_topic: rtl_433/Acurite-Tower/5555/temperature_C
+      json_attributes_topic: rtl_433/Acurite-Tower/5555
+      device_class: temperature
+      name: "Backyard temperature"
+      unique_id: backyard_temperature
+      unit_of_measurement: "°C"
+    - state_topic: rtl_433/Acurite-Tower/5555/humidity
+      json_attributes_topic: rtl_433/Acurite-Tower/5555
+      device_class: humidity
+      name: "Backyard humidity"
+      unique_id: backyard_humidity
+      unit_of_measurement: "%"
 ```
 
 ## Refrigerator and Freezer Monitoring
@@ -134,38 +132,35 @@ It's a bit more expensive than the other sensors, but it continues working with 
 
 ```yaml
 # Your sensor IDs will vary. I've put in placeholders of 54321 and 98765 below.
-binary_sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-986/54321/battery_ok
-    json_attributes_topic: rtl_433/Acurite-986/54321
-    device_class: battery
-    name: "Basement Fridge Temperature Battery"
-    unique_id: basement_fridge_temperature_battery
-    payload_on: 0
-    payload_off: 1
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-986/98765/battery_ok
-    json_attributes_topic: rtl_433/Acurite-986/98765
-    device_class: battery
-    name: "Basement Freezer Temperature Battery"
-    unique_id: basement_freezer_temperature_battery
-    payload_on: 0
-    payload_off: 1
-sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-986/54321/temperature_F
-    json_attributes_topic: rtl_433/Acurite-986/54321
-    device_class: temperature
-    name: "Basement Fridge Temperature"
-    unique_id: basement_fridge_temperature
-    unit_of_measurement: "°F"
-  - platform: mqtt
-    state_topic: rtl_433/Acurite-986/98765/temperature_F
-    json_attributes_topic: rtl_433/Acurite-986/98765
-    device_class: temperature
-    name: "Basement Freezer Temperature"
-    unique_id: basement_freezer_temperature
-    unit_of_measurement: "°F"
+mqtt:
+  binary_sensor:
+    - state_topic: rtl_433/Acurite-986/54321/battery_ok
+      json_attributes_topic: rtl_433/Acurite-986/54321
+      device_class: battery
+      name: "Basement Fridge Temperature Battery"
+      unique_id: basement_fridge_temperature_battery
+      payload_on: 0
+      payload_off: 1
+    - state_topic: rtl_433/Acurite-986/98765/battery_ok
+      json_attributes_topic: rtl_433/Acurite-986/98765
+      device_class: battery
+      name: "Basement Freezer Temperature Battery"
+      unique_id: basement_freezer_temperature_battery
+      payload_on: 0
+      payload_off: 1
+  sensor:
+    - state_topic: rtl_433/Acurite-986/54321/temperature_F
+      json_attributes_topic: rtl_433/Acurite-986/54321
+      device_class: temperature
+      name: "Basement Fridge Temperature"
+      unique_id: basement_fridge_temperature
+      unit_of_measurement: "°F"
+    - state_topic: rtl_433/Acurite-986/98765/temperature_F
+      json_attributes_topic: rtl_433/Acurite-986/98765
+      device_class: temperature
+      name: "Basement Freezer Temperature"
+      unique_id: basement_freezer_temperature
+      unit_of_measurement: "°F"
 ```
 
 ## Water-Leak Detection
@@ -202,24 +197,23 @@ With the configuration below Home Assistant will register the sensor as `wet` wh
 ```yaml
 #{% raw %}
 # Your sensor ID will vary. I've put in a placeholder of 88888 below.
-binary_sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Govee-Water/88888/event
-    json_attributes_topic: rtl_433/Govee-Water/88888
-    device_class: moisture
-    unique_id: 88888_govee_water
-    name: Dishwasher Water Leak
-    payload_on: Water Leak
-    payload_off: Button Press
-sensor:
-  - platform: mqtt
-    state_topic: rtl_433/Govee-Water/88888/battery_ok
-    json_attributes_topic: rtl_433/Govee-Water/88888
-    device_class: battery
-    value_template: "{{ (value_json | float * 100) | int }}"
-    unique_id: 88888_govee_water_battery
-    name: Dishwasher Water Detector Battery
-    unit_of_measurement: "%"
+mqtt:
+  binary_sensor:
+    - state_topic: rtl_433/Govee-Water/88888/event
+      json_attributes_topic: rtl_433/Govee-Water/88888
+      device_class: moisture
+      unique_id: 88888_govee_water
+      name: Dishwasher Water Leak
+      payload_on: Water Leak
+      payload_off: Button Press
+  sensor:
+    - state_topic: rtl_433/Govee-Water/88888/battery_ok
+      json_attributes_topic: rtl_433/Govee-Water/88888
+      device_class: battery
+      value_template: "{{ (value_json | float * 100) | int }}"
+      unique_id: 88888_govee_water_battery
+      name: Dishwasher Water Detector Battery
+      unit_of_measurement: "%"
 #{% endraw %}
 ```
 
