@@ -18,5 +18,5 @@ gem 'webrick'
 group :jekyll_plugins do
   gem 'amp-jekyll',
       git: 'https://github.com/aav7fl/amp-jekyll.git',
-      tag: '1.0.3'
+      tag: '1.0.4'
 end
