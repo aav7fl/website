@@ -23,6 +23,7 @@ task :serve do
   }
   
   serveOptions = {
+    host: "0.0.0.0",
     livereload: true,
     livereload_port: 35729,
     open_url: true,
