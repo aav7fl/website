@@ -1,5 +1,5 @@
 ---
-title: Smart Doorbell Retrofit in Home Assistant
+title: Transforming an Old Doorbell with Smart Alerts
 date: '2022-07-01 12:22'
 comments: true
 image:
@@ -9,25 +9,27 @@ image:
 alt: Original doorbell to the house
 published: true
 tag: "small project"
-description: "Retrofitting our existing doorbells to send useful alerts in Home Assistant when someone rings."
+description: "Transforming our existing doorbells to send alerts through Home Assistant when someone rings."
 ---
 
-In the last year I've been retrofitting tech into our home. 
-Our house is the epitome of luxury featuring such things as a ragged sound deadening from our rad carpeted stairwell. Due to this ingenious addition, it's difficult to hear things like the doorbell while we're watching TV or in a meeting.
+For the last year I've been retrofitting tech into our home. 
+Our house is the epitome of luxury featuring such things like a ragged carpeted wall to promote sound deadening. Due to this ingenious addition, it's difficult to hear things like the doorbell while we're watching TV or in a meeting.
 
-How do we solve this? ~~Take out the carpeted wall and make the doorbell louder~~. **NO**. We make the doorbell _smart_ 🧠! 
+How do we solve this? ~~Take out the carpeted wall and make the doorbell louder~~. **NO**. We make the doorbell _smart_ 🧠 and take pride it doing it ourselves! 
 
-> This is going to be a pretty high level overview at getting Shelly 1 relays to intercept my doorbell signals. It will skip over things like "Flashing ESPHome onto the Shelly relay". 
+> This is going to be _super casual_.
 > 
-> It's really to allow users near this ecosystem to steal and benefit from my project.
+> It will be a pretty high level overview at getting Shelly 1 relays to intercept my doorbell signals. I will skip over things like how to flash ESPHome onto the Shelly relay.
+> 
+> It's really to allow users near this ecosystem to steal from my project. Just like how [I stole some ideas from Frenck](https://frenck.dev/diy-smart-doorbell-for-just-2-dollar/).
 
 ## Goals
 
 - Get alerts on our devices when the doorbell rings
 - Ability to discern our different doorbells
 - Avoid subscription costs (Except to [Nabu Casa](https://www.nabucasa.com/) ❤️)
-- Ability to disable the doorbell chime like when we're sleeping
-- Create a fun repeating doorbell alarm for no good reason
+- Ability to silence the doorbell chime
+- Create a repeating doorbell alarm for ~~no good reason~~ _fun_
 
 ## Requirements
 
@@ -36,9 +38,9 @@ How do we solve this? ~~Take out the carpeted wall and make the doorbell louder~
 Here's an approximation for the hardware costs involved with the project.
 
 - $35: 2x Shelly 1 (one for each doorbell)
-- $15: Low voltage power supply (couldn't run it off of transformer in my case)
+- $15: Low voltage power supply (couldn't run it off of transformer in my case, but others might be able to)
 - $10: Low voltage wire to power Shelly 1
-- $20: (Optional) Waterproof junction box so wires weren't hanging everywhere
+- $15: (Optional) Fancy junction box so wires don't hang everywhere
 
 > I used a waterproof junction box because the doorbell wiring was too close to the main water line for my comfort. It just helps me sleep better.
 
@@ -55,31 +57,39 @@ This guide is going to assume the user is familiar with Home Assistant and ESPHo
 
 ### Two Shelly Relays?
 
-If you've read the hardware above, you might be asking yourself "Why are there two Shelly 1s? Surely you don't need that. 
+If you've read the hardware requirements above, you might be asking yourself "Why are there two Shelly 1 relays? Surely you don't need that." 
 
 You'd be right! However, did you know some homes have _two_ doorbells? I guess the thought is that you put the second doorbell by your back door in case a neighbor is stopping by. 
 
 When this happens, a chime box can be wired to give each doorbell a different chime (`Ding` vs `Ding Dong`) allowing the homeowner to know which door their visitor is at. _Neat!_
 
-Except our second doorbell is _also_ in the front.. just 15 steps from the first doorbell. We've had people ring our second doorbell before, so we're just going to proceed supporting it because I think it's bougie. 😎
+Except our second doorbell is _also_ in the front of our house.. just 15 steps from the first doorbell. We've had people ring our second doorbell before, so we're just going to proceed supporting it because I think it's bougie. 😎
 
 ### Shelly 1 Configuration
 
 Mentioned earlier, we're going to use ESPHome to configure our Shelly 1 relays.
 
-The Shelly 1 relay will be powered from our low voltage wires (or really, whatever you can find). The doorbell wires will travel through the I/O connectors. Finally, the doorbell button wire will become captured by the Shelly 1 `switch` input. We pass along that original doorbell signal via the Shelly relay to our doorbell chime and set it off. 
+The Shelly 1 relay will be powered from our low voltage wires (or really, whatever you can find for the `line` and `neutral`). 
 
-This accomplishes two things. First, we now _know_ via software that the doorbell was pressed since we triggered it via the Shelly `switch` input. Second, because we're choosing to pass the signal onto our doorbell chime, we can also choose _not_ to pass the signal along like while the baby is sleeping. I've added functionality to mute the doorbell chime via an exposed input boolean below (Helpful to pair with home bedtime automations).
+We'll connect the Shelly 1 `input` connector to the doorbell transformer power. That power (when switched on) will travel through the Shelly 1 `output` connector, leading to trigger the chime box. 
 
-> Achievement unlocked: Muting a doorbell
+Finally, the doorbell button signal will be captured by the Shelly 1 `switch` input.
 
-But we can take that a step further. Since we're _also_ in control of when our doorbell chimes, why not control it further? In the ESPHome config below, I've also included a little `script` that will repeatedly trigger the doorbell chime for 30s when toggled on. _DING-DONG Ding-Dong ding-dong..._ After 30s, the relay _should_ turn off the toggle, stopping the script execution.
+Capturing the doorbell signal with the `switch` input accomplishes two things. First, we now _know_ via software that the doorbell was pressed since we triggered it via the Shelly `switch` input. Second, because we're choosing to pass the signal onto our doorbell chime, we can also choose _not_ to pass the signal along 🔇. 
 
-_Why?_ I'm not really sure. It just seemed like a fun idea. Maybe you enjoy making dogs bark, annoying your significant other, or pretending to have a high-tech burglar alarm to annoy them away.
+I've added functionality to mute the doorbell chime via an exposed input. It's useful to pair with bedtime routines to keep the house quiet.
 
-It's probably a bad idea. But don't let that stop you! Just be careful of burning our your relay or doorbell chime. I'm _at least_ 20% sure it's not meant to operate like that (hence the 30s cap).
+> 🏅 Achievement unlocked: Muting a doorbell
 
-> Achievement unlocked: Annoying as bell
+![Home Assistant dashboard showing contents of the front door doorbell](/assets/img/2022/07/doorbell_device.png)*Home Assistant dashboard of Front Door Doorbell*
+
+But we can take that a step further. Since we're in control of _when_ our doorbell chimes, why not have some fun with that power? In the ESPHome config below, I've included a little `script` that will repeatedly trigger the doorbell chime for 30s when toggled on. _DING-DONG Ding-Dong ding-dong..._ After 30s, the script _should_ stop toggling the relay.
+
+_Why have I done this?_ I'm not really sure. It just seemed like a fun idea. Maybe you enjoy making dogs bark, annoying your significant other, or pretending to have a high-tech burglar alarm to annoy them away.
+
+It's probably a bad idea. But don't let that stop you! Just be careful of burning out your relay or doorbell chime. I'm _at least_ 20% sure it's not meant to operate like that (hence the 30s cap).
+
+> 🏅 Achievement unlocked: Annoying as bell
 
 
 ```yaml
@@ -226,9 +236,9 @@ script:
 
 Great, we have a chime and it's added into Home Assistant. That's not very useful yet. So let's add notifications!
 
-> I also _happen_ to have a camera by the doorbell, so I include a camera snapshot in my notifications.
+> I also _happen_ to have a camera by the doorbell, so I include a camera snapshot in my notifications. 
 
-Using the Home Assistant app on our phone, we can send out notifications with the following Home Assistant automation.
+Using the companion Home Assistant app on our phone, we can [push notifications to our device](https://companion.home-assistant.io/docs/notifications/notifications-basic/) using the `notify` service.
 
 ![Simulated phone doorbell notification](/assets/img/2022/07/phone_notification.jpg)*Simulated phone notification from a doorbell press*
 
@@ -259,7 +269,7 @@ blueprint:
   input:
     doorbell_sensor:
       name: Doorbell sensor
-      description: The sensor wich triggers the snapshot creation (domain binary_sensor, class motion).
+      description: The sensor which triggers the snapshot creation (domain binary_sensor, class motion).
       selector:
           entity:
             domain: binary_sensor
@@ -270,20 +280,6 @@ blueprint:
       selector:
         entity:
           domain: camera
-          
-    notifications_enabled:
-      name: Notifications State
-      description: Input Boolean to control all notifications across all automations (excluding overrides)
-      selector:
-        entity:
-          domain: input_boolean
-
-    sleeping_mode_enabled:
-      name: Sleeping Mode State
-      description: Input Boolean to describe the state of the home sleeping mode
-      selector:
-        entity:
-          domain: input_boolean
           
     camera_delay:
       name: (Optional) Camera Delay
@@ -344,18 +340,8 @@ variables:
   rate_limit: !input rate_limit
   snapshot_file_path: "/config/www/tmp/snapshot_{{ states[camera].object_id }}.jpg"
   snapshot_image_path: "/local/tmp/snapshot_{{ states[camera].object_id }}.jpg"
-  notifications_enabled: !input notifications_enabled
-  sleeping_mode_enabled: !input sleeping_mode_enabled
   notification_message_standard: !input notification_message_standard
 
-condition:
-  - condition: template
-    value_template: >-
-      {% if (states[notifications_enabled].state == 'on') %}
-        true
-      {% else %}
-        false
-      {%- endif %}  
 action:
   - delay: "{{ camera_delay }}"   
   
@@ -366,6 +352,7 @@ action:
       
   - delay: "{{ snapshot_delay }}"      
 
+  # Update this service group with whomever you'd like to notify
   - service: notify.family
     data:
       title: "{{ notification_title }}"
@@ -379,13 +366,9 @@ action:
           priority: high
         push:
           interruption-level: time-sensitive
-        actions:
-          - action: SIMULATE_PRESENCE
-            title: Fake presence
-          - action: TEMP_DOORBELL_NOTIFICATION_MUTE
-            title: Mute (15m)
         image: "{{ snapshot_image_path }}"
 
+  # Update this service group with whomever you'd like to notify
   - service: notify.screens
     data:
       title: "{{ notification_title }}"
@@ -407,6 +390,6 @@ max_exceeded: silent
 
 I don't think I'm a luddite, but sometimes I really appreciate older things. Who knows, maybe I'll come around to a video doorbell once there are better looking options. 
 
-It's super useful to get alerts when I'm busy, away from home, or mute alerts while the baby naps.
+It's super useful to get alerts when I'm busy, away from home, or have the ability to mute alerts while the baby naps.
 
 I had an existing doorbell, existing camera, and accessible wiring. With a little bit of fun, I was able to transform (pun intended) our doorbell setup into something I'd seen advertised by other smart doorbells. But doing it myself makes me happy.
