@@ -52,6 +52,7 @@ task :html_proofer do
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{https://www.linkedin.com.*}, # They always return a 999
+      %r{https://www.linkedin.com/in/kyleniewiada/ }, # Filter isn't working?
       %r{.*twitter.com/.*} # This site now hates HTML Proofer
     ]
   ).run
