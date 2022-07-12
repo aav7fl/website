@@ -46,13 +46,12 @@ task :html_proofer do
     check_opengraph: 'true',
     file_ignore: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
     internal_domains: ['www.kyleniewiada.org'],
-    url_ignore:
+    ignore_urls:
     [
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{https://www.linkedin.com.*}, # They always return a 999
-      %r{https://www.linkedin.com/in/kyleniewiada/ }, # Filter isn't working?
       %r{.*twitter.com/.*} # This site now hates HTML Proofer
     ]
   ).run
