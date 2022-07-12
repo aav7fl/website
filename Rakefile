@@ -44,7 +44,7 @@ task :html_proofer do
     allow_hash_href: 'true',
     check_html: 'true',
     check_opengraph: 'true',
-    file_ignore: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
+    ignore_files: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
     internal_domains: ['www.kyleniewiada.org'],
     ignore_urls:
     [
