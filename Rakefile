@@ -53,6 +53,7 @@ task :html_proofer do
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{https://www.linkedin.com.*}, # They always return a 999
       %r{.*twitter.com/.*} # This site now hates HTML Proofer
+      %r{https://frenck.dev.*} # Cloudflare is blocking us :(
     ]
   ).run
 end
