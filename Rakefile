@@ -55,11 +55,10 @@ task :html_proofer do
       %r{.*twitter.com/.*}, # This site now hates HTML Proofer
       %r{https://frenck.dev.*} # Cloudflare is blocking us :(
     ],
-    {
-      typhoeus: {
-        connecttimeout: 30,
-        timeout: 30 
-      }
+    typhoeus: {
+      followlocation: true,
+      connecttimeout: 30,
+      timeout: 30 
     }
   ).run
 end
