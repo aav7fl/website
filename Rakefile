@@ -54,12 +54,7 @@ task :html_proofer do
       %r{https://www.linkedin.com.*}, # They always return a 999
       %r{.*twitter.com/.*}, # This site now hates HTML Proofer
       %r{https://frenck.dev.*} # Cloudflare is blocking us :(
-    ],
-    typhoeus: {
-      followlocation: true,
-      connecttimeout: 30,
-      timeout: 30 
-    }
+    ]
   ).run
 end
 
