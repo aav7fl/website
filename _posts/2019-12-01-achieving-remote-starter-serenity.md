@@ -241,9 +241,9 @@ After poring through different Subaru forums trying to piece together how indivi
 
 Investigating the BCMs under the steering wheel in my vehicle revealed clusters of wires emerging from various grey modules. Since I was unable to confidently identify which wire controlled the rear defogger gate, I turned to the Internet communities for help.
 
-I stumbled upon a website called [The 12 Volt]( https://www.the12volt.com/). It's a community of members trying to help others with correct and safe wiring on different equipment.
+I stumbled upon a website called `The 12 Volt`. It's a community of members trying to help others with correct and safe wiring on different equipment.
 
-After spending some time looking through different wire schematics, I believed I had found the information I was looking for. I [created a community post](https://www.the12volt.com/installbay/forum_posts.asp?tid=144898) to confirm my findings. After some validation from another community member, I went to work back in my car.
+After spending some time looking through different wire schematics, I believed I had found the information I was looking for. I created a community post to confirm my findings. After some validation from another community member, I went to work back in my car.
 
 > Fun fact: Without the correct tools, I had no easy way of validating my work unless it was below 55° inside the vehicle. If it were warmer than that, the circuit enabling the rear defogger would not trigger. Essentially, I was forced to perform this work in the cold.
 
