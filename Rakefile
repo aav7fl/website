@@ -18,6 +18,7 @@ task :serve do
   puts 'Serving site...'.yellow.bold
 
   buildOptions = {
+    future: true,
     incremental: true,
     watch: true,
   }
