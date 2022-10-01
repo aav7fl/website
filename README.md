@@ -30,3 +30,9 @@ This is my personal website that I tweak and write about projects I have worked 
 ## Deploy
 
 `act push`
+
+## Develop Locally
+
+- Open in VSCode
+- Open in dev container
+- After container is built run `bundle exec rake`
