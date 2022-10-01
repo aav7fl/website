@@ -46,7 +46,6 @@ task :html_proofer do
     check_html: 'true',
     check_opengraph: 'true',
     ignore_files: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
-    internal_domains: ['www.kyleniewiada.org'],
     ignore_urls:
     [
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
@@ -55,7 +54,10 @@ task :html_proofer do
       %r{https://www.linkedin.com.*}, # They always return a 999
       %r{.*twitter.com/.*}, # This site now hates HTML Proofer
       %r{https://frenck.dev.*} # Cloudflare is blocking us :(
-    ]
+    ],
+    swap_urls: {
+      %r{^https://www.kyleniewiada.org/} => '/' # Convert internal links that may not exist yet.
+    }
   ).run
 end
 
