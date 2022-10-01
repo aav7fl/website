@@ -1,15 +1,16 @@
-<amp-analytics type="googleanalytics">
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
   <script type="application/json">
   {
-    "vars": {
-      "account": "{{ site.data.analytics.google_analytics }}"
-    },
-    "triggers": {
-      "trackPageview": {
-        "on": "visible",
-        "request": "pageview"
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "{{ site.data.analytics.google_analytics }}",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
       }
-    }
   }
   </script>
 </amp-analytics>
