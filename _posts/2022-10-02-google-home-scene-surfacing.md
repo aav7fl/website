@@ -1,6 +1,6 @@
 ---
 title: Surfacing Scenes to All Google Home Household Members
-date: '2022-10-02 17:13'
+date: '2022-10-01 17:49'
 comments: true
 image:
   path: /assets/img/2022/10/google_home_scenes_banner.jpg
