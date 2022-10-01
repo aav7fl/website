@@ -27,14 +27,23 @@ permalink: /resume/
 
 ## Experience
 
+### Senior Full Stack Developer at Gordon Food Service
+
+<div class="date">Nov 2021 - Present</div>
+
+- Guides conversations between product owners and developers to arrive at the realistic solution for everyone
+- Leads and reviews technical discussions for our code
+- Organizes and defines work for developers on the team
+- Continually manages and upgrades Terraform/Helm/Kubernetes apis
+
 ### Full Stack Developer at Gordon Food Service
 
-<div class="date">Jul 2019 - Present</div>
+<div class="date">Jul 2019 - Nov 2021</div>
 
-- Augment support by building a machine learning model to correctly detect chat sentiment and react accordingly
-- Manage and upgrade older Terraform/Helm configurations for transient workloads in Kubernetes clusters
-- Design and build an asynchronous live chat solution inside of an app to work with a non-asynchronous chat provider
-- Build multilingual functionality with Gordon Now Chat to serve customers across the US and Canada
+- Augmented support by building a machine learning model to correctly detect chat sentiment and react accordingly
+- Managed and upgraded older Terraform/Helm configurations for transient workloads in Kubernetes clusters
+- Designed and built an asynchronous live chat solution inside of an app to work with a non-asynchronous chat provider
+- Built multilingual functionality with Gordon Now Chat to serve customers across the US and Canada
 
 ### Associate Software Engineer at Gordon Food Service
 
@@ -70,20 +79,6 @@ permalink: /resume/
 
 - 1 on 1 tutoring in preparation for the AP Computer Science Exam
 
-### Software Developer Intern at Blue Medora, LLC
-
-<div class="date">Summer 2013; Summer 2014</div>
-
-- Developed Oracle Enterprise Manager plugins
-
-### Supervisor for RoboDawgs community camps
-
-<div class="date">Summer 2012</div>
-
-- Instructed up to 40 campers during the busiest week
-- Delegated jobs between nine employees
-- Conducted new building renovations/repairs
-
 ---
 
 ## Technical skills
@@ -93,13 +88,36 @@ permalink: /resume/
 - Setup, modify, and maintain this Jekyll website
 - [Source code](https://github.com/aav7fl/website)
 
-### Experience with:
+### Language Experience:
 
-- Java, Angular, React Native, Kotlin, SQL, HTML, CSS
+- Java
+- Kotlin
+- Angular
+- React Native
+- SQL
+- HTML/CSS
 
-### Familiar with:
+### Technical Experience:
 
-- Ruby, C, C++, C#, Python, Liquid, Markdown, TI-Basic
+- GCP
+- Kubernetes
+- Terraform
+- Helm
+- Jenkins
+- Cloud Build
+- GitHub/GitLab
+
+### Language Familiarity:
+
+- Python
+- Liquid
+- TI-Basic
+
+### Technical Familiarity:
+
+- Spring Boot
+- Dynatrace
+- Apigee
 
 ---
 
@@ -111,10 +129,6 @@ permalink: /resume/
 
 - Received silver, gold, and bronze palms
   - Requires an additional five merit badges (beyond the required 21 for Eagle) for each palm, and a three-month observance between each palm. This must occur before a scout's 18th birthday to be eligible.
-
-### Recipient of Grand Valley Music Department Scholarship
-
-<div class="date">2012 - 2014</div>
 
 ---
 
@@ -155,26 +169,6 @@ permalink: /resume/
 - Reverse engineered remote codes to my Steelcase electric desk
 - Discovered and documented the remote codes with explanations to each setting
 - [Blog post](/blog/2015/08/reverse-engineering-my-steelcase-desk/)
-
----
-
-## Activities
-
-### University Arts Chorale & Cantate Chamber Ensemble
-
-<div class="date">2012 - 2014</div>
-
-### Grand Valley Computing Club
-
-<div class="date">2012 - 2013</div>
-
-### Piano
-
-<div class="date">2002 - 2013</div>
-
-### Volunteer at Festival of the Arts Screen Printing
-
-<div class="date">Summer 2013 - Summer 2016</div>
 
 ---
 
