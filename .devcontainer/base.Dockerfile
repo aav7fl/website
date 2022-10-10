@@ -1,6 +1,6 @@
 # https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll/.devcontainer
-# [Choice] Debian OS version (use 2.7-bullseye on local arm64/Apple Silicon): 2.7-bullseye, 2.7-buster
-ARG VARIANT=2.7-bullseye
+# [Choice] Debian OS version (use 3.1-bullseye on local arm64/Apple Silicon): 3.1-bullseye, 3.1-buster
+ARG VARIANT=3.1-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers
 
