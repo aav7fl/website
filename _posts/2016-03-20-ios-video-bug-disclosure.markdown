@@ -16,6 +16,8 @@ amp:
 
 There exists a bug with the iOS video playback and color reproduction. When specific combinations and proportions of colors are present on screen, if (and only if) all user interface elements are hidden, then a decrease in color temperature (mostly red) occurs. This seemingly subtle shift in color turns cartoon characters and online content creators into ghostly pale figures.
 
+> Surprise! 🥳 I recently had the opportunity to test this again on a newer M1 iPad Air. I can say that this issue is _no longer present_! I believe this issue is resolved with all M-series devices. 
+
 ![comparing video playback demonstrating bug with and without user interface](/assets/img/2016/03/comparison.jpg)*Note the subtle differences in facial tones and woodgrain color*
 
 {% include video.html
@@ -109,4 +111,5 @@ Without knowing more about iOS inner workings, it's hard to say how much of the 
 
 I wanted to publicly disclose this bug because I understand how frustrating it can be to research such a subtle bug and come up empty while trying to reproduce it. I am hoping that this post will help other users that search for the problem demonstrated be aware that it exists, can be reproduced, and let them know what I have discovered.
 
-> As we approach the end of 2018, I find that this issue still persists on iOS 12, and on the latest iPad hardware. It's disappointing that Apple has not resolved this issue. I suppose they should just label this as a feature.
+> EDIT: As we approach the end of 2018, I find that this issue still persists on iOS 12, and on the latest iPad hardware. It's disappointing that Apple has not resolved this issue. I suppose they should just label this as a feature.
+> EDIT: As we enter 2022, I've had the opportunity to validate this on a newer M1 iPad Air. I can no longer replicate on this hardware. It looks to be finally resolved with devices running the M-series architecture!
