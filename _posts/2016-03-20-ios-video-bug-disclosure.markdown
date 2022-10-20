@@ -112,4 +112,5 @@ Without knowing more about iOS inner workings, it's hard to say how much of the 
 I wanted to publicly disclose this bug because I understand how frustrating it can be to research such a subtle bug and come up empty while trying to reproduce it. I am hoping that this post will help other users that search for the problem demonstrated be aware that it exists, can be reproduced, and let them know what I have discovered.
 
 > EDIT: As we approach the end of 2018, I find that this issue still persists on iOS 12, and on the latest iPad hardware. It's disappointing that Apple has not resolved this issue. I suppose they should just label this as a feature.
+
 > EDIT: As we enter 2022, I've had the opportunity to validate this on a newer M1 iPad Air. I can no longer replicate on this hardware. It looks to be finally resolved with devices running the M-series architecture!
