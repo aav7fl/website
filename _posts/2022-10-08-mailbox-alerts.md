@@ -14,7 +14,7 @@ description: "Dealing with my impatient inner child by getting notified the mome
 
 We have an unpredictable mail schedule and I'm an impatient child. I'm convinced that when the post office knows they're delivering a box of parts, they shuffle our route for a late-night delivery. Rather than hawking around the mailbox or listening for the phantom muffler of a Grumman LLV, I want unequivocal evidence when our mailbox had been opened for delivery. 
 
-> Alt: How I cured my Pavlovian response to hearing a Grumman LLV come down the road
+> Alt: How I cured my Pavlovian response to hearing a [Grumman LLV](https://en.wikipedia.org/wiki/Grumman_LLV) come down the road
 
 My solution was to use an outdoor rated Z-Wave contact sensor to detect when the mailbox was opened and then notify my family over Home Assistant. Here's how I got there.
 
