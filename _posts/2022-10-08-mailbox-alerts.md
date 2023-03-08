@@ -12,9 +12,9 @@ tag: "medium project"
 description: "Dealing with my impatient inner child by getting notified the moment we receive our mail through Home Assistant"
 ---
 
-We have an unpredictable mail schedule and I'm an impatient child. I'm convinced that when the post office knows they're delivering a box of parts, they shuffle our route for a late-night delivery. Rather than hawking around the mailbox or listening for the phantom muffler of a Grumman LLV, I want unequivocal evidence when our mailbox had been opened for delivery. 
+We have an unpredictable mail schedule and I'm an impatient child. I'm convinced that when the post office knows they're delivering a box of parts, they shuffle our route for a late-night delivery. Rather than hawking around the mailbox or listening for the phantom muffler of a [Ford-Utilimaster FFV](https://en.wikipedia.org/wiki/Ford-Utilimaster_FFV), I want unequivocal evidence when our mailbox had been opened for delivery. 
 
-> Alt: How I cured my Pavlovian response to hearing a [Grumman LLV](https://en.wikipedia.org/wiki/Grumman_LLV) come down the road
+> Alt: How I cured my Pavlovian response to hearing a Ford-Utilimaster FFV come down the road
 
 My solution was to use an outdoor rated Z-Wave contact sensor to detect when the mailbox was opened and then notify my family over Home Assistant. Here's how I got there.
 
@@ -260,4 +260,4 @@ action:
 
 ## Conclusion
 
-I've been using my mailbox alert setup for the last 3 months. It hasn't missed a delivery yet. The alerts have been super convenient since we don't get mail regularly, and sometimes we'll have a late (or second) delivery at 7PM. The sound of something similar to a Grumman LLV chugging down the road no longer brings me to the front window to check. I am at peace.
+I've been using my mailbox alert setup for the last 3 months. It hasn't missed a delivery yet. The alerts have been super convenient since we don't get mail regularly, and sometimes we'll have a late (or second) delivery at 7PM. The sound of something similar to a Ford-Utilimaster FFV chugging down the road no longer brings me to the front window to check. I am at peace.
