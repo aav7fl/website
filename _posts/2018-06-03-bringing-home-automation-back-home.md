@@ -26,7 +26,7 @@ When I first started working with Home Assistant, I wanted to solve only one pro
 
 ### Step One
 
-Connecting up Home Assistant to my Hue Lights took less than five minutes. As soon as Home Assistant started up, its [discovery service](https://www.home-assistant.io/components/discovery/) automatically prompted to authenticate locally on my network with my Hue hub. What a piece of cake. I could now control the lights from the Home Assistant web interface.
+Connecting up Home Assistant to my Hue Lights took less than five minutes. As soon as Home Assistant started up, its "discovery service" automatically prompted to authenticate locally on my network with my Hue hub. What a piece of cake. I could now control the lights from the Home Assistant web interface.
 
 ### Step Two
 
