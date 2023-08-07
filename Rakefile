@@ -53,7 +53,9 @@ task :html_proofer do
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{https://www.linkedin.com.*}, # They always return a 999
       %r{.*twitter.com/.*}, # This site now hates HTML Proofer
-      %r{https://frenck.dev.*} # Cloudflare is blocking us :(
+      %r{https://frenck.dev.*}, # Cloudflare is blocking us :(
+      %r{^https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23}, # GitHub is saying the anchor is an error
+      %r{^https://github.com/home-assistant/core/blob/dd7a06b9dca8a04152f6c4ef4828c8e214260393/homeassistant/components/google_assistant/trait.py#L522-L530} # GitHub is saying the anchor is an error
     ],
     swap_urls: {
       %r{^https://www.kyleniewiada.org/} => '/' # Convert internal links that may not exist yet.
