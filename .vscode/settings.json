@@ -3,5 +3,6 @@
         "-l"
     ],
     "git.enableSmartCommit": true,
-    "git.postCommitCommand": "push"
+    "git.postCommitCommand": "push",
+    "remote.localPortHost": "allInterfaces"
 }
