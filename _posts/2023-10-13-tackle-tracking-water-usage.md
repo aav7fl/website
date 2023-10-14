@@ -209,11 +209,11 @@ My OpenSprinkler controller supports different input sensors. One of the support
 2. Connect the wires from the water meter to the sensor ports on the OpenSprinkler controller
 3. Configure the sensor input on the OpenSprinkler dashboard
 
-Now OpenSprinkler can track water consumption. But how do I get the data in OpenSprinkler over to Home Assistant?
+Now OpenSprinkler can track water usage. But how do I get the data in OpenSprinkler over to Home Assistant?
 
 Simple. By using the [hass-opensprinkler](https://github.com/vinteo/hass-opensprinkler) integration. This integration exposes entities, controls, and data over to Home Assistant.
 
-When I first started using this integration, the water consumption entity was a bit flaky (I don't even remember if it worked until later updates). Since the consumption entity wasn't working, I had to figure out a different way to calculate my consumption. 
+When I first started using this integration, I don't believe there was an entity to show water consumption via the integration I was using (I think this is still true?). Since there was no consumption entity, I had to figure out a different way to calculate my consumption. 
 
 Luckily, the other exposed entities seemed to work without issue. As a rule of thumb, irrigation flow rates are generally constant and don't fluctuate too much. Since I have a reliable flow _rate_ coming from the controller, I can calculate the consumption by using a [Riemann sum](https://www.home-assistant.io/integrations/integration/) calculation of the current rate. This is basically plotting out a graph of the flow rate over time, and calculating the sum of all area under that line (e.g. a less precise integral).
 
