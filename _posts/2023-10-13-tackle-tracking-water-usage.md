@@ -12,8 +12,6 @@ tag: "large project"
 description: "Tackle tracking water consumption across my house and irrigation with Home Assistant, ESPHome, and OpenSprinkler"
 ---
 
-## Intro
-
 Data driven decision making is how I prefer to approach my smart home. A few years ago, I started the journey of tracking my electric and gas utilities. Water tracking eluded me. With our meager household consumption, it never made sense to tackle tracking water usage. But our family grew. I restored parts of our ancient irrigation system. Then we added garden beds! Suddenly we using more water. 
 
 Now I had a reason to track it.
