@@ -9,7 +9,7 @@ seo:
   type: Website
 regenerate: true
 permalink: /resume/
-last_manual_update: 2023-10-01
+last_manual_update: 2022-10-01
 ---
 <header>
 <h1>{{ page.author | default: site.author }}</h1>
