@@ -112,12 +112,14 @@ mqtt:
     - state_topic: rtl_433/Acurite-Tower/5555/temperature_C
       json_attributes_topic: rtl_433/Acurite-Tower/5555
       device_class: temperature
+      state_class: measurement
       name: "Backyard temperature"
       unique_id: backyard_temperature
       unit_of_measurement: "°C"
     - state_topic: rtl_433/Acurite-Tower/5555/humidity
       json_attributes_topic: rtl_433/Acurite-Tower/5555
       device_class: humidity
+      state_class: measurement
       name: "Backyard humidity"
       unique_id: backyard_humidity
       unit_of_measurement: "%"
@@ -152,12 +154,14 @@ mqtt:
     - state_topic: rtl_433/Acurite-986/54321/temperature_F
       json_attributes_topic: rtl_433/Acurite-986/54321
       device_class: temperature
+      state_class: measurement
       name: "Basement Fridge Temperature"
       unique_id: basement_fridge_temperature
       unit_of_measurement: "°F"
     - state_topic: rtl_433/Acurite-986/98765/temperature_F
       json_attributes_topic: rtl_433/Acurite-986/98765
       device_class: temperature
+      state_class: measurement
       name: "Basement Freezer Temperature"
       unique_id: basement_freezer_temperature
       unit_of_measurement: "°F"
@@ -210,6 +214,7 @@ mqtt:
     - state_topic: rtl_433/Govee-Water/88888/battery_ok
       json_attributes_topic: rtl_433/Govee-Water/88888
       device_class: battery
+      state_class: measurement
       value_template: "{{ (value_json | float * 100) | int }}"
       unique_id: 88888_govee_water_battery
       name: Dishwasher Water Detector Battery
