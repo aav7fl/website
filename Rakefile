@@ -52,6 +52,7 @@ task :html_proofer do
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{https://www.linkedin.com.*}, # They always return a 999
+      %r{https://www.reddit.com.*}, # Reddit is blocking us :(
       %r{.*twitter.com/.*}, # This site now hates HTML Proofer
       %r{https://frenck.dev.*}, # Cloudflare is blocking us :(
       %r{^https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23}, # GitHub is saying the anchor is an error
