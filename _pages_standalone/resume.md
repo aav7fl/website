@@ -9,7 +9,7 @@ seo:
   type: Website
 regenerate: true
 permalink: /resume/
-last_manual_update: 2022-10-01
+last_manual_update: 2023-01-16
 ---
 <header>
 <h1>{{ page.author | default: site.author }}</h1>
@@ -28,14 +28,22 @@ last_manual_update: 2022-10-01
 
 ## Experience
 
+### Senior Software Engineer at Gordon Food Service
+
+<div class="date">Jan 2024 - Present</div>
+
+- Works on integrating GenAI into pieces of our business to improve new customer retention
+- Makes customer onboarding a breeze by integrating GenAI with our chatbot
+  - This process creates new order guides for customers based on restaurant name, style, and their uploaded menus
+
 ### Senior Full Stack Developer at Gordon Food Service
 
-<div class="date">Nov 2021 - Present</div>
+<div class="date">Nov 2021 - Dec 2023</div>
 
-- Guides conversations between product owners and developers to arrive at the realistic solution for everyone
-- Leads and reviews technical discussions for our code
-- Organizes and defines work for developers on the team
-- Continually manages and upgrades Terraform/Helm/Kubernetes apis
+- Guided conversations between product owners and developers to arrive at the realistic solution for everyone
+- Lead and reviewed technical discussions for our code
+- Organized and defined work for developers on the team
+- Continually managed and upgraded Terraform/Helm/Kubernetes apis
 
 ### Full Stack Developer at Gordon Food Service
 
