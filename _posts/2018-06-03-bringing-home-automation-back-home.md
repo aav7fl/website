@@ -16,7 +16,7 @@ I'm a big fan of automation. Repetitive tasks annoy me and I try to find the bes
 
 My attempt at solving this problem led me into a massive project of shifting control from my smart devices wherever possible into my own hands. Granted there are still external services that are still required for a few of my devices, but this got me closer to full control. My solution was using the open source project [Home Assistant](https://www.home-assistant.io/).
 
-Home Assistant is an automation platform that has +1,000 components for different devices and services. It's written in Python3, has an [active community](https://community.home-assistant.io/), and openly accepts contributions into its project. Home Assistant's large library of compatible devices made it easy for me to hook up all of my smart plugs, smart lights, and other silly _smart_ devices. I personally run Home Assistant on [Hass.io](https://github.com/home-assistant/hassio#readme), a Docker-based system that handles Home Assistant updates and runs very well on my Raspberry Pi 3.
+Home Assistant is an automation platform that has +1,000 components for different devices and services. It's written in Python3, has an [active community](https://community.home-assistant.io/), and openly accepts contributions into its project. Home Assistant's large library of compatible devices made it easy for me to hook up all of my smart plugs, smart lights, and other silly _smart_ devices. I personally run Home Assistant on [Hass.io](https://github.com/home-assistant/hassio), a Docker-based system that handles Home Assistant updates and runs very well on my Raspberry Pi 3.
 
 {% include toc.html %}
 
@@ -119,7 +119,6 @@ It really gives me the feeling of living in one of those future movies.
 
 ## Additional Useful Home Assistant Components
 
-- [DarkSky API](https://darksky.net/dev) gathers hyperlocal weather information at the apartment and can be presented on the Home Assistant dashboard.
 - [Presence Detection](https://www.home-assistant.io/getting-started/presence-detection/) from Home Assistant helps identify who is home or away.
 - [Floorplan for Home Assistant](https://github.com/pkozul/ha-floorplan) is an interactive tool that allows a user to toggle/open/view entities from Home Assistant on a user created SVG layout of their living space.
 
