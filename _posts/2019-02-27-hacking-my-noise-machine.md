@@ -38,7 +38,7 @@ At this point, it dawned on me that a friend had gifted me an ESP32 board for Ch
 
 ## Prototyping
 
-After a quick Google search, I learned that the Home Assistant platform that recently launched an [ESPHome integration](https://www.home-assistant.io/components/esphome/). Lucky for me, ESPHome [supports for my board](https://esphome.io/devices/nodemcu_esp32)! A quick firmware flash and Home Assistant integration change later, I was able to produce a proof of concept that toggled an LED bulb on the ESP32 through the control of my Home Assistant front-end.
+After a quick Google search, I learned that the Home Assistant platform that recently launched an [ESPHome integration](https://www.home-assistant.io/components/esphome/). Lucky for me, ESPHome [supports for my board](https://esphome.io/components/esp32.html)! A quick firmware flash and Home Assistant integration change later, I was able to produce a proof of concept that toggled an LED bulb on the ESP32 through the control of my Home Assistant front-end.
 
 Lucky for me, the ESP32 board that I was using required a 5V power source. Conveniently, the noise machine was already using a 5V line for its main power. I just tapped into that and it worked perfectly. I don't _think_ I'm drawing enough current to cause any problems.
 
