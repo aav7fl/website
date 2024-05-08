@@ -65,7 +65,7 @@ At the time of writing, I'm using
 
 - [Home Assistant](https://www.home-assistant.io/) (2022.9.6) as the brains to this operation
 - [Z-Wave JS](https://github.com/zwave-js) (10.2.0) to manage my Z-Wave network
-- [Aeotec Range Extender 7](https://aeotec.com/products/aeotec-range-extender-7/) to extend my Z-Wave network out to the mailbox
+- [Aeotec Range Extender 7](https://store.aeotec.com/products/range-extender-7-zw189) to extend my Z-Wave network out to the mailbox
 
 First, I install the `Ring Alarm Outdoor Contact Sensor` to our mailbox lid with some stainless steel hardware.
 
