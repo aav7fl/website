@@ -262,7 +262,7 @@ Next, I track the consumption with a [utility meter](https://www.home-assistant.
 
 **Input:** `sensor.sprinkler_consumption_gallons` (Utility meter sensor)
 
-We're almost done. For whatever reason, the utility meter that I create above ends up missing key components that allow me to add it to my Energy Dashboard. To remedy this, I have to manually add a `device_class` and `unit_of_measurement` through the [customization entry](https://www.home-assistant.io/docs/configuration/customizing-devices/#manual-customization) for the sensor in order for it to be allowed in the Home Assistant `Energy` dashboard.
+We're almost done. For whatever reason, the utility meter that I create above ends up missing key components that allow me to add it to my Energy Dashboard. To remedy this, I have to manually add a `device_class` and `unit_of_measurement` through the [customization entry](https://www.home-assistant.io/docs/configuration/customizing-devices/) for the sensor in order for it to be allowed in the Home Assistant `Energy` dashboard.
 
 > I believe this problem can be avoided by defining the utility meter in `yaml` instead of the UI.
 
