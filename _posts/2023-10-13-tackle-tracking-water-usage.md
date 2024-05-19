@@ -327,9 +327,33 @@ To work around this setback, I need to create a template sensor that subtracts m
       state_class: total_increasing
       unit_of_measurement: gal
       device_class: water
-      value_template: >
-        {{ states('sensor.main_water_meter_consumption') | int - states('sensor.sprinkler_consumption_gallons') | int(0) }}
-      friendly_name: Standard Water Consumption
+      availability: "{{ is_number(states('sensor.main_water_meter_consumption_submeter_daily')) and is_number(states('sensor.sprinkler_consumption_gallons')) }}"
+      # Subtract the values of 2 utility meters.
+      # - One is a utility meter of the ESPHome main_water_meter_consumption_submeter
+      # - One is a utility meter of the sprinkler_consumption_sum_gallons
+      # Both utility meters reset at midnight. This allows me to keep a daily counter of gallons in case a device is reset (as that would break my template)
+      # While my total value won't show on the dashboard well, the statistics should work well and show up in my energy dashboard correctly
+      # instead of showing a jump at midnight. Before I was subracting a resetting value from a non-resetting value.
+      # Here we use a template to ignore values that decrease my consumption value or else that will reset my meter and count for more than was actually consumed.
+      # This is _supposed_ to eventually calculate correctly.
+      state: >-
+        {% set main_submeter_daily = states('sensor.main_water_meter_consumption_submeter_daily') | int(0) %}
+        {% set sprinkler_submeter_daily = states('sensor.sprinkler_consumption_gallons') | int(0) %}
+        {% set new_standard_water_consumption = main_submeter_daily - sprinkler_submeter_daily %}
+        {% set old_standard_water_consumption = states('sensor.standard_water_consumption') | int(0) %}
+        {% set standard_water_consumption = 0 %}
+
+        {% if new_standard_water_consumption == 0 %}
+          {# This is the value when the meter resets at midnight, or when we've only run the sprinkler #}
+          {% set standard_water_consumption = new_standard_water_consumption %}
+        {% elif new_standard_water_consumption > old_standard_water_consumption %}
+          {% set standard_water_consumption = new_standard_water_consumption %}
+        {% elif new_standard_water_consumption <= old_standard_water_consumption %}
+          {# Don't return the new value as we will mess up the total_increasing by going down #}
+          {% set standard_water_consumption = old_standard_water_consumption %}
+        {% endif %}
+
+        {{ standard_water_consumption }}
 ```
 
 ![Water consumption from Home Assistant Energy Dashboard](/assets/img/2023/10/water_consumption.png)*Water consumption in the Home Assistant Energy Dashboard*
