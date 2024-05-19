@@ -319,6 +319,7 @@ Home Assistant energy monitoring allows users to track separate electric devices
 To work around this setback, I need to create a template sensor that subtracts my irrigation sub-meter consumption from the total consumption of my household. I then add both meters back into the dashboard to give me a full picture of my consumption.
 
 ```yaml
+{% raw %}
 # Calculate standard home water consumption without irrigation
 # Fixes issue where there are two meters in series, and we want to avoid double-counting consumption
 - platform: template
@@ -354,6 +355,7 @@ To work around this setback, I need to create a template sensor that subtracts m
         {% endif %}
 
         {{ standard_water_consumption }}
+{% endraw %}
 ```
 
 ![Water consumption from Home Assistant Energy Dashboard](/assets/img/2023/10/water_consumption.png)*Water consumption in the Home Assistant Energy Dashboard*
