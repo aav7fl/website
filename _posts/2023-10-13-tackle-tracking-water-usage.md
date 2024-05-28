@@ -332,13 +332,7 @@ To work around this setback, I need to create a template sensor that subtracts m
       # Subtract the values of 2 utility meters.
       # - One is a utility meter of the ESPHome main_water_meter_consumption_submeter
       # - One is a utility meter of the sprinkler_consumption_sum_gallons
-      # Both utility meters reset at midnight. This allows me to keep a daily counter of gallons in case a device is reset (as that would break my template)
-      # While my total value won't show on the dashboard well, the statistics should work well and show up in my energy dashboard correctly
-      # instead of showing a jump at midnight. Before I was subracting a resetting value from a non-resetting value.
-      # We also add in an additional check to ignore the value at midnight for the first 30s as Home Assistant doesn't always reset both meters at the same
-      # time which means I see a huge spike for ~1s in the template when one value is reset, but not the other. Since it's being calculated for a
-      # "total_increasing" sensor, this resets and double counts values. This messes up my recorded total values of consumption for the day for midnight.
-      # This is just messy and I'm doing my best to make this odd situation work for me.
+      # Both utility meters reset at midnight. This makes it easier and clearer to make corrections if something goes wrong.
       state: >-
         {% set main_submeter_daily = states('sensor.main_water_meter_consumption_submeter_daily') | int(0) %}
         {% set sprinkler_submeter_daily = states('sensor.sprinkler_consumption_gallons') | int(0) %}
@@ -346,15 +340,19 @@ To work around this setback, I need to create a template sensor that subtracts m
         {% set old_standard_water_consumption = states('sensor.standard_water_consumption') | int(0) %}
         {% set standard_water_consumption = 0 %}
 
+        {# We first check if the time is around midnight and ignore any value (temporarily). That is because the meters we're using to calculate #}
+        {# the value both reset at midnight. Sometimes they don't clear before we try to calculate this value and we end up with a spike right at midnight #}
+        {# Any missed values we be re-calculated correctly as soon as this time passes. It shouldn't impact the grand scheme of things #}
         {% if today_at('00:00:00') <= now() <= today_at('00:00:30') %}
           {% set standard_water_consumption = 0 %}
+        {# This is the value when the meter resets at midnight, or when we've only run the sprinkler #}
         {% elif new_standard_water_consumption == 0 %}
-          {# This is the value when the meter resets at midnight, or when we've only run the sprinkler #}
           {% set standard_water_consumption = new_standard_water_consumption %}
+        {# Do return the new value as it has increased #}
         {% elif new_standard_water_consumption > old_standard_water_consumption %}
           {% set standard_water_consumption = new_standard_water_consumption %}
+        {# Don't return the new value as we will mess up the total_increasing by going down #}
         {% elif new_standard_water_consumption <= old_standard_water_consumption %}
-          {# Don't return the new value as we will mess up the total_increasing by going down #}
           {% set standard_water_consumption = old_standard_water_consumption %}
         {% endif %}
 
