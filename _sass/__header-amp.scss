@@ -5,9 +5,11 @@
 	text-align: center;
 	font-size: 1.4em;
 	font-weight: normal;
-	a, a:hover {
-    color: $white;
-    text-decoration: none;
+
+	a,
+	a:hover {
+		color: $white;
+		text-decoration: none;
 		overflow: visible;
 	}
 }

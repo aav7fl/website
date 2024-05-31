@@ -7,16 +7,21 @@ $light-grey: #d3d3d3;
 $dim-grey: #696969;
 $dark-grey: #3a3a3a;
 $darker-grey: #262626;
-$darker-grey-transparent: rgba(38,38,38,0);
+$darker-grey-transparent: rgba(38, 38, 38, 0);
 $black: #111111;
-$red:   #FF4136;
-$maroon: #9e023b;
-$cyan:  #00b2d9;
+$red: #CF4C6B;
+$maroon: #902F74;
+$cyan: #00b2d9;
 $light-gold: #ffffaa;
 $dark-gold: #ddcc00;
-$blue:  #0b5394;
-// $orange:  #FF851B;
-// $green: #2ECC40;
+$blue: #0b5394;
+$light-blue: #e9f7ff;
+
+$orange: #F67D5C;
+$green: #25a525;
+$light-green: #eaf3eb;
+$green: #40c940;
+$light-green: #BCE9BC;
 
 $primary-color: #3d256d; // Make sure to also change color in _data/colors.yaml
 $resume-accent: $blue;
