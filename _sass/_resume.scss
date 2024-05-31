@@ -5,16 +5,23 @@ RESUME STYLING
   header {
     text-align: center;
   }
+
   h2 {
     color: $resume-accent;
   }
+
   h3 {
     margin-bottom: 0;
   }
-  p, ul, ol, dl {
+
+  p,
+  ul,
+  ol,
+  dl {
     font-size: 0.875em;
     margin: 0 0 .5rem;
   }
+
   .date {
     color: $dim-grey;
     font-size: .8em;

@@ -2,7 +2,10 @@
 POST STYLING
 ***************/
 article {
-	img + em, amp-img + em, video + em {
+
+	img+em,
+	amp-img+em,
+	video+em {
 		text-align: center;
 		font-size: .9em;
 		font-style: italic;
@@ -10,16 +13,17 @@ article {
 		display: block;
 	}
 
-	img + p, amp-img + p {
+	img+p,
+	amp-img+p {
 		margin-bottom: 2em;
 	}
 }
 
 blockquote {
-  background: $blockquote-color;
-  border-left: 10px solid $blockquote-border-color;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
+	background: $blockquote-color;
+	border-left: 10px solid $blockquote-border-color;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
 }
 
 /***************
@@ -44,11 +48,16 @@ POST NAV STYLING
 			padding: .5em;
 			font-weight: bold;
 			color: white;
-			background: rgba(0,0,0,.6); // When IE11 dies. Remove this.
+			background: rgba(0, 0, 0, .6); // When IE11 dies. Remove this.
 		}
 
-		.previous { text-align: left; }
-		.next { text-align: right; }
+		.previous {
+			text-align: left;
+		}
+
+		.next {
+			text-align: right;
+		}
 
 		.link-image {
 			position: absolute;
@@ -58,13 +67,15 @@ POST NAV STYLING
 			top: 50%;
 			transform: translateY(-50%);
 			width: auto;
-	    height: auto;
-	    min-width: 100%;
-	    min-height: 100%;
+			height: auto;
+			min-width: 100%;
+			min-height: 100%;
 		}
 	}
 
-	.post-nav-link:hover img { transform: translateY(-50%) scale(1.2); }
+	.post-nav-link:hover img {
+		transform: translateY(-50%) scale(1.2);
+	}
 
 	@media all and (min-width: $breakpoint-2) {
 		flex-direction: row;

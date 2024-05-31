@@ -3,13 +3,16 @@ FORM STYLING
 ***************/
 
 label {
-	display:block;
-	margin-bottom:5px;
+	display: block;
+	margin-bottom: 5px;
 }
-input[type=text],input[type=email], textarea {
+
+input[type=text],
+input[type=email],
+textarea {
 	background: darken(white, 10%);
-	padding:.5em;
-	outline:none;
+	padding: .5em;
+	outline: none;
 	border: none;
 	margin-bottom: $padding;
 
@@ -18,26 +21,27 @@ input[type=text],input[type=email], textarea {
 	}
 
 	&.full-width {
-		box-sizing : border-box;
-		width:100%;
+		box-sizing: border-box;
+		width: 100%;
 	}
 }
+
 textarea {
-	height:$line-height*3;
+	height: $line-height*3;
 }
 
 form {
-	margin-bottom:$padding;
+	margin-bottom: $padding;
 
 	// Wrap each form input/element in a field div
 	.field {
-		margin-bottom:$padding;
+		margin-bottom: $padding;
 	}
 
 	// Notes go under the input fields
 	.note {
-		margin-top:5px;
-		color:$dim-grey;
+		margin-top: 5px;
+		color: $dim-grey;
 	}
 
 	// Required label
@@ -50,12 +54,14 @@ form {
 
 		// Validation reason
 		.reason {
-			margin-top:5px;
-			color:$bad-color;
+			margin-top: 5px;
+			color: $bad-color;
 		}
 
-		input[type=text],input[type=email], textarea{
-			border-color:$bad-color;
+		input[type=text],
+		input[type=email],
+		textarea {
+			border-color: $bad-color;
 		}
 	}
 }
