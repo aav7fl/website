@@ -6,37 +6,41 @@ footer {
 
 	//https://stackoverflow.com/a/31732902/1813592
 	.flex-list {
-	    position: relative;
-	    margin: 1em;
-	    overflow: hidden;
-			border-top: 1px solid $light-grey;
-	}
-	.flex-list ul {
-	    display: flex;
-	    flex-direction: row;
-	    flex-wrap: wrap;
-	    justify-content: space-between;
-	    margin-left: -1px;
-			padding: 0;
-	}
-	.flex-list li {
-			list-style: none;
-	    flex-grow: 1;
-	    flex-basis: auto;
-	    margin: .25em 0;
-	    padding: 0 1em;
-	    text-align: center;
-	    border-left: 1px solid #ccc;
-	    background-color: $white;
-			@media (min-width: $breakpoint-2) {
-				font-size: 110%;
-			}
+		position: relative;
+		margin: 1em;
+		overflow: hidden;
+		border-top: 1px solid $light-grey;
 	}
 
-	a{
+	.flex-list ul {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-left: -1px;
+		padding: 0;
+	}
+
+	.flex-list li {
+		list-style: none;
+		flex-grow: 1;
+		flex-basis: auto;
+		margin: .25em 0;
+		padding: 0 1em;
+		text-align: center;
+		border-left: 1px solid #ccc;
+		background-color: $white;
+
+		@media (min-width: $breakpoint-2) {
+			font-size: 110%;
+		}
+	}
+
+	a {
 		text-decoration: none;
 	}
-	a:hover{
+
+	a:hover {
 		background: $primary-color;
 		color: white;
 	}
