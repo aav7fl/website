@@ -332,31 +332,58 @@ To work around this setback, I need to create a template sensor that subtracts m
       # Subtract the values of 2 utility meters.
       # - One is a utility meter of the ESPHome main_water_meter_consumption_submeter
       # - One is a utility meter of the sprinkler_consumption_sum_gallons
-      # Both utility meters reset at midnight. This makes it easier and clearer to make corrections if something goes wrong.
+      # Create another helper utility meter
+      # - The last helper is a utility meter of this sensor that we use to compare against (and to make sure it's always available after restarts)
+      # All utility meters reset at midnight. This makes it easier and clearer to make corrections if something goes wrong.
       state: >-
-        {% set main_submeter_daily = states('sensor.main_water_meter_consumption_submeter_daily') | int(0) %}
-        {% set sprinkler_submeter_daily = states('sensor.sprinkler_consumption_gallons') | int(0) %}
+        {# Set up some variables to make reading my conditions easier #}
+
+        {# Daily utility meter of my main submeter #}
+        {% set main_submeter_daily = states('sensor.main_water_meter_consumption_submeter_daily') | float(0) %}
+
+        {# Daily utility meter of my sprinkler submeter #}
+        {% set sprinkler_submeter_daily = states('sensor.sprinkler_consumption_gallons') | float(0) %}
+
+        {# Current difference between both daily utility meters #}
         {% set new_standard_water_consumption = main_submeter_daily - sprinkler_submeter_daily %}
-        {% set old_standard_water_consumption = states('sensor.standard_water_consumption') | int(0) %}
+
+        {# Mirror the value in this template sensor to a utility meter helper, and retrieve it below. This ensures #}
+        {#  that _this_ template sensor always has a value on restart, and that the value is never unknown. #}
+        {% set old_standard_water_consumption = states('sensor.standard_water_consumption_meter_daily') | float(0) %}
+
+        {# Keep an eye on the sprinkler flow rate to know if both meters should be going off #}
+        {% set sprinkler_submeter_flow_rate = states('sensor.opensprinkler_flow_rate_gallons') | float(0) %}
+
+        {# Giving it a default value in case I mess up the logic below. #}
         {% set standard_water_consumption = 0 %}
 
-        {# We first check if the time is around midnight and ignore any value (temporarily). That is because the meters we're using to calculate #}
-        {# the value both reset at midnight. Sometimes they don't clear before we try to calculate this value and we end up with a spike right at midnight #}
-        {# Any missed values we be re-calculated correctly as soon as this time passes. It shouldn't impact the grand scheme of things #}
-        {% if today_at('00:00:00') <= now() <= today_at('00:00:30') %}
+        {# We first check if the time is around midnight and ignore any value (temporarily). That is because #}
+        {#  the meters we're using to calculate the value all reset _around_ midnight. Sometimes they don't clear #}
+        {#  _exactly_ at midnight before we try to calculate the value, then we end up with a spiked value #}
+        {#  right at midnight as the calculations shouldn't run until everything optimistically resets. #}
+        {# Any missed values we be re-calculated correctly as soon as the time window passes. #}
+        {# It's possible to miss the reset at midnight if the server rebooted during that time, #}
+        {# but that shouldn't matter since all of the meters reset together (ignoring super precise edge cases). #}
+        {% if today_at('00:00:00') <= now() <= today_at('00:01:00') %}
           {% set standard_water_consumption = 0 %}
-        {# This is the value when the meter resets at midnight, or when we've only run the sprinkler #}
-        {% elif new_standard_water_consumption == 0 %}
-          {% set standard_water_consumption = new_standard_water_consumption %}
-        {# Do return the new value as it has increased #}
-        {% elif new_standard_water_consumption > old_standard_water_consumption %}
-          {% set standard_water_consumption = new_standard_water_consumption %}
-        {# Don't return the new value as we will mess up the total_increasing by going down #}
-        {% elif new_standard_water_consumption <= old_standard_water_consumption %}
+
+        {# When irrigation is running, and the difference is small, (before we consume water in other ways), #}
+        {#  then we assume that the meters are probably slow to update if they're this close. #}
+        {# This could miss water consumption if we use less than 10 gallons on a day that we run the sprinklers #}
+        {#  .. but.. really? That edge case isn't worth it. #}
+        {% elif sprinkler_submeter_flow_rate > 0 and new_standard_water_consumption | abs < 10 %}
           {% set standard_water_consumption = old_standard_water_consumption %}
+
+        {% else %}
+          {# Take the max value between the old value and the new calculated value. #}
+          {# This is to prevent the new value from going down if the meters are slow to update, #}
+          {#  or my floating point math is off. This is a problem I had before. #}
+          {% set standard_water_consumption = max(new_standard_water_consumption, old_standard_water_consumption, 0) %}
         {% endif %}
 
-        {{ standard_water_consumption }}
+        {# Use the ceil rounding since the float values can shuffle around so much when subtracting the meters. #}
+        {# It makes the sensor update less frequently and doesn't loose any meaningful precision. #}
+        {{ standard_water_consumption | round(0, 'ceil') }}
 {% endraw %}
 ```
 
