@@ -24,6 +24,7 @@ $green: #40c940;
 $light-green: #BCE9BC;
 
 $primary-color: #3d256d; // Make sure to also change color in _data/colors.yaml
+$secondary-color: #0E829E;
 $resume-accent: $blue;
 $link-color: $primary-color;
 $bad-color: $red; // Bad color for errors, validation etc.
@@ -44,6 +45,7 @@ CONSISTENT SETTINGS
 $br: 5px; // Border-radius
 $btn-br: 5px; // Button border-radius
 $padding: 16px; // Padding and margins
+$margin: $padding;
 $line-height: 44px; // Consistent height for buttons, inputs etc.
 
 /***************

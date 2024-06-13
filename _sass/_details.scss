@@ -1,0 +1,55 @@
+$top-color: #00a1c7;
+$bottom-color: #0080a5;
+
+// When closed
+details:not([open]) {
+
+    summary {
+        &::after {
+            content: " (Tap to expand)";
+        }
+
+        // Border on all corners when closed.
+        border-radius: $br;
+    }
+}
+
+
+details[open] summary {
+    &::after {
+        content: " (Tap to collapse)";
+    }
+
+    // Only put border on top when open.
+    border-radius: $br $br 0 0;
+}
+
+details {
+    margin-top: $margin;
+    margin-bottom: $margin;
+
+    summary {
+        // Fallback
+        background-color: $top-color;
+        background-image: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
+        color: $white;
+        padding: $padding;
+
+        &::after {
+            display: inline-block;
+            text-align: right;
+            margin-left: 10px;
+            font-size: smaller;
+        }
+    }
+
+    div:first-child {
+        border-radius: 0 0 $br $br;
+        border: .2em solid $bottom-color;
+    }
+
+    pre:first-child {
+        margin: 0px;
+        border-radius: 0 0 .2em .2em;
+    }
+}
