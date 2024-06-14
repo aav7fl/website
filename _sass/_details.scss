@@ -1,14 +1,12 @@
-$top-color: #00a1c7;
-$bottom-color: #0080a5;
+$top-color: #bce5ff;
+$bottom-color: $top-color;
+// $bottom-color: #e5e5e5;
+
 
 // When closed
 details:not([open]) {
 
     summary {
-        &::after {
-            content: " (Tap to expand)";
-        }
-
         // Border on all corners when closed.
         border-radius: $br;
     }
@@ -17,7 +15,7 @@ details:not([open]) {
 
 details[open] summary {
     &::after {
-        content: " (Tap to collapse)";
+        transform: rotate(-180deg);
     }
 
     // Only put border on top when open.
@@ -31,15 +29,21 @@ details {
     summary {
         // Fallback
         background-color: $top-color;
-        background-image: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
-        color: $white;
+        //background-image: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
+        color: $black;
         padding: $padding;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         &::after {
-            display: inline-block;
-            text-align: right;
-            margin-left: 10px;
-            font-size: smaller;
+            content: '';
+            width: 0; 
+            height: 0; 
+            border-top: 10px solid $black;
+            border-inline: 7px solid transparent;
+            transition: 0.2s;
         }
     }
 
