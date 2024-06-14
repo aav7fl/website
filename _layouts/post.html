@@ -8,7 +8,12 @@ layout: no-title
 
     <h2 class="meta">{{ page.author | default: site.author }} on {{ page.date | date: '%B %d, %Y' }}</h2>
 
-    <h3 class="meta">{{ page.content | number_of_words | divided_by:200 | ceil }} Minute Read | {{ page.tag | capitalize }}</h3>
+    <h3 class="meta">
+      {% if page.minute_read_override %}
+      {{ page.minute_read_override }} Minute Read
+      {% else %}
+      {{ page.content | strip_code_blocks | number_of_words | divided_by:200 | ceil }} Minute Read
+      {% endif %} | {{ page.tag | capitalize }}</h3>
   </header>
 
   {% if page.image %}

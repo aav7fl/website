@@ -5,7 +5,13 @@
 
       <h2 class="meta">{{ page.author | default: site.author }}</h3>
 
-      <h3 class="meta">{{ page.date | date: '%B %d, %Y' }} | {{ page.content | number_of_words | divided_by:200 | ceil }} Minute Read</h3>
+      <h3 class="meta">{{ page.date | date: '%B %d, %Y' }} | 
+        {% if page.minute_read_override %}
+          {{ page.minute_read_override }} Minute Read 
+        {% else %}
+          {{ page.content | markdownify | strip_code_blocks | number_of_words | divided_by:200 | ceil }} Minute Read
+        {% endif %}
+      </h3>
 
       {% if page.image %}
       <div class="featuredImage">
