@@ -243,6 +243,8 @@ Here is my template sensor to convert the OpenSprinkler flow rate from `L/min` t
 Now that we have a rate in our preferred unit, we need to calculate the actual _consumption_. I'm using the [Riemann sum helper](https://www.home-assistant.io/integrations/integration/) to convert rate into consumption.
 
 > Note: I'm using a right-hand side Riemann sum for this calculation. If I use a left-hand/mid-point, and I don't capture any water usage for a while, we would see a huge spike in consumption when the next data point is tracked because it would assume a non-zero rate occurred over the entire duration. This is corrected by using a right-hand Riemann sum.
+> 
+> Note 2: [Starting in 2024.7](https://github.com/home-assistant/core/pull/110685), make sure you force the `max_sub_interval` to something like 30s - 60s. That is because the source data (flow rate) sensor from the sprinkler may not update frequently if the water flow is stable. If we let this value sit, our Riemann sum won't update for a while and cause the calculations between our two meters to be slightly off until it can correct itself later.
 
 ![Riemann sum of OpenSprinkler flow rate](/assets/img/2023/10/riemann_sum.png)*Consumption by Riemann sum integration*
 
