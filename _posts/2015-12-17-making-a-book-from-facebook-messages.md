@@ -1,6 +1,7 @@
 ---
 title: Creating a Hardcover Book from a Plethora of Facebook Messages
 date: "2015-12-17 18:00"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2015/12/banner.jpg

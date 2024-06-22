@@ -1,6 +1,7 @@
 ---
 title: "How I Dim My Hue Lights with a Plex Webhook"
 date: "2018-10-18 16:47"
+updated: 2018-12-17
 comments: true
 image:
   path: /assets/img/2018/10/banner.jpg

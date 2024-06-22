@@ -1,6 +1,7 @@
 ---
 title: "My Easy In-line USB Power Switch"
 date: "2016-03-15 20:25"
+updated: 2018-02-05
 comments: true
 image:
   path: /assets/img/2016/03/banner2.jpg

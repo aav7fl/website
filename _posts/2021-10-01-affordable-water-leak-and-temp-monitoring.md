@@ -1,6 +1,7 @@
 ---
 title: Affordable Leak Detection and Temperature Monitoring in Home Assistant
 date: '2021-10-01 10:22'
+updated: 2023-10-22
 comments: true
 image:
   path: /assets/img/2021/10/banner.jpg

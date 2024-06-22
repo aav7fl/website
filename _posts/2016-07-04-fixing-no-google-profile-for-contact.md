@@ -1,6 +1,7 @@
 ---
 title: "Fixing 'No Google Profile for Contact'"
 date: "2016-07-04 11:26"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2016/07/banner2.jpg

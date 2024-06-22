@@ -1,6 +1,7 @@
 ---
 title: "Streaming a Virtual Reality Spectator View to My Raspberry Pi 2"
 date: "2016-05-31 16:44"
+updated: 2024-03-29
 comments: true
 image:
   path: /assets/img/2016/05/banner2.jpg

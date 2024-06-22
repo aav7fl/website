@@ -1,6 +1,7 @@
 ---
 title: "Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish"
 date: "2020-07-26 08:00"
+updated: 2020-09-20
 comments: true
 image:
   path: /assets/img/2020/07/dryer_vibration_monitor.jpg

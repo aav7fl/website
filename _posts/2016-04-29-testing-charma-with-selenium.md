@@ -1,6 +1,7 @@
 ---
 title: Testing Charma with Selenium
 date: '2016-04-29 21:26'
+updated: 2021-06-28
 comments: true
 image:
   path: /assets/img/2016/04/banner2.jpg

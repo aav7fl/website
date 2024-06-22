@@ -1,6 +1,7 @@
 ---
 title: iOS Video Player Bug Disclosure
 date: '2016-03-20 18:05'
+updated: 2022-10-20
 comments: true
 image:
   path: /assets/img/2016/03/iPadTesting.jpg

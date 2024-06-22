@@ -1,6 +1,7 @@
 ---
 title: "Reviving a Game Because of Nostalgia"
 date: "2019-08-30 17:36"
+updated: 2019-08-31
 comments: true
 image:
   path: /assets/img/2019/08/star_wars_obi_wan_banner.jpg

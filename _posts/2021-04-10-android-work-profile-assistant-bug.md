@@ -1,6 +1,7 @@
 ---
 title: Fixing the Google Assistant on My Android Work Profile
 date: '2021-04-10 17:13'
+updated: 2022-04-22
 comments: true
 image:
   path: /assets/img/2021/04/banner.png

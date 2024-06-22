@@ -27,6 +27,18 @@ PAGE STYLES
 	}
 }
 
+.sub-meta {
+	color: $dim-grey;
+	font-weight: 300;
+	font-size: 100%;
+	@media (min-width: $breakpoint-2) {
+		font-size: 110%;
+	}
+	@media (min-width: $breakpoint-3) {
+		font-size: 120%;
+	}
+}
+
 a.meta {
   text-align: center;
   display: block;

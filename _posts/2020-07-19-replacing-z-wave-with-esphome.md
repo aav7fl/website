@@ -1,6 +1,7 @@
 ---
 title: "Deploying ESPHome Smart Plugs to Replace Z-Wave"
 date: "2020-07-19 10:58"
+updated: 2020-07-24
 comments: true
 image:
   path: /assets/img/2020/07/sonoff_s31_plugs_disassembled.jpg

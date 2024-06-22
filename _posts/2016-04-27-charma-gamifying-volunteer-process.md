@@ -1,6 +1,7 @@
 ---
 title: 'Charma - Gamifying the Volunteer Process'
 date: '2016-04-27 11:58'
+updated: 2017-04-12
 comments: true
 image:
   path: /assets/img/2016/04/banner.jpg

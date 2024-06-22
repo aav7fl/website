@@ -1,6 +1,7 @@
 ---
 title: "Improving Jekyll in 2017"
 date: "2017-02-22 5:34"
+updated: 2020-08-11
 comments: true
 image:
   path: /assets/img/2017/02/banner.png

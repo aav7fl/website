@@ -1,6 +1,7 @@
 ---
 title: "Bringing Home Automation Back Home"
 date: "2018-06-03 16:47"
+updated: 2024-02-05
 comments: true
 image:
   path: /assets/img/2018/06/banner.png
