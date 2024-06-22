@@ -1,6 +1,7 @@
 ---
 title: "Preventing Windows Apps from Broadcasting a Taskbar Notification"
 date: "2016-07-02 12:33"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2016/07/banner.png

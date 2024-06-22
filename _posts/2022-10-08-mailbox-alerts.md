@@ -1,6 +1,7 @@
 ---
 title: Instantaneous Mail Notifications
 date: '2022-10-08 08:05'
+updated: 2024-05-07
 comments: true
 image:
   path: /assets/img/2022/10/mailbox_banner.jpg

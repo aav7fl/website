@@ -1,6 +1,7 @@
 ---
 title: Transforming an Old Doorbell with Smart Alerts
 date: '2022-07-03 13:18'
+updated: 2022-07-03
 comments: true
 image:
   path: /assets/img/2022/07/banner.jpg

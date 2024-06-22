@@ -1,6 +1,7 @@
 ---
 title: "Hacking Voice & WiFi Control into My Dumb Noise Machine"
 date: "2019-02-27 16:56"
+updated: 2024-03-29
 comments: true
 image:
   path: /assets/img/2019/02/banner_noise_machine.png
