@@ -1,6 +1,7 @@
 ---
 title: "Trading in Nest for TensorFlow and Z-Wave"
 date: "2019-05-24 17:39"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2019/05/2019-05-23_18-58-26.jpg

@@ -1,6 +1,7 @@
 ---
 title: "N64 - The Legend of Zelda: Ocarina of Time Save Transfer Guide"
 date: "2016-05-01 14:10"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2016/05/banner.jpg

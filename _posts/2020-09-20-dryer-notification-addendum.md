@@ -1,6 +1,7 @@
 ---
 title: "Electric Dryer Monitoring with a CT Clamp"
 date: "2020-09-20 12:47"
+updated: 2020-09-20
 comments: true
 image:
   path: /assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg

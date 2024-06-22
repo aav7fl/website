@@ -1,6 +1,7 @@
 ---
 title: Discovering and Reverse Engineering My Steelcase Desk
 date: "2015-08-17 15:47"
+updated: 2017-04-12
 comments: true
 image:  
   path: /assets/img/2015/08/banner.jpg

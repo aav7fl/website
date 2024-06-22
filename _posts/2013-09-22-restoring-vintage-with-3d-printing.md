@@ -1,6 +1,7 @@
 ---
 title:  Restoring Vintage with 3D Printing
 date:   2013-09-22
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2013/09/small/DSC09139.JPG

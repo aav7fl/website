@@ -16,6 +16,10 @@ layout: no-title
       {% endif %} | {{ page.tag | capitalize }}</h3>
   </header>
 
+  {% if page.updated %}
+  <h4 class="sub-meta">Updated on {{ page.updated | date: '%B %d, %Y' }}</h4>
+  {% endif %}  
+
   {% if page.image %}
     <img src="{{ page.image.path }}" alt="{{ page.alt }}"/>
   {% endif %}

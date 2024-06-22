@@ -1,6 +1,7 @@
 ---
 title: "Backing Up Android Nougat Easter Egg Cats (No Root)"
 date: "2017-01-04 5:37"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2017/01/banner.jpg

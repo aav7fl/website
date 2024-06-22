@@ -1,6 +1,7 @@
 ---
 title:  "Somewhere to Start From"
 date:   2013-04-13
+updated: 2017-02-01
 comments: false
 tag: "update"
 description: "Kyle Niewiada's first post on his website, expectations, and where he would like to go from here. I enjoy writing music, programming, and computers."

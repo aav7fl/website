@@ -1,6 +1,7 @@
 ---
 title: "Microsoft Word Auto-Journal Macro for the Lazy"
 date: "2016-03-14 16:19"
+updated: 2021-10-01
 comments: true
 image:
   path: /assets/img/2016/03/banner.png
