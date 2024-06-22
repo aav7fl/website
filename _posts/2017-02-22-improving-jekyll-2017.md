@@ -92,7 +92,7 @@ I turned to [amp-jekyll](https://github.com/juusaw/amp-jekyll) (which is now a R
 
 ### AMP Sitemap Conflict
 
-In order to avoid duplicate results, AMP pages are not [necessary in the sitemap](https://twitter.com/JohnMu/status/786588362706673664) unless they are standalone pages. Referencing them in the `<head>` of the normal page is enough. Because [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap) knew nothing about my AMP ambitions, I had to manually set a default in my `amp.html` layout frontmatter to stop them from being included.
+In order to avoid duplicate results, AMP pages are not [necessary in the sitemap](https://x.com/JohnMu/status/786588362706673664) unless they are standalone pages. Referencing them in the `<head>` of the normal page is enough. Because [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap) knew nothing about my AMP ambitions, I had to manually set a default in my `amp.html` layout frontmatter to stop them from being included.
 
 `_layouts/amp.html`
 ```yaml
