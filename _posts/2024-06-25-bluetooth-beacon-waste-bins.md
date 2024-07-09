@@ -1,6 +1,7 @@
 ---
 title: 'Making Bluetooth the Beacon of Trash Day'
 date: '2024-06-25 21:07'
+updated: '2024-07-09 08:00'
 comments: true
 image:
   path: /assets/img/2024/06/waste_pickup.jpg
@@ -472,6 +473,13 @@ mqtt:
 ### Presence Sensors
 
 Before I dive into the presence sensors, let's cover some new [`Input number`](https://www.home-assistant.io/integrations/input_number/) helper sensors that I created in the UI. 
+
+<details>
+<summary>input_number threshold sensor UI</summary>
+
+{{ "![Home Assistant UI showing the creation of an input_number threshold sensor](/assets/img/2024/06/rssi_threshold_ui.png)*Home Assistant UI showing the creation of an `input_number` threshold sensor.*" | markdownify }}
+
+</details>
 
 * Trash bin RSSI threshold (Number): `input_number.trash_bin_rssi_threshold`
 * Recycling bin RSSI threshold (Number): `input_number.recycling_bin_rssi_threshold`
