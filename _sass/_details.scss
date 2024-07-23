@@ -14,12 +14,12 @@ details:not([open]) {
 
 
 details[open] summary {
+    // Only put border on top when open.
+    border-radius: $br $br 0 0;
+
     &::after {
         transform: rotate(-180deg);
     }
-
-    // Only put border on top when open.
-    border-radius: $br $br 0 0;
 }
 
 details {
