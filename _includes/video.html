@@ -7,14 +7,14 @@
 {% if page.layout == 'amp' %}
 <amp-video height="{{ height }}" width="{{ width }}" poster="{{ include.poster }}" layout="responsive" controls {{ include.controls }}>
   <div fallback>
-    Your browser doesn’t support HTML5 video
-  </div>
+    Your browser doesn't support HTML5 video
+  </div>
   <source type="video/mp4" src="{{ include.src }}"/>
 </amp-video>
 {% else %}
 <video width="{{ width }}" controls {{ include.controls }}>
   <source src="{{ include.src }}" type="video/mp4" />
-  <p>Your browser doesn’t support HTML5 video</p>
+  <p>Your browser doesn't support HTML5 video</p>
 </video>
 {% endif %}
 {% endif %}

@@ -1,7 +1,6 @@
 $top-color: #bce5ff;
 $bottom-color: $top-color;
-// $bottom-color: #e5e5e5;
-
+$bottom-color: #e5e5e5;
 
 // When closed
 details:not([open]) {
@@ -12,11 +11,19 @@ details:not([open]) {
     }
 }
 
+details[open] {
+    border-color: $top-color;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    p {
+        margin-left: $padding;
+        margin-right: $padding;
+    }
+}
+
 
 details[open] summary {
-    // Only put border on top when open.
-    border-radius: $br $br 0 0;
-
     &::after {
         transform: rotate(-180deg);
     }
@@ -30,6 +37,7 @@ details {
         // Fallback
         background-color: $top-color;
         //background-image: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
+        list-style: none; // Hide on iOS Safari (1 of 2)
         color: $black;
         padding: $padding;
         
@@ -45,6 +53,10 @@ details {
             border-inline: 7px solid transparent;
             transition: 0.2s;
         }
+    }
+
+    summary::-webkit-details-marker {
+        display: none; // Hide on iOS Safari (2 of 2)
     }
 
     div:first-child {
