@@ -9,7 +9,7 @@
         {% if page.minute_read_override %}
           {{ page.minute_read_override }} Minute Read 
         {% else %}
-          {{ page.content | markdownify | strip_code_blocks | number_of_words | divided_by:200 | ceil }} Minute Read
+          {{ page.content | markdownify | strip_code_blocks | strip_scripts | number_of_words | divided_by:200 | ceil }} Minute Read
         {% endif %}
       </h3>
 
@@ -27,7 +27,7 @@
 
     </div>
 
-    {{ content | markdownify }}
+    {{ content | amp_ignore | markdownify }}
 
   </article>
 </main>

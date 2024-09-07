@@ -11,7 +11,7 @@
       <h1 class="page-title">{{ page.title }}</h1>
     {% endif %}
 
-    {{ content }}
+    {{ content | amp_unignore }}
 
     {% include comments.html %}
     </main>
