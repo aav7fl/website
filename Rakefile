@@ -3,15 +3,18 @@
 require 'html-proofer'
 require 'jekyll'
 
-task :build, [:options] do |_t, args|
+task :build do
+  buildOptions = {
+    future: true,
+  }
+
   # Build twice to handle FastImage issue of non-existent images on init build
   puts 'Building site...'.yellow.bold
-  args.with_defaults(options: {})
   orig_stdout = $stdout.clone
   $stdout.reopen('/dev/null', 'w')
-  Jekyll::Commands::Build.process({})
+  Jekyll::Commands::Build.process(buildOptions)
   $stdout.reopen(orig_stdout)
-  Jekyll::Commands::Build.process(args[:options])
+  Jekyll::Commands::Build.process(buildOptions)
 end
 
 task :serve do
