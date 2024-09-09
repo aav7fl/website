@@ -1111,7 +1111,7 @@ Here is a list of important individuals associated with Soo Machine & Auto, Holl
 The following table lists verified car makes advertised by Soo Machine & Auto, Hollingsworth Auto, Braun-Mansfield, and F. M. Mansfield, along with the years they appeared in our sources. Please note that the absence of an advertisement for a specific car brand or year doesn't necessarily mean Soo Machine didn't sell it during that time. The sources, primarily advertisements and articles, cover several decades, and there may be gaps in the available records. Occasionally I indicate when a car brand was likely carried continuously throughout a specific period when there is overwhelming evidence.
 
 *   **[Buick](https://en.wikipedia.org/wiki/Buick)**: 1917-1981
-*   **[Cadillac](https://en.wikipedia.org/wiki/Cadillac)**: 1916, 1917, 1923, 1924, 1929, 1931, 1936, 1938, 1948, 1949, 1950, 1952, 1953, 1956, 1957, 1958, 1960, 1962, 1963, 1964, 1971, 1978, 1979 (Later article claims franchised since 1934.)
+*   **[Cadillac](https://en.wikipedia.org/wiki/Cadillac)**: 1916, 1917, 1922, 1923, 1924, 1929, 1931, 1936, 1938, 1948, 1949, 1950, 1952, 1953, 1956, 1957, 1958, 1960, 1962, 1963, 1964, 1971, 1978, 1979 (Later article claims franchised since 1934.)
 *   **[Chevrolet](https://en.wikipedia.org/wiki/Chevrolet)**: 1916, 1917
 *   **[GMC Trucks](https://en.wikipedia.org/wiki/GMC_(marque))**: 1931, 1937, 1939, 1946, 1947, 1949, 1951, 1953, 1957, 1962, 1971, 1978, 1979 (Later article claims franchising since 1929.)
 *   **[Hudson](https://en.wikipedia.org/wiki/Hudson_Motor_Car_Company)**: 1925
