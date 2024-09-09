@@ -1,7 +1,7 @@
 ---
 title: 'Soo Machine & Auto: Unearthing a Lost Legacy, Amplified by AI'
 date: '2024-09-09 08:00'
-# updated: '2024-09-10 08:00'
+updated: '2024-09-09 10:15'
 comments: true
 image:
   path: /assets/img/2024/09/soo_machine_showroom.jpg
@@ -24,13 +24,13 @@ This captivating project has led me down an intriguing path, merging historical 
 
 > My story is fun, but if you'd like to skip it, you'll find all my discoveries about Soo Machine & Auto Co. in the [history section](#soo-machine--auto-co-a-brief-history) below.
 
-<!-- <details markdown="block">
+<details markdown="block">
 
 <summary>Post Changelog</summary>
 
-- **2024-08-24**: Initial draft
+- **2024-09-09**: Extended LaSalle years based on a newly found yearbook advertisement.
 
-</details> -->
+</details>
 
 {% include toc.html %}
 
@@ -1118,7 +1118,7 @@ The following table lists verified car makes advertised by Soo Machine & Auto, H
 *   **[Jeep](https://en.wikipedia.org/wiki/Jeep)**: 1962, 1968, 1971 (Later article claims franchising since 1964.)
 *   **[Jewett](https://en.wikipedia.org/wiki/Jewett_(automobile))**: 1923, 1924
 *   **[Jeffery](https://en.wikipedia.org/wiki/Jeffery_(automobile))**: 1914, 1915, 1917
-*   **[LaSalle](https://en.wikipedia.org/wiki/LaSalle_(automobile))**: 1929, 1930, 1931, 1936
+*   **[LaSalle](https://en.wikipedia.org/wiki/LaSalle_(automobile))**: 1929, 1930, 1931, 1936, 1939
 *   **[Marquette](https://en.wikipedia.org/wiki/Marquette_(automobile))**: 1929, 1930
 *   **[Oldsmobile](https://en.wikipedia.org/wiki/Oldsmobile)**: 1916, 1917, 1924, 1931
 *   **[Opel](https://en.wikipedia.org/wiki/Opel)**: 1959, 1973, 1975
@@ -1194,12 +1194,12 @@ _Based on partial information from advertisements_, this is my **approximate tim
             ['Buick', 'Buick', new Date(1917, 0, 1), new Date(1981, 11, 13)],
             ['Overland', 'Overland', new Date(1918, 0, 1), new Date(1926, 0, 1)],
             ['Packard', 'Packard', new Date(1922, 0, 1), new Date(1925, 0, 1)],
-            ['Jewett', 'Jewett', new Date(1923, 0, 1), new Date(1924, 0, 1)],
+            ['Jewett', 'Jewett', new Date(1923, 0, 1), new Date(1925, 0, 1)],
             ['Hudson', 'Hudson', new Date(1925, 0, 1), new Date(1926, 0, 1)],
             ['Paige', 'Paige', new Date(1923, 0, 1), new Date(1927, 0, 1)],
             ['GMC Trucks', 'GMC Trucks', new Date(1929, 0, 1), new Date(1981, 11, 13)],
             ['Marquette', 'Marquette', new Date(1929, 0, 1), new Date(1930, 0, 1)],
-            ['LaSalle', 'LaSalle', new Date(1929, 0, 1), new Date(1937, 0, 1)],
+            ['LaSalle', 'LaSalle', new Date(1929, 0, 1), new Date(1940, 0, 1)],
             ['Pontiac', 'Pontiac', new Date(1934, 0, 1), new Date(1937, 0, 1)],
             ['Pontiac', 'Pontiac', new Date(1958, 0, 1), new Date(1981, 11, 13)],
             ['Opel', 'Opel', new Date(1959, 0, 1), new Date(1975, 0, 1)],
