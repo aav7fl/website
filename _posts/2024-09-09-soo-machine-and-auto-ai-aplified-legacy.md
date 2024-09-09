@@ -1111,24 +1111,24 @@ Here is a list of important individuals associated with Soo Machine & Auto, Holl
 The following table lists verified car makes advertised by Soo Machine & Auto, Hollingsworth Auto, Braun-Mansfield, and F. M. Mansfield, along with the years they appeared in our sources. Please note that the absence of an advertisement for a specific car brand or year doesn't necessarily mean Soo Machine didn't sell it during that time. The sources, primarily advertisements and articles, cover several decades, and there may be gaps in the available records. Occasionally I indicate when a car brand was likely carried continuously throughout a specific period when there is overwhelming evidence.
 
 *   **[Buick](https://en.wikipedia.org/wiki/Buick)**: 1917-1981
-*   **[Cadillac](https://en.wikipedia.org/wiki/Cadillac)**: 1916, 1917, 1928, 1931, 1938, 1948, 1949, 1950, 1952, 1953, 1956, 1957, 1958, 1960, 1962, 1963, 1964, 1971, 1978, 1979 (Later article claims franchised since 1934.)
+*   **[Cadillac](https://en.wikipedia.org/wiki/Cadillac)**: 1916, 1917, 1923, 1924, 1929, 1931, 1936, 1938, 1948, 1949, 1950, 1952, 1953, 1956, 1957, 1958, 1960, 1962, 1963, 1964, 1971, 1978, 1979 (Later article claims franchised since 1934.)
 *   **[Chevrolet](https://en.wikipedia.org/wiki/Chevrolet)**: 1916, 1917
-*   **[GMC Trucks](https://en.wikipedia.org/wiki/GMC_(marque))**: 1937, 1939, 1946, 1947, 1949, 1951, 1953, 1957, 1962, 1971, 1978, 1979 (Later article claims franchising since 1929.)
+*   **[GMC Trucks](https://en.wikipedia.org/wiki/GMC_(marque))**: 1931, 1937, 1939, 1946, 1947, 1949, 1951, 1953, 1957, 1962, 1971, 1978, 1979 (Later article claims franchising since 1929.)
 *   **[Hudson](https://en.wikipedia.org/wiki/Hudson_Motor_Car_Company)**: 1925
 *   **[Jeep](https://en.wikipedia.org/wiki/Jeep)**: 1962, 1968, 1971 (Later article claims franchising since 1964.)
 *   **[Jewett](https://en.wikipedia.org/wiki/Jewett_(automobile))**: 1923, 1924
 *   **[Jeffery](https://en.wikipedia.org/wiki/Jeffery_(automobile))**: 1914, 1915, 1917
-*   **[LaSalle](https://en.wikipedia.org/wiki/LaSalle_(automobile))**: 1931
+*   **[LaSalle](https://en.wikipedia.org/wiki/LaSalle_(automobile))**: 1929, 1930, 1931, 1936
 *   **[Marquette](https://en.wikipedia.org/wiki/Marquette_(automobile))**: 1929, 1930
-*   **[Oldsmobile](https://en.wikipedia.org/wiki/Oldsmobile)**: 1916, 1917, 1931
+*   **[Oldsmobile](https://en.wikipedia.org/wiki/Oldsmobile)**: 1916, 1917, 1924, 1931
 *   **[Opel](https://en.wikipedia.org/wiki/Opel)**: 1959, 1973, 1975
 *   **[Overland](https://en.wikipedia.org/wiki/Overland_Automobile)**: 1918-1926
-*   **[Paige](https://en.wikipedia.org/wiki/Paige_automobile)**: 1925, 1927
+*   **[Paige](https://en.wikipedia.org/wiki/Paige_automobile)**: 1923, 1925, 1927
 *   **[Packard](https://en.wikipedia.org/wiki/Packard)**: 1922-1925
 *   **[Pontiac](https://en.wikipedia.org/wiki/Pontiac_(automobile))**: 1934-1937, 1958-1981
 *   **[Rambler](https://en.wikipedia.org/wiki/Rambler_American)**: 1911, 1912, 1913, 1962, 1963 
 *   **[R-C-H](https://web.archive.org/web/20230401011722/https://www.thesahb.com/snapshot-192-1913-r-c-h/)**: 1911
-*   **[REO](https://en.wikipedia.org/wiki/REO_Motor_Car_Company)**: 1914, 1917, 1918, 1919, 1924, 1925, 1927
+*   **[REO](https://en.wikipedia.org/wiki/REO_Motor_Car_Company)**: 1914, 1917, 1918, 1919, 1922, 1923, 1924, 1925, 1927
 *   **[White](https://en.wikipedia.org/wiki/White_Motor_Company)**: 1917, 1919
 
 
@@ -1181,11 +1181,14 @@ _Based on partial information from advertisements_, this is my **approximate tim
             ['Jeffery', 'Jeffery', new Date(1914, 0, 1), new Date(1917, 0, 1)],
             ['REO', 'REO', new Date(1914, 0, 1), new Date(1927, 0, 1)],
             ['Cadillac', 'Cadillac', new Date(1916, 0, 1), new Date(1917, 0, 1)],
-            ['Cadillac', 'Cadillac', new Date(1928, 0, 1), new Date(1939, 0, 1)],
+            ['Cadillac', '???', new Date(1917, 0, 1), new Date(1922, 0, 1)],
+            ['Cadillac', 'Cadillac', new Date(1922, 0, 1), new Date(1939, 0, 1)],
             ['Cadillac', '???', new Date(1939, 0, 1), new Date(1948, 0, 1)],
             ['Cadillac', 'Cadillac', new Date(1948, 0, 1), new Date(1981, 11, 13)],
             ['Chevrolet', 'Chevrolet', new Date(1916, 0, 1), new Date(1917, 0, 1)],
-            ['Oldsmobile', 'Oldsmobile', new Date(1916, 0, 1), new Date(1917, 0, 1)],
+            ['Oldsmobile', 'Oldsmobile', new Date(1916, 0, 1), new Date(1918, 0, 1)],
+            ['Oldsmobile', 'Oldsmobile', new Date(1924, 0, 1), new Date(1925, 0, 1)],
+            ['Oldsmobile', '???', new Date(1925, 0, 1), new Date(1931, 0, 1)],
             ['Oldsmobile', 'Oldsmobile', new Date(1931, 0, 1), new Date(1932, 0, 1)],
             ['White', 'White', new Date(1917, 0, 1), new Date(1920, 0, 1)],
             ['Buick', 'Buick', new Date(1917, 0, 1), new Date(1981, 11, 13)],
@@ -1193,10 +1196,10 @@ _Based on partial information from advertisements_, this is my **approximate tim
             ['Packard', 'Packard', new Date(1922, 0, 1), new Date(1925, 0, 1)],
             ['Jewett', 'Jewett', new Date(1923, 0, 1), new Date(1924, 0, 1)],
             ['Hudson', 'Hudson', new Date(1925, 0, 1), new Date(1926, 0, 1)],
-            ['Paige', 'Paige', new Date(1925, 0, 1), new Date(1927, 0, 1)],
+            ['Paige', 'Paige', new Date(1923, 0, 1), new Date(1927, 0, 1)],
             ['GMC Trucks', 'GMC Trucks', new Date(1929, 0, 1), new Date(1981, 11, 13)],
             ['Marquette', 'Marquette', new Date(1929, 0, 1), new Date(1930, 0, 1)],
-            ['LaSalle', 'LaSalle', new Date(1931, 0, 1), new Date(1932, 0, 1)],
+            ['LaSalle', 'LaSalle', new Date(1929, 0, 1), new Date(1937, 0, 1)],
             ['Pontiac', 'Pontiac', new Date(1934, 0, 1), new Date(1937, 0, 1)],
             ['Pontiac', 'Pontiac', new Date(1958, 0, 1), new Date(1981, 11, 13)],
             ['Opel', 'Opel', new Date(1959, 0, 1), new Date(1975, 0, 1)],
