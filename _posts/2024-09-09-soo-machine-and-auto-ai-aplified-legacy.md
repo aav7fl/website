@@ -28,7 +28,8 @@ This captivating project has led me down an intriguing path, merging historical 
 
 <summary>Post Changelog</summary>
 
-- **2024-09-09**: Extended LaSalle years based on a newly found yearbook advertisement.
+- **2024-09-09**: Extended LaSalle years based on a newly found advertisement.
+- **2024-09-10**: Update Robert Morrison's year of birth and include new adoptive theory.
 
 </details>
 
@@ -820,7 +821,7 @@ Soo Machine & Engine Works was an automotive business located in Sault Ste. Mari
 
 ![Sanborn Fire Insurance Map from Sault Sainte Marie, Chippewa County, Michigan. Sanborn Map Company, Nov, 1915. Map. Retrieved from the Library of Congress](/assets/img/2024/09/master-gmd-gmd411m-g4114m-g4114sm-g041911915-04191_1915-0011.jpeg)*Sanborn Fire Insurance Map from Sault Sainte Marie, Chippewa County, Michigan. Sanborn Map Company, Nov, 1915. Map. Retrieved from the Library of Congress, <[www.loc.gov/item/sanborn04191_007/](https://www.loc.gov/item/sanborn04191_007/)>.*
 
-**Robert Morrison**, one of the co-founders, was a skilled machinist and the manager of the Soo Machine & Auto Co. He is credited with playing a crucial role in the company's success, as he ensured it was fully equipped to handle various engine and machine repairs, specializing in gas engines and launch machinery. Morrison frequently traveled on business, attending auto shows and visiting cities like Chicago and Milwaukee. On October 4, 1909, Robert Morrison (1879) married Miss Violet May Parsons (~1883).
+**Robert Morrison**, one of the co-founders, was a skilled machinist and the manager of the Soo Machine & Auto Co. He is credited with playing a crucial role in the company's success, as he ensured it was fully equipped to handle various engine and machine repairs, specializing in gas engines and launch machinery. Morrison frequently traveled on business, attending auto shows and visiting cities like Chicago and Milwaukee. On October 4, 1909, Robert Morrison (1880) married Miss Violet May Parsons (~1883).
 
 ![Robert A. Morrison](/assets/img/2024/09/robert_morrison.jpg)*"Robert A. Morrison": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.*
 
@@ -1272,6 +1273,10 @@ I think the best bet is to locate anyone who has a bunch of old car memorabilia 
 
 > I've done some digging on FamilySearch and attached a few records to [Robert's FamilySearch page](https://www.familysearch.org/tree/person/details/9FWJ-G1R) to help with future discovery by others. (The website does require an account, but it's free to use).
 
+It's possible that Robert A. Morrison was actually adopted by Charles and Sarah Morrison, as he doesn't show up in the household in the [Morrison 1881](https://www.familysearch.org/ark:/61903/1:1:MVFZ-FCQ), and I can't even being to piece together what happened to the Morrison family by [1891](https://www.familysearch.org/ark:/61903/1:1:KHG8-2T5) as they're all seamingly apart by then. Charles or Sarah show up on any birth records as parents for someone named Robert. By 1901, Robert had seemingly immigrated to the US (1899/1900). So it's possible that Robert was a relative or close neighbor friend that could have had a different name when he born. I was unable to find any records for a Robert born on October 14, 1880, but that doesn't mean I searched all of the correct record collections. My theory is that Robert was adopted by the Morrison family between 1891-1899 before he moved away. Which is why Robert later lists Charles and Sarah as his parents on his marriage certificate. 
+
+This might make tracking down his original birth records a bit trickier since we don't necessarily know his birth parents for certain. We'd probably want to start looking for any Robert born in Canada on October 14, 1880 and then check if there are records of his birth parents passing away before 1899.
+
 All documents and newspaper articles that I've found for Robert Morrison only list his middle initial as "A". I've tried searching for his birth record in Canada, but I've had no luck.
 
 Good resources include newspaper obituaries, death certificates, or cemetery records.
@@ -1286,6 +1291,8 @@ Good resources include newspaper obituaries, death certificates, or cemetery rec
 **Criteria**: When did Robert A. Morrison pass away? I am looking for documentation providing Robert's date of death. Any documentation should reasonably match known records such as his birth, residences, history, or known family members.
 
 > I've done some digging on FamilySearch and attached a few records to [Robert's FamilySearch page](https://www.familysearch.org/tree/person/details/9FWJ-G1R) to help with future discovery by others. (The website does require an account, but it's free to use).
+
+It's possible that Robert A. Morrison was actually adopted by Charles and Sarah Morrison, as he doesn't show up in the household in the [Morrison 1881](https://www.familysearch.org/ark:/61903/1:1:MVFZ-FCQ), and I can't even being to piece together what happened to the Morrison family by [1891](https://www.familysearch.org/ark:/61903/1:1:KHG8-2T5) as they're all seamingly apart by then. Charles or Sarah show up on any birth records as parents for someone named Robert. By 1901, Robert had seemingly immigrated to the US (1899/1900). So it's possible that Robert was a relative or close neighbor friend that could have had a different name when he born. I was unable to find any records for a Robert born on October 14, 1880, but that doesn't mean I searched all of the correct record collections. My theory is that Robert was adopted by the Morrison family between 1891-1899 before he moved away. Which is why Robert later lists Charles and Sarah as his parents on his marriage certificate. 
 
 It appears that Robert A. Morrison left Sault Ste. Marie after selling his ownership of Soo Machine & Auto in 1921 and divorced Violet during this decade.
 
