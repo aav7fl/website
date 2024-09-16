@@ -14,6 +14,8 @@ description: "AI supercharged my quest to unearth the forgotten history of Soo M
 comments: true
 amp:
   - video
+redirect_from:
+  - "/blog/2024/09/soo-machine-and-auto-ai-aplified-legacy/"
 ---
 
 ## Late Nights and Legacy: A Digital Excavation into Soo Machine & Auto
