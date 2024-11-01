@@ -853,7 +853,7 @@ This move signaled a strategic shift for the company, providing a larger and mor
 >
 > [Evening_News_1920-03-13_Supplemental.pdf](/assets/files/2024/09/Evening_News_1920-03-13_Supplemental.pdf)
 >
-> I have been informed that [UPLINK](https://uplink.nmu.edu/islandora/object/nmu%3A59574) may be uploading newspaper scans of _The Evening News_ in the near future with a higher quality scan of this supplement. I will update any media if I notice this happen.
+> I have been informed that [UPLINK](https://uplink.nmu.edu/) may be uploading newspaper scans of _The Evening News_ in the near future with a higher quality scan of this supplement. I will update any media if I notice they have better scans.
 
 Throughout the **1920s**, Soo Machine & Auto Co. adapted to the evolving automotive market, securing dealerships with several prominent car manufacturers. Building upon its existing partnerships with Jeffery, Buick, Chevrolet, Reo, Cadillac, Oldsmobile, and White trucks, the company expanded its offerings to include Paige automobiles. The company's ability to secure dealerships with a diverse range of manufacturers highlights its strong reputation in the industry and its understanding of the growing demand for automobiles in the region.
 
