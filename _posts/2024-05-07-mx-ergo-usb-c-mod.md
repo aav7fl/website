@@ -15,7 +15,7 @@ description: "Upgrading the charging port on my Logitech MX Ergo trackball with 
 
 Trackballs are a fine alternative input device for driving computers. They excel with slinging the cursor across multi-monitor setups. When used correctly, they can help reduce wrist strain. I started taking trackballs seriously over a decade ago as part of a package solution to mix in a variety of inputs with daily computer usage. In 2013, for less than $20, I picked up a Logitech M570 entry-level trackball. Pairing the trackball, an external trackpad, and a split keyboard together helped break up the repetitive movements that were giving me trouble 🧘. 
 
-> 2024-11-15: Babalooi in the comments informed me that Logitech has released an updated MX Ergo model — the MX Ergo S. The major changes I've identified include a USB-C port, silent switches, and the the Bolt receiver.
+> 2024-11-15: Babalooi in the comments informed me that Logitech has released an updated MX Ergo model — the MX Ergo S. The major changes I've identified include a USB-C port, silent switches, and supporting the Bolt receiver.
 
 ## Throwback
 
