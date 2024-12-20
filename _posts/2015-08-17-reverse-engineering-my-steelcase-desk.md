@@ -1,7 +1,7 @@
 ---
 title: Discovering and Reverse Engineering My Steelcase Desk
 date: "2015-08-17 15:47"
-updated: 2017-04-12
+updated: 2024-12-19
 comments: true
 image:  
   path: /assets/img/2015/08/banner.jpg
@@ -14,6 +14,8 @@ description: "How I reverse engineered the remote codes on my prototype Steelcas
 ---
 
 In 2013 I made the plunge for a height-adjustable standing desk. I had wanted one for a while because I was becoming restless sitting down throughout the day in my computer chair. I wanted to be able to move around easily while I was using it and not be chained to sitting. I won't go into the health benefits or drawbacks of such a setup, but instead how I discovered and reprogrammed my desk.
+
+> 2024-12-19: This desk has been with me for over a decade, but its time has passed. It no longer functions correctly and I'm passing it on to the next person. 😢 I wish them luck if they choose to attempt a repair. 👋
 
 Lucky for me, during my search for an adjustable standing desk, Steelcase was liquidating their old pyramid headquarters/test labs. You can get a pretty good look at how amazing the building and the labs were in a tour of the campus [here](https://www.youtube.com/watch?v=GTsdOLD-CyI).
 I contacted up the warehouse that was selling off Steelcase's office furniture and drove on over.
@@ -125,12 +127,30 @@ PArA Mode: PArA
 12. After adjusting, back out and check your latest displayed height. If the height displayed is correct, move on. If not, re-adjust step 11 again.
 13. Lower desk height half-way.
 14. Enter code 211 in either P-Code or PArA mode.
-15. Press F until “Init” is displayed.
+15. Press F until "Init" is displayed.
 16. The motor will now respond slowly until calibration is completed.
 17. Lower desk to its minimum height.
 18. Raise the desk to its maximum height.
 19. When you reach the top, the display will change to the correct height and the calibration of the desk will be complete.
 
+#### Additional Remote Toubleshooting
+
+> I recently dug up an old document that Steelcase shared with me on what they thought matched the desk remote. It includes helpful information such as remote control errors. I've included the original document here, as well as in the table below: 
+> 
+> [Steelcase Electric Adjustable Worksurface Memory Controller Troubleshooting Manual](/assets/files/2015/Steelcase-2004-electric-adjustable-worksurface-memory-contoller-troubleshooting.pdf)
+
+{: .table-post}
+| Code 	| Description 	| Corrective Action 	|
+|---	|---	|---	|
+| ERR1 	| Signal to controller is interrupted 	| 1. Check controller connection at motor. Make sure it is plugged in all the way and secure.<br>2. Check the cable of the controller. Make sure the cable is not damaged.<br>3. If problem continues after checking both of the above, call your Steelcase dealer for service.<br><br>After the signal is re-established, ERR1 will disappear from the controller display. 	|
+| ERR2 	| Overload protection has shut the system down 	| Stop operation of the motor for a short period of time. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again with five minutes. At that time, ERR2 will disappear from the controller display. 	|
+| ERR3 	| Memory signal needs to be recalibrated 	| The memory function needs to be re-initialized. Perform the following steps:<br><br>1. Press the "F" button. You will see "INIT" on the display. Release the button.<br>2. Press the "DOWN" arrow button until the motor stops at its lowest point. Release the button.<br>3. Press the "UP" arrow button until the motor stops at its highest point. Release the button.<br><br>ERR3 will now disappear from the display and the LED display will show the correct height 	|
+| ERR4 	| 15% duty cycle is exceeded 	| The motor has operated for an extended period of time and has shut down. There are two possible corrective actions.<br><br>1. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again within 5 minutes. At that time ERR4 will disappear from the controller display.<br>2. Disconnect the power cord from the power source for 10 seconds and re-connect. User can operate the motor again. At that time ERR4 will disappear from the controller display. 	|
+| ERR5 	| There is an open circuit. Both limit switches are in the open position 	| Call your Steelcase dealer for a replacement column mechanism. 	|
+| ERR6 	| Power voltage to the mechanism is low 	| There are two possible corrective actions.<br>1. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again within five minutes. At that time, ERR6 will disappear from the controller display.<br>2. Disconnect the power cord from the power source for 10 seconds and re-connect. User can operate the motor again. At that time ERR6 will disappear from the controller display. 	|
+| O112/O212 	| May display when unit is first powered on 	| No need for alarm. This code only displays to indicate software version on the PC board within the mechanism. 	|
+
+I hope that helps someone!
 
 ### Conclusion
 

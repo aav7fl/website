@@ -35,7 +35,6 @@ plugins:
   - amp-jekyll
   - jekyll-feed
   - jekyll-gist
-  - jekyll-last-modified-at
   - jekyll-paginate
   - jekyll-redirect-from
   - jekyll-seo-tag
