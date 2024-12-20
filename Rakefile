@@ -52,6 +52,7 @@ task :html_proofer do
     ignore_urls:
     [
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
+      %r{.*opensprinkler.com/.*}, # Returns a 403
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*uplink.nmu.edu/.*}, # They've started returning a 403 to us
       %r{.*/#comment-.*}, # Internal Disqus comments
