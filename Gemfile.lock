@@ -37,7 +37,7 @@ GEM
       logger
     faraday-net_http (3.1.0)
       net-http
-    fastimage (2.3.1)
+    fastimage (2.4.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-x86_64-linux-gnu)
     fiber-annotation (0.2.0)
