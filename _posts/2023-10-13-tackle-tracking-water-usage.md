@@ -19,7 +19,7 @@ Now I had a reason to track it.
 
 ## Why Track Consumption?
 
-While on a walk last week, I spotted a neighbor with a busted sprinkler head. Water was gushing into the street and washing out our their new grass. 
+While on a walk last week, I spotted a neighbor with a busted sprinkler head. Water was gushing into the street and washing out their new grass. 
 
 How would _you_ know if your sprinkler head breaks off?
 
