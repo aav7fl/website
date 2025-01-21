@@ -2,14 +2,12 @@
   url: https://www.linkedin.com/in/kyleniewiada/
 - name: GitHub
   url: https://github.com/aav7fl
-- name: X
-  url: https://x.com/CrypticCitrus
+- name: Bluesky
+  url: https://bsky.app/profile/crypticcitrus.bsky.social
 - name: YouTube
   url: https://www.youtube.com/user/KyleNiewiada
 - name: BandCamp
   url: https://kyleniewiada.bandcamp.com/
   nofollow: true
-- name: RSS
-  url: /feed.xml
 - name: Sitemap
   url: /sitemap/
