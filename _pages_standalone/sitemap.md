@@ -22,3 +22,4 @@ permalink: /sitemap/
 {% for page in site.pages_standalone %}
 - [{{ page.title }}]({{ page.url }})
 {% endfor %}
+- [RSS](/feed.xml)
