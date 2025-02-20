@@ -1,15 +1,17 @@
+@use "_config";
+
 /***************
 FOOTER STYLING
 ***************/
 footer {
-	padding: $padding 0;
+	padding: config.$padding 0;
 
 	//https://stackoverflow.com/a/31732902/1813592
 	.flex-list {
 		position: relative;
 		margin: 1em;
 		overflow: hidden;
-		border-top: 1px solid $light-grey;
+		border-top: 1px solid config.$light-grey;
 	}
 
 	.flex-list ul {
@@ -29,9 +31,9 @@ footer {
 		padding: 0 1em;
 		text-align: center;
 		border-left: 1px solid #ccc;
-		background-color: $white;
+		background-color: config.$white;
 
-		@media (min-width: $breakpoint-2) {
+		@media (min-width: config.$breakpoint-2) {
 			font-size: 110%;
 		}
 	}
@@ -41,7 +43,7 @@ footer {
 	}
 
 	a:hover {
-		background: $primary-color;
+		background: config.$primary-color;
 		color: white;
 	}
 

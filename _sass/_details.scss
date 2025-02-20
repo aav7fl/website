@@ -1,3 +1,5 @@
+@use "_config";
+
 $top-color: #bce5ff;
 $bottom-color: $top-color;
 $bottom-color: #e5e5e5;
@@ -7,7 +9,7 @@ details:not([open]) {
 
     summary {
         // Border on all corners when closed.
-        border-radius: $br;
+        border-radius: config.$br;
     }
 }
 
@@ -17,8 +19,8 @@ details[open] {
     border-left-style: solid;
     border-right-style: solid;
     p {
-        margin-left: $padding;
-        margin-right: $padding;
+        margin-left: config.$padding;
+        margin-right: config.$padding;
     }
 }
 
@@ -30,16 +32,16 @@ details[open] summary {
 }
 
 details {
-    margin-top: $margin;
-    margin-bottom: $margin;
+    margin-top: config.$margin;
+    margin-bottom: config.$margin;
 
     summary {
         // Fallback
         background-color: $top-color;
         //background-image: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
         list-style: none; // Hide on iOS Safari (1 of 2)
-        color: $black;
-        padding: $padding;
+        color: config.$black;
+        padding: config.$padding;
         
         display: flex;
         justify-content: space-between;
@@ -49,7 +51,7 @@ details {
             content: '';
             width: 0; 
             height: 0; 
-            border-top: 10px solid $black;
+            border-top: 10px solid config.$black;
             border-inline: 7px solid transparent;
             transition: 0.2s;
         }
@@ -60,7 +62,7 @@ details {
     }
 
     div:first-child {
-        border-radius: 0 0 $br $br;
+        border-radius: 0 0 config.$br config.$br;
         border: .2em solid $bottom-color;
     }
 

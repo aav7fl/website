@@ -1,39 +1,41 @@
+@use "_config";
+
 /***************
 HEADER STYLING
 ***************/
 
 .header {
 	background-image: url('/assets/img/banner.svg');
-	background-color: $dark-grey;
+	background-color: config.$dark-grey;
 	background-size: cover;
 	background-position: center center;
 	padding: 0;
 	height: auto;
-	margin-bottom: $padding;
+	margin-bottom: config.$padding;
 
 	// Outer navigation wrapper
 	.navigation {
-		background: $nav-background;
+		background: config.$nav-background;
 	}
 
 	// Container with no padding for navbar
 	.nav-container {
-		max-width: $navigation-width;
+		max-width: config.$navigation-width;
 		margin: 0 auto;
 	}
 }
 
 /* Remove header image when screen width is too small */
-@media (min-width: $breakpoint-2) {
+@media (min-width: config.$breakpoint-2) {
 	.header {
 		min-height: 10em;
 		position: relative;
-		margin-bottom: $padding;
+		margin-bottom: config.$padding;
 	}
 }
 
 nav {
-	height: $nav-height;
+	height: config.$nav-height;
 	/* Menu height */
 	overflow: hidden;
 	/* Don't show anything outside the nav */
@@ -43,13 +45,13 @@ nav ul {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-	max-height: $nav-height*2;
+	max-height: config.$nav-height*2;
 	/* Menu height x 2 */
 	position: relative;
 
 	/* Position the menu button relative to this item */
 	.active {
-		background: $nav-active;
+		background: config.$nav-active;
 	}
 }
 
@@ -61,18 +63,18 @@ nav li {
 nav a {
 	display: inline-block;
 	padding: 0 1em;
-	color: $nav-font-color;
+	color: config.$nav-font-color;
 	text-decoration: none;
 	white-space: nowrap;
-	line-height: $nav-height;
+	line-height: config.$nav-height;
 	/* Menu height */
-	height: $nav-height;
+	height: config.$nav-height;
 	/* Menu height */
 }
 
 nav a:hover {
-	color: $nav-font-color;
-	background-color: $link-hover-color;
+	color: config.$nav-font-color;
+	background-color: config.$link-hover-color;
 }
 
 nav li:first-child {
@@ -82,15 +84,15 @@ nav li:first-child {
 
 	/* Hide when screen width is too small */
 	:hover {
-		color: $nav-font-color;
-		background-color: $nav-background;
+		color: config.$nav-font-color;
+		background-color: config.$nav-background;
 	}
 
-	@media (min-width: $breakpoint-0) {
+	@media (min-width: config.$breakpoint-0) {
 		font-size: 100%;
 	}
 
-	@media (min-width: $breakpoint-1) {
+	@media (min-width: config.$breakpoint-1) {
 		font-size: 140%;
 	}
 }
@@ -100,9 +102,9 @@ nav li:last-child {
 	position: absolute;
 	/* Move the menu button out of flow */
 	right: 0;
-	bottom: $nav-height;
+	bottom: config.$nav-height;
 	/* Move upwards, the same distance as the menu height */
-	background-image: linear-gradient(to right, $nav-background-transparent 0, $nav-background 2em);
+	background-image: linear-gradient(to right, config.$nav-background-transparent 0, config.$nav-background 2em);
 	padding-left: 3em;
 }
 
@@ -133,7 +135,7 @@ nav#menu:target li:not(:first-child) {
 	margin-top: 2px;
 
 	a:hover {
-		background-color: $link-hover-color;
+		background-color: config.$link-hover-color;
 	}
 }
 
@@ -147,6 +149,6 @@ nav#menu:target li:nth-last-child(2) {
 	top: 0;
 	right: 0;
 	margin: 0;
-	border-left: 2px solid $nav-background;
-	background: $nav-background-light;
+	border-left: 2px solid config.$nav-background;
+	background: config.$nav-background-light;
 }

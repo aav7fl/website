@@ -1,3 +1,5 @@
+@use "_config";
+
 /***************
 BUTTON DEFAULTS
 ***************/
@@ -16,11 +18,11 @@ BUTTON DEFAULTS
 .button-outline {
   @extend %btn;
   background-color: transparent;
-  border: 3px solid $primary-color;
-  color: $primary-color;
+  border: 3px solid config.$primary-color;
+  color: config.$primary-color;
 
   &:hover {
-    background-color: $primary-color;
-    color: $white;
+    background-color: config.$primary-color;
+    color: config.$white;
   }
 }
