@@ -1,3 +1,4 @@
+@use "sass:color";
 /***************
 FORM STYLING
 ***************/
@@ -10,7 +11,7 @@ label {
 input[type=text],
 input[type=email],
 textarea {
-	background: darken(white, 10%);
+	background: color.adjust(white, $lightness: -10%);
 	padding: .5em;
 	outline: none;
 	border: none;

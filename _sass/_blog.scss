@@ -1,3 +1,4 @@
+@use "sass:color";
 /***************
 POST STYLING
 ***************/
@@ -9,7 +10,7 @@ article {
 		text-align: center;
 		font-size: .9em;
 		font-style: italic;
-		color: lighten($black, 30%);
+		color: color.adjust($black, $lightness: 30%);
 		display: block;
 	}
 

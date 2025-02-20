@@ -1,3 +1,4 @@
+@use "sass:color";
 /***************
 PAGE STYLES
 ***************/
@@ -61,7 +62,7 @@ LINK STYLING
 a {
 	color: $link-color;
 	&:hover {
-		color: darken($link-color, 15%);
+		color: color.adjust($link-color, $lightness: -15%);
 	}
 }
 
