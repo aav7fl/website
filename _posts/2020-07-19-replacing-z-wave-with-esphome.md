@@ -69,37 +69,44 @@ Here is a sample from my ESPHome configuration for one of my deployed smart plug
 
 ```yaml
 # Basic Config
-# sonoff_s31_1
-# Living Room Air Conditioner
+# sonoff-s31-01
+# Flower lamp
+# Updated for 2025.2.0
 
 substitutions:
-  plugtag: sonoff_s31_1
-  devicename: Living Room Air Conditioner
+  plugtag: sonoff-s31-01
+  devicename: Flower lamp
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  
+
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${plugtag} Fallback Hotspot"
+    ssid: "${plugtag} Hotspot"
     password: !secret ap_hotspot_password
+
+  reboot_timeout: 6h
 
 # Enable captive portal if wifi ever changes
 captive_portal:
 
 # Enable Home Assistant API
 api:
-  password: !secret api_password
+  encryption:
+    key: !secret encryption_pre_shared_key
 
 ota:
+  platform: esphome
   password: !secret ota_password
 
 esphome:
   name: ${plugtag}
   comment: ${devicename}
-  platform: ESP8266
+
+esp8266:
   board: esp01_1m
+  restore_from_flash: no
 
 # Enable logging
 logger:
@@ -109,31 +116,20 @@ logger:
 uart:
   rx_pin: RX
   baud_rate: 4800
+  parity: EVEN
 
 status_led:
   pin: GPIO13
 
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: GPIO0
-      mode: INPUT_PULLUP
-      inverted: True
-    name: "${devicename} Button"
-    on_press:
-      - switch.toggle: relay
-  - platform: status
-    name: "${devicename} Status"     
-
 # Enable time component to reset energy at midnight
 time:
-  - platform: homeassistant
-    id: my_time 
+  - platform: sntp
+    id: my_time
 
 sensor:
   - platform: wifi_signal
     name: "${devicename} WiFi Signal"
-    update_interval: 60s
+    update_interval: 300s
   - platform: total_daily_energy
     name: "${devicename} Total Daily Energy"
     power_id: power
@@ -142,8 +138,8 @@ sensor:
     filters:
       - multiply: 0.001
   - platform: cse7766
-    update_interval: 3s
     current:
+      internal: true
       name: "${devicename} Current"
       unit_of_measurement: A
       accuracy_decimals: 3
@@ -154,10 +150,12 @@ sensor:
           - 3.8 -> 3.957
           - 5.9 -> 6.099
           - 12.7 -> 13.046
+        - throttle_average: 30s
         # Make everything below 0.01A appear as just 0A.
         # Furthermore it corrects 0.016A for the power usage of the plug.
         - lambda: if (x < (0.01 - 0.016)) return 0; else return (x - 0.016);
     voltage:
+      internal: true
       name: "${devicename} Voltage"
       unit_of_measurement: V
       accuracy_decimals: 1
@@ -168,6 +166,7 @@ sensor:
           - 116.8 -> 117.66
           - 116.1 -> 116.87
           - 114.3 -> 115.33
+        - throttle_average: 30s
     power:
       name: "${devicename} Power"
       id: power
@@ -180,16 +179,31 @@ sensor:
           - 451.5 -> 463.9
           - 687.4 -> 705.53
           - 1446.3 -> 1482.9
+        - throttle_average: 30s
         # Make everything below 2W appear as just 0W.
         # Furthermore it corrects 0.91W for the power usage of the plug.
         - lambda: if (x < (2 + 0.91)) return 0; else return (x - 0.91);
-        
-switch:
+    
+output:
   - platform: gpio
-    name: "${devicename}"
-    icon: mdi:air-conditioner
+    id: light_relay
     pin: GPIO12
-    id: relay        
+
+binary_sensor:
+  - platform: gpio
+    id: button
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    on_press:
+      - light.toggle: light_switch
+        
+light:
+  - platform: binary
+    id: light_switch
+    name: "${devicename}"
+    output: light_relay         
 ```
 
 > Note that there are custom calibration data points around the electricity monitoring sensors. I wanted extremely accurate power consumption metrics from each plug.

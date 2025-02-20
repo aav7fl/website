@@ -96,9 +96,9 @@ Here is my ESPHome Water Meter Configuration:
 
 ```yaml
 # Basic Config
-# esp_32
+# esp_32_02
 # Water Meter
-# Written on v2023.9.3
+# Updated for 2025.2.0
 
 # Alleged Reed Switch data from manufacturer:
 #   Pulse Output: 1 gallon per pulse
@@ -107,25 +107,34 @@ Here is my ESPHome Water Meter Configuration:
 #   Width of the pulse with continuous output: 0.75 sec
 #   The angle with continuous output: 90 degree
 
+# external_components:
+#   # use pulse_meter from ESPHome's dev branch in GitHub
+#   - source:
+#       type: git
+#       url: https://github.com/aav7fl/esphome
+#       ref: dev
+#     components: [ pulse_meter ]
+
 substitutions:
-  plugtag: esp-32
+  plugtag: esp-32-02
   devicename: Main Water Meter
   deviceid: main_water_meter
-
-esphome:
-  name: ${plugtag}
-  comment: ${devicename}
-  platform: ESP32
-  board: nodemcu-32s
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
+  # manual_ip:
+    # static_ip: 192.168.95.110
+    # gateway: 192.168.95.1
+    # subnet: 255.255.255.0
+
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${plugtag} Hotspot"
     password: !secret ap_hotspot_password
+
+  #use_address: energy-meter.local
 
 # Enable captive portal if wifi ever changes
 captive_portal:
@@ -136,12 +145,26 @@ api:
     key: !secret encryption_pre_shared_key
 
 ota:
+  platform: esphome
   password: !secret ota_password
+
+esphome:
+  name: ${plugtag}
+  comment: ${devicename}
+  on_boot:
+    priority: 800
+    then: 
+      # Set default value on boot so it doesn't show as unknown
+      - sensor.template.publish:
+          id: water_consumption_submeter
+          state: !lambda "return 0;"
+
+esp32:
+  board: nodemcu-32s
 
 # Enable logging
 logger:
 
-# Expose virtual button in Home Assistant to restart device
 button:
   - platform: restart
     name: "${devicename} Restart"
@@ -161,6 +184,9 @@ sensor:
     accuracy_decimals: 1
     name: "${devicename} Flow"
     icon: 'mdi:water'
+    filters:
+      - clamp:
+          max_value: 20
     total:
       id: water_total
       internal: true
@@ -172,20 +198,22 @@ sensor:
       on_value:
         then: 
           - sensor.template.publish:
-              id: water_consumption
+              id: water_consumption_submeter
               state: !lambda "return x;"
 
   # Templated sensor to provide native total_increasing sensor information to Home Assistant 
   # This makes it easier to add to the Energy Dashboard
   - platform: template
-    id: water_consumption
-    name: "${devicename} Consumption"
+    id: water_consumption_submeter
+    name: "${devicename} Consumption Submeter"
     unit_of_measurement: "gal"
     state_class: total_increasing
     # Return 0 decimal places as the water meter only measures in whole gallons
     accuracy_decimals: 0
     device_class: water
     icon: "mdi:gauge"
+    # Return 0 when device is restarted
+    # lambda: return 0;
 
   - platform: wifi_signal
     name: "${devicename} WiFi Signal"
