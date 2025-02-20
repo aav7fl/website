@@ -1,4 +1,6 @@
 @use "sass:color";
+@use "_config";
+
 /***************
 POST STYLING
 ***************/
@@ -10,7 +12,7 @@ article {
 		text-align: center;
 		font-size: .9em;
 		font-style: italic;
-		color: color.adjust($black, $lightness: 30%);
+		color: color.adjust(config.$black, $lightness: 30%);
 		display: block;
 	}
 
@@ -21,8 +23,8 @@ article {
 }
 
 blockquote {
-	background: $blockquote-color;
-	border-left: 10px solid $blockquote-border-color;
+	background: config.$blockquote-color;
+	border-left: 10px solid config.$blockquote-border-color;
 	margin: 1.5em 10px;
 	padding: 0.5em 10px;
 }
@@ -35,7 +37,7 @@ POST NAV STYLING
 	flex-direction: column;
 
 	.post-nav-link {
-		height: $post-nav-link-height;
+		height: config.$post-nav-link-height;
 		margin: .1em;
 		overflow: hidden;
 		position: relative;
@@ -78,7 +80,7 @@ POST NAV STYLING
 		transform: translateY(-50%) scale(1.2);
 	}
 
-	@media all and (min-width: $breakpoint-2) {
+	@media all and (min-width: config.$breakpoint-2) {
 		flex-direction: row;
 
 		.post-nav-link {

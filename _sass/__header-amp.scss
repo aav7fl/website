@@ -1,14 +1,16 @@
+@use "_config";
+
 .header-amp {
-	background: $nav-background;
-	margin-bottom: $padding;
-	padding: $padding;
+	background: config.$nav-background;
+	margin-bottom: config.$padding;
+	padding: config.$padding;
 	text-align: center;
 	font-size: 1.4em;
 	font-weight: normal;
 
 	a,
 	a:hover {
-		color: $white;
+		color: config.$white;
 		text-decoration: none;
 		overflow: visible;
 	}

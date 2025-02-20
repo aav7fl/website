@@ -1,4 +1,6 @@
 @use "sass:color";
+@use "_config";
+
 /***************
 PAGE STYLES
 ***************/
@@ -8,34 +10,34 @@ PAGE STYLES
 	font-size: 200%;
 	line-height: 1.2;
 	font-weight: normal;
-	@media (min-width: $breakpoint-2) {
+	@media (min-width: config.$breakpoint-2) {
 		font-size: 250%;
 	}
-	@media (min-width: $breakpoint-3) {
+	@media (min-width: config.$breakpoint-3) {
 		font-size: 300%;
 	}
 }
 
 .meta {
-	color: $dim-grey;
+	color: config.$dim-grey;
 	font-weight: 300;
 	font-size: 120%;
-	@media (min-width: $breakpoint-2) {
+	@media (min-width: config.$breakpoint-2) {
 		font-size: 130%;
 	}
-	@media (min-width: $breakpoint-3) {
+	@media (min-width: config.$breakpoint-3) {
 		font-size: 140%;
 	}
 }
 
 .sub-meta {
-	color: $dim-grey;
+	color: config.$dim-grey;
 	font-weight: 300;
 	font-size: 100%;
-	@media (min-width: $breakpoint-2) {
+	@media (min-width: config.$breakpoint-2) {
 		font-size: 110%;
 	}
-	@media (min-width: $breakpoint-3) {
+	@media (min-width: config.$breakpoint-3) {
 		font-size: 120%;
 	}
 }
@@ -47,7 +49,7 @@ a.meta {
 
 .title-meta {
 	overflow: auto;
-	color: $dim-grey;
+	color: config.$dim-grey;
 	font-size: 100%;
 }
 
@@ -60,9 +62,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 LINK STYLING
 ***************/
 a {
-	color: $link-color;
+	color: config.$link-color;
 	&:hover {
-		color: color.adjust($link-color, $lightness: -15%);
+		color: color.adjust(config.$link-color, $lightness: -15%);
 	}
 }
 
@@ -71,17 +73,17 @@ CODE STYLING
 ***************/
 code, pre {
     border-radius: .2em;
-    background-color: $code-background;
-    border: .1em solid $light-grey;
+    background-color: config.$code-background;
+    border: .1em solid config.$light-grey;
 }
 
 code {
     padding: 2px 4px;
-    color: $inline-code;
+    color: config.$inline-code;
 }
 
 pre {
-    padding: $padding;
+    padding: config.$padding;
     overflow-y:hidden;
 }
 
@@ -125,12 +127,12 @@ h6:hover .octicon {
 TEXT SELECTION STYLING INVALID FOR NOW.
 ***************/
 // ::-moz-selection {
-// 	background: $primary-color;
+// 	background: config.$primary-color;
 // 	color: white;
 // }
 //
 // ::selection {
-// 	background: $primary-color;
+// 	background: config.$primary-color;
 // 	color: white;
 // }
 
@@ -139,6 +141,6 @@ ALREADY A DEFAULT BROWSER STYLE
 ***************/
 // p {
 //   display: block;
-//   margin-top: $padding;
-//   margin-bottom: $padding;
+//   margin-top: config.$padding;
+//   margin-bottom: config.$padding;
 // }

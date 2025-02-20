@@ -1,10 +1,10 @@
 /* Import fonts from Google */
-@import "fonts";
+@use "fonts";
 
 /*  Site configuration */
-@import "_config";
+@use "_config";
 /*  Import typography */
-@import "typography";
+@use "typography";
 /*  Primary */
-@import "_base";
-@import "_header";
+@use "_base";
+@use "_header";
