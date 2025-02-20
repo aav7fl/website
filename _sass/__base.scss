@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "_config";
+
 body {
 	margin: 0;
 }
@@ -10,8 +13,8 @@ input,
 textarea {
 	font-size: 1em;
 	line-height: 1.58;
-	color: $black;
-	font-family: $sans-serif;
+	color: config.$black;
+	font-family: config.$sans-serif;
 	overflow-wrap: break-word;
 }
 
@@ -32,9 +35,9 @@ GLOBAL Extra
 ***************/
 .line-separator {
 	height: 2px;
-	background: $light-grey;
-	margin-top: $padding;
-	margin-bottom: $padding;
+	background: config.$light-grey;
+	margin-top: config.$padding;
+	margin-bottom: config.$padding;
 }
 
 .clearfix:after {
@@ -44,10 +47,10 @@ GLOBAL Extra
 }
 
 .content {
-	max-width: $content-width;
+	max-width: config.$content-width;
 	margin-right: auto;
 	margin-left: auto;
-	padding: 0 $padding;
+	padding: 0 config.$padding;
 
 	img {
 		display: block;
@@ -92,7 +95,7 @@ POST LIST STYLING
 			position: absolute;
 			bottom: -2em;
 			left: 0;
-			background: darken(white, 10%);
+			background: color.adjust(white, $lightness: -10%);
 			height: 2px;
 			width: 60px;
 		}
@@ -106,7 +109,7 @@ POST LIST STYLING
 		}
 
 		.date {
-			color: $dim-grey;
+			color: config.$dim-grey;
 			font-size: .8em;
 		}
 	}

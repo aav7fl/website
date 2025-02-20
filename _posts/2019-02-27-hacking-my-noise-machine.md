@@ -108,46 +108,71 @@ Voice control was now a success. My dumb noise machine went through a transforma
 Here's the source configuration of my ESP32 board if anyone wants to try this, or use some of it to control their own devices.
 
 ```yaml
-esphome:
-  name: esp_32
-  platform: ESP32
-  board: nodemcu-32s
-  build_path: esp_32
-  arduino_version: espressif32@1.5.0
-  esphome_core_version:
-    repository: https://github.com/esphome/esphome-core.git
-    tag: v1.11.2
-  use_custom_code: false
-  board_flash_mode: dout
+# Updated for 2025.2.0
+
+substitutions:
+  plugtag: esp-32-00
+  devicename: Noise Machine
+  deviceid: noise_machine
+
 wifi:
-  domain: .local
-  networks:
-  - password: REDACTED
-    ssid: REDACTED
-  use_address: esp_32.local
-logger:
-  baud_rate: 115200
-  hardware_uart: UART0
-  tx_buffer_size: 512
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${plugtag} Hotspot"
+    password: !secret ap_hotspot_password
+
+  reboot_timeout: 6h
+
+# Enable captive portal if wifi ever changes
+captive_portal:
+
+# Enable Home Assistant API
 api:
-  password: REDACTED
-  port: 6053
+  encryption:
+    key: !secret encryption_pre_shared_key
+
 ota:
-  password: REDACTED
-  safe_mode: true
+  platform: esphome
+  password: !secret ota_password
+
+esphome:
+  name: ${plugtag}
+  comment: ${devicename}
+  on_boot:
+    priority: 600
+    # Force the Green LED state upon boot in case it is stuck
+    then:
+      - switch.turn_on:
+          id: event_led
+      - delay: 500ms
+      - switch.turn_off:
+          id: event_led  
+
+esp32:
+  board: nodemcu-32s
+
+# Enable logging
+logger:
+
 sensor:
-- platform: adc
-  pin: 36
-  id: noise_machine_voltage
-  name: Noise Machine Voltage
-  update_interval: 2s
+  - platform: adc
+    pin: GPIO36
+    id: ${deviceid}_voltage
+    name: ${devicename} LED Voltage
+    internal: true
+    update_interval: 2s
+
 switch:
 - platform: gpio
   pin:
     number: 23
-  id: noise_machine_pin
+  id: ${deviceid}_pin
+  restore_mode: ALWAYS_OFF
   internal: true
-  name: noise_machine_pin
+  name: ${deviceid}_pin
 - platform: gpio
   pin:
     number: 21
@@ -155,47 +180,46 @@ switch:
   internal: true
   name: event_led
 - platform: template
-  name: Noise Machine
+  name: ${devicename}
   icon: mdi:volume-high
-  lambda: !lambda |-
-    if (id(noise_machine_voltage).state > 0.5) {
+  lambda: |-
+    if (id(${deviceid}_voltage).state > 0.5) {
       return true;
     } else {
       return false;
     }
   turn_on_action:
     then:
-    - if:
-        condition:
-        - lambda: !lambda |-
-            return id(noise_machine_voltage).state <= 0.5;
-        then:
-        - switch.turn_on:
-            id: noise_machine_pin
-        - switch.turn_on:
-            id: event_led
-        - delay: 500ms
-        - switch.turn_off:
-            id: noise_machine_pin
-        - switch.turn_off:
-            id: event_led
+      - if: 
+          condition:
+            lambda: 'return id(${deviceid}_voltage).state <= 0.5;'
+          then:
+            - switch.turn_on:
+                id: ${deviceid}_pin
+            - switch.turn_on:
+                id: event_led
+            - delay: 500ms
+            - switch.turn_off:
+                id: ${deviceid}_pin
+            - switch.turn_off:
+                id: event_led        
   turn_off_action:
     then:
-    - if:
-        condition:
-        - lambda: !lambda |-
-            return id(noise_machine_voltage).state > 0.5;
-        then:
-        - switch.turn_on:
-            id: noise_machine_pin
-        - switch.turn_on:
-            id: event_led
-        - delay: 500ms
-        - switch.turn_off:
-            id: noise_machine_pin
-        - switch.turn_off:
-            id: event_led
-status_led:
-  pin:
-    number: 2
+      - if: 
+          condition:
+            lambda: 'return id(${deviceid}_voltage).state > 0.5;'
+          then:
+            - switch.turn_on:
+                id: ${deviceid}_pin
+            - switch.turn_on:
+                id: event_led
+            - delay: 500ms
+            - switch.turn_off:
+                id: ${deviceid}_pin
+            - switch.turn_off:
+                id: event_led   
+# Disable status LED as it's annoying to have blink in the middle of the night when power is out/on vacation with it.
+#status_led:
+#  pin:
+#    number: 2
 ```
