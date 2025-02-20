@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "_config";
+
 /***************
 FORM STYLING
 ***************/
@@ -10,14 +13,14 @@ label {
 input[type=text],
 input[type=email],
 textarea {
-	background: darken(white, 10%);
+	background: color.adjust(white, $lightness: -10%);
 	padding: .5em;
 	outline: none;
 	border: none;
-	margin-bottom: $padding;
+	margin-bottom: config.$padding;
 
 	&:focus {
-		border: 1px solid $primary-color;
+		border: 1px solid config.$primary-color;
 	}
 
 	&.full-width {
@@ -27,21 +30,21 @@ textarea {
 }
 
 textarea {
-	height: $line-height*3;
+	height: config.$line-height*3;
 }
 
 form {
-	margin-bottom: $padding;
+	margin-bottom: config.$padding;
 
 	// Wrap each form input/element in a field div
 	.field {
-		margin-bottom: $padding;
+		margin-bottom: config.$padding;
 	}
 
 	// Notes go under the input fields
 	.note {
 		margin-top: 5px;
-		color: $dim-grey;
+		color: config.$dim-grey;
 	}
 
 	// Required label
@@ -55,13 +58,13 @@ form {
 		// Validation reason
 		.reason {
 			margin-top: 5px;
-			color: $bad-color;
+			color: config.$bad-color;
 		}
 
 		input[type=text],
 		input[type=email],
 		textarea {
-			border-color: $bad-color;
+			border-color: config.$bad-color;
 		}
 	}
 }

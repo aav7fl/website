@@ -108,16 +108,12 @@ It's probably a bad idea. But don't let that stop you! Just be careful of burnin
 # Basic Config
 # shelly-one-01
 # Front Door Doorbell
+# Updated for 2025.2.0
 
 substitutions:
+  plugtag: shelly-one-01
   devicename: Front Door Doorbell
   deviceid: front_door_doorbell
-
-esphome:
-  name: shelly-one-01
-  comment: ${devicename}
-  platform: ESP8266
-  board: esp01_1m
 
 wifi:
   ssid: !secret wifi_ssid
@@ -128,18 +124,24 @@ wifi:
     ssid: "${plugtag} Hotspot"
     password: !secret ap_hotspot_password
 
-
 # Enable captive portal if wifi ever changes
 captive_portal:
 
 # Enable Home Assistant API
 api:
-  password: !secret api_password
   encryption:
     key: !secret encryption_pre_shared_key
 
 ota:
+  platform: esphome
   password: !secret ota_password
+
+esphome:
+  name: ${plugtag}
+  comment: ${devicename}
+
+esp8266:
+  board: esp01_1m
 
 # Global to store the on/off state of the chime
 globals:
@@ -192,7 +194,7 @@ switch:
     id: chime_is_enabled
     name: ${devicename} Chime
     icon: mdi:power-settings
-    restore_state: false
+    restore_mode: DISABLED
     turn_on_action:
       - globals.set:
           id: chime_var
@@ -207,7 +209,7 @@ switch:
     id: chime_alarm
     name: ${devicename} Alarm
     icon: mdi:alarm-bell
-    restore_state: false
+    restore_mode: DISABLED
     turn_on_action:
       - globals.set:
           id: chime_alarm_var

@@ -1,7 +1,7 @@
-@import "_config";
-@import "_footer";
+@use "_config";
+@use "_footer";
 /*  Secondary */
-@import "blog";
-@import "buttons";
-@import "syntax";
-@import "details";
+@use "blog";
+@use "buttons";
+@use "syntax";
+@use "details";

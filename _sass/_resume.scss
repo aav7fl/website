@@ -1,3 +1,5 @@
+@use "_config";
+
 /***************
 RESUME STYLING
 ***************/
@@ -7,7 +9,7 @@ RESUME STYLING
   }
 
   h2 {
-    color: $resume-accent;
+    color: config.$resume-accent;
   }
 
   h3 {
@@ -23,7 +25,7 @@ RESUME STYLING
   }
 
   .date {
-    color: $dim-grey;
+    color: config.$dim-grey;
     font-size: .8em;
     margin-bottom: 0;
   }
