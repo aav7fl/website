@@ -1,3 +1,5 @@
+@use "sass:color";
+
 body {
 	margin: 0;
 }
@@ -92,7 +94,7 @@ POST LIST STYLING
 			position: absolute;
 			bottom: -2em;
 			left: 0;
-			background: darken(white, 10%);
+			background: color.adjust(white, $lightness: -10%);
 			height: 2px;
 			width: 60px;
 		}
