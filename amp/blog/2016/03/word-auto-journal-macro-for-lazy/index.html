@@ -1,0 +1,344 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Microsoft Word Auto-Journal Macro for the Lazy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="I created a Microsoft Word macro that automatically generated a skeleton entry for today and added up the total hours documented thus far">
+<meta property="og:description" content="I created a Microsoft Word macro that automatically generated a skeleton entry for today and added up the total hours documented thus far">
+<link rel="canonical" href="/blog/2016/03/word-auto-journal-macro-for-lazy/">
+<meta property="og:url" content="/blog/2016/03/word-auto-journal-macro-for-lazy/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2016/03/banner.png">
+<meta property="og:image:height" content="505">
+<meta property="og:image:width" content="964">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-03-14T16:19:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2016/03/banner.png">
+<meta property="twitter:title" content="Microsoft Word Auto-Journal Macro for the Lazy">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2016-03-14T16:19:00-04:00","datePublished":"2016-03-14T16:19:00-04:00","description":"I created a Microsoft Word macro that automatically generated a skeleton entry for today and added up the total hours documented thus far","headline":"Microsoft Word Auto-Journal Macro for the Lazy","image":{"height":505,"width":964,"url":"https://www.kyleniewiada.org/assets/img/2016/03/banner.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2016/03/word-auto-journal-macro-for-lazy/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2016/03/word-auto-journal-macro-for-lazy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Microsoft Word Auto-Journal Macro for the Lazy</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">March 14, 2016 | 
+        
+          3 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on October 01, 2021</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2016/03/banner.png" alt="Microsoft Word output for auto journal macro" width="964" height="505" layout="responsive"><noscript><img src="/assets/img/2016/03/banner.png" alt="Microsoft Word output for auto journal macro" width="964" height="505"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>A few months back I was given the requirement for a project to keep some kind of journal logging the number of hours I spent on a task along with a short description. Because the project was deeply integrated with Microsoft products and services, I decided that it would be best to write such a journal with Microsoft Word.</p>
+
+<p>As is the motivation for many projects/scripts of mine, I wanted to automate the process as much as possible such that I never had to think about it again [anytime soon]. This was shortly after I had <a href="/blog/2015/12/making-a-book-from-facebook-messages/">concluded work on a previous project</a> that involved using Microsoft Word with macro scripts. I was ready to learn more about its advanced features. I wanted an automatic running total because I would often forget to recalculate my grand total after each entry. There were probably other solutions that were better suited for this, but I really wanted to see how useful Microsoft Word macros (I know the evil stigma associated with macros) could be to me.</p>
+
+<h4 id="goals">Goals:</h4>
+
+<ol>
+  <li>Automatically insert a new blank entry for today with the cursor ready to write a description</li>
+  <li>The ability to total hours for all entries without the user remembering</li>
+  <li>Automatically update total hours at top of document</li>
+</ol>
+
+<h4 id="results">Results:</h4>
+
+<p>I created a Microsoft Word macro enabled document that when opened will:</p>
+
+<ol>
+  <li>Automatically remove empty paragraphs that Microsoft Word <em>loves</em> to place at the end of your document</li>
+  <li>Add skeleton text containing today’s date, start, end, and total time</li>
+  <li>Add a paragraph labeled “Description:”</li>
+  <li>Calculate total hours on exit without user needing to remember</li>
+  <li>Automatically add skeleton entry on document open</li>
+</ol>
+
+<h3 id="what-it-does">What it does</h3>
+
+<p>I have provided an example document below. It includes a text-button to add the total number of hours for each entry and another text-button to add new journal entries.</p>
+
+<p>The macro calculates the total number of hours entered by searching for the ‘Total [*]’ string. When it matches, it will add the number found between ‘[]’ to a running total until the entire document has been searched. It will then return the total. The example document shows this total at the top. It is not foolproof. It can be easily defeated if someone decides to include the ‘Total [*]’ string inside their journal entry, or if one wants to overflow the numbers. But it works for me without any major issues (including the null value case), and that is what mattered.</p>
+
+<p>The macro adds a new journal entry to the end of the text by searching for the end of the document, removing any extra paragraphs at the end of the document, and then adding in the pre-scripted skeleton structure for a new journal entry with the date of today. During planning, I could have gone above and beyond and calculated the total hours between the start time and end time of a task/added it to the ‘Total []’ field, but I decided to draw the line there. The amount of work I was putting in for something that would take no time to accomplish would not be paying off.</p>
+
+<p>When the document is closed, the macro will run and add up the total number of hours from the listed entries automatically. A save dialog will then pop up and the user may choose to save or discard changes.</p>
+
+<h3 id="source-code-and-example-document">Source code and example document</h3>
+
+<p><a href="/assets/files/2016/03/JournalExample.docm">Microsoft Word Auto-Journal example document</a></p>
+
+<p>Above is a link to the macro enabled Microsoft Word document example. Below is the source code for the macro. Most of it is pieced together from other examples online accomplishing similar tasks. I spent most of my time looking at different resources for visual basic techniques and have mentioned those sources in nearby comments for pieces of code where available.</p>
+
+<div class="language-vb highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">Sub</span> <span class="nf">AutoOpen</span><span class="p">()</span>
+
+    <span class="k">Call</span> <span class="n">autoText</span>
+
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="c1">'Generate form fill text for document on call</span>
+<span class="k">Sub</span> <span class="nf">autoText</span><span class="p">()</span>
+
+    <span class="c1">'remove the empty paragraph that word likes to add to the end of the document on open.</span>
+    <span class="k">Call</span> <span class="n">removeEmptyPara</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">EndKey</span> <span class="n">Unit</span><span class="p">:</span><span class="o">=</span><span class="n">wdStory</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">TypeParagraph</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">InsertDateTime</span> <span class="n">DateTimeFormat</span><span class="p">:</span><span class="o">=</span><span class="s">"MMMM dd, yyyy"</span><span class="p">,</span> <span class="n">_</span>
+    <span class="n">InsertAsField</span><span class="p">:</span><span class="o">=</span><span class="k">False</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">TypeText</span> <span class="n">vbTab</span> <span class="o">&amp;</span> <span class="s">"Start [] End [] Total []"</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">EndKey</span> <span class="n">Unit</span><span class="p">:</span><span class="o">=</span><span class="n">wdStory</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">TypeParagraph</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">TypeText</span> <span class="s">"Description: "</span>
+
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="c1">'Removes empty paragraphs located at the end of the document</span>
+<span class="k">Sub</span> <span class="nf">removeEmptyPara</span><span class="p">()</span>
+    <span class="c1">'https://www.extendoffice.com/documents/word/647-word-remove-empty-paragraphs.html</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">Find</span><span class="p">.</span><span class="n">ClearFormattin</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">Find</span><span class="p">.</span><span class="n">Replacement</span><span class="p">.</span><span class="n">ClearFormatting</span>
+    <span class="k">With</span> <span class="n">Selection</span><span class="p">.</span><span class="n">Find</span>
+        <span class="p">.</span><span class="n">Text</span> <span class="o">=</span> <span class="s">"^p^p"</span>
+        <span class="p">.</span><span class="n">Replacement</span><span class="p">.</span><span class="n">Text</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="p">.</span><span class="n">Forward</span> <span class="o">=</span> <span class="k">True</span>
+        <span class="p">.</span><span class="n">Wrap</span> <span class="o">=</span> <span class="n">wdFindContinue</span>
+        <span class="p">.</span><span class="n">Format</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchCase</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchWholeWord</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchByte</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchAllWordForms</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchSoundsLike</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchWildcards</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="p">.</span><span class="n">MatchFuzzy</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="k">End</span> <span class="k">With</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">Find</span><span class="p">.</span><span class="n">Execute</span> <span class="n">Replace</span><span class="p">:</span><span class="o">=</span><span class="n">wdReplaceAll</span>
+
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Sub</span> <span class="nf">AutoClose</span><span class="p">()</span>
+
+    <span class="k">Call</span> <span class="n">findTotal</span>
+
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Sub</span> <span class="nf">findTotal</span><span class="p">()</span>
+
+    <span class="c1">'based on https://stackoverflow.com/questions/6425595/word-vba-how-to-select-text-between-two-substrings-and-assign-to-variable</span>
+
+    <span class="k">Dim</span> <span class="nv">firstTerm</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="k">Dim</span> <span class="nv">secondTerm</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="k">Dim</span> <span class="nv">myRange</span> <span class="ow">As</span> <span class="n">Range</span>
+    <span class="k">Dim</span> <span class="nv">documentText</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="nv">startPos</span> <span class="ow">As</span> <span class="kt">Long</span> <span class="c1">'Stores the starting position of firstTerm</span>
+    <span class="k">Dim</span> <span class="nv">stopPos</span> <span class="ow">As</span> <span class="kt">Long</span> <span class="c1">'Stores the starting position of secondTerm based on first term's location</span>
+    <span class="k">Dim</span> <span class="nv">nextPosition</span> <span class="ow">As</span> <span class="kt">Long</span> <span class="c1">'The next position to search for the firstTerm</span>
+    <span class="k">Dim</span> <span class="nv">total</span> <span class="ow">As</span> <span class="kt">Double</span>
+
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nextPosition</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">firstTerm</span> <span class="o">=</span> <span class="s">"Total ["</span>
+    <span class="n">secondTerm</span> <span class="o">=</span> <span class="s">"]"</span>
+
+    <span class="c1">'Get all the document text and store it in a variable.</span>
+    <span class="k">Set</span> <span class="n">myRange</span> <span class="o">=</span> <span class="n">ActiveDocument</span><span class="p">.</span><span class="n">Range</span>
+    <span class="c1">'Maximum limit of a string is 2 billion characters.</span>
+    <span class="c1">'So, hopefully your document is not bigger than that.  However, expect declining performance based on how big doucment is</span>
+    <span class="n">documentText</span> <span class="o">=</span> <span class="n">myRange</span><span class="p">.</span><span class="n">Text</span>
+
+    <span class="c1">'Loop documentText till you can't find any more matching "terms"</span>
+    <span class="k">Do</span> <span class="n">Until</span> <span class="n">nextPosition</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">startPos</span> <span class="o">=</span> <span class="n">InStr</span><span class="p">(</span><span class="n">nextPosition</span><span class="p">,</span> <span class="n">documentText</span><span class="p">,</span> <span class="n">firstTerm</span><span class="p">,</span> <span class="n">vbTextCompare</span><span class="p">)</span>
+        <span class="n">stopPos</span> <span class="o">=</span> <span class="n">InStr</span><span class="p">(</span><span class="n">startPos</span><span class="p">,</span> <span class="n">documentText</span><span class="p">,</span> <span class="n">secondTerm</span><span class="p">,</span> <span class="n">vbTextCompare</span><span class="p">)</span>
+
+        <span class="c1">'prevents empty brackets from crashing macro</span>
+        <span class="k">If</span> <span class="n">stopPos</span> <span class="o">-</span> <span class="n">startPos</span> <span class="o">&lt;&gt;</span> <span class="n">Len</span><span class="p">(</span><span class="n">firstTerm</span><span class="p">)</span> <span class="k">Then</span>
+            <span class="c1">'Debug.Print Mid$(documentText, startPos + Len(firstTerm), stopPos - startPos - Len(firstTerm))</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">Mid</span><span class="err">$</span><span class="p">(</span><span class="n">documentText</span><span class="p">,</span> <span class="n">startPos</span> <span class="o">+</span> <span class="n">Len</span><span class="p">(</span><span class="n">firstTerm</span><span class="p">),</span> <span class="n">stopPos</span> <span class="o">-</span> <span class="n">startPos</span> <span class="o">-</span> <span class="n">Len</span><span class="p">(</span><span class="n">firstTerm</span><span class="p">))</span>
+        <span class="k">End</span> <span class="k">If</span>
+        <span class="n">nextPosition</span> <span class="o">=</span> <span class="n">InStr</span><span class="p">(</span><span class="n">stopPos</span><span class="p">,</span> <span class="n">documentText</span><span class="p">,</span> <span class="n">firstTerm</span><span class="p">,</span> <span class="n">vbTextCompare</span><span class="p">)</span>
+    <span class="k">Loop</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">"Total = "</span><span class="err">;</span> <span class="n">total</span>
+    <span class="n">ActiveDocument</span><span class="p">.</span><span class="n">Variables</span><span class="p">(</span><span class="s">"total"</span><span class="p">).</span><span class="n">Delete</span>
+    <span class="n">ActiveDocument</span><span class="p">.</span><span class="n">Variables</span><span class="p">.</span><span class="n">Add</span> <span class="n">Name</span><span class="p">:</span><span class="o">=</span><span class="s">"total"</span><span class="p">,</span> <span class="n">Value</span><span class="p">:</span><span class="o">=</span><span class="n">total</span>
+    <span class="c1">'MsgBox "I'm done"</span>
+    <span class="k">Call</span> <span class="n">UpdateAll</span>
+
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Sub</span> <span class="nf">UpdateAll</span><span class="p">()</span>
+    <span class="c1">'Based on unknown source.</span>
+    <span class="k">Dim</span> <span class="nv">oStory</span> <span class="ow">As</span> <span class="n">Range</span>
+    <span class="k">For</span> <span class="k">Each</span> <span class="n">oStory</span> <span class="ow">In</span> <span class="n">ActiveDocument</span><span class="p">.</span><span class="n">StoryRanges</span>
+        <span class="n">oStory</span><span class="p">.</span><span class="n">Fields</span><span class="p">.</span><span class="n">Update</span>
+        <span class="k">If</span> <span class="n">oStory</span><span class="p">.</span><span class="n">StoryType</span> <span class="o">&lt;&gt;</span> <span class="n">wdMainTextStory</span> <span class="k">Then</span>
+            <span class="k">While</span> <span class="k">Not</span> <span class="p">(</span><span class="n">oStory</span><span class="p">.</span><span class="n">NextStoryRange</span> <span class="ow">Is</span> <span class="k">Nothing</span><span class="p">)</span>
+                <span class="k">Set</span> <span class="n">oStory</span> <span class="o">=</span> <span class="n">oStory</span><span class="p">.</span><span class="n">NextStoryRange</span>
+                <span class="n">oStory</span><span class="p">.</span><span class="n">Fields</span><span class="p">.</span><span class="n">Update</span>
+            <span class="k">Wend</span>
+        <span class="k">End</span> <span class="k">If</span>
+    <span class="k">Next</span> <span class="n">oStory</span>
+    <span class="k">Set</span> <span class="n">oStory</span> <span class="o">=</span> <span class="k">Nothing</span>
+<span class="k">End</span> <span class="k">Sub</span>
+</code></pre></div></div>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2016/03/word-auto-journal-macro-for-lazy/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>
