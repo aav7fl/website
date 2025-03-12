@@ -1,0 +1,352 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Reviving a Game Because of Nostalgia</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="My dive into how I solved the bug that revived Star Wars: Obi-Wan on the Cxbx-Reloaded Xbox emulator. The process involved stepping through the disassembled game code and working backwards.">
+<meta property="og:description" content="My dive into how I solved the bug that revived Star Wars: Obi-Wan on the Cxbx-Reloaded Xbox emulator. The process involved stepping through the disassembled game code and working backwards.">
+<link rel="canonical" href="/blog/2019/08/fixing-star-wars-obi-wan/">
+<meta property="og:url" content="/blog/2019/08/fixing-star-wars-obi-wan/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2019/08/star_wars_obi_wan_banner.jpg">
+<meta property="og:image:height" content="487">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-08-30T17:36:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2019/08/star_wars_obi_wan_banner.jpg">
+<meta property="twitter:title" content="Reviving a Game Because of Nostalgia">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2019-08-30T17:36:00-04:00","datePublished":"2019-08-30T17:36:00-04:00","description":"My dive into how I solved the bug that revived Star Wars: Obi-Wan on the Cxbx-Reloaded Xbox emulator. The process involved stepping through the disassembled game code and working backwards.","headline":"Reviving a Game Because of Nostalgia","image":{"height":487,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2019/08/star_wars_obi_wan_banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/08/fixing-star-wars-obi-wan/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2019/08/fixing-star-wars-obi-wan/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+    <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Reviving a Game Because of Nostalgia</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">August 30, 2019 | 
+        
+          13 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on August 31, 2019</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2019/08/star_wars_obi_wan_banner.jpg" alt="Star Wars: Obi-Wan custom game banner" width="800" height="487" layout="responsive"><noscript><img src="/assets/img/2019/08/star_wars_obi_wan_banner.jpg" alt="Star Wars: Obi-Wan custom game banner" width="800" height="487"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>When I dive into a project, I generally have some inkling how I am going to work through it. I have a pretty high confidence on how long it will take or what the outcome will be. For whatever reason, last weekend I had the urge to play my favorite childhood Xbox game, <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code>.</p>
+
+<p>Running games on the original hardware is always the best option, but I’m adamant about being able to preserve my content in the distant future. Besides, I can’t always have every console hooked up to the TV; some need to live in storage. I like the idea of having the option of emulation to preserve my games and saves for their future. In fact, that’s what my whole <a href="/blog/2015/04/transferring-n64-saves/">Nintendo 64 backup project</a> was about a few years ago.</p>
+
+<h2 id="growing-up-on-the-xbox">Growing up on the Xbox</h2>
+
+<p>The original Xbox was integral to my upbringing. I remember my parents taking my sister and I to Blockbuster on the weekend. <em>Sometimes</em> they would allow us to rent or even <em>buy</em> a used game; but only if it was under $20.</p>
+
+<p><amp-img src="/assets/img/2019/08/games.jpg" alt="Childhood collection of Xbox games" width="800" height="262" layout="responsive"><noscript><img src="/assets/img/2019/08/games.jpg" alt="Childhood collection of Xbox games" width="800" height="262"></noscript></amp-img><em>My humble Xbox collection from my childhood</em></p>
+
+<p>My dad had a neat deal with his friend. They shared an Official Xbox Magazine. Each issue would come with a demo disc full of playable demos for upcoming games. When a new issue came out, his friend would play with it for a month before passing it along to us. Because we were receiving it last, we could keep it! Every month, my collection of barely playable games increased. It was a thrill be able to pop in a new disc and find out which game demos were on the disc. I didn’t care that they weren’t the full game. It was a blast.</p>
+
+<p><amp-img src="/assets/img/2019/08/demos.jpg" alt="Collection of Official Xbox Magazine demo discs" width="800" height="403" layout="responsive"><noscript><img src="/assets/img/2019/08/demos.jpg" alt="Collection of Official Xbox Magazine demo discs" width="800" height="403"></noscript></amp-img><em>The Xbox demo discs I looked forward to each month</em></p>
+
+<p>What I’m really trying to say is that <em>nostalgia really hits me with the original Xbox</em>. I have a lot of fond memories with the system. But the cherry on top was <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code>.</p>
+
+<h2 id="my-history-with-star-wars-obi-wan">My History with Star Wars: Obi-Wan</h2>
+
+<p>As a kid, I would spend endless hours exploring each level. I distinctly remember how I would try to complete the training level as fast as possible every time I booted the game (before I knew that speedrunning was a thing). So, if we can get enough interest on a <code class="language-plaintext highlighter-rouge">training level</code> speedrun category for this game, I’d love to submit an entry.</p>
+
+<blockquote>
+  <p>For those that want some speedrunning tips on the <code class="language-plaintext highlighter-rouge">training level</code>, listen up. After the first door, you’re required to crawl through a tunnel. Crawl backwards if you want to go faster. Also, the doors <em>don’t block force powers</em>. Sections that involve force pushing droids off ledges or pushing bins to climb on can be triggered before the room even opens.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code> has a unique functionality where the right thumb stick was completely dedicated to the swinging lightsaber. If you push left, it swings from the left. If you push right, it swings from the right. I think you get where I’m going with this.</p>
+
+<!-- Method to implement AMP-Video. -->
+
+<amp-video height="420" width="700" poster="/assets/files/2019/08/saber_swing_thumb.png" layout="responsive" controls="" autoplay="" loop="">
+  <div fallback="">
+    Your browser doesn't support HTML5 video
+  </div>
+  <source type="video/mp4" src="/assets/files/2019/08/saber_swing.mp4"></source>
+</amp-video>
+
+<p>The controllable lightsaber added complexity to the game over the traditional single button attack. The player needed to plan each swing of their lightsaber to counter an enemy or avoid getting hit. It’s a cool concept that I wish they would bring back.</p>
+
+<p>Unfortunately, many people find this game to be terrible. Looking online, the reviews for the game average around <code class="language-plaintext highlighter-rouge">6/10</code>. Obi-Wan controls like a tank, the camera movement is rigid, it’s not obvious how each level should be routed, and the enemies don’t give the player a chance to recover if they falter.</p>
+
+<p>This Star Wars game was exclusive to the original Xbox. Since the reception for the game wasn’t astounding, publishers probably weren’t interested in porting it to later generations. This also meant that gamers weren’t <em>too</em> attracted to getting it running on an emulator.</p>
+
+<p><em>But I was.</em></p>
+
+<h2 id="surrendering-to-nostalgia">Surrendering to Nostalgia</h2>
+
+<p>Last weekend while I was relaxing, a thought in the back of my head was imploring me to check the latest compatibility of <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code> on <a href="https://github.com/Cxbx-Reloaded/Cxbx-Reloaded">Cxbx-Reloaded</a>. Cxbx-Reloaded is an emulator for running original Xbox games. The project is doing quite well, and every month they are adding new playable games to their compatibility list.</p>
+
+<p>I went to the GitHub project to check on the latest status of the Star Wars game. I had remembered that a year ago, the game wouldn’t boot in the emulator. But progress had been made and it would now boot to the start screen!</p>
+
+<p>As I read through the compatibility notes, I came across two findings:</p>
+
+<ol>
+  <li>If the game was left idle, an in-game engine rendered demo would play a prerecorded gameplay script. This demo showed working sound, some glitched graphics, and actions without crashing the game.</li>
+  <li>The game wasn’t accepting input from a controller.</li>
+</ol>
+
+<p>The comment about controller input was several months old, so I was hopeful that maybe it was fixed? I downloaded the latest <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded</code> build, loaded up my <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code> backup, and <em>anticipated</em> that the controller issue had been fixed. But to my dismay, the game still wasn’t accepting controller input.</p>
+
+<blockquote>
+  <p><a href="https://github.com/Cxbx-Reloaded/game-compatibility/issues/666">Cxbx-Reloaded/game-compatibility/Star Wars Obi-Wan [4C410001]</a></p>
+</blockquote>
+
+<p>Unsure of what I could do with this project, I navigated to their Discord channel and asked if anyone had any idea what to do. I even toyed around with the idea of offering a bounty if someone else could fix the issue. In the end, the friendly developers suggested running <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded</code> with the logs turned on for <code class="language-plaintext highlighter-rouge">Xapi</code> (logging controller input).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0x2C3C] XAPI    XInputOpen(
+   DeviceType           : 0x003B41A0
+   dwPort               : 0
+   dwSlot               : 0
+   pPollingParameters   : 0x00000000
+);
+[0x2C3C] XAPI    XInputGetCapabilities(
+   hDevice              : 0x045170C0
+ OUT pCapabilities      : 0x096BED70
+);
+[0x2C3C] XAPI    XInputGetCapabilities returns 0
+[0x2C3C] XAPI    XInputClose(
+   hDevice              : 0x045170C0
+);
+</code></pre></div></div>
+
+<p>That’s exactly what I did. Almost immediately after I posted my log, they spotted an irregularity where the Star Wars game was closing the controller almost instantly after connecting with it. They suggested I crack open a debugger, place breakpoints in hooked functions, and see if anything returned was out of place.</p>
+
+<p>I wasn’t exactly thrilled to dig into this. The whole project was unfamiliar, I hadn’t touched C++ in several years, and setting up a dev environment on Windows is never fun.</p>
+
+<p><amp-img src="/assets/img/2019/08/darth_maul_battle.png" alt="Star Wars Obi-Wan facing Darth Maul in-game" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2019/08/darth_maul_battle.png" alt="Star Wars Obi-Wan facing Darth Maul in-game" width="800" height="600"></noscript></amp-img><em>Darth Maul Battle (Shaders are a bit off on the emulator)</em></p>
+
+<h2 id="building-the-code">Building the Code</h2>
+
+<p>After debating with myself internally for an hour, I decided that my love for <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code> was greater than my discomfort for a project I understood nothing about. I forked <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded</code>, cloned the source code, and began working through the <code class="language-plaintext highlighter-rouge">README</code> to set up my environment.</p>
+
+<p>Setting up the project on my machine was nothing but frustrating. When I first installed Visual Studio 2019, I missed a step to install the <code class="language-plaintext highlighter-rouge">.NET 4.5 Developer Pack</code>. For whatever reason, I was unable to find this exact developer pack version online. I could only find the <code class="language-plaintext highlighter-rouge">.NET 4.5.1 Developer Pack</code>.</p>
+
+<p>This really shouldn’t have been a big deal. But because the framework wasn’t an exact match, every time I opened the project, it complained that I didn’t have the correct .NET framework installed and it wanted me to find the correct version. To fix this, I had to uninstall Visual Studio 2019 and reinstall it again (but this time making sure to select <code class="language-plaintext highlighter-rouge">.NET 4.5 Developer Pack</code> during the installation steps).</p>
+
+<p>Another bump that I hit was that the <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded Debugger</code> companion project would not compile. That meant that it kept breaking my build for <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded</code>. With some help from another developer on the Discord channel, they suggested that I simply unload the <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded Debugger</code> to continue developing. Who knew it was that easy?</p>
+
+<p>I followed their directions and eventually I was able compile <code class="language-plaintext highlighter-rouge">Cxbx-Reloaded</code>; it only took my whole day to setup.</p>
+
+<h2 id="tracing-through">Tracing Through</h2>
+
+<p>Before I had even started debugging the code, I felt like giving up because how difficult it was to <em>build</em> a <em>working version</em> of the code. But my nostalgia kicked my drive back in gear and I dove in.</p>
+
+<p>I started by debugging the <code class="language-plaintext highlighter-rouge">XInputGetCapabilities</code>. The developers on Discord figured that whatever the Star Wars game was requesting for controller capabilities wasn’t matching what the emulator was giving it. Through a lot of debugging and comparisons with other games in my library, I was able to support their assumption. I noticed that as soon as the Xbox polled for new controller changes, it would request the controller capabilities. Almost immediately after, the game code would run and then something would magically call the emulator method to close the controller.</p>
+
+<p>I thought it was incredibly odd and for an entire day I believed the emulator code was closing off the controller. Of course, knowing nothing about how this emulator or the Xbox worked, my assumption was incorrect. After speaking with the Discord channel once again, they were able to direct me to the call stack that contained the disassembled game code. <em>This is where the fun begins.</em></p>
+
+<h2 id="into-the-disassembler">Into the Disassembler</h2>
+
+<p>It never really occurred to me that I would be able to debug the game code through the emulator. I knew I wouldn’t be able to debug the emulator source code, but the thought never crossed my mind that I would be able to step through the disassembled game code. What felt like a tribute to my computer architecture classes in college, I was once again facing x86 assembly code.</p>
+
+<p>I’m not sure if you know about this but debugging machine code is like time traveling. As soon as you start stepping through instruction sets, time around you will warp and you will lose an entire evening to the <code class="language-plaintext highlighter-rouge">next line</code> button in your debugger.</p>
+
+<p>Debugging the disassembled game was awfully tedious. For the first couple hours I had no idea what I was looking for other than the fact that 40<em>ish</em> instructions would run and then close the controller. Eventually, I had the brilliant idea of opening the memory of the emulated console to see how each instruction was affecting active data. Once I figured out how to use the memory map with my debugger, everything started to get easier.</p>
+
+<p><amp-img src="/assets/img/2019/08/battle_royale.jpg" alt="Star Wars: Obi-Wan Battle Royale mode" width="1280" height="960" layout="responsive"><noscript><img src="/assets/img/2019/08/battle_royale.jpg" alt="Star Wars: Obi-Wan Battle Royale mode" width="1280" height="960"></noscript></amp-img><em>Playing battle royale in Star Wars: Obi-Wan (Shaders are a bit off on the emulator)</em></p>
+
+<p>With a second monitor dedicated to x86 instruction definitions and bit calculators, I started from the last call before the controller was closed and began working my way up through the instruction set. Eventually, I started to feel like I had a pattern. There was a certain memory address that I knew of and any instruction pointing to it was going to call the method to close the controller. After a while I noticed a <em>single instruction</em> around the same area that would send the user to a <em>different</em> memory location. I assumed this was the condition that would <em>not</em> close the controller.</p>
+
+<p>It felt a little bit strange. I was naming groups of disassembled code and attaching negative emotions to certain jump instructions if the program ran into them. Programming is weird.</p>
+
+<p>Since I had identified a <code class="language-plaintext highlighter-rouge">jump</code> instruction of interest, I had to discover what values each register needed leading up to it. Each time an instruction pulled from memory, I had to figure out what values were needed to give the correct register result. Each time I passed the active instruction in my debugger, I had to restart the process so I could confirm that a change in memory didn’t affect any other instructions leading up to that point.</p>
+
+<p>After a couple hours, I had finished working all the way up the chain. I finally figured out what bytes in memory were necessary in order to hit the <em>one</em> <code class="language-plaintext highlighter-rouge">jump</code> instruction that didn’t close the controller. I was excited. As soon as had my result, I detached the debugger from the emulator and tried to play my game. This time, the controller worked! I shouted with joy that modifying these silly bytes on my machine could result in functional gameplay.</p>
+
+<h2 id="0xff">0xFF</h2>
+
+<p>After it was all done, the result was that I needed to change a single byte to <code class="language-plaintext highlighter-rouge">0xFF</code> in order to pass the controller capabilities check. What a silly change. I made the change in code to modify the single byte and ran it again. This time when I looked at the memory map, I noticed that the controller capabilities were 23 bytes of <code class="language-plaintext highlighter-rouge">0xFF</code>, and they immediately followed the one byte that I needed to change to <code class="language-plaintext highlighter-rouge">0xFF</code>.</p>
+
+<p><amp-img src="/assets/img/2019/08/debug.png" alt="Visual Studio 2019 Debugging Disassembled Game Code" width="1919" height="1050" layout="responsive"><noscript><img src="/assets/img/2019/08/debug.png" alt="Visual Studio 2019 Debugging Disassembled Game Code" width="1919" height="1050"></noscript></amp-img><em>Finding the relationship between controller capabilities, memory, and disassembled game code</em></p>
+
+<p>If you’re like me, you’re probably noticing something here. Everything looks like it’s shifted over too far. My original theory was that the offset was incorrect by 1-3 bytes. I brought my findings to the Discord channel with a lengthy explanation to my findings. Within 10 minutes, another developer concluded that the compiler was adding an extra byte into the controller capabilities header in order to align it to a normal 4 bytes. Since the controller capabilities header only needed three bytes, there was an extra byte that wasn’t supposed to be used, which caused the controller capabilities to be shifted over by one byte.</p>
+
+<p>After a quick discussion on how they should resolve it, they offered me the opportunity to create the PR to implement the fix. The fix was to include a different header with the controller capabilities header <code class="language-plaintext highlighter-rouge">struct</code> that prevented it from adding an unused byte in the memory layout.</p>
+
+<blockquote>
+  <p><a href="https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708">Cxbx-Reloaded Pull Request #1708</a></p>
+</blockquote>
+
+<p>About an hour later, the pull request was merged. As a bonus side effect, the community has begun discovering other games with controller input issues that were solved with this fix.</p>
+
+<p>Solving this issue had a very high risk but was extremely rewarding.</p>
+
+<ol>
+  <li>There was no guarantee that a reasonable solution existed.</li>
+  <li>Debugging through disassembled code is quite tedious and can lead to easy mistakes.</li>
+  <li>If a solution existed to solve the controller input, did I have the skill to implement it?</li>
+  <li>If I had the skill to implement it, would it break compatibility with other games?</li>
+  <li>If a solution existed, was it specific to this game, or did it apply to other games? (The spirit of the project was to avoid game specific patches unless it affected them all)</li>
+  <li>If I managed to find a fix and implement it, would the game even get beyond the start menu or crash right away?</li>
+</ol>
+
+<p>Lucky for me, everything worked out. But due to many of the reasons above, it could have gone nowhere fast.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>I’m proud of the work that I did to solve the controller input issue with this game. It is great to step back and enjoy some work you’ve done on a project. It’s healthy to be proud of code that helped you grow, even if the solution is simple. Everything that was learned along the way, and the result of that change can have a larger impact than what was ever intended.</p>
+
+<p>Sure, this fix means that a few <em>other</em> (less exciting) games have working input now as a result. But really, I did this so <em>everyone</em> can have fun playing <code class="language-plaintext highlighter-rouge">Star Wars: Obi-Wan</code>. ¯\_(ツ)_/¯</p>
+
+<p><em>Why am I obsessed with this game?</em></p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2019/08/fixing-star-wars-obi-wan/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>
