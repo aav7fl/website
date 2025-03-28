@@ -1,7 +1,7 @@
 ---
 title: "Deploying ESPHome Smart Plugs to Replace Z-Wave"
 date: "2020-07-19 10:58"
-updated: 2020-07-24
+updated: 2025-03-28
 comments: true
 image:
   path: /assets/img/2020/07/sonoff_s31_plugs_disassembled.jpg
@@ -106,7 +106,7 @@ esphome:
 
 esp8266:
   board: esp01_1m
-  restore_from_flash: no
+  restore_from_flash: false
 
 # Enable logging
 logger:
