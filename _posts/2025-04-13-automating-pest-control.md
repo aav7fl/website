@@ -1,6 +1,7 @@
 ---
 title: Automating Attic Pest Control
 date: '2025-04-13 22:22'
+updated: '2025-04-14 07:08'
 comments: true
 image:
   path: /assets/img/2025/04/mousetrap.jpg
@@ -95,13 +96,13 @@ It's true that the device could technically update when we're rebooting, and we'
 ```yaml
 template:
   - trigger:
-  - platform: state
+    - platform: state
       entity_id: sensor.attic_mousetrap_last_seen
       not_to:
-      - unknown
-      - unavailable
-  sensor:
-  - name: Attic mousetrap Last Seen
+        - unknown
+        - unavailable
+    sensor:
+    - name: Attic mousetrap Last Seen
       unique_id: attic_mousetrap_last_seen_helper
       state: '{{ trigger.to_state.state }}'
       device_class: timestamp
