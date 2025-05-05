@@ -1,7 +1,7 @@
 ---
 title: Tackle Tracking Water Usage
 date: '2023-10-13 21:07'
-updated: 2024-06-17
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2023/10/garden_bed_watering.jpg
@@ -325,17 +325,17 @@ condition:
 action:
   - service: notify.family
     data:
+      title: 💧🌱 Irrigation Usage High!
       message: >-
         Irrigation has used {{states('sensor.sprinkler_consumption_gallons')}}
         gallons today. That was previously considered high. Please investigate.
-      title: 💧🌱 Irrigation Usage High!
+      data:
+        ttl: 0
+        priority: high
       data:
         notification_icon: mdi:sprinkler-variant
         group: irrigation-alert
         channel: irrigation-alert
-        data:
-          ttl: "0"
-          priority: high
 mode: single
 ```
 {% endraw %}

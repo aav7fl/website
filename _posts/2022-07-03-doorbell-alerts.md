@@ -1,7 +1,7 @@
 ---
 title: Transforming an Old Doorbell with Smart Alerts
 date: '2022-07-03 13:18'
-updated: 2022-07-03
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2022/07/banner.jpg
@@ -371,14 +371,14 @@ action:
   - service: notify.family
     data:
       title: "{{ notification_title }}"
-      message: "{{ notification_message_standard }}"        
+      message: "{{ notification_message_standard }}"  
+      data:
+        ttl: 0
+        priority: high      
       data:
         notification_icon: mdi:bell
         group: doorbell
         channel: doorbell
-        data:
-          ttl: '0'
-          priority: high
         push:
           interruption-level: time-sensitive
         image: "{{ snapshot_image_path }}"
