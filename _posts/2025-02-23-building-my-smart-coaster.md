@@ -1,6 +1,7 @@
 ---
 title: "The Smart Coaster That Keeps Me Hydrated"
 date: '2025-02-23 20:01'
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2025/02/smart_coaster_front.jpg
@@ -405,20 +406,20 @@ actions:
           - parallel:
               - data:
                   # My cheater way to convert the timer's original duration into minutes for my notification. It will work for any _sane_ duration.
+                  title: 🥤 Drink some water
                   message: >-
                     You haven't had anything to drink in the last {% set
                     remaining_time = state_attr('timer.water_bottle_timer',
                     'duration').split(':') %}{{remaining_time[0] | int * 60 +
                     remaining_time[1] | int }} minutes.
-                  title: 🥤 Drink some water
+                  data:
+                    ttl: 0
+                    priority: high  
                   data:
                     notification_icon: mdi:beer
                     group: water-drink-alert
                     channel: water-drink-alert
                     tag: water-drink-alert
-                    data:
-                      ttl: "0"
-                      priority: high
                     push:
                       interruption-level: time-sensitive
                 action: notify.kyle

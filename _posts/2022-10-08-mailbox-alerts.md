@@ -1,7 +1,7 @@
 ---
 title: Instantaneous Mail Notifications
 date: '2022-10-08 08:05'
-updated: 2024-05-07
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2022/10/mailbox_banner.jpg
@@ -132,19 +132,19 @@ action:
   - service: notify.family
     data:
       title: 📬 You've got mail!
+      message: The mailbox has been opened. Maybe you have mail?
+      data:
+        ttl: 0
+        priority: high
       data:
         notification_icon: mdi:mailbox-open-up
         group: mail-alert
         channel: mail-alert
-        data:
-          ttl: "0"
-          priority: high
         push:
           interruption-level: time-sensitive
         actions: # More on this action later!
           - action: TURN_OFF_MAIL_PRESENT
             title: That was me
-      message: The mailbox has been opened. Maybe you have mail?
 mode: single
 ```
 
