@@ -1,7 +1,7 @@
 ---
 title: Automating Attic Pest Control
 date: '2025-04-13 22:22'
-updated: '2025-04-14 07:08'
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2025/04/mousetrap.jpg
@@ -233,13 +233,13 @@ actions:
                   title: 🐭🪤 ZAP! Attic mousetrap triggered
                   message: Oh no! The attic mousetrap has been triggered.
                   data:
+                    ttl: 0
+                    priority: high  
+                  data:
                     notification_icon: mdi:rodent
                     group: mousetrap-alert
                     channel: mousetrap-alert
                     tag: mousetrap-alert-attic
-                    data:
-                      ttl: "0"
-                      priority: high
                     push:
                       interruption-level: time-sensitive
                     actions:

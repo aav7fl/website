@@ -1,7 +1,7 @@
 ---
 title: 'Making Bluetooth the Beacon of Trash Day'
 date: '2024-06-25 21:07'
-updated: '2024-07-09 08:00'
+updated: '2025-05-05 06:22'
 comments: true
 image:
   path: /assets/img/2024/06/waste_pickup.jpg
@@ -651,12 +651,12 @@ action:
               title: 🗑️ Trash!
               message: The trash has not been taken out yet. Pickup is tomorrow.
               data:
+                ttl: 0
+                priority: high
+              data:
                 notification_icon: mdi:dump-truck
                 group: waste-removal-alert
                 channel: waste-removal-alert
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
       - conditions:
@@ -689,12 +689,12 @@ action:
                 The recycling or trash have not been taken out yet. Pickup
                 is tomorrow.
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:recycle
                 group: waste-removal-alert
                 channel: waste-removal-alert
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
       - conditions:
@@ -722,12 +722,12 @@ action:
               title: 🗑️ Trash!
               message: The trash was already taken down. Was that you?
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:dump-truck
                 group: waste-removal-alert
                 channel: waste-removal-alert
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
         alias: Trash tomorrow (bin not home)
@@ -761,12 +761,12 @@ action:
                 The recycling or trash were already taken down. Was that
                 you?
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:recycle
                 group: waste-removal-alert
                 channel: waste-removal-alert
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
         alias: Trash/Recycling tomorrow (bin not home)
@@ -988,13 +988,13 @@ action:
               title: 🗑️ Trash picked up
               message: The trash bin has been picked up.
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:dump-truck
                 group: waste-removal-alert
                 channel: waste-removal-alert
                 image: /local/tmp/snapshot_camera_proxy_driveway_wide.jpg
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
       - conditions:
@@ -1037,13 +1037,13 @@ action:
               title: ♻️🗑️ Recycling & trash picked up
               message: The recycling & trash bins have been picked up.
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:dump-truck
                 group: waste-removal-alert
                 channel: waste-removal-alert
                 image: /local/tmp/snapshot_camera_proxy_driveway_wide.jpg
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
       - conditions:
@@ -1076,13 +1076,13 @@ action:
               title: ♻️🗑️ Recycling or trash picked up
               message: The recycling or trash bins still haven't been picked up.
               data:
+                ttl: 0
+                priority: high  
+              data:
                 notification_icon: mdi:dump-truck
                 group: waste-removal-alert
                 channel: waste-removal-alert
                 image: /local/tmp/snapshot_camera_proxy_driveway_wide.jpg
-                data:
-                  ttl: "0"
-                  priority: high
                 push:
                   interruption-level: time-sensitive
 mode: single
@@ -1153,12 +1153,12 @@ action:
         One of the Bluetooth beacon's presence sensor has been unknown for a while.
         Please investigate.
       data:
+        ttl: 0
+        priority: high  
+      data:
         notification_icon: mdi:radio-tower
         group: bluetooth-beacon-alert
         channel: bluetooth-beacon-alert
-        data:
-          ttl: "0"
-          priority: high
         push:
           interruption-level: time-sensitive
 mode: single
