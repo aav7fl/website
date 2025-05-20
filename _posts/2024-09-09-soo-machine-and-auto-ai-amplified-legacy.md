@@ -1,10 +1,10 @@
 ---
 title: 'Soo Machine & Auto: Unearthing a Lost Legacy, Amplified by AI'
 date: '2024-09-09 08:00'
-updated: '2024-09-09 10:15'
+updated: '2025-05-20 08:22'
 comments: true
 image:
-  path: /assets/img/2024/09/soo_machine_showroom.jpg
+  path: /assets/img/2024/09/soo_machine_showroom.png
   height: 517
   width: 800
 alt: Soo Machine & Auto. Interior view of the beautiful show rooms on Maple Street. The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.
@@ -825,7 +825,7 @@ Soo Machine & Engine Works was an automotive business located in Sault Ste. Mari
 
 **Robert Morrison**, one of the co-founders, was a skilled machinist and the manager of the Soo Machine & Auto Co. He is credited with playing a crucial role in the company's success, as he ensured it was fully equipped to handle various engine and machine repairs, specializing in gas engines and launch machinery. Morrison frequently traveled on business, attending auto shows and visiting cities like Chicago and Milwaukee. On October 4, 1909, Robert Morrison (1880) married Miss Violet May Parsons (~1883).
 
-![Robert A. Morrison](/assets/img/2024/09/robert_morrison.jpg)*"Robert A. Morrison": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.*
+![Robert A. Morrison](/assets/img/2024/09/robert_morrison.png)*"Robert A. Morrison": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.*
 
  **George (Whithouse) Ingham**, the other co-founder, was the president of Soo Machine & Auto. Prior to this position, he was awarded patents for a "steam-boiler" ([US760126A](https://patents.google.com/patent/US760126A/en)) in **1904** and a "lubricator" ([US843536A](https://patents.google.com/patent/US843536A/en)) in **1907**. 
  
@@ -845,19 +845,21 @@ In **1920**, Soo Machine & Auto Co. embarked on a major expansion project, inves
 
 This move signaled a strategic shift for the company, providing a larger and more prominent location to accommodate its growing business. The new building boasted a spacious showroom for displaying their expanding inventory of automobiles, dedicated office space, and a well-stocked stockroom. [The building still stands today](https://www.google.com/maps/@46.4989006,-84.3455289,3a,75y,63.38h,77.13t/data=!3m6!1e1!3m4!1sqafjwhNEHFRAHQDbSeMKvA!2e0!7i16384!8i8192?coh=205409&entry=ttu&g_ep=EgoyMDI0MDgyMy4wIKXMDSoASAFQAw%3D%3D).
 
-![Soo Machine & Auto Showroom](/assets/img/2024/09/soo_machine_showroom.jpg)*"Soo Machine & Auto: Interior view of the beautiful show rooms on Maple Street": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.*
+![Soo Machine & Auto Showroom](/assets/img/2024/09/soo_machine_showroom.png)*"Soo Machine & Auto: Interior view of the beautiful show rooms on Maple Street": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 9.*
 
-![Soo Machine & Auto Storage Room](/assets/img/2024/09/soo_machine_storage_room.jpg)*"Soo Machine & Auto: Thousands of square feet of storage space in the new garage": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 12.*
+![Soo Machine & Auto Storage Room](/assets/img/2024/09/soo_machine_storage_room.png)*"Soo Machine & Auto: Thousands of square feet of storage space in the new garage": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 12.*
 
 > On March 13, 1920, Soo Machine & Auto Co. took out an 8-page supplement to _The Evening News_. At the time, it was the largest ever paid advertisement in _The Evening News_. This supplement contained a variety of articles, photos, and advertisements showcasing the company's offerings and services. It is now part of the public domain, and I have attached a copy for others to enjoy. I tried my best to OCR it, but the quality of the microfilm scan was poor. 
 >
 > [Evening_News_1920-03-13_Supplemental.pdf](/assets/files/2024/09/Evening_News_1920-03-13_Supplemental.pdf)
 >
-> I have been informed that [UPLINK](https://uplink.nmu.edu/) may be uploading newspaper scans of _The Evening News_ in the near future with a higher quality scan of this supplement. I will update any media if I notice they have better scans.
+> **EDIT 2025-05-20**: UPLINK has uploaded their own scan of this newspaper with higher quality images (but less readable text). [Check it out here](https://uplink.nmu.edu/node/103396).
+>
+> If that ever goes away, I've uploaded a [copy of their scan here](/assets/files/2024/09/CCHS-001_1920_03_13.pdf).
 
 Throughout the **1920s**, Soo Machine & Auto Co. adapted to the evolving automotive market, securing dealerships with several prominent car manufacturers. Building upon its existing partnerships with Jeffery, Buick, Chevrolet, Reo, Cadillac, Oldsmobile, and White trucks, the company expanded its offerings to include Paige automobiles. The company's ability to secure dealerships with a diverse range of manufacturers highlights its strong reputation in the industry and its understanding of the growing demand for automobiles in the region.
 
-![Soo Machine & Auto Salesrooms](/assets/img/2024/09/soo_machine_salesrooms.jpg)*"Soo Machine & Auto: Mr. Morrison and some of his fellow workers in front of the Maple Street salesrooms": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 13.*
+![Soo Machine & Auto Salesrooms](/assets/img/2024/09/soo_machine_salesrooms.png)*"Soo Machine & Auto: Mr. Morrison and some of his fellow workers in front of the Maple Street salesrooms": The Evening News, Sault Saint Marie, MI, March 13, 1920, p. 13.*
 
 Beyond its role as an automotive dealer, Soo Machine & Auto Co. became a central gathering place for the Sault Ste. Marie community. The sources describe the company as a place where "farmers would meet," "bigwigs gravitated," "sportsmen met," and "weary businessmen" would gather. This confluence of community members transformed the company into a de facto community center, where local affairs, sporting events, and even political matters were discussed and debated. The company's central location on Maple Street further contributed to its role as a community hub. 
 
