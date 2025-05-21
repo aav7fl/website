@@ -1,7 +1,7 @@
 ---
 title: 'Soo Machine & Auto: Unearthing a Lost Legacy, Amplified by AI'
 date: '2024-09-09 08:00'
-updated: '2025-05-20 08:22'
+updated: '2025-05-21 17:05'
 comments: true
 image:
   path: /assets/img/2024/09/soo_machine_showroom.png
@@ -853,9 +853,9 @@ This move signaled a strategic shift for the company, providing a larger and mor
 >
 > [Evening_News_1920-03-13_Supplemental.pdf](/assets/files/2024/09/Evening_News_1920-03-13_Supplemental.pdf)
 >
-> **EDIT 2025-05-20**: UPLINK has uploaded their own scan of this newspaper with higher quality images (but less readable text). [Check it out here](https://uplink.nmu.edu/node/103396).
+> **EDIT 2025-05-21**: UPLINK has uploaded their own scan of this newspaper with higher quality images (but less readable text). [Check it out here](https://uplink.nmu.edu/node/103396).
 >
-> If that ever goes away, I've uploaded a [copy of their scan here](/assets/files/2024/09/CCHS-001_1920_03_13.pdf).
+> However, I reached out and obtained an uncompressed scan from them, [which I've recompressed at a suitable resolution for reading here (~50MB)](/assets/files/2024/09/CCHS-001_1920_03_13.pdf).
 
 Throughout the **1920s**, Soo Machine & Auto Co. adapted to the evolving automotive market, securing dealerships with several prominent car manufacturers. Building upon its existing partnerships with Jeffery, Buick, Chevrolet, Reo, Cadillac, Oldsmobile, and White trucks, the company expanded its offerings to include Paige automobiles. The company's ability to secure dealerships with a diverse range of manufacturers highlights its strong reputation in the industry and its understanding of the growing demand for automobiles in the region.
 
