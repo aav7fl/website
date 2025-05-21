@@ -4,5 +4,8 @@
     ],
     "git.enableSmartCommit": true,
     "git.postCommitCommand": "push",
-    "remote.localPortHost": "allInterfaces"
+    "remote.localPortHost": "allInterfaces",
+    "cSpell.words": [
+        "cooldown"
+    ]
 }
