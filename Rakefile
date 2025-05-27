@@ -49,22 +49,23 @@ task :html_proofer do
     check_html: 'true',
     check_opengraph: 'true',
     ignore_files: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
+    ignore_status_codes: [503], # Ignore common errors
     ignore_urls:
     [
-      %r{.*apple.com/.*},
-      %r{.*ebird.org/.*},
-      %r{.*loc.gov/.*},
-      %r{.*opensprinkler.com/.*},
-      %r{.*savaslabs.com/.*},
-      %r{.*uplink.nmu.edu/.*},
-      %r{.*/#comment-.*}, # Disqus comments
-      %r{https://www.linkedin.com.*},
-      %r{https://www.reddit.com.*},
-      %r{.*x.com/.*},
-      %r{^https://frenck.dev.*},
-      %r{^https://github.com/aav7fl/website/blob/.*},
-      %r{^https://github.com/home-assistant/core/.*},
-      %r{^https://sooeveningnews.newsbank.com/.*}
+      %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
+      %r{.*ebird.org/.*}, # eBird is blocks us :(
+      %r{.*loc.gov/.*}, # Seems to break every other day
+      %r{.*opensprinkler.com/.*}, # Returns a 403
+      %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
+      %r{.*uplink.nmu.edu/.*}, # They've started returning a 403 to us
+      %r{.*/#comment-.*}, # Internal Disqus comments
+      %r{https://www.linkedin.com.*}, # They always return a 999
+      %r{https://www.reddit.com.*}, # Reddit is blocking us :(
+      %r{.*x.com/.*}, # This site now hates HTML Proofer
+      %r{https://frenck.dev.*}, # Cloudflare is blocking us :(
+      %r{^https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23}, # GitHub is saying the anchor is an error
+      %r{^https://github.com/home-assistant/core/blob/dd7a06b9dca8a04152f6c4ef4828c8e214260393/homeassistant/components/google_assistant/trait.py#L522-L530}, # GitHub is saying the anchor is an error
+      %r{^https://sooeveningnews.newsbank.com/.*} # NewsBank thinks we're a bot if we test too often
     ],
     swap_urls: {
       %r{^https://www.kyleniewiada.org/} => '/' # Convert internal links that may not exist yet.
