@@ -99,7 +99,7 @@ Check out the video demo where I control the noise box with my voice. Don't worr
 
 ## Conclusion
 
-Thankfully, my Home Assistant instance already had a [Google Home integration](https://www.nabucasa.com/config/google_assistant/). This meant once I had the ESP32 module connected using ESPHome, I only needed to expose the entity to Google.
+Thankfully, my Home Assistant instance already had a [Google Home integration](https://www.home-assistant.io/integrations/google_assistant/). This meant once I had the ESP32 module connected using ESPHome, I only needed to expose the entity to Google.
 
 Voice control was now a success. My dumb noise machine went through a transformation stuffed with wires and an ESP32 module. No more decisions needed to be made on whether I wanted to suffer with the creaking all night, or end up dashing across the frozen carpet to turn it on. My ~~dumb~~ _smarter_ noise machine was fully controllable from my cozy warm bed.
 
