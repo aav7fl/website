@@ -53,6 +53,7 @@ task :html_proofer do
     [
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
       %r{.*ebird.org/.*}, # eBird is blocks us :(
+      %r{.*loc.gov/.*}, # Seems to break every other day
       %r{.*opensprinkler.com/.*}, # Returns a 403
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*uplink.nmu.edu/.*}, # They've started returning a 403 to us
