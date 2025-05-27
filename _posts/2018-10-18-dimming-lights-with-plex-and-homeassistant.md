@@ -112,7 +112,7 @@ Here's the automation for changing the boolean value:
     entity_id: input_boolean.plex
 ```
 
-> After HomeAssistant introduced their [Cloud Webhook](https://www.nabucasa.com/config/webhooks/) in `0.84.0`, my `payload_template` for the incoming WebHooks needed to be changed to `{% raw %}{{ (trigger.data | string)[154:][:-55] }}{% endraw %}` until HomeAssistant is able to handle JSON payloads in multipart data WebHooks. It's a _terrible_ solution and entirely based on assumed headers of the payload, but it works for now.
+> After HomeAssistant introduced their [Cloud Webhook](https://www.home-assistant.io/blog/2018/12/12/release-84/#cloud-webhooks) in `0.84.0`, my `payload_template` for the incoming WebHooks needed to be changed to `{% raw %}{{ (trigger.data | string)[154:][:-55] }}{% endraw %}` until HomeAssistant is able to handle JSON payloads in multipart data WebHooks. It's a _terrible_ solution and entirely based on assumed headers of the payload, but it works for now.
 
 ## Conclusion
 
