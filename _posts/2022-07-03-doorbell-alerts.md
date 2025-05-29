@@ -1,7 +1,7 @@
 ---
 title: Transforming an Old Doorbell with Smart Alerts
 date: '2022-07-03 13:18'
-updated: '2025-05-05 06:22'
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2022/07/banner.jpg
@@ -108,12 +108,12 @@ It's probably a bad idea. But don't let that stop you! Just be careful of burnin
 # Basic Config
 # shelly-one-01
 # Front Door Doorbell
-# Updated for 2025.2.0
+# Updated for 2025.5.0
 
 substitutions:
-  plugtag: shelly-one-01
-  devicename: Front Door Doorbell
-  deviceid: front_door_doorbell
+  board_id: shelly-one-01
+  name: front-door-doorbell
+  friendly_name: Front Door Doorbell
 
 wifi:
   ssid: !secret wifi_ssid
@@ -121,7 +121,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${plugtag} Hotspot"
+    ssid: "${board_id} Hotspot"
     password: !secret ap_hotspot_password
 
 # Enable captive portal if wifi ever changes
@@ -137,8 +137,9 @@ ota:
   password: !secret ota_password
 
 esphome:
-  name: ${plugtag}
-  comment: ${devicename}
+  name: ${name}
+  comment: ${board_id}
+  friendly_name: ${friendly_name}
 
 esp8266:
   board: esp01_1m
@@ -164,14 +165,14 @@ time:
 # Sensors that the ESPhome unit is capable of reporting
 sensor:
   - platform: wifi_signal
-    name: "${devicename} WiFi Signal"
+    name: "WiFi Signal"
     update_interval: 300s
 
 binary_sensor:
   - platform: gpio
     pin:
       number: GPIO5
-    name: ${devicename}
+    name: None
     filters:
       - delayed_on: 100ms
       - delayed_off: 25ms
@@ -192,7 +193,7 @@ switch:
   # doorbell button is pushed.
   - platform: template
     id: chime_is_enabled
-    name: ${devicename} Chime
+    name: Chime
     icon: mdi:power-settings
     restore_mode: DISABLED
     turn_on_action:
@@ -207,7 +208,7 @@ switch:
       return id(chime_var);
   - platform: template
     id: chime_alarm
-    name: ${devicename} Alarm
+    name: Alarm
     icon: mdi:alarm-bell
     restore_mode: DISABLED
     turn_on_action:
@@ -226,7 +227,7 @@ switch:
   - platform: gpio
     id: relay
     internal: true
-    name: ${devicename} Doorbell Switch
+    name: Doorbell Switch
     pin: GPIO4
     restore_mode: RESTORE_DEFAULT_OFF
     

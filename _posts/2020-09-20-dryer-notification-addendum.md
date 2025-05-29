@@ -1,7 +1,7 @@
 ---
 title: "Electric Dryer Monitoring with a CT Clamp"
 date: "2020-09-20 12:47"
-updated: 2020-09-20
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg
@@ -61,20 +61,20 @@ spi:
 #  https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/blob/master/Software/EmonESP/src/energy_meter.h#L55-L75
 sensor:
   - platform: wifi_signal
-    name: "${devicename} WiFi Signal"
+    name: "WiFi Signal"
     update_interval: 300s
   - platform: atm90e32
     cs_pin: 5
     phase_a:
       voltage:
         id: CT1_voltage
-        name: "${devicename} Line Voltage"
+        name: "Line Voltage"
       current:
         id: CT1_current
-        name: "${devicename} CT1 Current"
+        name: "CT1 Current"
       power:
         id: CT1_power
-        name: "${devicename} CT1 Power"
+        name: "CT1 Power"
       gain_voltage: 3920 # For Meters >= v1.4 rev.3
       gain_ct: 39473
     # Library states phase_c is used for CT2 on single split-phase meter on this specific board
@@ -82,21 +82,21 @@ sensor:
     #   current:
     #     id: CT2_current
     #     internal: true
-    #     name: "${devicename} CT2 Current"
+    #     name: "CT2 Current"
     #   power:
     #     id: CT2_power
     #     internal: true
-    #     name: "${devicename} CT2 Power"
+    #     name: "CT2 Power"
     #   gain_voltage: 3920 # For Meters >= v1.4 rev.3
     #   gain_ct: 39473
     frequency:
       internal: true
-      name: "${devicename} Line Frequency"
+      name: "Line Frequency"
     line_frequency: 60Hz
     gain_pga: 4X
     update_interval: 3s
   - platform: template
-    name: "${devicename} Power"
+    name: "Power"
     id: calculated_power
     unit_of_measurement: "W"
     icon: "mdi:flash"
@@ -111,7 +111,7 @@ sensor:
 
 binary_sensor:  
   - platform: template
-    name: "${devicename} Running"
+    name: "Running"
     filters:
       - delayed_on_off: 10s # Avoid extra alerts when opening dryer door to check status
     lambda: |-
