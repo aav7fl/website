@@ -1,7 +1,7 @@
 ---
 title: "Deploying ESPHome Smart Plugs to Replace Z-Wave"
 date: "2020-07-19 10:58"
-updated: 2025-03-28
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2020/07/sonoff_s31_plugs_disassembled.jpg
@@ -71,11 +71,12 @@ Here is a sample from my ESPHome configuration for one of my deployed smart plug
 # Basic Config
 # sonoff-s31-01
 # Flower lamp
-# Updated for 2025.2.0
+# Updated for 2025.5.0
 
 substitutions:
-  plugtag: sonoff-s31-01
-  devicename: Flower lamp
+  board_id: sonoff-s31-01
+  name: flower-lamp
+  friendly_name: Flower lamp
 
 wifi:
   ssid: !secret wifi_ssid
@@ -83,7 +84,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${plugtag} Hotspot"
+    ssid: "${board_id} Hotspot"
     password: !secret ap_hotspot_password
 
   reboot_timeout: 6h
@@ -101,8 +102,9 @@ ota:
   password: !secret ota_password
 
 esphome:
-  name: ${plugtag}
-  comment: ${devicename}
+  name: ${name}
+  comment: ${board_id}
+  friendly_name: ${friendly_name}
 
 esp8266:
   board: esp01_1m
@@ -128,10 +130,10 @@ time:
 
 sensor:
   - platform: wifi_signal
-    name: "${devicename} WiFi Signal"
+    name: "WiFi Signal"
     update_interval: 300s
   - platform: total_daily_energy
-    name: "${devicename} Total Daily Energy"
+    name: "Total Daily Energy"
     power_id: power
     accuracy_decimals: 3
     unit_of_measurement: kWh
@@ -140,7 +142,7 @@ sensor:
   - platform: cse7766
     current:
       internal: true
-      name: "${devicename} Current"
+      name: "Current"
       unit_of_measurement: A
       accuracy_decimals: 3
       filters:
@@ -156,7 +158,7 @@ sensor:
         - lambda: if (x < (0.01 - 0.016)) return 0; else return (x - 0.016);
     voltage:
       internal: true
-      name: "${devicename} Voltage"
+      name: "Voltage"
       unit_of_measurement: V
       accuracy_decimals: 1
       filters:
@@ -168,7 +170,7 @@ sensor:
           - 114.3 -> 115.33
         - throttle_average: 30s
     power:
-      name: "${devicename} Power"
+      name: "Power"
       id: power
       unit_of_measurement: W
       accuracy_decimals: 0
@@ -202,7 +204,7 @@ binary_sensor:
 light:
   - platform: binary
     id: light_switch
-    name: "${devicename}"
+    name: None
     output: light_relay         
 ```
 
