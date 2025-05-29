@@ -1,7 +1,7 @@
 ---
 title: "The Smart Coaster That Keeps Me Hydrated"
 date: '2025-02-23 20:01'
-updated: '2025-05-05 06:22'
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2025/02/smart_coaster_front.jpg
@@ -483,11 +483,12 @@ Here is a breakdown of the hardware and ESPHome configuration I used for my smar
 # Basic Config
 # esp-32-s3-01
 # Smart Coaster
-# Update for 2025.2.0
+# Update for 2025.5.0
 
 substitutions:
-  devicename: Smart Coaster
-  deviceid: coaster
+  board_id: esp-32-s3-01
+  friendly_name: Smart Coaster
+  name: smart-coaster
 
 wifi:
   ssid: !secret wifi_ssid
@@ -495,7 +496,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${devicename} Hotspot"
+    ssid: "${board_id} Hotspot"
     password: !secret ap_hotspot_password
 
 # Enable captive portal if wifi ever changes
@@ -511,9 +512,9 @@ ota:
   password: !secret ota_password
 
 esphome:
-  name: ${devicename}
-  comment: ${devicename}
-  friendly_name: ${devicename}
+  name: ${name}
+  comment: ${board_id}
+  friendly_name: ${friendly_name}
 
 esp32:
   board: esp32-s3-devkitc-1

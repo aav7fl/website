@@ -1,7 +1,7 @@
 ---
 title: Tackle Tracking Water Usage
 date: '2023-10-13 21:07'
-updated: '2025-05-05 06:22'
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2023/10/garden_bed_watering.jpg
@@ -98,7 +98,7 @@ Here is my ESPHome Water Meter Configuration:
 # Basic Config
 # esp_32_02
 # Water Meter
-# Updated for 2025.2.0
+# Updated for 2025.5.0
 
 # Alleged Reed Switch data from manufacturer:
 #   Pulse Output: 1 gallon per pulse
@@ -116,9 +116,9 @@ Here is my ESPHome Water Meter Configuration:
 #     components: [ pulse_meter ]
 
 substitutions:
-  plugtag: esp-32-02
-  devicename: Main Water Meter
-  deviceid: main_water_meter
+  board_id: esp-32-02
+  name: Main Water Meter
+  friendly_name: Main Water Meter
 
 wifi:
   ssid: !secret wifi_ssid
@@ -131,7 +131,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${plugtag} Hotspot"
+    ssid: "${board_id} Hotspot"
     password: !secret ap_hotspot_password
 
   #use_address: energy-meter.local
@@ -149,8 +149,9 @@ ota:
   password: !secret ota_password
 
 esphome:
-  name: ${plugtag}
-  comment: ${devicename}
+  name: ${name}
+  comment: ${board_id}
+  friendly_name: ${friendly_name}
   on_boot:
     priority: 800
     then: 
@@ -167,7 +168,7 @@ logger:
 
 button:
   - platform: restart
-    name: "${devicename} Restart"
+    name: "Restart"
 
 # Sensors that the ESPhome unit is capable of reporting
 sensor:
@@ -182,7 +183,7 @@ sensor:
     internal_filter: 200ms
     unit_of_measurement: 'gal/min'
     accuracy_decimals: 1
-    name: "${devicename} Flow"
+    name: "Flow"
     icon: 'mdi:water'
     filters:
       - clamp:
@@ -205,7 +206,7 @@ sensor:
   # This makes it easier to add to the Energy Dashboard
   - platform: template
     id: water_consumption_submeter
-    name: "${devicename} Consumption Submeter"
+    name: "Consumption Submeter"
     unit_of_measurement: "gal"
     state_class: total_increasing
     # Return 0 decimal places as the water meter only measures in whole gallons
@@ -216,7 +217,7 @@ sensor:
     # lambda: return 0;
 
   - platform: wifi_signal
-    name: "${devicename} WiFi Signal"
+    name: "WiFi Signal"
     update_interval: 300s
 
 # Enables status LED

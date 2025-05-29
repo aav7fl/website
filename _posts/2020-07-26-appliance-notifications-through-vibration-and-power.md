@@ -1,7 +1,7 @@
 ---
 title: "Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish"
 date: "2020-07-26 08:00"
-updated: 2020-09-20
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2020/07/dryer_vibration_monitor.jpg
@@ -28,7 +28,7 @@ Since my plug is running ESPHome, I just need to add a new `binary_sensor` to th
 ```yaml
 binary_sensor:
   - platform: template
-    name: "Washing Machine Running"
+    name: "Running"
     filters:
       - delayed_off: 15s
     lambda: |-
@@ -108,7 +108,7 @@ sensor:
     # Handle a moving average of vibrations 
     # Avoids `turning on` when bumping the dryer
   - platform: pulse_counter
-    name: "Dryer Vibration Pulse Rate"
+    name: "Vibration Pulse Rate"
     internal: false # It may be easier to expose this when setting up and testing
     id: vibration_pulse_rate
     icon: mdi:vibrate
@@ -125,7 +125,7 @@ sensor:
 # SW-420 Vibration Sensor
 binary_sensor:  
   - platform: template
-    name: "Dryer Running"
+    name: "Running"
     device_class: vibration
     filters:
       - delayed_on_off: 120s # Avoid debounce shaking from washing machine in close proximity

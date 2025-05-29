@@ -1,7 +1,7 @@
 ---
 title: "Hacking Voice & WiFi Control into My Dumb Noise Machine"
 date: "2019-02-27 16:56"
-updated: 2024-03-29
+updated: '2025-05-29 12:00'
 comments: true
 image:
   path: /assets/img/2019/02/banner_noise_machine.png
@@ -108,11 +108,12 @@ Voice control was now a success. My dumb noise machine went through a transforma
 Here's the source configuration of my ESP32 board if anyone wants to try this, or use some of it to control their own devices.
 
 ```yaml
-# Updated for 2025.2.0
+# Updated for 2025.5.0
 
 substitutions:
-  plugtag: esp-32-00
-  devicename: Noise Machine
+  board_id: esp-32-00
+  name: noise-machine
+  friendly_name: Noise Machine
   deviceid: noise_machine
 
 wifi:
@@ -121,7 +122,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "${plugtag} Hotspot"
+    ssid: "${board_id} Hotspot"
     password: !secret ap_hotspot_password
 
   reboot_timeout: 6h
@@ -139,8 +140,9 @@ ota:
   password: !secret ota_password
 
 esphome:
-  name: ${plugtag}
-  comment: ${devicename}
+  name: ${name}
+  comment: ${board_id}
+  friendly_name: ${devicename}
   on_boot:
     priority: 600
     # Force the Green LED state upon boot in case it is stuck
@@ -161,7 +163,7 @@ sensor:
   - platform: adc
     pin: GPIO36
     id: ${deviceid}_voltage
-    name: ${devicename} LED Voltage
+    name: LED Voltage
     internal: true
     update_interval: 2s
 
@@ -180,7 +182,7 @@ switch:
   internal: true
   name: event_led
 - platform: template
-  name: ${devicename}
+  name: None
   icon: mdi:volume-high
   lambda: |-
     if (id(${deviceid}_voltage).state > 0.5) {
