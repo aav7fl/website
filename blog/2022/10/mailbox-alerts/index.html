@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#3d256d">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#3d256d">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+      
+        <link rel="amphtml" href="https://www.kyleniewiada.org/amp/blog/2022/10/mailbox-alerts/" data-proofer-ignore>
+      
+    
+
+    <!-- Messy way to capture custom page title to replace SEO Tags -->
+    
+    
+    <title>Instantaneous Mail Notifications</title>
+    <meta property="og:title" content="Instantaneous Mail Notifications" />
+
+    <!-- Come and get me RSS readers -->
+    <link type="application/atom+xml" rel="alternate" href="https://www.kyleniewiada.org/feed.xml" title="Kyle Niewiada&apos;s Website" />
+
+    <!-- Critical Stylesheet -->
+    <style type="text/css">
+      
+      @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header{background-image:url("/assets/img/banner.svg");background-color:#3a3a3a;background-size:cover;background-position:center center;padding:0;height:auto;margin-bottom:16px}.header .navigation{background:#262626}.header .nav-container{max-width:1000px;margin:0 auto}@media(min-width: 600px){.header{min-height:10em;position:relative;margin-bottom:16px}}nav{height:70px;overflow:hidden}nav ul{margin:0;padding:0;list-style-type:none;max-height:140px;position:relative}nav ul .active{background:#3d256d}nav li{display:inline-block;padding:0}nav a{display:inline-block;padding:0 1em;color:#fff;text-decoration:none;white-space:nowrap;line-height:70px;height:70px}nav a:hover{color:#fff;background-color:#00b2d9}nav li:first-child{left:0;vertical-align:top;font-size:75%}nav li:first-child :hover{color:#fff;background-color:#262626}@media(min-width: 330px){nav li:first-child{font-size:100%}}@media(min-width: 400px){nav li:first-child{font-size:140%}}nav li:last-child{position:absolute;right:0;bottom:70px;background-image:linear-gradient(to right, rgba(38, 38, 38, 0) 0, #262626 2em);padding-left:3em}nav li:nth-last-child(2){display:none}nav#menu:target{height:auto;padding:0}nav#menu:target ul{max-height:none}nav#menu:target li{display:block}nav#menu:target a{display:block;background-color:hsla(0,0%,100%,.05)}nav#menu:target li:not(:first-child){margin-top:2px}nav#menu:target li:not(:first-child) a:hover{background-color:#00b2d9}nav#menu:target li:last-child{display:none}nav#menu:target li:nth-last-child(2){display:inline-block;position:absolute;top:0;right:0;margin:0;border-left:2px solid #262626;background:#3a3a3a}
+      
+    </style>
+
+    <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1" />
+
+<meta name="author" content="Kyle Niewiada" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Dealing with my impatient inner child by getting notified the moment we receive our mail through Home Assistant" />
+<meta property="og:description" content="Dealing with my impatient inner child by getting notified the moment we receive our mail through Home Assistant" />
+<link rel="canonical" href="https://www.kyleniewiada.org/blog/2022/10/mailbox-alerts/" />
+<meta property="og:url" content="https://www.kyleniewiada.org/blog/2022/10/mailbox-alerts/" />
+<meta property="og:site_name" content="Kyle Niewiada’s Website" />
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2022/10/mailbox_banner.jpg" />
+<meta property="og:image:height" content="600" />
+<meta property="og:image:width" content="800" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-08T08:05:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2022/10/mailbox_banner.jpg" />
+<meta property="twitter:title" content="Instantaneous Mail Notifications" />
+<meta name="twitter:site" content="@CrypticCitrus" />
+<meta name="twitter:creator" content="@CrypticCitrus" />
+<meta property="fb:app_id" content="137961485759" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2022-10-08T08:05:00-04:00","datePublished":"2022-10-08T08:05:00-04:00","description":"Dealing with my impatient inner child by getting notified the moment we receive our mail through Home Assistant","headline":"Instantaneous Mail Notifications","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2022/10/mailbox_banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2022/10/mailbox-alerts/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2022/10/mailbox-alerts/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP46JK222K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZP46JK222K');
+</script> 
+</head>
+
+
+  <body>
+  <!-- start header -->
+<header class="header">
+  <div class="navigation">
+    <div class="nav-container">
+      <nav id="menu">
+        <ul class="menu-closed">
+          
+            
+            <li class="normal"><a href="/">Kyle Niewiada</a></li>
+          
+            
+            <li class="normal"><a href="/">Home</a></li>
+          
+            
+            <li class="normal"><a href="/about/">About</a></li>
+          
+            
+            <li class="normal"><a href="/archive/">Archive</a></li>
+          
+            
+            <li class="normal"><a href="/contact/">Contact</a></li>
+          
+            
+            <li class="normal"><a href="/resume/">Résumé</a></li>
+          
+          <li><a href="#">&#215; Close menu</a></li>
+          <li><a href="#menu">&#9776; Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <main class="content">
+    <!-- lazy way to hide page title on blog posts -->
+    
+
+    <article>
+  <header>
+    <h1 class="page-title">Instantaneous Mail Notifications</h1>
+
+    <h2 class="meta">Kyle Niewiada on October 08, 2022</h2>
+
+    <h3 class="meta">
+      
+      7 Minute Read
+       | Medium project</h3>
+  </header>
+
+  
+  <h4 class="sub-meta">Updated on May 05, 2025</h4>
+    
+
+  
+  <img src="/assets/img/2022/10/mailbox_banner.jpg" alt="Ring Alarm Outdoor Contact Sensor installed in a mailbox for mail notifications" />
+  
+
+  <div class="line-separator"></div>
+
+  <p>We have an unpredictable mail schedule and I’m an impatient child. I’m convinced that when the post office knows they’re delivering a box of parts, they shuffle our route for a late-night delivery. Rather than hawking around the mailbox or listening for the phantom muffler of a <a href="https://en.wikipedia.org/wiki/Ford-Utilimaster_FFV">Ford-Utilimaster FFV</a>, I want unequivocal evidence when our mailbox had been opened for delivery.</p>
+
+<blockquote>
+  <p>Alt: How I cured my Pavlovian response to hearing a Ford-Utilimaster FFV come down the road</p>
+</blockquote>
+
+<p>My solution was to use an outdoor rated Z-Wave contact sensor to detect when the mailbox was opened and then notify my family over Home Assistant. Here’s how I got there.</p>
+<h2 id="detecting-mail">
+  
+  
+    Detecting Mail <a href="#detecting-mail" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+<h3 id="option-1-">
+  
+  
+    Option 1 👎 <a href="#option-1-" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Before anyone asks, the yellow indicator flag on some mailboxes <em>can</em> let a user know that the mail has arrived. It’s a small yellow flag that raises when the mailbox door is opened, but remains upright when the mailbox door is closed. This simple mechanism can indicate that the mailbox has been opened.</p>
+
+<p>But using an indicator flag is more like polling the status of mail delivery. I’d rather be <em>told</em> when mail arrives instead of checking in on it.</p>
+<h3 id="option-2-">
+  
+  
+    Option 2 👎 <a href="#option-2-" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>One residential option for mailbox notifications is something called a <code class="language-plaintext highlighter-rouge">Mail Chime</code>. They are usually gyroscopic (or contact) sensors that send RF signals to a chime unit back inside the house. When triggered, the indoor station sets off a ring. This is similar to a wireless doorbell.</p>
+
+<p>These are <em>okay</em>. But I found two big deficiencies with this option.</p>
+
+<ol>
+  <li>There’s usually no battery indicator on the sensor (so I don’t know when it stops working)</li>
+  <li>If I want to make it smarter, I need to hack something into the chime box or retransmit signals.</li>
+</ol>
+<h3 id="option-3-">
+  
+  
+    Option 3 🤷 <a href="#option-3-" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>The next option for consideration is a product made by Ring for this exact purpose. It’s called the <code class="language-plaintext highlighter-rouge">Ring Mailbox Sensor</code>. It’s a motion sensor connected to an external antenna that mounts outside of the mailbox. The devices connects to the Ring bridge.</p>
+
+<p>However, it feels a little user-hostile since it uses a proprietary protocol with their special bridge. Even though it’s purpose built for my situation, the vendor lock-in pushed me to look for other solutions.</p>
+<h3 id="option-4-">
+  
+  
+    Option 4 👍 <a href="#option-4-" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>The last solution I looked into was adding a contact sensor to the mailbox door to detect when it opens. Luckily I have a plastic mailbox so I didn’t need to worry about a metal box impeding the signal.</p>
+
+<p>I ended up going with the <code class="language-plaintext highlighter-rouge">Ring Alarm Outdoor Contact Sensor</code>. It seems to have a handful of great features.</p>
+
+<ul>
+  <li>✅ IP66 weather resistant (Protected against dust and strong jets of water)</li>
+  <li>✅ Supports Z-Wave Long Range (Using a compatible controller, the signal can reach up to 1 mile with direct line-of-sight)</li>
+  <li>✅ 5 year battery life</li>
+  <li>✅ Standard batteries (2x AA)</li>
+  <li>✅ Heartbeat signals to ensure it’s still alive and connected</li>
+  <li>✅ Battery updates</li>
+  <li>✅ Works with Z-Wave JS</li>
+</ul>
+
+<p>That’s a pretty impressive list. If I had a proper Z-Wave Long Range controller, I could leverage the full long-range capabilities. But I don’t have a controller with the newer standard, so I’m getting by with my Aeotec range extenders <em>for now</em>.</p>
+
+<blockquote>
+  <p>Avoid using this contact sensor with a metal mailbox since a metal mailbox will act as a faraday cage and inhibit the signal.</p>
+</blockquote>
+<h2 id="how-do-i-implement-this">
+  
+  
+    How Do I Implement This? <a href="#how-do-i-implement-this" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>At the time of writing, I’m using</p>
+
+<ul>
+  <li><a href="https://www.home-assistant.io/">Home Assistant</a> (2022.9.6) as the brains to this operation</li>
+  <li><a href="https://github.com/zwave-js">Z-Wave JS</a> (10.2.0) to manage my Z-Wave network</li>
+  <li><a href="https://store.aeotec.com/products/range-extender-7-zw189">Aeotec Range Extender 7</a> to extend my Z-Wave network out to the mailbox</li>
+</ul>
+
+<p>First, I install the <code class="language-plaintext highlighter-rouge">Ring Alarm Outdoor Contact Sensor</code> to our mailbox lid with some stainless steel hardware.</p>
+
+<p><img src="/assets/img/2022/10/mailbox_banner.jpg" alt="Ring Alarm Outdoor Contact Sensor installed in a mailbox for mail notifications" /><em>Contact sensor installed in mailbox</em></p>
+
+<p>Next I include the contact sensor into the Z-Wave network inside Z-Wave JS.</p>
+
+<p>Since my Home Assistant already integrates with my Z-Wave network, any new devices in Z-Wave JS will automatically populate new entities in Home Assistant.</p>
+
+<p>After the contact sensor entity is created in Home Assistant, I wait for the contact sensor to update its values upon state changes. When the contact sensor sends the update that it was opened, my Home Assistant automations will trigger and notifications are sent out.</p>
+<h2 id="automations">
+  
+  
+    Automations <a href="#automations" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>Here are the automations I wrote to help notify and track states of when I <em>think</em> mail has arrived, or when it was picked up.</p>
+
+<blockquote>
+  <p>The notification setup works best if you’re not frequently sending outgoing mail. But if you are, I added a small action further down to help mitigate that behavior.</p>
+</blockquote>
+
+<p>The first thing we need to set up is an <code class="language-plaintext highlighter-rouge">input_boolean</code> helper that we’ll toggle <code class="language-plaintext highlighter-rouge">on</code> or <code class="language-plaintext highlighter-rouge">off</code> depending on if we think mail has arrived.</p>
+
+<p><img src="/assets/img/2022/10/mail_present_input.jpg" alt="Mail Present input boolean" /><em>Mail Present input boolean</em></p>
+
+<p>In my examples, I call it <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code>.</p>
+
+<p>As a bonus, we can show this <code class="language-plaintext highlighter-rouge">input_boolean</code> on the dashboard for a quick glance.</p>
+
+<p><img src="/assets/img/2022/10/mail_present_dashboard.jpg" alt="Mail Present in the dashboard" /><em>Mail Present in the dashboard</em></p>
+<h3 id="mail-arrived">
+  
+  
+    Mail Arrived <a href="#mail-arrived" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><img src="/assets/img/2022/10/notification.png" alt="Mail Arrived notification" /><em>Mail Arrived notification</em></p>
+
+<p>When the contact sensor’s intrusion sensor flips to <code class="language-plaintext highlighter-rouge">on</code>, it indicates that the mailbox is “open”. When the contact sensor’s intrusion sensor flips to <code class="language-plaintext highlighter-rouge">off</code>, it indicates that the mailbox has been “closed”.</p>
+
+<p>Here’s our happy path. When we open the mailbox for the first time, we turn on the <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code> to show that the mail is (probably) present in the mailbox. If we open the mailbox again later, we turn the <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code> off. This indicates that mail has been retrieved.</p>
+
+<p>But not everything in the world follows the happy path.</p>
+
+<p>I’ve added a conditional that the mailbox intrusion sensor must be <code class="language-plaintext highlighter-rouge">off</code> (closed) for at least 15s before we consider ‘opening the mailbox’ a new event. This helps in situations where the mail carrier closes the mailbox, realizes they have more mail, and then opens it back up again. If we don’t account for this, we would otherwise incorrectly mark the mail as “retrieved”.</p>
+
+<p>If every condition is met, our automation fires off a notification to the family that mail has (probably) arrived.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">alias</span><span class="pi">:</span> <span class="s">Alert - Mail arrived</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Automation to control actions when mailbox is opened</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.mailbox_home_security_intrusion</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+    <span class="na">for</span><span class="pi">:</span>
+      <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">seconds</span><span class="pi">:</span> <span class="m">15</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_on</span>
+    <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">target</span><span class="pi">:</span>
+      <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s">📬 You've got mail!</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="s">The mailbox has been opened. Maybe you have mail?</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:mailbox-open-up</span>
+        <span class="na">group</span><span class="pi">:</span> <span class="s">mail-alert</span>
+        <span class="na">channel</span><span class="pi">:</span> <span class="s">mail-alert</span>
+        <span class="na">push</span><span class="pi">:</span>
+          <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+        <span class="na">actions</span><span class="pi">:</span> <span class="c1"># More on this action later!</span>
+          <span class="pi">-</span> <span class="na">action</span><span class="pi">:</span> <span class="s">TURN_OFF_MAIL_PRESENT</span>
+            <span class="na">title</span><span class="pi">:</span> <span class="s">That was me</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+</code></pre></div></div>
+<h3 id="mail-retrieved">
+  
+  
+    Mail Retrieved <a href="#mail-retrieved" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Next, we consider mail retrieved if:</p>
+
+<ul>
+  <li><strong>Scenario 1</strong>: The contact sensor changes from <code class="language-plaintext highlighter-rouge">off</code> (mailbox <em><strong>closed</strong></em>) to <code class="language-plaintext highlighter-rouge">on</code> (mailbox <em><strong>open</strong></em>), but only after being closed for <code class="language-plaintext highlighter-rouge">15s</code>. This indicates that the mailbox was likely opened a second time to retrieve mail.</li>
+  <li><strong>Scenario 2</strong>: The contact sensor changes from <code class="language-plaintext highlighter-rouge">on</code> (mailbox <em><strong>open</strong></em>) to <code class="language-plaintext highlighter-rouge">off</code> (mailbox <em><strong>closed</strong></em>), but only after being left open for <code class="language-plaintext highlighter-rouge">60s</code>. This usually indicates that there was a package sticking out of the mailbox so the door was never closed.</li>
+</ul>
+
+<p>The automation turns off the <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code> so we can show on our dashboard that the mail has been (likely) picked up.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">alias</span><span class="pi">:</span> <span class="s">Alert - Mail retrieved</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Automation to control actions when mailbox is opened (for the second time)</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.mailbox_home_security_intrusion</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+    <span class="na">for</span><span class="pi">:</span>
+      <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">seconds</span><span class="pi">:</span> <span class="m">0</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">mail-retrieved-1</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.mailbox_home_security_intrusion</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">mail-retrieved-2</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+<span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span> <span class="s">mail-retrieved-1</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+            <span class="na">for</span><span class="pi">:</span>
+              <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">seconds</span><span class="pi">:</span> <span class="m">15</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>  
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span> <span class="s">mail-retrieved-2</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+            <span class="na">for</span><span class="pi">:</span>
+              <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">seconds</span><span class="pi">:</span> <span class="m">60</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+</code></pre></div></div>
+<h3 id="outgoing-mail-action">
+  
+  
+    Outgoing Mail Action <a href="#outgoing-mail-action" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><img src="/assets/img/2022/10/notification_action.png" alt="Mail Arrived notification with action" /><em>Mail Arrived notification with an action</em></p>
+
+<p>This is a quick helper action if a user is putting mail in the mailbox at the start of the day.</p>
+
+<p>Whenever mail “arrives”, our earlier automation sends a notification to the family with additional actions. One of those actions has a button that says “It was me”.</p>
+
+<p>If a user presses that button, the notification will send <code class="language-plaintext highlighter-rouge">TURN_OFF_MAIL_PRESENT</code> in an event back to Home Assistant which will get picked up by the following automation. This automation will then turn <em>off</em> the <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code> which will then allow a notification to occur again the next time the mailbox is opened.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">alias</span><span class="pi">:</span> <span class="s">Action - Outgoing mail ID</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Button to turn off "mail present" when opening the mailbox for outgoing mail</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">event</span>
+    <span class="na">event_type</span><span class="pi">:</span> <span class="s">mobile_app_notification_action</span>
+    <span class="na">event_data</span><span class="pi">:</span>
+      <span class="na">action</span><span class="pi">:</span> <span class="s">TURN_OFF_MAIL_PRESENT</span>
+<span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+    <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">target</span><span class="pi">:</span>
+      <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+</code></pre></div></div>
+<h3 id="daily-reset">
+  
+  
+    Daily Reset <a href="#daily-reset" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>At the start of each day, reset the <code class="language-plaintext highlighter-rouge">input_boolean.mail_present</code> state to fix any possible edge cases that were missed.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06:00:00"</span>
+<span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+    <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">target</span><span class="pi">:</span>
+      <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.mail_present</span>
+</code></pre></div></div>
+<h2 id="conclusion">
+  
+  
+    Conclusion <a href="#conclusion" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>I’ve been using my mailbox alert setup for the last 3 months. It hasn’t missed a delivery yet. The alerts have been super convenient since we don’t get mail regularly, and sometimes we’ll have a late (or second) delivery at 7PM. The sound of something similar to a Ford-Utilimaster FFV chugging down the road no longer brings me to the front window to check. I am at peace.</p>
+
+  <div class="line-separator"></div>
+
+  <!-- POST NAVIGATION -->
+<div class="post-nav">
+  
+    <a class="post-nav-link" href="/blog/2022/10/google-home-scene-surfacing/">
+    <div class="link-text previous">&laquo;&nbsp;Surfacing Scenes to All Google Home Household Members</div>
+    
+      <img class="link-image" src="/assets/img/2022/10/google_home_scenes_banner.jpg" alt="Previous Article">
+    
+    </a>
+  
+  
+    <a class="post-nav-link" href="/blog/2023/10/tackle-tracking-water-usage/">
+    <div class="link-text next">Tackle Tracking Water Usage&nbsp;&raquo;</div>
+    
+      <img class="link-image" src="/assets/img/2023/10/garden_bed_watering.jpg" alt="Next Article">
+    
+    </a>
+  
+</div>
+
+</article>
+
+
+    
+<!-- Add Disqus comments. -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'kyleniewiada'; // required: replace example with your forum shortname
+  var disqus_identifier = "/blog/2022/10/mailbox-alerts/";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+    </main>
+  <!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/" >LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl" >GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social" >Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada" >YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel='nofollow'>BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/" >Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- start noncritical style -->
+<link rel="preload" href="/assets/css/noncritical.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/noncritical.css"></noscript>
+<script>
+  /*loadCss*/
+  !function(w){"use strict";var loadCSS=function(href,before,media){function ready(cb){return doc.body?cb():void setTimeout(function(){ready(cb)})}function loadCB(){ss.addEventListener&&ss.removeEventListener("load",loadCB),ss.media=media||"all"}var ref,doc=w.document,ss=doc.createElement("link");if(before)ref=before;else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet",ss.href=href,ss.media="only x",ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){for(var resolvedHref=ss.href,i=sheets.length;i--;)if(sheets[i].href===resolvedHref)return cb();setTimeout(function(){onloadcssdefined(cb)})};return ss.addEventListener&&ss.addEventListener("load",loadCB),ss.onloadcssdefined=onloadcssdefined,onloadcssdefined(loadCB),ss};"undefined"!=typeof exports?exports.loadCSS=loadCSS:w.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+
+  /*link[rel=preload] polyfill*/
+  !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
+</script>
+<!-- end noncritical style -->
+<!-- end footer -->
+
+  </body>
+</html>
