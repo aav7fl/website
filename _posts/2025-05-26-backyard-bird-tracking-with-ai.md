@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-#updated: '2025-05-26 21:58'
+updated: '2025-06-04 16:51'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -28,6 +28,9 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > Are you only here for the BirdNET-Go Home Assistant sensors and cards? Skip ahead to the [Home Assistant Sensors](#home-assistant-sensors) or the [Home Assistant Cards](#home-assistant-cards) sections below.
 
 {% include toc.html %}
+
+> Changelog:
+> - 2025-06-04: Updated `command_line` sensors to use `curl` retry logic for few Home Assistant warning logs.
 
 ## Continuous Bird Detection
 
@@ -166,13 +169,13 @@ template: !include template.yaml
 {% raw %}
 ```yaml
 # command_line.yaml
-# version 1.0
+# version 1.1
 - sensor:
     name: "BirdNET Daily Summary"
     unique_id: "birdnet_daily_summary"
     # Updated command uses jq to check input type and provide a default empty list
     command: >
-      curl -s 'http://YOUR_BIRDNET_ENDPOINT:YOUR_BIRDNET_PORT/api/v2/analytics/species/daily' |
+      curl --connect-timeout 5 --max-time 10 --retry 3 --retry-delay 0 --retry-max-time 30 -s 'http://YOUR_BIRDNET_ENDPOINT:YOUR_BIRDNET_PORT/api/v2/analytics/species/daily' |
       jq 'if type == "array" then {species_list: .} end'
     value_template: >
       {% if value_json is defined and value_json.species_list is iterable and value_json.species_list is not string %}
@@ -182,7 +185,7 @@ template: !include template.yaml
     json_attributes:
       - species_list
     scan_interval: 60 # Or adjust as needed
-    command_timeout: 25
+    command_timeout: 35
 ```
 {% endraw %}
 
@@ -232,13 +235,13 @@ template: !include template.yaml
 {% raw %}
 ```yaml
 # command_line.yaml
-# version 1.0
+# version 1.1
 - sensor:
     name: "BirdNET Species Summary"
     unique_id: "birdnet_species_summary"
     # Uses jq to check input type and provide a default empty list
     command: >
-      curl -s 'http://YOUR_BIRDNET_ENDPOINT:YOUR_BIRDNET_PORT/api/v2/analytics/species/summary' |
+      curl --connect-timeout 5 --max-time 10 --retry 3 --retry-delay 0 --retry-max-time 30 -s 'http://YOUR_BIRDNET_ENDPOINT:YOUR_BIRDNET_PORT/api/v2/analytics/species/summary' |
       jq 'if type == "array" then {species_list: .} end'
     # Value_template calculates the number of species in the list
     value_template: >
