@@ -30,7 +30,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 {% include toc.html %}
 
 > Changelog:
-> - 2025-06-04: Updated `command_line` sensors to use `curl` retry logic for few Home Assistant warning logs.
+> - 2025-06-04: Tweaked the `command_line` sensors to use `curl` retry logic for fewer Home Assistant warning logs.
 
 ## Continuous Bird Detection
 
