@@ -6,9 +6,7 @@ updates:
     interval: daily
     time: "09:00"
   labels:
-    - "dependencies"
-    # Add default Kodiak `merge.automerge_label`
-    - "automerge"    
+    - "dependencies" 
   open-pull-requests-limit: 10
   reviewers:
   - aav7fl
@@ -19,8 +17,6 @@ updates:
     time: "09:00"
   labels:
     - "dependencies"
-    # Add default Kodiak `merge.automerge_label`
-    - "automerge"
   open-pull-requests-limit: 10
   reviewers:
   - aav7fl
