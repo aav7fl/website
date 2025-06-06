@@ -41,7 +41,7 @@ HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Curren
 
 One will find a list of keys for applications registered for the system notifications. If the application you’re looking for does not immediately jump out, it is probably one of the `Microsoft.Explorer.Notification.{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}` keys.
 
-The only information that I could find about this and how the key is decided is the claim that [it is the application GUID](https://github.com/mumble-voip/mumble/issues/1777#issue-98981400). However, my research has found that this registry key does not match the GUID for the installed application. My theory is that it is randomly generated upon install. But I have not yet verified this.
+The only information that I could find about this and how the key is decided is the claim that [it is the application GUID](https://github.com/mumble-voip/mumble/issues/1777). However, my research has found that this registry key does not match the GUID for the installed application. My theory is that it is randomly generated upon install. But I have not yet verified this.
 
 ![The notification for my battery adding a subkey in the registry](/assets/img/2016/07/regedit0.png)*The notification for my battery adding a subkey in the registry*
 
