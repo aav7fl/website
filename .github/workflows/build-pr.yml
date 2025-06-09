@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -33,3 +37,17 @@ jobs:
         run: npm install
       - name: AMP validation
         run: find _site/amp -iname '*.html' | egrep '.*' | xargs -L1 npx amphtml-validator
+  auto-approve:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.repository == 'aav7fl/website'
+    steps:
+      - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v2
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --merge "${{github.event.pull_request.html_url}}"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
