@@ -38,9 +38,9 @@ jobs:
       - name: AMP validation
         run: find _site/amp -iname '*.html' | egrep '.*' | xargs -L1 npx amphtml-validator
   auto-approve:
+    needs: build-and-test
     runs-on: ubuntu-latest
     if: >
-      github.event.workflow_run.conclusion == 'success' &&
       github.event.pull_request.user.login == 'dependabot[bot]' &&
       github.repository == 'aav7fl/website'
     steps:
