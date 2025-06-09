@@ -13,7 +13,7 @@ This is my personal website that I tweak and write about projects I have worked 
 ## Features
 - Mobile responsive
 - Uses modern HTML5 and CSS3
-- AMP validated ([Accelerated Mobile Pages](https://www.ampproject.org/))
+- AMP validated ([Accelerated Mobile Pages](https://amp.dev/))
 - Ready for GitHub Actions continuous integration
 - Basic Testing
 
@@ -25,11 +25,7 @@ This is my personal website that I tweak and write about projects I have worked 
 
 ## Test
 
-`act pull_request`
-
-## Deploy
-
-`act push`
+`bundle exec rake test`
 
 ## Develop Locally
 
