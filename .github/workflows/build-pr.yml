@@ -1,11 +1,11 @@
-name: build-and-test
+name: Build and test
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
