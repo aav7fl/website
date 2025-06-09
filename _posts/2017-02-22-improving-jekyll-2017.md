@@ -17,7 +17,7 @@ When I took a look at my website last year, it needed help. There wasn't a whole
 
 Next, my website felt a little bulky. The CSS was over-the-top, I didn't need a JavaScript header menu, I had unnecessary nested HTML tags, and still didn't like how some of the elements collapsed on mobile devices.
 
-The last major change that I wanted to implement was **AMP** ([accelerated mobile pages](https://www.ampproject.org/)) to make is easier for mobile devices hitting my blog. This led down a rabbit hole of further changes.
+The last major change that I wanted to implement was **AMP** ([accelerated mobile pages](https://amp.dev/)) to make is easier for mobile devices hitting my blog. This led down a rabbit hole of further changes.
 
 > Link to the [website source code](https://github.com/aav7fl/website/tree/2ff155a26e3c91837f35e794433fce7f3f020a30) right before this blog post was released; but it may be helpful to check out later revisions of code to see how things have changed.
 
@@ -35,7 +35,7 @@ Cool, right? After I set up the RubyGem, I found some broken HTML tags, a few 40
 
 ### amphtml-validator
 
-After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. [amphtml-validator](https://github.com/ampproject/amphtml/tree/master/validator/js/nodejs) to the rescue; a Node.js package command line tool that validates AMP HTML files.
+After I implemented AMP (more on that later), I needed a better way to test rather than opening up my browser and validating each page through the Chrome dev tools. [amphtml-validator](https://github.com/ampproject/amphtml/tree/main/validator/js/nodejs) to the rescue; a Node.js package command line tool that validates AMP HTML files.
 
 With a little Ruby-Fu, I was able to add the Node.js package execution to my Rakefile. It finds all of the `*.html` files in my AMP directory and passes them one at a time to the amphtml-validator. I check the exit status of the Node.js package, let the user know if it fails, and continue with my day.
 
@@ -85,11 +85,11 @@ Read more on [Travis-CI caching docs](https://docs.travis-ci.com/user/caching/).
 
 ## AMP Pages
 
-Starting back in the middle of 2016, I wanted to implement AMP ([accelerated mobile pages](https://www.ampproject.org/)) in my website. In case you didn't know, it's a streamlined version of the webpage strongly optimized for mobile rendering and reduced load times. It also comes with its own special restrictions.
+Starting back in the middle of 2016, I wanted to implement AMP ([accelerated mobile pages](https://amp.dev/)) in my website. In case you didn't know, it's a streamlined version of the webpage strongly optimized for mobile rendering and reduced load times. It also comes with its own special restrictions.
 
 If there was something that would make the web experience faster for any readers, I was interested. My biggest problems were that Jekyll had yet to implement multiple layouts natively. This meant that I needed to rely on an external plugin in order to generate the AMP pages. Good thing I setup up Travis-CI!
 
-I turned to [amp-jekyll](https://github.com/juusaw/amp-jekyll) (which is now a RubyGem!) to add an AMP layout. There were a few small changes that I needed to make though. I had to figure out how to [properly add videos](https://www.ampproject.org/docs/reference/components/amp-video) to my posts, remove the AMP pages from my sitemap, and change the canonical URL on my AMP pages while using Jekyll-SEO-Tag.
+I turned to [amp-jekyll](https://github.com/juusaw/amp-jekyll) (which is now a RubyGem!) to add an AMP layout. There were a few small changes that I needed to make though. I had to figure out how to [properly add videos](https://amp.dev/documentation/components/amp-video) to my posts, remove the AMP pages from my sitemap, and change the canonical URL on my AMP pages while using Jekyll-SEO-Tag.
 
 ### AMP Sitemap Conflict
 
@@ -142,7 +142,7 @@ Now all I need to do is call the Jekyll-SEO-Tag with `{% raw %}{% include amp-ch
 
 ### AMP Videos
 
-AMP Videos require a bit of finesse to implement. They need to have a special JS file loaded in the head and they need to follow the correct [amp-video guidelines](https://www.ampproject.org/docs/reference/components/amp-video).
+AMP Videos require a bit of finesse to implement. They need to have a special JS file loaded in the head and they need to follow the correct [amp-video guidelines](https://amp.dev/documentation/components/amp-video).
 
 #### Fixing the <Head>
 
