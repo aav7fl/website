@@ -49,7 +49,10 @@ task :html_proofer do
     check_html: 'true',
     check_opengraph: 'true',
     ignore_files: [%r{_site/amp/.*}], # Ignore AMP. Handled by AMP-Validator
-    ignore_status_codes: [503], # Ignore common errors
+    ignore_status_codes: [
+      502, 
+      503
+    ], # Ignore common errors
     ignore_urls:
     [
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
