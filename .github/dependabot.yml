@@ -8,8 +8,6 @@ updates:
   labels:
     - "dependencies" 
   open-pull-requests-limit: 10
-  reviewers:
-  - aav7fl
 - package-ecosystem: bundler
   directory: "/"
   schedule:
@@ -18,5 +16,3 @@ updates:
   labels:
     - "dependencies"
   open-pull-requests-limit: 10
-  reviewers:
-  - aav7fl
