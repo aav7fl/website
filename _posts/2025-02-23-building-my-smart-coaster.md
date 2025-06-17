@@ -1,13 +1,13 @@
 ---
 title: "The Smart Coaster That Keeps Me Hydrated"
 date: '2025-02-23 20:01'
-updated: '2025-05-29 12:00'
+updated: '2025-06-17 19:04'
 comments: true
 image:
-  path: /assets/img/2025/02/smart_coaster_front.jpg
-  height: 603
+  path: /assets/img/2025/02/smart_coaster_v3_front.jpg
+  height: 602
   width: 800
-alt: Smart coaster build from the front
+alt: Smart coaster V3 build from the front
 published: true
 tag: "small project"
 description: "Forget smart water bottles! I created a 'temporarily permanent' smart coaster to solve my dehydration woes. If I've lost track, my coaster nudges me to drink water, and refrains when I've kept up."
@@ -24,6 +24,9 @@ Or should I throw a bunch of glue, wood, and my favorite electronics together to
 In an effort to quickly deliver value, join me on my self-imposed 48-hour project.
 
 {% include toc.html %}
+
+> Changelog:
+> - 2025-06-17: I completed my wishlist and created a second (more ascetic) version of the smart coaster. See my [update below](#update-2025-06-17).
 
 ## Possible Solutions
 
@@ -572,9 +575,124 @@ If I had the gumption and endless free time for this project, I would:
 - Solder wires between the boards
 - Enclose the back wedge with a thin layer of wood or black acrylic
 
+## Update: 2025-06-17
+
+I've been using my smart coaster for a few months, and it's made me more conscious about my water intake. So far I've received ~700+ drink reminders, or around 9 each day.
+
+As this has become one of my most consistently used devices, I decided to treat myself and tackle some items from the wishlist I posted a few months back.
+
+- ✅ Use a dark walnut wood stain on the coaster plate
+- ✅ Carve out a small channel or hole in the coaster plate to hide the sensor wiring
+- ✅ Figure out how to recess the sensor to the coaster plate
+- ✅ Cover the sensor with a thin layer of acrylic to better hide and protect it
+- ✅ Solder wires between the boards
+- ❌ ~~Enclose the back wedge with a thin layer of wood or black acrylic~~ With organized wiring, this should be unnecessary
+
+### First Attempt
+
+I figured this would be a straightforward update. I would take some of my new tools and create an updated version of my coaster plate that addresses the aesthetic complaints I had with the first version.
+
+To get things started, I needed some design ideas. I wanted to match some of the mid-century modern elements that are already present in my home. After toying around with some thoughts, I enlisted Gemini to help me envision some different color changes in my original coaster.
+
+![A Gemini AI tweaked image of my original coaster in dark walnut and a green coaster pad](/assets/img/2025/02/smart_coaster_ai_reimagined.png)*Gemini AI's re-imagining of my original coaster with a dark walnut stain and a green coaster pad*
+
+The above image is what inspired me to mix a dark walnut wood stain with some green elements. To complement the dark wood, I eventually decided on a dark sage green silicone pad and braided USB-C cable. I ordered the parts and went to work forming the wooden base.
+
+The first thing I did was gather the pine wood that I used for the original coaster plate. I cut it down to size and added some blinders in the back to hide the electronics from the side. I glued it all together and let it dry overnight.
+
+If I owned (or knew how to use) a CNC router, I would have used it to:
+
+1. Carve out the recessed hole for the ToF sensor
+2. Cut a shallow recess to inlay an acrylic plate cover
+
+But I didn't have those tools. So I pulled out my handheld rotary tool and carved out the recessed hole for the ToF sensor with my carving bits. My goal was to make the sensor flush-mounted to the coaster backing. This would make it easier to hide.
+
+![A Smart Coaster prototype in eastern white pine](/assets/img/2025/02/smart_coaster_v2_before_stain.jpg)*My Smart Coaster V2 in (eastern white?) pine before staining*
+
+#### Hiding the Sensor
+
+Reminder: My ToF sensor needs to be able to see the laser dot reflection to measure the distance from an object. So whatever material I use to hide it needs to possess _some_ kind of transparent properties. 
+
+My original plan was to adhere a _super thin_, black, translucent acrylic sheet over the sensor. I wasn't able to locate any, so I did the next best thing. I decided to use some "LED dimming stickers". LED dimming stickers are sold as devices that can help dim blindingly bright electronic LEDs that illuminate a room at night.
+
+You can easily find these magical stickers online, but they're essentially glossy, thin plastic stickers that block some amount of light from shining through. The best way to describe this is like a black-tinted Kapton tape.
+
+Through some early testing, I found that covering my ToF sensor with one of these stickers successfully hides the sensor while still allowing the laser light to still detect distances. ✅
+
+With the plan in motion, I switched back to the coaster board. I sanded down the dry prototype and began to apply a dark walnut wood stain.
+
+![A Smart Coaster prototype with a poorly completed stain job](/assets/img/2025/02/smart_coaster_v2_after_stain.jpg)*My Smart Coaster V2 after a terrible staining job with super inconsistent grain*
+
+The results looked ~~beautiful~~ like trash 🗑️. Seriously, this was a disaster. I've done some passable wood staining in the past for trim, railings, and speakers. I've even used the _exact_ same wood stain when I refinished the top on my Sansui SP-1700 speaker below!
+
+![Refinishing Sansui SP-1700 speakers](/assets/img/2025/02/sansui_sp-1700_speaker_refinish.jpg)*Proof that I'm not entirely incompetent by demonstrating the same stain gel to repair and re-finish my Sansui SP-1700 3-Way Speaker*
+
+After 3 coats, the stain was still uneven and blotchy from the cheap pine board I was using. Instead of trying to fix the problem, I made the decision to use a superior material.
+
+### Second Attempt
+
+Enter _black walnut_. If I was trying to get a "dark walnut" look for my coaster, why not just use black walnut? In quantities this small, it doesn't really hurt the bank too much. 💰
+
+I found some solid 1/2" black walnut 'thin stock' that fit the dimensions I needed and ordered it. Oh wow, let me tell you, this stuff is _gorgeous_. You can find some really nice grain patterns in the wood, especially when it's wet.
+
+I took this opportunity to add an additional angled front undercut that is parallel to the slant on the rear of the back wedge. I think it gives the coaster a nice, subtle flow with something less boring.
+
+Since everything was still in pieces, I also carved out a channel in the back wedge where I planned to hide the ToF sensor and wiring. You can see my test fitment below.
+
+![Green painter's tape covering the bare black ](/assets/img/2025/02/smart_coaster_v3_unglued.jpg)*Preparing the surfaces of the black walnut coaster with painter's tape to keep the glue from spreading on the wood*
+
+Learning from some mistakes on my previous prototype, I wrapped the edges of my coaster with some green painter's tape so the wood glue wouldn't squeeze out everywhere. I made sure to remove these after pressing the pieces together and before the glue dried so they wouldn't get stuck underneath any edges. I theorize this was one of my issues in my earlier prototype, where the stain was unable to penetrate the pine wood properly due to the glue soaking into the wood.
+
+![A poorly stained pine coaster on the left and an unstained/un-oiled black walnut coaster on the right](/assets/img/2025/02/smart_coaster_v2_and_v3.jpg)*A comparison showing the abomination of my stained V2 coaster versus my un-oiled V3 coaster*
+
+After the glue dried, I sliced off the back ears and sanded it down with some 220-grit sandpaper to hide my miter saw cuts. Once everything was smooth, I began to apply the finish.
+
+#### Applying the Finish
+
+Since this is already a dark wood, I chose not to stain it, or else I might lose some of the lighter grain definition. I went with Osmo Polyx Hard Wax Oil #3054 (Clear Satin) to give it a nice sheen. It was very easy to work with. After 2 coats, this was the result. 😳
+
+![A black walnut coaster with Osmo Polyx Hard Wax Oil #3054 rubbed in](/assets/img/2025/02/smart_coaster_v3_after_oil.jpg)*The beautiful sheen of my black walnut coaster plate after rubbing in Osmo Polyx Hard Wax Oil #3054*
+
+It looks so good! I really wish I had used a nicer wood like this from the start. But using pine in the earlier prototypes gave me plenty of opportunities to refine my design.
+
+After a bit of drying time, I added the gel pads to the bottom of the coaster (reusing the same ones as before). I inserted the newly soldered ToF sensor and routed the wires into the back pocket, where they connected to Seeed Studio XIAO ESP32-S3. I hot-glued the ESP32-S3 into place and made sure everything was working properly.
+
+![The backside of my smart coaster showing a Seeed Studio XIAO ESP32-S3](/assets/img/2025/02/smart_coaster_v3_backside.jpg)*The backside of my Smart Coaster showing the compact install of the Seeed Studio XIAO ESP32-S3*
+
+Here is another view of the _nearly completed_ Smart Coaster V3 from the front. At this point, everything was functional again. But I needed to take care of some finishing touches before I could call it complete.
+
+![A nearly completed Smart Coaster made of black walnut with an exposed time-of-flight sensor in the back](/assets/img/2025/02/smart_coaster_v3_before_sticker.jpg)*The nearly complete Smart Coaster V3 with its recessed time-of-flight sensor still exposed*
+
+#### Learning About Silicone
+
+I had to stop my coaster pad from sliding off of the wooden base plate. The reason I'm using a coaster pad is that it helps guide the placement of the water bottle without looking. If I didn't have this, I might accidentally set my water bottle down on the edge of the coaster plate where it could tip over.
+
+To mount the silicone coaster pad to my wooden base, I tried to use some of the same mounting tape I used in my original prototype (which I later learned was rubber). That didn't work well. The tape was actually sticking to the paper backing better than it was to the silicone coaster pad. 🙃
+
+Next, I tried to hot glue it. If you've worked with silicone before, you can probably guess how that went. The hot glue blobs peeled right off of the silicone pad. 🥸
+
+Those lessons gave me hands-on learning on how silicone is _extremely_ hydrophobic and non-porous. To adhere silicone to anything, one needs to choose more appropriate alternatives like a silicone-based adhesive.
+
+Lucky for me, I already had some lying around. I ended up using some [Permatex 81158 Black Silicone Adhesive Sealant](https://www.permatex.com/products/adhesives-and-sealants/adhesives-sealant/permatex-black-silicone-adhesive-sealant-3-oz/) from the depths of my tool shelves. So far it's holding! 🤞
+
+#### Playing With Stickers
+
+To wrap up the coaster rebuild, I had to cover the ToF sensor. Putting a cover over it protects the sensor from dust and debris while also hiding any electronics that might be visible from view.
+
+Inspired by mid-century atomic design, I wanted to overlay a stretched black diamond accent piece. My goal was to match the design language that I was already applying in the wood angles. Using my X-Acto knife, I sliced away a diamond-shaped accent from the blank sticker sheet and placed it over the sensor. 
+
+
+![A sticker covering the time-of-flight sensor on my Smart Coaster V3](/assets/img/2025/02/smart_coaster_v3_sticker_placement.jpg)*Sticker placement covering the ToF sensor on my Smart Coaster V3 (ignore the pencil alignment marks ✏️)*
+
+If my sticker gets damaged over time, I could always switch to using one of the pre-cut strips in a horizontal line for a greater contrast. But I think the diamond shape looks better.
+
+And we made it. Here's the final (for now) result of my Smart Coast V3! ✨
+
+![A fully assembled Smart Coaster made from black walnut and a hidden time-of-flight sensor](/assets/img/2025/02/smart_coaster_v3_front.jpg)*The final Smart Coaster V3 made from black walnut and a hidden time-of-flight sensor behind the black translucent sticker*
+
 ## Conclusion
 
-![Smart coaster build with Home Assistant dashboard showing data in the back](/assets/img/2025/02/smart_coaster_integration.jpg)*Smart coaster with its data being displayed on my Home Assistant dashboard as a notification nudges me to drink water*
+![Smart Coaster V1 build with Home Assistant dashboard showing data in the back](/assets/img/2025/02/smart_coaster_integration.jpg)*Smart Coaster V1 with its data being displayed on my Home Assistant dashboard as a notification nudges me to drink water*
 
 I want to make sure I remember to drink water. I think I've figured out a good approach that avoids any feedback loop from tracking and interacting with my phone. I think my solution reduces any additional cognitive load by only nudging me when appropriate and automatically dismissing all notifications when I pick up my water bottle. 
 
@@ -582,4 +700,6 @@ From conception to completion, this project only took 2 days—a record for me. 
 
 The final result is a smart coaster that is delicately reminding me to drink water and staying out of my way if I drink water naturally. 
 
-All of this to say, **my temporary prototype solution is good enough to be permanent**. 🥤🖖
+All of this to say, **my temporary prototype solution is good enough to be permanent¹**. 🥤🖖
+
+¹Until I decided to build a better looking one months later. 😅
