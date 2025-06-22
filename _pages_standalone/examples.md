@@ -21,12 +21,15 @@ redirect_from:
 
 Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
+## Table of Contents
 
 {% include toc.html %}
 
 ## Example Post
 
 Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+
+## Callout
 
 > Example callout
 
@@ -38,5 +41,26 @@ Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapi
   controls="autoplay loop"
 %}
 
+## Image
+
 ![BirdNET-Go main dashboard](/assets/img/2025/05/birdnet-go_main_dashboard.png)*My main dashboard on BirdNET-Go*
 
+## Details
+
+<!-- If an HTML tag has an attribute markdown="block", then the content of the tag is parsed as block level elements. -->
+<!-- https://kramdown.gettalong.org/syntax.html#html-blocks -->
+<details markdown="block">
+
+<summary>[YAML] Example Configuration</summary>
+
+```yaml
+{% raw %}
+template:
+  - trigger:
+      - platform: time_pattern
+        # Let's be honest, we don't need to check often. 
+        # But 5 minutes should be reactive enough if I need to correct an event date.
+        minutes: "/5" 
+{% endraw %}
+```
+</details>
