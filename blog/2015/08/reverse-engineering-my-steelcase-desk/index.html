@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#3d256d">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#3d256d">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+      
+        <link rel="amphtml" href="https://www.kyleniewiada.org/amp/blog/2015/08/reverse-engineering-my-steelcase-desk/" data-proofer-ignore>
+      
+    
+
+    <!-- Messy way to capture custom page title to replace SEO Tags -->
+    
+    
+    <title>Discovering and Reverse Engineering My Steelcase Desk</title>
+    <meta property="og:title" content="Discovering and Reverse Engineering My Steelcase Desk" />
+
+    <!-- Come and get me RSS readers -->
+    <link type="application/atom+xml" rel="alternate" href="https://www.kyleniewiada.org/feed.xml" title="Kyle Niewiada&apos;s Website" />
+
+    <!-- Critical Stylesheet -->
+    <style type="text/css">
+      
+      @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header{background-image:url("/assets/img/banner.svg");background-color:#3a3a3a;background-size:cover;background-position:center center;padding:0;height:auto;margin-bottom:16px}.header .navigation{background:#262626}.header .nav-container{max-width:1000px;margin:0 auto}@media(min-width: 600px){.header{min-height:10em;position:relative;margin-bottom:16px}}nav{height:70px;overflow:hidden}nav ul{margin:0;padding:0;list-style-type:none;max-height:140px;position:relative}nav ul .active{background:#3d256d}nav li{display:inline-block;padding:0}nav a{display:inline-block;padding:0 1em;color:#fff;text-decoration:none;white-space:nowrap;line-height:70px;height:70px}nav a:hover{color:#fff;background-color:#00b2d9}nav li:first-child{left:0;vertical-align:top;font-size:75%}nav li:first-child :hover{color:#fff;background-color:#262626}@media(min-width: 330px){nav li:first-child{font-size:100%}}@media(min-width: 400px){nav li:first-child{font-size:140%}}nav li:last-child{position:absolute;right:0;bottom:70px;background-image:linear-gradient(to right, rgba(38, 38, 38, 0) 0, #262626 2em);padding-left:3em}nav li:nth-last-child(2){display:none}nav#menu:target{height:auto;padding:0}nav#menu:target ul{max-height:none}nav#menu:target li{display:block}nav#menu:target a{display:block;background-color:hsla(0,0%,100%,.05)}nav#menu:target li:not(:first-child){margin-top:2px}nav#menu:target li:not(:first-child) a:hover{background-color:#00b2d9}nav#menu:target li:last-child{display:none}nav#menu:target li:nth-last-child(2){display:inline-block;position:absolute;top:0;right:0;margin:0;border-left:2px solid #262626;background:#3a3a3a}
+      
+    </style>
+
+    <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1" />
+
+<meta name="author" content="Kyle Niewiada" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How I reverse engineered the remote codes on my prototype Steelcase sit/stand desk unlocking secret developer codes to enable One Touch adjustments" />
+<meta property="og:description" content="How I reverse engineered the remote codes on my prototype Steelcase sit/stand desk unlocking secret developer codes to enable One Touch adjustments" />
+<link rel="canonical" href="https://www.kyleniewiada.org/blog/2015/08/reverse-engineering-my-steelcase-desk/" />
+<meta property="og:url" content="https://www.kyleniewiada.org/blog/2015/08/reverse-engineering-my-steelcase-desk/" />
+<meta property="og:site_name" content="Kyle Niewiada’s Website" />
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2015/08/banner.jpg" />
+<meta property="og:image:height" content="779" />
+<meta property="og:image:width" content="800" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-17T15:47:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2015/08/banner.jpg" />
+<meta property="twitter:title" content="Discovering and Reverse Engineering My Steelcase Desk" />
+<meta name="twitter:site" content="@CrypticCitrus" />
+<meta name="twitter:creator" content="@CrypticCitrus" />
+<meta property="fb:app_id" content="137961485759" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2015-08-17T15:47:00-04:00","datePublished":"2015-08-17T15:47:00-04:00","description":"How I reverse engineered the remote codes on my prototype Steelcase sit/stand desk unlocking secret developer codes to enable One Touch adjustments","headline":"Discovering and Reverse Engineering My Steelcase Desk","image":{"height":779,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2015/08/banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2015/08/reverse-engineering-my-steelcase-desk/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2015/08/reverse-engineering-my-steelcase-desk/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP46JK222K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZP46JK222K');
+</script> 
+</head>
+
+
+  <body>
+  <!-- start header -->
+<header class="header">
+  <div class="navigation">
+    <div class="nav-container">
+      <nav id="menu">
+        <ul class="menu-closed">
+          
+            
+            <li class="normal"><a href="/">Kyle Niewiada</a></li>
+          
+            
+            <li class="normal"><a href="/">Home</a></li>
+          
+            
+            <li class="normal"><a href="/about/">About</a></li>
+          
+            
+            <li class="normal"><a href="/archive/">Archive</a></li>
+          
+            
+            <li class="normal"><a href="/contact/">Contact</a></li>
+          
+            
+            <li class="normal"><a href="/resume/">Résumé</a></li>
+          
+          <li><a href="#">&#215; Close menu</a></li>
+          <li><a href="#menu">&#9776; Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <main class="content">
+    <!-- lazy way to hide page title on blog posts -->
+    
+
+    <article>
+  <header>
+    <h1 class="page-title">Discovering and Reverse Engineering My Steelcase Desk</h1>
+
+    <h2 class="meta">Kyle Niewiada on August 17, 2015</h2>
+
+    <h3 class="meta">
+      
+      9 Minute Read
+       | Medium project</h3>
+  </header>
+
+  
+  <h4 class="sub-meta">Updated on December 19, 2024</h4>
+    
+
+  
+  <img src="/assets/img/2015/08/banner.jpg" alt="Steelcase height-adjustable standing desk" />
+  
+
+  <div class="line-separator"></div>
+
+  <p>In 2013 I made the plunge for a height-adjustable standing desk. I had wanted one for a while because I was becoming restless sitting down throughout the day in my computer chair. I wanted to be able to move around easily while I was using it and not be chained to sitting. I won’t go into the health benefits or drawbacks of such a setup, but instead how I discovered and reprogrammed my desk.</p>
+
+<blockquote>
+  <p>2024-12-19: This desk has been with me for over a decade, but its time has passed. It no longer functions correctly 😢. I’ve been unable to fix it, so I’m keeping it around for our kids to play on with their toys.</p>
+</blockquote>
+
+<p>Lucky for me, during my search for an adjustable standing desk, Steelcase was liquidating their old pyramid headquarters/test labs. You can get a pretty good look at how amazing the building and the labs were in a tour of the campus <a href="https://www.youtube.com/watch?v=GTsdOLD-CyI">here</a>.
+I contacted up the warehouse that was selling off Steelcase’s office furniture and drove on over.</p>
+
+<p>In my head, my ideal desk would be one that would (1) raise and lower, (2) use no electrics, (3) be reasonably priced for such a feature list, and (4) have a short enough width to fit in my room. I had arrived at the warehouse and to my dismay learned that someone had purchased all 40 Airtouch Steelcase desks the night before (a desk that can be raised and lowered with a hydraulic not using any electricity). I had done research and found that this was the only currently available height adjustable desk that would have fit in my room.</p>
+
+<p>Not being deterred, I began to browse the electric section of the height-adjustable desks in the warehouse. I thought maybe I could replan my room again. That’s when I stumbled upon a very peculiar looking desk. This desk did not show up in any standard Steelcase lineup. I pulled out my ruler and took some measurements to find that it would fit perfectly. I haggled a bit on the price, bundled in two monitor arms, and bought it.</p>
+
+<p><img src="/assets/img/2015/08/desk.jpg" alt="My new desk" /><em>My new desk</em></p>
+<h3 id="what-exactly-did-i-buy">
+  
+  
+    What <em>Exactly</em> did I Buy? <a href="#what-exactly-did-i-buy" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>It wasn’t until I had the desk back at home that I realized I could find no listing of this unit in any Steelcase catalogs (maybe I wasn’t looking hard enough?). I got in contact with Steelcase and Andrea from the Steelcase store was able to provide:</p>
+
+<p>“J797763SR. It looks like it’s for the Worksurface-Elec, straight, 48, Radius, brand:steel, product line:pathways secant”</p>
+
+<p>I also had discovered that what I had in my hands was a <strong>test sample</strong>. On the back of the unit was slapped a sticker that was partially pulled off. It stated that it was from the product development labs, had a fill out date of May 7, 2003, the request number, the person who requested, the specialist, the description for the unit, and the sample ID.</p>
+
+<p><img src="/assets/img/2015/08/test_sticker.jpg" alt="Test sticker found on my Steelcase height-adjustable standing desk" />
+<img src="/assets/img/2015/08/order_sticker.jpg" alt="Order sticker found on my Steelcase height-adjustable standing desk" /></p>
+
+<p>This might have explained why I had such an odd remote to it. I’m not sure what the lineup was like back in 2003 for Steelcase height-adjustable electric desks. I was unable to find desks that used the same remote as mine, or even a similar configuration. Given that I had a test unit, I began to wonder if there were special testing properties to the remote.</p>
+<h3 id="solving-a-problem">
+  
+  
+    Solving a Problem <a href="#solving-a-problem" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>I was always annoyed with the remote on my desk because I had to hold down the programmed buttons to allow it to raise or lower. I understand that this is a safety feature to prevent children from being crushed or items being lifted off of the desk. But I was never a fan of being forced to hold down the buttons. As I’m always standing by (/badJoke) when I raise or lower it, I wanted to find a way to make this unit adjustable with a single momentary button press.</p>
+
+<p>There was no documentation on my desk and I knew nearly nothing about the remote other than its more recent incarnations with a similar button layout on newer desks. I began to play with it and see if there were any hidden modes or features I was unaware of.</p>
+
+<p>After a lot of trial and error, and mapping out possible and probable key combination sets, I discovered two different programming modes for my desk remote. One was temporary and the other was permanent until exited. Below are my findings (<strong>including a way to change the adjustment mode from manual to automatic!!</strong>).</p>
+<h3 id="remote-modes">
+  
+  
+    Remote Modes: <a href="#remote-modes" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Passcode Mode (P-Mode): P—</p>
+
+<ul>
+  <li>Permanent P-Mode (Or until remote reboot): Goto PArA, Press Down 3X, Press 1 9X</li>
+  <li>Temporary P-Mode: Goto PArA, Press III 3X, Wait 3 seconds.</li>
+</ul>
+
+<p>PArA Mode: PArA</p>
+
+<ul>
+  <li>To reach PArA menu, press F until display reads PArA.</li>
+  <li>If in Passcode Mode, unplug desk, plug back in.</li>
+</ul>
+
+<p><img src="/assets/img/2015/08/normal.jpg" alt="Normal Mode" /><em>Normal Mode</em></p>
+
+<p><img src="/assets/img/2015/08/PArA.jpg" alt="PArA mode" /><em>PArA mode</em></p>
+
+<p><img src="/assets/img/2015/08/passcode.jpg" alt="Passcode mode" /><em>Passcode mode</em></p>
+
+<table class="table-post">
+  <thead>
+    <tr>
+      <th>Code:</th>
+      <th>P-Mode:</th>
+      <th>PArA Mode:</th>
+      <th>Default Value (As I found it)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>111</td>
+      <td>Set offset curve multiplier (from min)</td>
+      <td>X</td>
+      <td>1970</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>113</td>
+      <td>Hand/Auto toggle (Auto travel to programmed position)</td>
+      <td>X</td>
+      <td>Hand (But I like Auto)</td>
+    </tr>
+    <tr>
+      <td>121</td>
+      <td>Acc.# (0-9) Distance to start decelerating from below a number?</td>
+      <td>Acc.# (0-9) Distance to start decelerating from below a number?</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>Acc.# (0-9) Distance to start decelerating from above a number?</td>
+      <td>Acc.# (0-9) Distance to start decelerating from above a number?</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>131</td>
+      <td>Upward Speed (1-39)</td>
+      <td>Upward Speed (1-39)</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>Downward Speed (1-39)</td>
+      <td>Downward Speed (1-39)</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>Height offset for minimum height</td>
+      <td>Height offset for minimum height</td>
+      <td>23(.)3(“)</td>
+    </tr>
+    <tr>
+      <td>211</td>
+      <td>LErN (Calibrates based on min (133) and max offset (111))</td>
+      <td>LErN (Calibrates based on min (133) and max offset (111))</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>212</td>
+      <td>UrLA (Calibrates based on software defaults? 24¼” to 52”)</td>
+      <td>UrLA (Calibrates based on software defaults? 24¼” to 52”)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>213</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>221</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>223</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>231</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>232</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>233</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>311</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>312</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>313</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>321</td>
+      <td>Toggle USA/Eur units (for height)</td>
+      <td>Toggle USA/Eur units (for height)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>322</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>323</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>331</td>
+      <td>Max weight setting? Current weight setting? (0-140)</td>
+      <td>X</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>332</td>
+      <td>X</td>
+      <td>X</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>333</td>
+      <td>SPP- (Set Program Position?) Manually set program # height</td>
+      <td>SPP- (Set Program Position?) Manually set program # height</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+<h4 id="to-calibrate-desk-remote-display">
+  
+  
+    To calibrate desk remote display: <a href="#to-calibrate-desk-remote-display" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h4>
+    
+
+<ol>
+  <li>Turn on desk.</li>
+  <li>Lower desk to minimum height.</li>
+  <li>Measure distance from the floor to the top of the desk.</li>
+  <li>Enter code 133 in either P-Code or PArA mode.</li>
+  <li>Change number to reflect the minimum desk height (Inches or cm pending the setup for units).</li>
+  <li>Press F</li>
+  <li>Raise desk to maximum height. The display will likely jump when the max height is reached.</li>
+  <li>Measure distance from the floor to the top of the desk.</li>
+  <li>Enter Passcode Mode (See top).</li>
+  <li>Enter code 111.</li>
+  <li>
+    <p>Raise or lower number the number to correct your max height. The number behaves like X, where X is the number you are adjusting. My calculations and formula were based on inches. Your results might vary.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaxHeight - MinHeight - 11.8
+---------------------------- + 1500 = X
+    .0079059829
+
+In my case, I would have
+
+38.8 - 23.3 - 11.8
+------------------ + 1500 = 1968
+    .0079059829
+</code></pre></div>    </div>
+  </li>
+  <li>After adjusting, back out and check your latest displayed height. If the height displayed is correct, move on. If not, re-adjust step 11 again.</li>
+  <li>Lower desk height half-way.</li>
+  <li>Enter code 211 in either P-Code or PArA mode.</li>
+  <li>Press F until “Init” is displayed.</li>
+  <li>The motor will now respond slowly until calibration is completed.</li>
+  <li>Lower desk to its minimum height.</li>
+  <li>Raise the desk to its maximum height.</li>
+  <li>When you reach the top, the display will change to the correct height and the calibration of the desk will be complete.</li>
+</ol>
+<h4 id="additional-remote-toubleshooting">
+  
+  
+    Additional Remote Toubleshooting <a href="#additional-remote-toubleshooting" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h4>
+    
+
+<blockquote>
+  <p>I recently dug up an old document that Steelcase shared with me on what they thought matched the desk remote. It includes helpful information such as remote control errors. I’ve included the original document here, as well as in the table below:</p>
+
+  <p><a href="/assets/files/2015/Steelcase-2004-electric-adjustable-worksurface-memory-contoller-troubleshooting.pdf">Steelcase Electric Adjustable Worksurface Memory Controller Troubleshooting Manual</a></p>
+</blockquote>
+
+<table class="table-post">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Corrective Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ERR1</td>
+      <td>Signal to controller is interrupted</td>
+      <td>1. Check controller connection at motor. Make sure it is plugged in all the way and secure.<br />2. Check the cable of the controller. Make sure the cable is not damaged.<br />3. If problem continues after checking both of the above, call your Steelcase dealer for service.<br /><br />After the signal is re-established, ERR1 will disappear from the controller display.</td>
+    </tr>
+    <tr>
+      <td>ERR2</td>
+      <td>Overload protection has shut the system down</td>
+      <td>Stop operation of the motor for a short period of time. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again with five minutes. At that time, ERR2 will disappear from the controller display.</td>
+    </tr>
+    <tr>
+      <td>ERR3</td>
+      <td>Memory signal needs to be recalibrated</td>
+      <td>The memory function needs to be re-initialized. Perform the following steps:<br /><br />1. Press the “F” button. You will see “INIT” on the display. Release the button.<br />2. Press the “DOWN” arrow button until the motor stops at its lowest point. Release the button.<br />3. Press the “UP” arrow button until the motor stops at its highest point. Release the button.<br /><br />ERR3 will now disappear from the display and the LED display will show the correct height</td>
+    </tr>
+    <tr>
+      <td>ERR4</td>
+      <td>15% duty cycle is exceeded</td>
+      <td>The motor has operated for an extended period of time and has shut down. There are two possible corrective actions.<br /><br />1. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again within 5 minutes. At that time ERR4 will disappear from the controller display.<br />2. Disconnect the power cord from the power source for 10 seconds and re-connect. User can operate the motor again. At that time ERR4 will disappear from the controller display.</td>
+    </tr>
+    <tr>
+      <td>ERR5</td>
+      <td>There is an open circuit. Both limit switches are in the open position</td>
+      <td>Call your Steelcase dealer for a replacement column mechanism.</td>
+    </tr>
+    <tr>
+      <td>ERR6</td>
+      <td>Power voltage to the mechanism is low</td>
+      <td>There are two possible corrective actions.<br />1. The motor will automatically reset itself once a short period of time has elapsed. User can operate the motor again within five minutes. At that time, ERR6 will disappear from the controller display.<br />2. Disconnect the power cord from the power source for 10 seconds and re-connect. User can operate the motor again. At that time ERR6 will disappear from the controller display.</td>
+    </tr>
+    <tr>
+      <td>O112/O212</td>
+      <td>May display when unit is first powered on</td>
+      <td>No need for alarm. This code only displays to indicate software version on the PC board within the mechanism.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>I hope that helps someone!</p>
+<h3 id="conclusion">
+  
+  
+    Conclusion <a href="#conclusion" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>I like switching between sitting and standing when I’m at my computer. Whenever I hook up my controller and play a game, I prefer standing because I get very involved and move around. My monitors easily change position so I can readjust my workstation on the fly. It’s hassle-free. I’m glad I was able to discover the settings that could change the adjustment mode to automatic. Now that I’ve had experience with the setup, I don’t think I’ll ever be going back to full-time sitting.</p>
+
+<p>Don’t knock it until you try it.</p>
+
+  <div class="line-separator"></div>
+
+  <!-- POST NAVIGATION -->
+<div class="post-nav">
+  
+    <a class="post-nav-link" href="/blog/2015/04/transferring-n64-saves/">
+    <div class="link-text previous">&laquo;&nbsp;Transferring My N64 Saves</div>
+    
+      <img class="link-image" src="/assets/img/2015/04/DSC09669.JPG" alt="Previous Article">
+    
+    </a>
+  
+  
+    <a class="post-nav-link" href="/blog/2015/12/making-a-book-from-facebook-messages/">
+    <div class="link-text next">Creating a Hardcover Book from a Plethora of Facebook Messages&nbsp;&raquo;</div>
+    
+      <img class="link-image" src="/assets/img/2015/12/banner.jpg" alt="Next Article">
+    
+    </a>
+  
+</div>
+
+</article>
+
+
+    
+<!-- Add Disqus comments. -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'kyleniewiada'; // required: replace example with your forum shortname
+  var disqus_identifier = "/blog/2015/08/reverse-engineering-my-steelcase-desk/";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+    </main>
+  <!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/" >LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl" >GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social" >Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada" >YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel='nofollow'>BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/" >Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- start noncritical style -->
+<link rel="preload" href="/assets/css/noncritical.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/noncritical.css"></noscript>
+<script>
+  /*loadCss*/
+  !function(w){"use strict";var loadCSS=function(href,before,media){function ready(cb){return doc.body?cb():void setTimeout(function(){ready(cb)})}function loadCB(){ss.addEventListener&&ss.removeEventListener("load",loadCB),ss.media=media||"all"}var ref,doc=w.document,ss=doc.createElement("link");if(before)ref=before;else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet",ss.href=href,ss.media="only x",ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){for(var resolvedHref=ss.href,i=sheets.length;i--;)if(sheets[i].href===resolvedHref)return cb();setTimeout(function(){onloadcssdefined(cb)})};return ss.addEventListener&&ss.addEventListener("load",loadCB),ss.onloadcssdefined=onloadcssdefined,onloadcssdefined(loadCB),ss};"undefined"!=typeof exports?exports.loadCSS=loadCSS:w.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+
+  /*link[rel=preload] polyfill*/
+  !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
+</script>
+<!-- end noncritical style -->
+<!-- end footer -->
+
+  </body>
+</html>
