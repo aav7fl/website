@@ -1,7 +1,7 @@
 ---
 title: Upgrading My Logitech MX Ergo Trackball with USB-C
 date: '2024-05-07 20:51'
-updated: 2024-11-15
+updated: 2025-06-21
 comments: true
 image:
   path: /assets/img/2024/05/mx_ergo_trackball_usb_c.jpg
@@ -27,8 +27,57 @@ The MX Ergo did everything that I wanted. But Logitech made the insane decision 
 
 It's a first-world tragedy when all I want is to carry one charging cable in my bag without giving it a second though. I only have a handful of devices that I regularly use which don't have USB-C ports.
 
-- 2017 Bose QuietComfort Headphones (Has a proper USB-C successor ✅)
-- 2017 iPad Pro (Has a proper USB-C successor ✅)
+- ~~2016 Bose QuietComfort 35 Headphones (Has a proper USB-C successor ✅)~~
+<details markdown="block">
+
+<summary>Bose QuietComfort 35 USB-C Mod</summary>
+
+In 2025, I decided look for USB-C mods available on the Bose QC 35 headphones. My headphones were solid, I used them daily, wanted the convenience of a single charging cable, but I wasn't interested in replacing them with a newer model.
+
+Others have tried using the Bose QC 45 USB-C daughter boards as drop-in replacements in the Bose QC 35. They work, but I've heard of some users mention that the Bluetooth light will stay illuminated all of the time. So it's not 100% backwards compatible with the QC 35.
+
+But I found a project on GitHub that seemed promising.
+
+- [jamesturton/bose-qc35-usb-c](https://github.com/jamesturton/bose-qc35-usb-c)
+
+The project includes designs for a daughter board design with USB-C that is compatible with Bose QC 35 headphones. However, they do not sell any assembled boards. Users are welcome order pre-assembled boards from a PCB manufacturer, but it's not cheap.
+
+I found a user on Reddit ([/u/starkdrive](https://www.reddit.com/user/starkdrive/)) who was offering assembled boards that _might_ be using the same design. They were available at a reasonable price, so I went this route.
+
+It worked out great! No blue light issue and they fit perfectly in my Bose QC 35 headphones.
+
+Here's a picture of the assembled red daughter board in my Bose QC 35 headphones:
+
+![Bose QuietComfort 35 with USB-C daughter board installed](/assets/img/2024/05/bose_quietcomfort_35_usb_c_daughter_board.jpg)*Bose QuietComfort 35 with a red USB-C daughter board installed*
+
+With everything fully assembled:
+
+![Bose QuietComfort 35 with USB-C mod installed](/assets/img/2024/05/bose_quietcomfort_35_usb_c.jpg)*Bose QuietComfort 35 with the USB-C mod fully installed*
+
+_Perfection 👌🧼_
+
+</details>
+
+- ~~DualShock 4~~
+<details markdown="block">
+
+<summary>Sony DualShock USB-C Mod</summary>
+
+I was already on a roll with the Bose QuietComfort 35 USB-C mod, so I decided to tackle my DualShock 4 next. My DualShock 4 controller is the primary controller that I use on my PC for gaming. I find it super comfortable and it works well with my original USB Wireless Adapter.
+
+I don't even own a PS4. 😂
+
+Just like my other devices, I wanted the convenience of a single cable to charge my DualShock 4.
+
+Originally, I was going to get the USB-C daughter board from a seller on Tindie, but they were out of stock. So I went with a kit from ElecGear that I picked up on Amazon. The kit was only $15 and included two boards, so it seemed like a good deal.
+
+One super-short install later and we were good to go! The install wasn't nearly as clean as my Bose QC 35 headphones, but it was still a success.
+
+![Sony DualShock 4 with USB-C mod installed](/assets/img/2024/05/dualshock_4_usb_c.jpg)*Sony DualShock 4 with USB-C mod installed*
+
+</details>
+
+- ~~2017 iPad Pro (Has a proper USB-C successor ✅)~~ Upgraded to newer iPad model with USB-C
 - 2017 Logitech MX Ergo (No USB-C successor ❌)
 
 Looking back, 2017 was quite the year for me 😅.
