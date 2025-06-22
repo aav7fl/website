@@ -55,6 +55,7 @@ task :html_proofer do
     ], # Ignore common errors
     ignore_urls:
     [
+      %r{.*amp.dev/.*}, # Blocks too many requests at once like re-runs
       %r{.*apple.com/.*}, # Apple blocking Travis CI/typhoeus
       %r{.*ebird.org/.*}, # eBird is blocks us :(
       %r{.*loc.gov/.*}, # Seems to break every other day
