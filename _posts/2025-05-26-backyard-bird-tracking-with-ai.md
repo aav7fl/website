@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2025-06-04 16:51'
+updated: '2025-07-09 12:00'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -31,6 +31,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 
 > Changelog:
 > - 2025-06-04: Tweaked the `command_line` sensors to use `curl` retry logic for fewer Home Assistant warning logs.
+> - 2025-07-09: Tweaked the `notify` conditions to filter out an `unavailable` `from_state` which could occur when manually reloading all template entities in Home Assistant.
 
 ## Continuous Bird Detection
 
@@ -1058,7 +1059,7 @@ The downside is that this will only send a notification for each bird species _o
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 alias: Notify on First Detection of New BirdNET Bird Species
 description: >-
   Send a notification to kyle when a new bird species is detected that
@@ -1073,7 +1074,8 @@ conditions:
     value_template: >-
       {{ trigger.to_state.attributes.species_list is defined and
       trigger.to_state.attributes.species_list is iterable and
-      trigger.to_state.attributes.species_list is not string }}
+      trigger.to_state.attributes.species_list is not string and
+      trigger.from_state.state != 'unavailable' }}
 actions:
   - variables:
       current_species_list: >-
@@ -1141,7 +1143,7 @@ This can easily be adjusted in the automation below on the {% raw %}`{{ differen
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 alias: Notify rare bird detection
 description: >-
   Notify the family when a bird that hasn't been detected for a large number of days
@@ -1156,7 +1158,8 @@ conditions:
     value_template: >-
       {{ trigger.to_state.attributes.species_list is defined and
       trigger.to_state.attributes.species_list is iterable and
-      trigger.to_state.attributes.species_list is not string }}
+      trigger.to_state.attributes.species_list is not string and
+      trigger.from_state.state != 'unavailable' }}
 actions:
   - variables:
       current_species_list: >-
