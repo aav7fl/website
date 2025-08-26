@@ -1,7 +1,7 @@
 ---
 title: 'Making Bluetooth the Beacon of Trash Day'
 date: '2024-06-25 21:07'
-updated: '2025-05-05 06:22'
+updated: '2025-08-26 12:10'
 comments: true
 image:
   path: /assets/img/2024/06/waste_pickup.jpg
@@ -14,6 +14,14 @@ description: "Bluetooth beacons + Home Assistant = Smarter Waste Management. Lea
 ---
 
 If you're anything like me, you've probably experienced the frustration of dragging your trash bins to the curb only to realize it wasn't trash day... or worse, mixing up the recycling week and missing the pickup entirely. Well, not anymore! I've integrated some affordable Bluetooth beacons with my Home Assistant setup to create a smart trash system that not only notifies me when to take out the bins but also tells me when they've been emptied.
+
+<details markdown="block">
+
+<summary>Post Changelog</summary>
+
+- **2025-08-26**: Add `device:` blocks to MQTT sensors to tie entities under a single device.
+
+</details>
 
 {% include toc.html %}
 
@@ -258,6 +266,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["trash_bin"]
+      name: "Trash Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
   - state_topic: "bluecharm/publish/BEACON_GATEWAY_ID"
     name: "Trash bin battery"
     unique_id: "trash_bin_battery"
@@ -290,6 +304,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetDmacFound = namespace(found=False) %}
+    device:
+      identifiers: ["trash_bin"]
+      name: "Trash Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
   ##
   # Recycling Bin
   ##
@@ -310,6 +330,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["recycling_bin"]
+      name: "Recycling Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
   - state_topic: "bluecharm/publish/BEACON_GATEWAY_ID"
     name: "Recycling bin battery"
     unique_id: "recycling_bin_battery"
@@ -342,6 +368,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetDmacFound = namespace(found=False) %}
+    device:
+      identifiers: ["recycling_bin"]
+      name: "Recycling Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
 {% endraw %}
 ```
 </details>
@@ -445,6 +477,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["trash_bin"]
+      name: "Trash Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
   ##
   # Recycling Bin
   ##
@@ -464,6 +502,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["recycling_bin"]
+      name: "Recycling Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
 {% endraw %}
 ```
 </details>
@@ -542,6 +586,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["trash_bin"]
+      name: "Trash Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
   ##
   # Recycling Bin
   ##
@@ -570,6 +620,12 @@ mqtt:
               {%- endif %}
           {%- endfor %}
       {% set targetUuidFound = namespace(found=False) %}
+    device:
+      identifiers: ["recycling_bin"]
+      name: "Recycling Bin"
+      manufacturer: "Blue Charm"
+      model: "BCG04"
+      suggested_area: "Garage"
 {% endraw %}
 ```
 </details>

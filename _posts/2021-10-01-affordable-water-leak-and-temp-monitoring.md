@@ -1,7 +1,7 @@
 ---
 title: Affordable Leak Detection and Temperature Monitoring in Home Assistant
 date: '2021-10-01 10:22'
-updated: 2023-10-22
+updated: '2025-08-26 12:10'
 comments: true
 image:
   path: /assets/img/2021/10/banner.jpg
@@ -18,6 +18,14 @@ Home automation should be open, affordable, and functional. I think it's silly f
 A cheap SDR can listen to oodles of devices on common RF bands. For example, devices that operate on 433 MHz can include TPMS sensors, weather sensors, or even utility meters. Thankfully, there are some terrific communities who have figured out how to decode many of the popular device signals for the average user to track.  
 
 By leveraging one of these projects, we can use our own SDR with some 433 MHz sensors to send useful information over to Home Assistant.
+
+<details markdown="block">
+
+<summary>Post Changelog</summary>
+
+- **2025-08-26**: Add `device:` blocks to MQTT sensors to tie entities under a single device.
+
+</details>
 
 ## Goals
 
@@ -109,6 +117,12 @@ mqtt:
       unique_id: backyard_temperature_battery
       payload_on: 0
       payload_off: 1
+      device:
+        identifiers: ["backyard_sensor"]
+        name: "Backyard Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Backyard"
   sensor:
     - state_topic: rtl_433/Acurite-Tower/5555/temperature_C
       json_attributes_topic: rtl_433/Acurite-Tower/5555
@@ -117,6 +131,12 @@ mqtt:
       name: "Backyard temperature"
       unique_id: backyard_temperature
       unit_of_measurement: "°C"
+      device:
+        identifiers: ["backyard_sensor"]
+        name: "Backyard Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Backyard"
     - state_topic: rtl_433/Acurite-Tower/5555/humidity
       json_attributes_topic: rtl_433/Acurite-Tower/5555
       device_class: humidity
@@ -124,6 +144,12 @@ mqtt:
       name: "Backyard humidity"
       unique_id: backyard_humidity
       unit_of_measurement: "%"
+      device:
+        identifiers: ["backyard_sensor"]
+        name: "Backyard Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Backyard"
 ```
 
 ## Refrigerator and Freezer Monitoring
@@ -144,6 +170,12 @@ mqtt:
       unique_id: basement_fridge_temperature_battery
       payload_on: 0
       payload_off: 1
+      device:
+        identifiers: ["basement_fridge"]
+        name: "Basement Fridge Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Storage"
     - state_topic: rtl_433/Acurite-986/98765/battery_ok
       json_attributes_topic: rtl_433/Acurite-986/98765
       device_class: battery
@@ -151,6 +183,12 @@ mqtt:
       unique_id: basement_freezer_temperature_battery
       payload_on: 0
       payload_off: 1
+      device:
+        identifiers: ["basement_freezer"]
+        name: "Basement Freezer Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Storage"
   sensor:
     - state_topic: rtl_433/Acurite-986/54321/temperature_F
       json_attributes_topic: rtl_433/Acurite-986/54321
@@ -159,6 +197,12 @@ mqtt:
       name: "Basement Fridge Temperature"
       unique_id: basement_fridge_temperature
       unit_of_measurement: "°F"
+      device:
+        identifiers: ["basement_fridge"]
+        name: "Basement Fridge Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Storage"
     - state_topic: rtl_433/Acurite-986/98765/temperature_F
       json_attributes_topic: rtl_433/Acurite-986/98765
       device_class: temperature
@@ -166,6 +210,12 @@ mqtt:
       name: "Basement Freezer Temperature"
       unique_id: basement_freezer_temperature
       unit_of_measurement: "°F"
+      device:
+        identifiers: ["basement_freezer"]
+        name: "Basement Freezer Sensor"
+        manufacturer: "AcuRite"
+        model: "06002M"
+        suggested_area: "Storage"
 ```
 
 ## Water-Leak Detection
@@ -211,6 +261,12 @@ mqtt:
       name: Dishwasher Water Leak
       payload_on: Water Leak
       payload_off: Button Press
+      device:
+        identifiers: ["dishwasher"]
+        name: "Dishwasher Water Detector"
+        manufacturer: "Govee"
+        model: "H5054"
+        suggested_area: "Kitchen"
   sensor:
     - state_topic: rtl_433/Govee-Water/88888/battery_ok
       json_attributes_topic: rtl_433/Govee-Water/88888
@@ -220,6 +276,12 @@ mqtt:
       unique_id: 88888_govee_water_battery
       name: Dishwasher Water Detector Battery
       unit_of_measurement: "%"
+      device:
+        identifiers: ["dishwasher"]
+        name: "Dishwasher Water Detector"
+        manufacturer: "Govee"
+        model: "H5054"
+        suggested_area: "Kitchen"
 #{% endraw %}
 ```
 
