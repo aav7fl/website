@@ -41,7 +41,7 @@ Many years ago, I had heard of a smart mousetrap by a company called Dome. At th
 
 The model I landed on was the "Elexa Dome Z-Wave Smart Electronic Mouse Trap", previously called the "Dome Mouser". 
 
-[Z-Wave Alliance > Dome Mouser](https://products.z-wavealliance.org/products/1847)
+[Z-Wave Alliance > Dome Mouser](https://products.z-wavealliance.org/z-wave-product/dome-mouser/)
 
 I _would love_ to leave a link on where to purchase it, but I took so long to finish writing this post that it has been unavailable to purchase anywhere for over a year. 
 
