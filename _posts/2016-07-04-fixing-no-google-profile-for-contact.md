@@ -29,7 +29,7 @@ It wasn’t until a few months ago that I realized I had somehow acquired _three
 
 Now I had three Google+ accounts tied to my primary email. When I tried to speak a Google Now Hangouts command, it would not find any contacts. Honestly, I can’t remember if it ever worked before then.
 
-I had a theory. I thought that there might be a conflict in which route my Google Now commands were following to gather my contacts. The first thing I did was [delete my Google+ business page](https://support.google.com/plus/answer/1044503) because it wasn’t linked to anything. Next, I tried to delete my Google+ page linked to my YouTube channel. However, because it was linked, I could not delete it. [This setting](https://www.youtube.com/account_transfer_channel) allowed me to switch my connected Google+ profile on my YouTube channel. After severing the link, I was then able to close my old YouTube’s Google+ account.
+I had a theory. I thought that there might be a conflict in which route my Google Now commands were following to gather my contacts. The first thing I did was delete my Google+ business page because it wasn’t linked to anything. Next, I tried to delete my Google+ page linked to my YouTube channel. However, because it was linked, I could not delete it. [This setting](https://www.youtube.com/account_transfer_channel) allowed me to switch my connected Google+ profile on my YouTube channel. After severing the link, I was then able to close my old YouTube’s Google+ account.
 
 ## Then There Was One
 
