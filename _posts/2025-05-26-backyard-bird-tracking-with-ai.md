@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2025-08-28 12:00'
+updated: '2025-09-02 08:00'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -33,6 +33,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2025-06-04: Tweaked the `command_line` sensors to use `curl` retry logic for fewer Home Assistant warning logs.
 > - 2025-07-09: Tweaked the `notify` conditions to filter out an `unavailable` `from_state` which could occur when manually reloading all template entities in Home Assistant.
 > - 2025-08-28: Tweaked the "rare species" automation to skip sending an alert when the species list changes. This avoids an issue where timestamps are sometimes wrong when a new species is added to the list by the BirdNET-Go API.
+> - 2025-09-02: Removed the `notify` condition after the 'race condition' was resolved via [tphakala/birdnet-go#1242](https://github.com/tphakala/birdnet-go/pull/1242).
 
 ## Continuous Bird Detection
 
@@ -1144,7 +1145,7 @@ This can easily be adjusted in the automation below on the {% raw %}`{{ differen
 
 {% raw %}
 ```yaml
-# version 1.2
+# version 1.3
 alias: Notify rare bird detection
 description: >-
   Notify the family when a bird that hasn't been detected for a large number of days
@@ -1162,11 +1163,6 @@ conditions:
       trigger.to_state.attributes.species_list is not string and
       trigger.from_state.state != 'unavailable' }}
     alias: Is a valid list
-  - condition: template
-    value_template: >-
-      {{ (trigger.to_state.attributes.species_list | length) ==
-      (trigger.from_state.attributes.species_list | length) }}
-    alias: List sizes stay the same (avoids new species bug)
 actions:
   - variables:
       current_species_list: >-
