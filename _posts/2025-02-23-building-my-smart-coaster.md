@@ -145,7 +145,7 @@ My first attempt to build my smart coaster didn't work. In my head, I thought I 
 
 This approach was a bad idea. Because I was speedrunning this project, I didn't take the time to read any of the specifications on the VL53L0X sensor I had just purchased online. It turns out there is a minimum distance the sensor needs to be from an object to work properly (30-40 mm). 
 
-> Alternatively, I could have used a different sensor such as the VL53L4CD, with a near 0 mm minimum range. At the time of ordering my parts, it wasn't yet supported by ESPHome. Only later did I learn that a [mrtoy-me](https://github.com/mrtoy-me) had been working on a [custom component](https://github.com/mrtoy-me/esphome-my-components) for it. I have not tested it.
+> Alternatively, I could have used a different sensor such as the VL53L4CD, with a near 0 mm minimum range. At the time of ordering my parts, it wasn't yet supported by ESPHome. Only later did I learn that a [mrtoy-me](https://github.com/mrtoy-me) had been working on a custom component for it but it is no longer public.
 
 If I were to mount the sensor to the board shown above, the sensor would be too close to the bottle to work properly. This might create a false reading, which could lead to a lot of incorrect notifications. 🚨
 
