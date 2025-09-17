@@ -123,7 +123,7 @@ Now that I had the correct checksum algorithm, I recalculated my memory dump and
 
 I managed to up-convert a younger piece of my childhood (with help) into the present digital age. I had many roadblocks and a few of my ideas were unexplored. If I had to do it all over again, I wouldn’t do it any other way. This was fun.
 
-It didn’t take long before I learned that the community had made a [high definition texture pack]( https://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic) for specific graphic plug-ins. Of course I had to give it a try. It looks magnificent. This was the result.
+It didn’t take long before I learned that the community had made a high definition texture pack for specific graphic plug-ins. Of course I had to give it a try. It looks magnificent. This was the result.
 
 ![Zelda Ocarina of Time with high resolution texture pack](/assets/img/2015/04/zelda01.jpg)
 
@@ -149,7 +149,7 @@ Software and resources I used:
 - [010 Editor](https://www.sweetscape.com/010editor/)
 - [uCON64](https://ucon64.sourceforge.io/)
 - [Project64](https://www.pj64-emu.com/public-releases)
-- [Zelda high definition texture pack]( https://www.emutalk.net/threads/51481-Zelda-Ocarina-of-time-Community-Retexture-Project-V6-Development-Topic)
+- Zelda high definition texture pack (Known as "Zelda Ocarina of time Community Retexture Project V6")
 - [Our Custom Ocarina Checksum Checker](https://github.com/Vi1i/OcarinaChecksumChecker)
 
 **EDIT (March 10, 2016):**
