@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#3d256d">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#3d256d">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+      
+        <link rel="amphtml" href="https://www.kyleniewiada.org/amp/blog/2024/06/bluetooth-beacon-waste-bins/" data-proofer-ignore>
+      
+    
+
+    <!-- Messy way to capture custom page title to replace SEO Tags -->
+    
+    
+    <title>Making Bluetooth the Beacon of Trash Day</title>
+    <meta property="og:title" content="Making Bluetooth the Beacon of Trash Day" />
+
+    <!-- Come and get me RSS readers -->
+    <link type="application/atom+xml" rel="alternate" href="https://www.kyleniewiada.org/feed.xml" title="Kyle Niewiada&apos;s Website" />
+
+    <!-- Critical Stylesheet -->
+    <style type="text/css">
+      
+      @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header{background-image:url("/assets/img/banner.svg");background-color:#3a3a3a;background-size:cover;background-position:center center;padding:0;height:auto;margin-bottom:16px}.header .navigation{background:#262626}.header .nav-container{max-width:1000px;margin:0 auto}@media(min-width: 600px){.header{min-height:10em;position:relative;margin-bottom:16px}}nav{height:70px;overflow:hidden}nav ul{margin:0;padding:0;list-style-type:none;max-height:140px;position:relative}nav ul .active{background:#3d256d}nav li{display:inline-block;padding:0}nav a{display:inline-block;padding:0 1em;color:#fff;text-decoration:none;white-space:nowrap;line-height:70px;height:70px}nav a:hover{color:#fff;background-color:#00b2d9}nav li:first-child{left:0;vertical-align:top;font-size:75%}nav li:first-child :hover{color:#fff;background-color:#262626}@media(min-width: 330px){nav li:first-child{font-size:100%}}@media(min-width: 400px){nav li:first-child{font-size:140%}}nav li:last-child{position:absolute;right:0;bottom:70px;background-image:linear-gradient(to right, rgba(38, 38, 38, 0) 0, #262626 2em);padding-left:3em}nav li:nth-last-child(2){display:none}nav#menu:target{height:auto;padding:0}nav#menu:target ul{max-height:none}nav#menu:target li{display:block}nav#menu:target a{display:block;background-color:hsla(0,0%,100%,.05)}nav#menu:target li:not(:first-child){margin-top:2px}nav#menu:target li:not(:first-child) a:hover{background-color:#00b2d9}nav#menu:target li:last-child{display:none}nav#menu:target li:nth-last-child(2){display:inline-block;position:absolute;top:0;right:0;margin:0;border-left:2px solid #262626;background:#3a3a3a}
+      
+    </style>
+
+    <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1" />
+
+<meta name="author" content="Kyle Niewiada" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Bluetooth beacons + Home Assistant = Smarter Waste Management. Learn how I track pickups, automate reminders, and revolutionize my waste management routine to never miss a pickup day." />
+<meta property="og:description" content="Bluetooth beacons + Home Assistant = Smarter Waste Management. Learn how I track pickups, automate reminders, and revolutionize my waste management routine to never miss a pickup day." />
+<link rel="canonical" href="https://www.kyleniewiada.org/blog/2024/06/bluetooth-beacon-waste-bins/" />
+<meta property="og:url" content="https://www.kyleniewiada.org/blog/2024/06/bluetooth-beacon-waste-bins/" />
+<meta property="og:site_name" content="Kyle Niewiada’s Website" />
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2024/06/waste_pickup.jpg" />
+<meta property="og:image:height" content="600" />
+<meta property="og:image:width" content="800" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-25T21:07:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2024/06/waste_pickup.jpg" />
+<meta property="twitter:title" content="Making Bluetooth the Beacon of Trash Day" />
+<meta name="twitter:site" content="@CrypticCitrus" />
+<meta name="twitter:creator" content="@CrypticCitrus" />
+<meta property="fb:app_id" content="137961485759" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2024-06-25T21:07:00-04:00","datePublished":"2024-06-25T21:07:00-04:00","description":"Bluetooth beacons + Home Assistant = Smarter Waste Management. Learn how I track pickups, automate reminders, and revolutionize my waste management routine to never miss a pickup day.","headline":"Making Bluetooth the Beacon of Trash Day","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2024/06/waste_pickup.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2024/06/bluetooth-beacon-waste-bins/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2024/06/bluetooth-beacon-waste-bins/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP46JK222K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZP46JK222K');
+</script> 
+</head>
+
+
+  <body>
+  <!-- start header -->
+<header class="header">
+  <div class="navigation">
+    <div class="nav-container">
+      <nav id="menu">
+        <ul class="menu-closed">
+          
+            
+            <li class="normal"><a href="/">Kyle Niewiada</a></li>
+          
+            
+            <li class="normal"><a href="/">Home</a></li>
+          
+            
+            <li class="normal"><a href="/about/">About</a></li>
+          
+            
+            <li class="normal"><a href="/archive/">Archive</a></li>
+          
+            
+            <li class="normal"><a href="/contact/">Contact</a></li>
+          
+            
+            <li class="normal"><a href="/resume/">Résumé</a></li>
+          
+          <li><a href="#">&#215; Close menu</a></li>
+          <li><a href="#menu">&#9776; Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <main class="content">
+    <!-- lazy way to hide page title on blog posts -->
+    
+
+    <article>
+  <header>
+    <h1 class="page-title">Making Bluetooth the Beacon of Trash Day</h1>
+
+    <h2 class="meta">Kyle Niewiada on June 25, 2024</h2>
+
+    <h3 class="meta">
+      
+      23 Minute Read
+       | Large project</h3>
+  </header>
+
+  
+  <h4 class="sub-meta">Updated on August 26, 2025</h4>
+    
+
+  
+  <img src="/assets/img/2024/06/waste_pickup.jpg" alt="A Blue Charm Bluetooth beacon strapped to my trash bin handle" />
+  
+
+  <div class="line-separator"></div>
+
+  <p>If you’re anything like me, you’ve probably experienced the frustration of dragging your trash bins to the curb only to realize it wasn’t trash day… or worse, mixing up the recycling week and missing the pickup entirely. Well, not anymore! I’ve integrated some affordable Bluetooth beacons with my Home Assistant setup to create a smart trash system that not only notifies me when to take out the bins but also tells me when they’ve been emptied.</p>
+
+<details>
+
+  <summary>Post Changelog</summary>
+
+  <ul>
+    <li><strong>2025-08-26</strong>: Add <code class="language-plaintext highlighter-rouge">device:</code> blocks to MQTT sensors to tie entities under a single device.</li>
+  </ul>
+
+</details>
+
+<div class="line-separator"></div>
+<h2>
+  
+  
+    Table of Contents
+  
+  
+</h2>
+    
+<div class="table-of-contents">
+<ul id="markdown-toc">
+  <li><a href="#the-beacon-of-trash-day" id="markdown-toc-the-beacon-of-trash-day">The Beacon of Trash Day</a></li>
+  <li><a href="#whats-my-stack" id="markdown-toc-whats-my-stack">What’s My Stack?</a>    <ul>
+      <li><a href="#hardware" id="markdown-toc-hardware">Hardware</a></li>
+      <li><a href="#software" id="markdown-toc-software">Software</a></li>
+    </ul>
+  </li>
+  <li><a href="#how-does-this-work" id="markdown-toc-how-does-this-work">How Does This Work?</a>    <ul>
+      <li><a href="#how-do-i-know-where-the-bins-are" id="markdown-toc-how-do-i-know-where-the-bins-are">How do I know where the bins are?</a></li>
+      <li><a href="#how-do-i-know-when-the-bins-are-picked-up" id="markdown-toc-how-do-i-know-when-the-bins-are-picked-up">How do I know when the bins are picked up?</a></li>
+      <li><a href="#did-you-say-something-about-notifications" id="markdown-toc-did-you-say-something-about-notifications">Did you say something about notifications?</a></li>
+    </ul>
+  </li>
+  <li><a href="#bluetooth-beacon-configuration" id="markdown-toc-bluetooth-beacon-configuration">Bluetooth Beacon Configuration</a>    <ul>
+      <li><a href="#slot0-ibeacon" id="markdown-toc-slot0-ibeacon">Slot0 (iBeacon)</a></li>
+      <li><a href="#slot1-eddystone-tlm" id="markdown-toc-slot1-eddystone-tlm">Slot1 (Eddystone TLM)</a></li>
+      <li><a href="#bluetooth-beacon-scanner-gateway" id="markdown-toc-bluetooth-beacon-scanner-gateway">Bluetooth Beacon Scanner Gateway</a></li>
+    </ul>
+  </li>
+  <li><a href="#home-assistant-configuration" id="markdown-toc-home-assistant-configuration">Home Assistant Configuration</a>    <ul>
+      <li><a href="#calendar-sensor" id="markdown-toc-calendar-sensor">Calendar Sensor</a></li>
+      <li><a href="#rssi-and-battery-sensors" id="markdown-toc-rssi-and-battery-sensors">RSSI and Battery Sensors</a></li>
+      <li><a href="#data-filters" id="markdown-toc-data-filters">Data Filters</a></li>
+      <li><a href="#vibration-sensors" id="markdown-toc-vibration-sensors">Vibration Sensors</a></li>
+      <li><a href="#presence-sensors" id="markdown-toc-presence-sensors">Presence Sensors</a></li>
+    </ul>
+  </li>
+  <li><a href="#automations" id="markdown-toc-automations">Automations</a>    <ul>
+      <li><a href="#notification-recycling-or-trash-removal-tomorrow" id="markdown-toc-notification-recycling-or-trash-removal-tomorrow">[Notification] Recycling or Trash removal tomorrow</a></li>
+      <li><a href="#state-helper-recycling-or-trash-picked-up" id="markdown-toc-state-helper-recycling-or-trash-picked-up">[State Helper] Recycling or Trash picked up</a></li>
+      <li><a href="#notification-recycling-or-trash-picked-up" id="markdown-toc-notification-recycling-or-trash-picked-up">[Notification] Recycling or Trash picked up</a></li>
+      <li><a href="#notification-health-check-for-bluetooth-beacons" id="markdown-toc-notification-health-check-for-bluetooth-beacons">[Notification] Health Check for Bluetooth Beacons</a>        <ul>
+          <li><a href="#handling-unknown-states" id="markdown-toc-handling-unknown-states">Handling ‘Unknown’ States</a></li>
+          <li><a href="#handling-stuck-states" id="markdown-toc-handling-stuck-states">Handling ‘Stuck’ States</a></li>
+          <li><a href="#handling-away-states" id="markdown-toc-handling-away-states">Handling ‘Away’ States</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#lessons-learned-so-far" id="markdown-toc-lessons-learned-so-far">Lessons Learned (So Far)</a></li>
+  <li><a href="#whats-next" id="markdown-toc-whats-next">What’s Next?</a></li>
+</ul>
+
+</div>
+<div class="line-separator"></div>
+<h2 id="the-beacon-of-trash-day">
+  
+  
+    The Beacon of Trash Day <a href="#the-beacon-of-trash-day" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>The heart of this system is a set of Bluetooth beacons. These aren’t just any beacons though; they’re multi-talented. Let me introduce you to the <a href="https://bluecharmbeacons.com/product/bluetooth-ble-ibeacon-bc04p-multibeacon-water-resistant-with-motion-sensor/">Blue Charm BC04P MultiBeacon</a>.</p>
+
+<ul>
+  <li>Affordable: ~$20 each.</li>
+  <li>IP67 Water-resistant: Perfect for withstanding the elements.</li>
+  <li>Long Battery Life: ~4 years on a single CR2477 battery.</li>
+  <li>Vibration Sensor: When triggered, these beacons can swap to broadcasting a different UUID.</li>
+  <li>Different Bluetooth beacon formats: Like iBeacon or Eddystone TLM.</li>
+  <li>Endless Configurability: Seriously, you can tweak almost everything about these beacons from signal format, broadcast strength, patterns, UUIDs, and more!</li>
+</ul>
+
+<p>I capture data from the beacons using Blue Charm’s <a href="https://bluecharmbeacons.com/product/bcg04-ble-gateway-beacon-scanner/">Beacon Scanner Gateway (BCG04)</a>. This device listens for the beacons and sends the data over wifi to my Home Assistant instance via MQTT. I could have rolled my own gateway, but I wanted to keep things simple and reliable. Time isn’t exactly a luxury for me right now.</p>
+
+<blockquote>
+  <p>I was motivated by the fact that I kept forgetting to bring my bins back inside after they were emptied. This whole project was heavily inspired by <a href="https://bluecharmbeacons.com/beacon-powered-reminder-to-take-out-the-trash/">Blue Charm’s blog post</a>. I’ve made a bunch of tweaks and I’m stoked with how this turned out.</p>
+</blockquote>
+<h2 id="whats-my-stack">
+  
+  
+    What’s My Stack? <a href="#whats-my-stack" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+<h3 id="hardware">
+  
+  
+    Hardware <a href="#hardware" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<ul>
+  <li>Trash or recycling bin (hopefully provided by your waste removal provider)</li>
+  <li><a href="https://bluecharmbeacons.com/product/bluetooth-ble-ibeacon-bc04p-multibeacon-water-resistant-with-motion-sensor/">Blue Charm BC04P Bluetooth beacon</a></li>
+  <li><a href="https://bluecharmbeacons.com/product/bcg04-ble-gateway-beacon-scanner/">Blue Charm Beacon Scanner Gateway (BCG04)</a></li>
+</ul>
+<h3 id="software">
+  
+  
+    Software <a href="#software" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<ul>
+  <li><a href="https://www.home-assistant.io/">Home Assistant</a> (I’m using <code class="language-plaintext highlighter-rouge">2024.6.2</code> at the time of writing)</li>
+  <li>MQTT broker (I use the <a href="https://hub.docker.com/_/eclipse-mosquitto">eclipse-mosquitto docker official image</a>)</li>
+  <li>KBeacon Pro app (by KKM Co., Ltd)</li>
+</ul>
+<h2 id="how-does-this-work">
+  
+  
+    How Does This Work? <a href="#how-does-this-work" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>Ready to revolutionize your waste management routine? Let’s dive into how I’ve set up these beacons to work with Home Assistant.</p>
+
+<p>The basic concept is simple.</p>
+
+<ul>
+  <li>Zip-tie Bluetooth beacons to my bins.</li>
+  <li>Program and track the UUID of the Bluetooth beacons.</li>
+  <li>Program the beacons to broadcast a <em>different</em> UUID when the vibration sensor is triggered.</li>
+  <li>Use Home Assistant to track the signal strength and vibration events.</li>
+  <li>Set up automations to send me notifications based on the data.</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/bluetooth_beacon_on_bin.png" alt="Bluetooth beacon installed on a recycling bin handle" /><em>Blue Charm BC04P Bluetooth beacon strapped to the handle of my recycling bin</em></p>
+<h3 id="how-do-i-know-where-the-bins-are">
+  
+  
+    How do I know where the bins are? <a href="#how-do-i-know-where-the-bins-are" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><strong>Signal Strength</strong>. Each bin has a Bluetooth beacon strapped to it. When the beacon signal is strong, the bin is in the garage. When the signal is weak (or missing entirely), the bin is at the curb. Notice that giant chasm in the signal strength? The signal is always above or below that threshold. I can safely assume that if it’s below that threshold, the bin is outside.</p>
+
+<p><img src="/assets/img/2024/06/filtered_beacon_signals.png" alt="Filtered beacon signal strength" /><em>Filtered beacon signal strength with a clear separation that is never crossed</em></p>
+<h3 id="how-do-i-know-when-the-bins-are-picked-up">
+  
+  
+    How do I know when the bins are picked up? <a href="#how-do-i-know-when-the-bins-are-picked-up" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><strong>Vibration Detection</strong>. These beacons include a configurable vibration sensor. On trash or recycling day, the beacon’s vibration sensor will trigger when the bin is lifted by the truck. This trigger will cause the beacon to emit a different signal. By listening for the modified signal, I know when the bins have been emptied (or hit by a car 🗑️💥🚗).</p>
+
+<p><img src="/assets/img/2024/06/bluetooth_beacon_open.jpg" alt="Inside the Blue Charm Bluetooth beacon case" /><em>Inside the Blue Charm BC04P Bluetooth beacon case</em></p>
+<h3 id="did-you-say-something-about-notifications">
+  
+  
+    Did you say something about notifications? <a href="#did-you-say-something-about-notifications" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Since I’m tracking if the bins are inside or outside, I get a friendly reminder the night before pickup day if I haven’t taken the bins out yet. More on these automations later.</p>
+<h2 id="bluetooth-beacon-configuration">
+  
+  
+    Bluetooth Beacon Configuration <a href="#bluetooth-beacon-configuration" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>Let’s start at the top and <em>lightly</em> work our way through the steps of configuring the beacons.</p>
+
+<p>Each beacon has a few slots available to broadcast using different formats. I use 2 out of the 4 available slots. The first slot is for the bin’s presence and vibration detection (iBeacon), and the second slot is for the battery readings (Eddystone TLM). Ahead is the configuration overview for each beacon format.</p>
+
+<p>But first, below is a grid of screenshots showing how I’ve configured my <code class="language-plaintext highlighter-rouge">Recycling bin beacon</code> in the KBeacon Pro app. This includes broadcasting in each of the different formats, and the triggers used. Your situation may vary, but this should offer a good starting place. You’ll need to tweak these settings, such as the vibration trigger strength, to fit your needs.</p>
+
+<p><img src="/assets/img/2024/06/collage.jpg" alt="KBeacon Pro Settings" /><em>KBeacon Pro Settings. UUIDs have been redacted.</em></p>
+
+<blockquote>
+  <p>If you need a more detailed quick-start guide for these beacons, Blue Charms has a <a href="https://bluecharmbeacons.com/quick-start-guide-bc04p-ibeacon-ble-multibeacon/">great one here</a>.</p>
+</blockquote>
+<h3 id="slot0-ibeacon">
+  
+  
+    Slot0 (iBeacon) <a href="#slot0-ibeacon" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><code class="language-plaintext highlighter-rouge">Slot0</code> is the first configuration slot for the beacon. I’ve configured this slot to broadcast an iBeacon formatted signal every 1 second. There’s nothing special about this signal. It broadcasts a pre-programmed UUID that I know to listen for. When I hear it, I record how strong or weak the signal is. The signal strength allows me to calculate if the bin is nearby, or far away.</p>
+
+<p>Here’s the twist. The iBeacon configuration has a trigger option for <code class="language-plaintext highlighter-rouge">motion</code> (or <code class="language-plaintext highlighter-rouge">vibration</code>) as one of the options. While this sensor is triggered, the beacon will swap broadcasting its original UUID for a <em>different</em> pre-configured “triggered UUID”. When I hear “triggered UUID”, I know the beacon’s vibration sensor has been tripped.</p>
+
+<p>Roughly 30 seconds after the vibration sensor is triggered, it will reset and the beacon will swap back to broadcasting its original UUID.</p>
+
+<p>Everything about these is super configurable from the broadcast strength to the message types. The iBeacon normally broadcasts at 0+ dBm to save on battery life. But when the vibration sensor is triggered, it can temporarily increase the transmission level for the vibration event broadcast to 8+ dBm. This can help ensure that the beacon gateway receives important vibration events.</p>
+
+<blockquote>
+  <p>This can be useful when the beacon is placed at the end of a driveway, where it might be on the edge of the broadcast range. By increasing the broadcast strength for the vibration trigger, it increases the chances that the event will be heard. After the trigger resets, the beacon can return to broadcasting its standard event at 0+ dBm and continue to save on battery life.</p>
+
+  <p>For what it’s worth, I never needed to increase the broadcast strength on my setup. But it’s good to know that I have options.</p>
+</blockquote>
+<h3 id="slot1-eddystone-tlm">
+  
+  
+    Slot1 (Eddystone TLM) <a href="#slot1-eddystone-tlm" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p><code class="language-plaintext highlighter-rouge">Slot1</code> of my beacon is used to broadcast the current battery voltage of the beacon’s battery. I’m able to do this by using the <a href="https://github.com/google/eddystone/blob/bb8738d7ddac0ddd3dfa70e594d011a0475e763d/eddystone-tlm/README.md">Eddystone TLM</a> broadcast format instead of iBeacon. This is because an Eddystone TLM encoded frame supports including a field for battery voltage in mV. The Blue Charm BC04P supports this feature.</p>
+
+<blockquote>
+  <p>To save on battery life, I configured the beacon to only broadcast the Eddystone TLM every 40 seconds; the slowest period I was able to set from the app.</p>
+</blockquote>
+
+<p>Knowledge of the battery voltage alone doesn’t provide enough information to estimate the remaining battery life. That’s because we don’t know where the voltage cutoff is before the beacon stops working. I <em>could</em> test it by using an external power supply, and slowly lowering the voltage until it cuts out. But I went the easier route. I asked support.</p>
+
+<p>I reached out to <a href="https://www.linkedin.com/in/thomas-wetherell-3b10991/">Thomas</a> at Blue Charm Beacons (who makes the beacon) and asked if they could share information about the power requirements for the beacon. They generously returned my request with the exact power levels that they use to detect an empty battery in their app, 2500 mV. Thomas also let me know that they found the beacon usually continues to work until <em>roughly</em> 2400 mV, but we’re going to stick with the 2500 mV for our calculations.</p>
+
+<p>I took this information and created a sensor in Home Assistant that provides a rough estimate of the beacon’s remaining battery percentage. I’ll cover this later in the post.</p>
+<h3 id="bluetooth-beacon-scanner-gateway">
+  
+  
+    Bluetooth Beacon Scanner Gateway <a href="#bluetooth-beacon-scanner-gateway" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>The setup of the Bluetooth beacon scanner gateway is pretty straightforward. You just need to:</p>
+
+<ol>
+  <li>Download the KGateway app (by KKM Co., Ltd).</li>
+  <li>Connect the scanner gateway to your 2.4 GHz Wi-Fi network (5 GHz won’t work here).</li>
+  <li>Enter the MQTT server details and the topic you want to publish to.</li>
+  <li>(Optional but recommended) Reduce network traffic from the beacon scanner by adjusting the filter settings to ignore all beacon MACs except the ones you’re setting up.</li>
+</ol>
+
+<blockquote>
+  <p>The <a href="https://bluecharmbeacons.com/quick-start-guide-bcg04-usb-powered-ble-mini-gateway/">Blue Charm BCG04 Beacon Gateway starter guide</a> is pretty good at walking you through any additional setup process, but I think it’s self-explanatory.</p>
+</blockquote>
+<h2 id="home-assistant-configuration">
+  
+  
+    Home Assistant Configuration <a href="#home-assistant-configuration" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    <hr />
+<h3 id="calendar-sensor">
+  
+  
+    Calendar Sensor <a href="#calendar-sensor" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>My waste pickup provider is lame because they don’t provide an API for their pickup dates. 👎 Instead, they cram the schedule for all users and groups into a PDF calendar highlighting their holidays for the entire year.</p>
+
+<p>I used to set up a Google Task/Reminder for each pickup day, but that was a pain to maintain. It seems like repeating tasks only show up on a rolling ~6-month window on my Google Calendar. This means I have to check back every few months to adjust the tasks around holidays as they appear on my calendar.</p>
+
+<p>Instead, I created a separate Google Calendar that exclusively holds pickup dates for my trash and recycling. The benefit is that when my waste pickup provider releases their yearly calendar, I can update all pickup dates on my calendar <em>once</em>.</p>
+
+<p><img src="/assets/img/2024/06/waste_pickup_calendar.png" alt="Calendar view in Home Assistant showing the trash and recycling pickup dates for June, 2024." /><em>Waste collection calendar in Home Assistant</em></p>
+
+<p>I’ve connected this calendar to Home Assistant using the <a href="https://www.home-assistant.io/integrations/google/">Google Calendar integration</a>. I created some sensors around the calendar events to track future/current pickup days. This way, I can easily build automations and notifications around these events.</p>
+
+<ul>
+  <li>Trash Tomorrow</li>
+  <li>Recycling Tomorrow</li>
+  <li>Trash Today</li>
+  <li>Recycling Today</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/pickup_quick_glance.png" alt="Quick glance showing upcoming waste collection for each pickup type." /><em>Waste collection quick-glance showing both bins will be picked up tomorrow, and both bins are still at the house.</em></p>
+
+<p>The template sensors below check the <code class="language-plaintext highlighter-rouge">waste_collection</code> Google Calendar for events <code class="language-plaintext highlighter-rouge">today</code> and <code class="language-plaintext highlighter-rouge">tomorrow</code> that contain the words <code class="language-plaintext highlighter-rouge">Trash</code> or <code class="language-plaintext highlighter-rouge">Recycling</code>. If it finds a matching event, it sets the sensor to <code class="language-plaintext highlighter-rouge">on</code>. If it doesn’t find an event, the sensor stays <code class="language-plaintext highlighter-rouge">off</code>.</p>
+
+<!-- If an HTML tag has an attribute markdown="block", then the content of the tag is parsed as block level elements. -->
+<!-- https://kramdown.gettalong.org/syntax.html#html-blocks -->
+<details>
+
+  <summary>[YAML] Calendar event sensors</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">template</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">trigger</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time_pattern</span>
+        <span class="c1"># Let's be honest, we don't need to check often. </span>
+        <span class="c1"># But 5 minutes should be reactive enough if I need to correct an event date.</span>
+        <span class="na">minutes</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/5"</span> 
+    <span class="na">action</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">calendar.get_events</span>
+        <span class="na">data</span><span class="pi">:</span>
+          <span class="na">start_date_time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">today_at()</span><span class="nv"> </span><span class="s">}}"</span>
+          <span class="na">end_date_time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">today_at('23:59:59')</span><span class="nv"> </span><span class="s">}}"</span>
+        <span class="na">target</span><span class="pi">:</span>
+          <span class="na">entity_id</span><span class="pi">:</span> <span class="s">calendar.waste_collection</span>
+        <span class="na">response_variable</span><span class="pi">:</span> <span class="s">agenda_today</span>
+      <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">calendar.get_events</span>
+        <span class="na">data</span><span class="pi">:</span>
+          <span class="na">start_date_time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">today_at()</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">timedelta(days=1)</span><span class="nv"> </span><span class="s">}}"</span>
+          <span class="na">end_date_time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">today_at('23:59:59')</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">timedelta(days=1)</span><span class="nv"> </span><span class="s">}}"</span>
+        <span class="na">target</span><span class="pi">:</span>
+          <span class="na">entity_id</span><span class="pi">:</span> <span class="s">calendar.waste_collection</span>
+        <span class="na">response_variable</span><span class="pi">:</span> <span class="s">agenda_tomorrow</span>
+    <span class="na">binary_sensor</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Trash Today</span>
+        <span class="na">unique_id</span><span class="pi">:</span> <span class="s">trash_today</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">{% set search_term = "Trash" %}</span>
+          <span class="s">{{ agenda_today['calendar.waste_collection'].events</span>
+          <span class="s">| selectattr('summary', 'search', search_term) | list | count &gt; 0 }}</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Recycling Today</span>
+        <span class="na">unique_id</span><span class="pi">:</span> <span class="s">recycling_today</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">{% set search_term = "Recycling" %}</span>
+          <span class="s">{{ agenda_today['calendar.waste_collection'].events</span>
+          <span class="s">| selectattr('summary', 'search', search_term) | list | count &gt; 0 }}</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Trash Tomorrow</span>
+        <span class="na">unique_id</span><span class="pi">:</span> <span class="s">trash_tomorrow</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">{% set search_term = "Trash" %}</span>
+          <span class="s">{{ agenda_tomorrow['calendar.waste_collection'].events</span>
+          <span class="s">| selectattr('summary', 'search', search_term) | list | count &gt; 0 }}</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Recycling Tomorrow</span>
+        <span class="na">unique_id</span><span class="pi">:</span> <span class="s">recycling_tomorrow</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">{% set search_term = "Recycling" %}</span>
+          <span class="s">{{ agenda_tomorrow['calendar.waste_collection'].events</span>
+          <span class="s">| selectattr('summary', 'search', search_term) | list | count &gt; 0 }}</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="rssi-and-battery-sensors">
+  
+  
+    RSSI and Battery Sensors <a href="#rssi-and-battery-sensors" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Next, we have the RSSI and battery sensors. These sensors are used to track the signal strength of the Bluetooth beacons and the estimated remaining battery life.</p>
+
+<ul>
+  <li>Trash Bin RSSI</li>
+  <li>Trash Bin Battery</li>
+  <li>Recycling Bin RSSI</li>
+  <li>Recycling Bin Battery</li>
+</ul>
+
+<p>The MQTT messages from the Blue Charm BCG04 gateway can be ingested by Home Assistant through MQTT sensors. I realllly wish that the gateway assigned to each beacon had a different MQTT topic, like the <a href="https://github.com/merbanan/rtl_433">rtl_433 project</a>. Instead, the beacon gateway groups all beacon data into a JSON array which is published to a single MQTT topic. It does this because the beacon gateway batches all events before publishing them at each ‘send interval’ to reduce overhead. This requires the user to loop through and filter the incoming data to find the information that they want from it.</p>
+
+<p>If the beacon gateway was sending events using different topics, it would have been <em>much</em> easier to persist the beacon state between reboots or identify when a beacon had last sent a signal. But I <em>understand</em> it’s a lot easier to manage a single MQTT topic for all beacons when the beacon gateway is batching the events together. Especially on lower-powered hardware.</p>
+
+<p>I’ve worked around these limitations in the sensors below.</p>
+
+<details>
+
+  <summary>[YAML] MQTT RSSI and battery sensors</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">sensor</span><span class="pi">:</span>
+  <span class="c1"># REPLACE: BEACON_GATEWAY_ID with the actual ID of your beacon gateway</span>
+  <span class="c1"># REPLACE: TRASH_BEACON_UUID with the UUID of your trash bin beacon</span>
+  <span class="c1"># REPLACE: RECYCLING_BEACON_UUID with the UUID of your recycling bin beacon</span>
+  <span class="c1"># REPLACE: TRASH_BIN_DMAC with the DMAC of the trash bin Eddystone beacon</span>
+  <span class="c1"># REPLACE: RECYCLING_BIN_DMAC with the DMAC of the recycling bin Eddystone beacon</span>
+  <span class="c1">##</span>
+  <span class="c1"># Trash Bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">RSSI"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">trash_bin_rssi"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">signal_strength</span>
+    <span class="c1"># Assume the sensor is too far away after 300 seconds of no updates</span>
+    <span class="na">expire_after</span><span class="pi">:</span> <span class="m">300</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">dBm"</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "TRASH_BEACON_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">{{ value_json.obj[i].rssi }}</span>
+                  <span class="s">{% set targetUuidFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">trash_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">battery"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">trash_bin_battery"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+    <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">%"</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="c1"># Sensor with CR2477 stops operating around is 2450 mV</span>
+    <span class="c1"># Battery starts at 3.3V. Anything over 3.0V is considered 100%.</span>
+    <span class="c1"># Assumes discharge curve is linear</span>
+    <span class="c1"># Type 8 message is (Eddystone) TLM, which contains the battery information as mV</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetDmacFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].dmac == "TRASH_BIN_DMAC" and value_json.obj[i].type == 8 and targetDmacFound.found == False %}</span>
+                  <span class="s">{% set stock_voltage = 3000 %}</span>
+                  <span class="s">{% set voltage_range = 550 %}</span>
+                  <span class="s">{% set current_voltage = value_json.obj[i].vbatt %}</span>
+                  <span class="s">{% set remaining_life = 0 %}</span>
+
+                  <span class="s">{% if current_voltage &gt;= stock_voltage %}</span>
+                    <span class="s">{% set remaining_life = 100 %}</span>
+                  <span class="s">{% elif current_voltage &gt; (stock_voltage - voltage_range) %}</span>
+                    <span class="s">{% set remaining_life = int((current_voltage - (stock_voltage - voltage_range)) / voltage_range * 100) %}</span>
+                  <span class="s">{% else %}</span>
+                    <span class="s">{% set remaining_life = 0 %}</span>
+                  <span class="s">{% endif %}</span>
+                  <span class="s">{{ remaining_life | int }}</span>
+                  <span class="s">{% set targetDmacFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetDmacFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">trash_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+  <span class="c1">##</span>
+  <span class="c1"># Recycling Bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">RSSI"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">recycling_bin_rssi"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">signal_strength</span>
+    <span class="c1"># Assume the sensor is too far away after 300 seconds of no updates</span>
+    <span class="na">expire_after</span><span class="pi">:</span> <span class="m">300</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">dBm"</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "RECYCLING_BEACON_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">{{ value_json.obj[i].rssi }}</span>
+                  <span class="s">{% set targetUuidFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">recycling_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">battery"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">recycling_bin_battery"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+    <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">%"</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="c1"># Sensor with CR2477 stops operating around is 2450 mV</span>
+    <span class="c1"># Battery starts at 3.3V. Anything over 3.0V is considered 100%.</span>
+    <span class="c1"># Assumes discharge curve is linear</span>
+    <span class="c1"># Type 8 message is (Eddystone) TLM, which contains the battery information as mV</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetDmacFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].dmac == "RECYCLING_BIN_DMAC" and value_json.obj[i].type == 8 and targetDmacFound.found == False %}</span>
+                  <span class="s">{% set stock_voltage = 3000 %}</span>
+                  <span class="s">{% set voltage_range = 550 %}</span>
+                  <span class="s">{% set current_voltage = value_json.obj[i].vbatt %}</span>
+                  <span class="s">{% set remaining_life = 0 %}</span>
+
+                  <span class="s">{% if current_voltage &gt;= stock_voltage %}</span>
+                    <span class="s">{% set remaining_life = 100 %}</span>
+                  <span class="s">{% elif current_voltage &gt; (stock_voltage - voltage_range) %}</span>
+                    <span class="s">{% set remaining_life = int((current_voltage - (stock_voltage - voltage_range)) / voltage_range * 100) %}</span>
+                  <span class="s">{% else %}</span>
+                    <span class="s">{% set remaining_life = 0 %}</span>
+                  <span class="s">{% endif %}</span>
+                  <span class="s">{{ remaining_life | int }}</span>
+                  <span class="s">{% set targetDmacFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetDmacFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">recycling_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="data-filters">
+  
+  
+    Data Filters <a href="#data-filters" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>The primary use of the <a href="https://www.home-assistant.io/integrations/filter/">filter integration</a> is to smooth out the RSSI data from the Bluetooth beacons.</p>
+
+<p>If you check out the graph below, you’ll notice that the RSSI is more like a drunken hummingbird than a steady signal. But if you apply a smoothing filter, the RSSI values are pretty flat.</p>
+
+<p>If I were to rely <em>only</em> on the raw RSSI signals, my presence detections would be flipping back and forth multiple times per minute. The filtered values help reduce these false positives.</p>
+
+<p>The filters I use are:</p>
+
+<ul>
+  <li>Filtered trash bin RSSI</li>
+  <li>Filtered recycling bin RSSI</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/trash_rssi_vs_filtered.png" alt="5-minute graph showing the raw RSSI values vs the filtered view" /><em>Trash Bin RSSI vs a smoother filtered RSSI view</em></p>
+
+<details>
+
+  <summary>[YAML] Filtered RSSI sensors</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">filter</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Filtered</span><span class="nv"> </span><span class="s">trash</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">RSSI"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s">filtered_trash_bin_rssi</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.trash_bin_rssi</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">outlier</span>
+        <span class="na">window_size</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">radius</span><span class="pi">:</span> <span class="m">5.0</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">lowpass</span>
+        <span class="na">time_constant</span><span class="pi">:</span> <span class="m">10</span>
+        <span class="na">precision</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">time_simple_moving_average</span>
+        <span class="na">window_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">00:01"</span>
+        <span class="na">precision</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">filter</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Filtered</span><span class="nv"> </span><span class="s">recycling</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">RSSI"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s">filtered_recycling_bin_rssi</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.recycling_bin_rssi</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">outlier</span>
+        <span class="na">window_size</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">radius</span><span class="pi">:</span> <span class="m">5.0</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">lowpass</span>
+        <span class="na">time_constant</span><span class="pi">:</span> <span class="m">10</span>
+        <span class="na">precision</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="pi">-</span> <span class="na">filter</span><span class="pi">:</span> <span class="s">time_simple_moving_average</span>
+        <span class="na">window_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">00:01"</span>
+        <span class="na">precision</span><span class="pi">:</span> <span class="m">2</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="vibration-sensors">
+  
+  
+    Vibration Sensors <a href="#vibration-sensors" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Next, we have our vibration sensors. This is what we use to detect when the bins have been picked up/emptied.</p>
+
+<ul>
+  <li>Trash Bin Vibration</li>
+  <li>Recycling Bin Vibration</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/waste_vibration.png" alt="Home Assistant history graph showing the vibration sensor state for the trash and recycling bin Bluetooth beacons" /><em>Vibration sensor states for the trash and recycling bins around morning pickup.</em></p>
+
+<p>Below are these sensors, created from the MQTT data that the Blue Charm BCG04 beacon gateway sends over.</p>
+
+<details>
+
+  <summary>[YAML] MQTT vibration binary sensors</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">binary_sensor</span><span class="pi">:</span>
+  <span class="c1"># REPLACE: BEACON_GATEWAY_ID with the actual ID of your beacon gateway</span>
+  <span class="c1"># REPLACE: TRASH_BIN_VIBRATION_UUID with the UUID of your trash bin vibration UUID</span>
+  <span class="c1"># REPLACE: RECYCLING_BIN_VIBRATION_UUID with the UUID of your recycling bin vibration UUID</span>
+  <span class="c1">##</span>
+  <span class="c1"># Trash bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">vibration"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">trash_bin_vibration"</span>
+    <span class="c1"># off_delay of 30s so we don't get spammed with the vibration state changing</span>
+    <span class="na">off_delay</span><span class="pi">:</span> <span class="m">30</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">vibration</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "TRASH_BIN_VIBRATION_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">ON</span>
+                  <span class="s">{% set targetUuidFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">trash_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+  <span class="c1">##</span>
+  <span class="c1"># Recycling Bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">vibration"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">recycling_bin_vibration"</span>
+    <span class="c1"># off_delay of 30s so we don't get spammed with the vibration state changing</span>
+    <span class="na">off_delay</span><span class="pi">:</span> <span class="m">30</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">vibration</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "RECYCLING_BIN_VIBRATION_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">ON</span>
+                  <span class="s">{% set targetUuidFound.found = True %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">recycling_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="presence-sensors">
+  
+  
+    Presence Sensors <a href="#presence-sensors" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Before I dive into the presence sensors, let’s cover some new <a href="https://www.home-assistant.io/integrations/input_number/"><code class="language-plaintext highlighter-rouge">Input number</code></a> helper sensors that I created in the UI.</p>
+
+<details>
+<summary>input_number threshold sensor UI</summary>
+
+<p><img src="/assets/img/2024/06/rssi_threshold_ui.png" alt="Home Assistant UI showing the creation of an input_number threshold sensor" /><em>Home Assistant UI showing the creation of an <code class="language-plaintext highlighter-rouge">input_number</code> threshold sensor.</em></p>
+
+
+</details>
+
+<ul>
+  <li>Trash bin RSSI threshold (Number): <code class="language-plaintext highlighter-rouge">input_number.trash_bin_rssi_threshold</code></li>
+  <li>Recycling bin RSSI threshold (Number): <code class="language-plaintext highlighter-rouge">input_number.recycling_bin_rssi_threshold</code></li>
+</ul>
+
+<p>These <code class="language-plaintext highlighter-rouge">input_number</code> sensors set the RSSI thresholds that we use to determine if the bins are <code class="language-plaintext highlighter-rouge">home</code> or <code class="language-plaintext highlighter-rouge">away</code>. These are not strictly required but make configuration a lot easier.</p>
+
+<p><img src="/assets/img/2024/06/threshold_sensors.png" alt="Home Assistant card showing the input_number threshold sensors" /><em>Home Assistant card showing the input_number threshold sensors.</em></p>
+
+<blockquote>
+  <p>In the binary presence sensors below, we’ll use our newly created threshold sensor to set and adjust the <code class="language-plaintext highlighter-rouge">home</code>/<code class="language-plaintext highlighter-rouge">away</code> threshold for the filtered RSSI value. Any future adjustments can be made in the Home Assistant UI dashboard <em>without</em> needing to edit a YAML file.</p>
+</blockquote>
+
+<p>Let’s continue onto the presence sensors. These sensors use the <em>filtered</em> RSSI sensors that we created earlier to determine if the bins are still at the house or down by the curb.</p>
+
+<ul>
+  <li>Trash Bin Present</li>
+  <li>Recycling Bin Present</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/waste_presence.png" alt="Home Assistant history graph showing the presence state for the trash and recycling bin Bluetooth beacons" /><em>Presence states for the trash and recycling bins as I roll them down to the curb. If the bins are “Home”, they’re up at the house. If the bins are “Away”, they’re at the curb.</em></p>
+
+<p>Here are the unconventional things I’m doing with the presence sensors.</p>
+
+<ul>
+  <li>The presence sensor will not update if the beacon is too far away from our gateway. This is why I have a 5-minute expiry time on the presence sensors. If we haven’t heard a signal from the beacon in 5 minutes, the sensor value expires and defaults to <code class="language-plaintext highlighter-rouge">away</code>. This is a good way to handle the case where the beacon moves out of range before we consider the signal “weak”.</li>
+  <li>The sensor is getting updated inefficiently. I use the MQTT payload as the <em>trigger</em> to update the presence sensor state. It’s easier to read and understand when things are located near each other in the code. The more efficient route would be to set up <em>another</em> template sensor elsewhere that is triggered by updates to the filtered RSSI values.</li>
+  <li>If we reboot, the presence sensor will temporarily be <code class="language-plaintext highlighter-rouge">unknown</code>. This is because our presence sensor is comparing the “RSSI threshold” against the “<em>filtered</em> RSSI value”. On a fresh boot, our “filtered RSSI value” won’t have any data yet. So we need to wait until we receive a few messages from the Bluetooth beacon before it starts generating values.</li>
+</ul>
+
+<details>
+
+  <summary>[YAML] MQTT presence binary sensors</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">binary_sensor</span><span class="pi">:</span>
+  <span class="c1"># REPLACE: BEACON_GATEWAY_ID with the actual ID of your beacon gateway</span>
+  <span class="c1"># REPLACE: TRASH_BEACON_UUID with the UUID of your trash bin beacon</span>
+  <span class="c1"># REPLACE: RECYCLING_BEACON_UUID with the UUID of your recycling bin beacon</span>
+  <span class="c1">##</span>
+  <span class="c1"># Trash bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">present"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">trash_bin_present"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">presence</span>
+    <span class="c1"># Assume the sensor is too far away after 300 seconds of no updates</span>
+    <span class="na">off_delay</span><span class="pi">:</span> <span class="m">300</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="c1"># Since this is using a filter that gets generated _after_ the RSSI sensor populates it, the</span>
+    <span class="c1"># very first message (and possibly 2nd message) would not have populated the filter yet.</span>
+    <span class="c1"># This is probably ok since the sensor should be updating ~every second and should resolve</span>
+    <span class="c1"># itself in only a few seconds.</span>
+    <span class="c1"># We also set this to expire after 300 seconds as the only other trigger is if we see message</span>
+    <span class="c1"># that matches the UUID for this sensor.</span>
+    <span class="c1"># We check if it's a number before we set the away status to fix a bug where the filtered RSSI is unknown on boot</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "TRASH_BEACON_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">{% if states('sensor.filtered_trash_bin_rssi') | is_number and states('input_number.trash_bin_rssi_threshold') | is_number %}</span>
+                      <span class="s">{{ 'ON' if states('sensor.filtered_trash_bin_rssi') | float &gt; states('input_number.trash_bin_rssi_threshold') | float else 'OFF' }}</span>
+                      <span class="s">{% set targetUuidFound.found = True %}</span>
+                  <span class="s">{%- endif %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">trash_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Trash</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+  <span class="c1">##</span>
+  <span class="c1"># Recycling Bin</span>
+  <span class="c1">##</span>
+  <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bluecharm/publish/BEACON_GATEWAY_ID"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">bin</span><span class="nv"> </span><span class="s">present"</span>
+    <span class="na">unique_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">recycling_bin_present"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">presence</span>
+    <span class="c1"># Assume the sensor is too far away after 300 seconds of no updates</span>
+    <span class="na">off_delay</span><span class="pi">:</span> <span class="m">300</span>
+    <span class="c1"># Home Assistant ignores an empty value ('') and will not update the state of the entity.</span>
+    <span class="c1"># Since this is using a filter that gets generated _after_ the RSSI sensor populates it, the</span>
+    <span class="c1"># very first message (and possibly 2nd message) would not have populated the filter yet.</span>
+    <span class="c1"># This is probably ok since the sensor should be updating ~every second and should resolve</span>
+    <span class="c1"># itself in only a few seconds.</span>
+    <span class="c1"># We also set this to expire after 300 seconds as the only other trigger is if we see message</span>
+    <span class="c1"># that matches the UUID for this sensor.</span>
+    <span class="c1"># We check if it's a number before we set the away status to fix a bug where the filtered RSSI is unknown on boot</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+          <span class="s">{% for i in range(value_json.obj|count) -%}</span>
+              <span class="s">{% if value_json.obj[i].uuid == "RECYCLING_BEACON_UUID" and targetUuidFound.found == False %}</span>
+                  <span class="s">{% if states('sensor.filtered_recycling_bin_rssi') | is_number and states('input_number.recycling_bin_rssi_threshold') | is_number %}</span>
+                      <span class="s">{{ 'ON' if states('sensor.filtered_recycling_bin_rssi') | float &gt; states('input_number.recycling_bin_rssi_threshold') | float else 'OFF' }}</span>
+                      <span class="s">{% set targetUuidFound.found = True %}</span>
+                  <span class="s">{%- endif %}</span>
+              <span class="s">{%- endif %}</span>
+          <span class="s">{%- endfor %}</span>
+      <span class="s">{% set targetUuidFound = namespace(found=False) %}</span>
+    <span class="na">device</span><span class="pi">:</span>
+      <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">recycling_bin"</span><span class="pi">]</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Recycling</span><span class="nv"> </span><span class="s">Bin"</span>
+      <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Blue</span><span class="nv"> </span><span class="s">Charm"</span>
+      <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">BCG04"</span>
+      <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Garage"</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h2 id="automations">
+  
+  
+    Automations <a href="#automations" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>High-level: I have 3 automations here.</p>
+
+<ol>
+  <li>Send a notification to the family to take out the bins on the night before trash or recycling pickup.</li>
+  <li>Set or reset the “picked up” helper entities.</li>
+  <li>Send a notification to the family if the trash or recycling has been picked up.</li>
+</ol>
+
+<p>I created the following helper entities in the UI to make managing the automations easier:</p>
+
+<ul>
+  <li>Trash picked up (Toggle): <code class="language-plaintext highlighter-rouge">input_boolean.trash_picked_up</code></li>
+  <li>Recycling picked up (Toggle): <code class="language-plaintext highlighter-rouge">input_boolean.recycling_picked_up</code></li>
+</ul>
+
+<p>The input booleans (type: toggle) are used to track if the trash or recycling has been picked up. By breaking the events into these toggle switches, I can easily track what happens. This helps avoid cramming <em>everything</em> in an already busy automation.</p>
+
+<blockquote>
+  <p>Pro tip: If you want to automate low-battery alerts for the beacons, consider using one of the community-created <a href="https://community.home-assistant.io/t/low-battery-notifications-actions/653754">blueprints for battery sensors</a>.</p>
+</blockquote>
+
+<p>Let’s dive into the first automation.</p><hr />
+<h3 id="notification-recycling-or-trash-removal-tomorrow">
+  
+  
+    [Notification] Recycling or Trash removal tomorrow <a href="#notification-recycling-or-trash-removal-tomorrow" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>This automation sends a notification the night before a scheduled pickup for either recycling or trash.</p>
+
+<ul>
+  <li>It reminds the family if the bins are still at the house</li>
+  <li>It sends a confirmation if the bins are already at the curb (just in case the beacons somehow are stuck in <code class="language-plaintext highlighter-rouge">away</code> mode)</li>
+  <li>It leverages an unnecessarily complicated flow to send a <em>different</em> message if <em>both</em> bins are scheduled for pickup tomorrow. Why send two notifications when you can send one? 🤔</li>
+  <li>My automations don’t listen for <code class="language-plaintext highlighter-rouge">home</code> and <code class="language-plaintext highlighter-rouge">away</code>. Instead, they check for <code class="language-plaintext highlighter-rouge">home</code> and <code class="language-plaintext highlighter-rouge">not home</code> because <code class="language-plaintext highlighter-rouge">not home</code> can include <code class="language-plaintext highlighter-rouge">away</code>, <code class="language-plaintext highlighter-rouge">unknown</code>, or <code class="language-plaintext highlighter-rouge">unavailable</code>. As we mentioned earlier, the presence state may be <code class="language-plaintext highlighter-rouge">unknown</code> when the server restarts. The automation is meant to fail gracefully if the sensor is in a bad state.</li>
+</ul>
+
+<p><img src="/assets/img/2024/06/pickup_tomorrow_notification.jpg" alt="Recycling and trash pickup tomorrow notification" /><em>Recycling and trash bin pickup tomorrow notification</em></p>
+
+<details>
+
+  <summary>[Automation] Recycling or Trash removal tomorrow notification</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">alias</span><span class="pi">:</span> <span class="s">Recycling or Trash removal tomorrow notification</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Sends</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">notification</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">recycling</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">trash</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">scheduled</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">picked</span><span class="nv"> </span><span class="s">up</span><span class="nv"> </span><span class="s">tomorrow.</span><span class="nv"> </span><span class="s">But</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">I</span><span class="nv"> </span><span class="s">haven't</span><span class="nv"> </span><span class="s">already</span><span class="nv"> </span><span class="s">taken</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">bins</span><span class="nv"> </span><span class="s">out.</span>
+<span class="s">"</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">16:30:00"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">trash</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">16:30:00"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">recycling</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+                <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if trash is Home, Unavailable, or Unknown</span>
+            <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if bin is at home</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">🗑️ Trash!</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="s">The trash has not been taken out yet. Pickup is tomorrow.</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:dump-truck</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">recycling</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+                <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if trash is Home, Unavailable, or Unknown</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+                <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if recycling is Home, Unavailable, or Unknown</span>
+            <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if bins are at home</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">♻️ Recycling &amp; Trash!</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+                <span class="s">The recycling or trash have not been taken out yet. Pickup</span>
+                <span class="s">is tomorrow.</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:recycle</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+          <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if bin is not at home</span>
+            <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if trash is not at Home</span>
+                <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">🗑️ Trash!</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="s">The trash was already taken down. Was that you?</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:dump-truck</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+        <span class="na">alias</span><span class="pi">:</span> <span class="s">Trash tomorrow (bin not home)</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">recycling</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_tomorrow</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if bin not at home</span>
+            <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if trash is not Home</span>
+                <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+              <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if recycling is not Home</span>
+                <span class="na">condition</span><span class="pi">:</span> <span class="s">not</span>
+                <span class="na">conditions</span><span class="pi">:</span>
+                  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_bin_present</span>
+                    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">♻️ Recycling &amp; Trash?</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+                <span class="s">The recycling or trash were already taken down. Was that</span>
+                <span class="s">you?</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:recycle</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+        <span class="na">alias</span><span class="pi">:</span> <span class="s">Trash/Recycling tomorrow (bin not home)</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">parallel</span>
+<span class="na">max</span><span class="pi">:</span> <span class="m">2</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="state-helper-recycling-or-trash-picked-up">
+  
+  
+    [State Helper] Recycling or Trash picked up <a href="#state-helper-recycling-or-trash-picked-up" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>This automation controls the helper entities that indicate whether recycling or trash has been picked up. It helps simplify our automations and gives us a good idea what the current state of the bins are from the dashboard.</p>
+
+<ul>
+  <li>When the <code class="language-plaintext highlighter-rouge">input_boolean.*_picked_up</code> helper is <code class="language-plaintext highlighter-rouge">on</code>, it means the bin has been picked up.</li>
+  <li>When the <code class="language-plaintext highlighter-rouge">input_boolean.*_picked_up</code> helper is <code class="language-plaintext highlighter-rouge">off</code>, it means the bin has been returned to the house.</li>
+</ul>
+
+<blockquote>
+  <p>There is a possibility that the notification could go off by mistake if the vibration sensor is triggered by something else <em>before</em> the pickup. But I haven’t had a car hit my bins yet… 🤞</p>
+</blockquote>
+
+<p>This automation starts when either the vibration sensor is triggered (waste picked up) or the presence sensor switches to <code class="language-plaintext highlighter-rouge">home</code> (bin returned home).</p>
+
+<p>The helper entities are only turned <code class="language-plaintext highlighter-rouge">on</code> if the following conditions are met:</p>
+
+<ol>
+  <li>The vibration sensor is triggered (waste picked up)</li>
+  <li>The bin is currently <code class="language-plaintext highlighter-rouge">away</code> (by the curb)</li>
+  <li>The bin is scheduled for pickup that day</li>
+</ol>
+
+<p>The helper entities are only turned <code class="language-plaintext highlighter-rouge">off</code> if the following conditions are met:</p>
+
+<ol>
+  <li>The bin returns to the house for at least 1 minute (to prevent false positives)</li>
+  <li>The bin is scheduled for pickup that day</li>
+</ol>
+
+<blockquote>
+  <p>I guess if I forget to bring the bins back up on pickup day, it won’t reset the helper. But I’m usually pretty good at being a responsible adult and retrieving them on the same day. I could always remove that <code class="language-plaintext highlighter-rouge">return</code> condition if this becomes a problem.</p>
+</blockquote>
+
+<details>
+
+  <summary>[Automation] Recycling or Trash picked up - state helper</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">alias</span><span class="pi">:</span> <span class="s">Recycling or Trash picked up helper</span>
+<span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+  <span class="s">Update the helpers that indicate whether recycling or trash has been picked</span>
+  <span class="s">up, but not brought back up</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.trash_bin_vibration</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">trash-picked-up</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.trash_bin_present</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">trash-brought-in</span>
+    <span class="na">for</span><span class="pi">:</span>
+      <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">minutes</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">seconds</span><span class="pi">:</span> <span class="m">0</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.recycling_bin_vibration</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">recycling-picked-up</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">binary_sensor.recycling_bin_present</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">recycling-brought-in</span>
+    <span class="na">for</span><span class="pi">:</span>
+      <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">minutes</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">seconds</span><span class="pi">:</span> <span class="m">0</span>
+<span class="na">condition</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash-picked-up</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_today</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_on</span>
+            <span class="na">metadata</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.trash_picked_up</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash-brought-in</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_today</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.trash_picked_up</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">recycling-picked-up</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_today</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_bin_present</span>
+            <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_on</span>
+            <span class="na">metadata</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.recycling_picked_up</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">recycling-brought-in</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_today</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">input_boolean.turn_off</span>
+            <span class="na">metadata</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">data</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.recycling_picked_up</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">parallel</span>
+<span class="na">max</span><span class="pi">:</span> <span class="m">2</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="notification-recycling-or-trash-picked-up">
+  
+  
+    [Notification] Recycling or Trash picked up <a href="#notification-recycling-or-trash-picked-up" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>This automation sends a notification to the family when the recycling or trash bins have been picked up. If either bin has not been returned by 5 PM, another reminder is sent to the family.</p>
+
+<blockquote>
+  <p>My automation includes a camera snapshot in the notification. This allows me to quickly verify that the bin was picked up by the truck, and not just bumped by a car. Feel free to remove that from the automation below since it’s super specific to my setup.</p>
+</blockquote>
+
+<p><img src="/assets/img/2024/06/pickup_notification.jpg" alt="Recycling and trash bin pickup notification" /><em>Recycling and trash bin pickup notification</em></p>
+
+<p>This automation starts from either of the following conditions:</p>
+
+<ul>
+  <li>Either of the <code class="language-plaintext highlighter-rouge">input_boolean.*_picked_up</code> helpers are turned <code class="language-plaintext highlighter-rouge">on</code></li>
+  <li>The time is 5 PM (and the bins haven’t been brought back up)</li>
+</ul>
+
+<p>I did a silly complex thing in my automation where I gate my pickup notifications. If it’s a trash-only day, I send the notification as soon as the trash is picked up.</p>
+
+<p>However, if it’s a trash <em>and</em> recycling day, then I wait for <em>both</em> bins to be picked up before sending a notification… also, I change the notification text depending on if it’s trash-only, or trash <em>and</em> recycling. ✨</p>
+
+<details>
+
+  <summary>[Automation] Recycling or Trash picked up notification</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">alias</span><span class="pi">:</span> <span class="s">Recycling or Trash picked up notification</span>
+<span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+  <span class="s">Change helper boolean and send notification when one (or waiting for both)</span>
+  <span class="s">trash and recycling have been picked up</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">input_boolean.trash_picked_up</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">trash</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+    <span class="na">entity_id</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">input_boolean.recycling_picked_up</span>
+    <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+    <span class="na">from</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">recycling</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">17:00:00"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">bin-reminder</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+            <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_today</span>
+            <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+            <span class="na">alias</span><span class="pi">:</span> <span class="s">Only send this alert if it's not a recycling day</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">camera.snapshot</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="c1"># I place my camera snapshot here because I have another notification channel elsewhere </span>
+              <span class="c1">#  that shows the image on my TV using "Notifications for Android TV"</span>
+              <span class="c1">#  https://www.home-assistant.io/integrations/nfandroidtv/</span>
+              <span class="c1"># I gate (and duplicate) this snapshot sequence a few more times that way I take a snapshot </span>
+              <span class="c1">#  only when I'm about to send one. </span>
+              <span class="c1"># That's because I like to see the last pickup image on my dashboard.</span>
+              <span class="na">filename</span><span class="pi">:</span> <span class="s">/config/www/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span>
+                <span class="c1"># I use a proxy camera to create a cropped view of the driveway for a zoomed-in picture</span>
+                <span class="c1">#  https://www.home-assistant.io/integrations/proxy/</span>
+                <span class="pi">-</span> <span class="s">camera.driveway_proxy</span>
+          <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span>
+              <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">seconds</span><span class="pi">:</span> <span class="m">1</span>
+              <span class="na">milliseconds</span><span class="pi">:</span> <span class="m">0</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">🗑️ Trash picked up</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="s">The trash bin has been picked up.</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:dump-truck</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">image</span><span class="pi">:</span> <span class="s">/local/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">trash</span>
+              <span class="pi">-</span> <span class="s">recycling</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.recycling_picked_up</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_bin_present</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+            <span class="na">alias</span><span class="pi">:</span> <span class="s">Recycling has been picked up, or taken inside</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.trash_picked_up</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+            <span class="na">alias</span><span class="pi">:</span> <span class="s">Trash has been picked up, or taken inside</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">camera.snapshot</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">filename</span><span class="pi">:</span> <span class="s">/config/www/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">camera.driveway_proxy</span>
+          <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span>
+              <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">seconds</span><span class="pi">:</span> <span class="m">1</span>
+              <span class="na">milliseconds</span><span class="pi">:</span> <span class="m">0</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">♻️🗑️ Recycling &amp; trash picked up</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="s">The recycling &amp; trash bins have been picked up.</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:dump-truck</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">image</span><span class="pi">:</span> <span class="s">/local/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+      <span class="pi">-</span> <span class="na">conditions</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">trigger</span>
+            <span class="na">id</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">bin-reminder</span>
+          <span class="pi">-</span> <span class="na">alias</span><span class="pi">:</span> <span class="s">Recycling or trash hasn't been picked up</span>
+            <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+            <span class="na">conditions</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.recycling_picked_up</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+              <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+                <span class="na">entity_id</span><span class="pi">:</span> <span class="s">input_boolean.trash_picked_up</span>
+                <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+        <span class="na">sequence</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">camera.snapshot</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">filename</span><span class="pi">:</span> <span class="s">/config/www/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+            <span class="na">target</span><span class="pi">:</span>
+              <span class="na">entity_id</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">camera.driveway_proxy</span>
+          <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span>
+              <span class="na">hours</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">minutes</span><span class="pi">:</span> <span class="m">0</span>
+              <span class="na">seconds</span><span class="pi">:</span> <span class="m">1</span>
+              <span class="na">milliseconds</span><span class="pi">:</span> <span class="m">0</span>
+          <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+            <span class="na">data</span><span class="pi">:</span>
+              <span class="na">title</span><span class="pi">:</span> <span class="s">♻️🗑️ Recycling or trash picked up</span>
+              <span class="na">message</span><span class="pi">:</span> <span class="s">The recycling or trash bins still haven't been picked up.</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+                <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:dump-truck</span>
+                <span class="na">group</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">channel</span><span class="pi">:</span> <span class="s">waste-removal-alert</span>
+                <span class="na">image</span><span class="pi">:</span> <span class="s">/local/tmp/snapshot_camera_proxy_driveway_wide.jpg</span>
+                <span class="na">push</span><span class="pi">:</span>
+                  <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+
+</code></pre></div>  </div>
+</details><hr />
+<h3 id="notification-health-check-for-bluetooth-beacons">
+  
+  
+    [Notification] Health Check for Bluetooth Beacons <a href="#notification-health-check-for-bluetooth-beacons" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>I’m a bit of a control freak when it comes to my Bluetooth beacons. Let’s just say I have a bat signal set up if one of those little guys starts misbehaving. It’s stupidly simple.</p>
+
+<p>Any night before a pickup at 7 PM, I get a notification if:</p>
+
+<ul>
+  <li>The presence sensor for any Bluetooth beacon is <code class="language-plaintext highlighter-rouge">unknown</code>
+    <ul>
+      <li>Like if it didn’t recover after my server rebooted</li>
+    </ul>
+  </li>
+  <li>The RSSI sensor for any beacon hasn’t been updated in the last 15 minutes
+    <ul>
+      <li>This only works if the beacon is still in range while down at the curb</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/2024/06/beacon_healthcheck_notification.png" alt="Bluetooth beacon health check notification" /><em>Bluetooth beacon health check notification</em></p>
+
+<p>Since I’m not expecting to see these scenarios happen too often, I didn’t template out the notification text. Instead, it’s a generic one.</p>
+
+<details>
+
+  <summary>[Automation] Health check notification for Bluetooth beacons</summary>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">alias</span><span class="pi">:</span> <span class="s">Health check for Bluetooth beacons</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Send</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">notification</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">presence</span><span class="nv"> </span><span class="s">sensor</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Bluetooth</span><span class="nv"> </span><span class="s">beacons</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">unknown</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">while."</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">19:00:00"</span>
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+    <span class="na">conditions</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+        <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_tomorrow</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+        <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_tomorrow</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">or</span>
+    <span class="na">conditions</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+        <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.trash_bin_present</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s">unknown</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">state</span>
+        <span class="na">entity_id</span><span class="pi">:</span> <span class="s">binary_sensor.recycling_bin_present</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s">unknown</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+        <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if Trash Bin RSSI is older than 15 minutes</span>
+        <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+          <span class="s">{{ (as_timestamp(now()) -</span>
+          <span class="s">as_timestamp(states.sensor.trash_bin_rssi.last_updated)) &gt; 900 }}</span>
+      <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+        <span class="na">alias</span><span class="pi">:</span> <span class="s">Test if Recycling Bin RSSI is older than 15 minutes</span>
+        <span class="na">value_template</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+          <span class="s">{{ (as_timestamp(now()) -</span>
+          <span class="s">as_timestamp(states.sensor.recycling_bin_rssi.last_updated)) &gt; 900 }}</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s">📡 Bluetooth beacon state unknown</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+        <span class="s">One of the Bluetooth beacon's presence sensor has been unknown for a while.</span>
+        <span class="s">Please investigate.</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>  
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:radio-tower</span>
+        <span class="na">group</span><span class="pi">:</span> <span class="s">bluetooth-beacon-alert</span>
+        <span class="na">channel</span><span class="pi">:</span> <span class="s">bluetooth-beacon-alert</span>
+        <span class="na">push</span><span class="pi">:</span>
+          <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+
+</code></pre></div>  </div>
+</details>
+<h4 id="handling-unknown-states">
+  
+  
+    Handling ‘Unknown’ States <a href="#handling-unknown-states" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h4>
+    
+
+<p>You may remember from an earlier configuration that if I reboot the server, the beacon presence sensor will temporarily be <code class="language-plaintext highlighter-rouge">unknown</code> until the filtered RSSI sensor is populated from data. There’s a <em>small</em> window when:</p>
+
+<ol>
+  <li>Rebooting the server..</li>
+  <li>The night before a pickup..</li>
+  <li>At 7 PM..</li>
+  <li>For only a few seconds..</li>
+  <li>While the automation is triggering..</li>
+</ol>
+
+<p>where the Bluetooth beacons <em>could</em> be in an <code class="language-plaintext highlighter-rouge">unknown</code> state.</p>
+
+<p>This scenario is so small that I just don’t care about it. 99.99% is good enough for my home. If it’s that big of a deal, I’ll add a condition around the <a href="https://www.home-assistant.io/integrations/uptime/"><code class="language-plaintext highlighter-rouge">uptime</code></a> sensor.</p>
+<h4 id="handling-stuck-states">
+  
+  
+    Handling ‘Stuck’ States <a href="#handling-stuck-states" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h4>
+    
+
+<p>I hope that if my beacon gets stuck, it will <em>stay</em> stuck. My automation has a condition to check if any of the RSSI sensors have been updated recently. When the weekly check triggers, if the sensor hasn’t been updated in the last 15 minutes, I’ll get a notification. This check isn’t very useful if the beacon normally exits the range of the scanner gateway.</p>
+<h4 id="handling-away-states">
+  
+  
+    Handling ‘Away’ States <a href="#handling-away-states" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h4>
+    
+
+<p>My automations sorta cover the scenario where the beacon presence is stuck in an <code class="language-plaintext highlighter-rouge">away</code> state.</p>
+
+<blockquote>
+  <p>As a reminder, the presence sensor is set to expire to the <code class="language-plaintext highlighter-rouge">off</code>/<code class="language-plaintext highlighter-rouge">away</code> state after 5 minutes if there haven’t been any updates.</p>
+</blockquote>
+
+<p>If my beacon is stuck in the <code class="language-plaintext highlighter-rouge">away</code> state <em>after</em> pickup, I’ll <em>probably</em> notice. That’s because one of my automations earlier sends an additional reminder if I haven’t “returned” the bins to my house by <code class="language-plaintext highlighter-rouge">5 PM</code>.</p>
+
+<p>If my beacon is stuck in the <code class="language-plaintext highlighter-rouge">away</code> state <em>before</em> pickup, I’m kinda hosed. I might miss the “Recycling or Trash removal tomorrow” notification if my system thinks that the bin is already down by the curb.</p>
+
+<p>To cover me, the “Recycling or Trash removal tomorrow” will also notify me if the bins have <em>already been taken down</em>. I’m going to get a notification whether I want one or not. 🥊</p>
+
+<p>This allows me to double-check that <em>I</em> took the bin down and that the sensor didn’t just spit out some garbage (pun intended).</p>
+
+<p>Possible alternatives:</p>
+
+<ul>
+  <li><strong>Unpredictable</strong>: Add additional checks to see if the bin was set to <code class="language-plaintext highlighter-rouge">away</code> at a weird time.</li>
+  <li><strong>Unreliable</strong>: Add additional checks throughout the evening to make sure the bin is <em>still</em> <code class="language-plaintext highlighter-rouge">away</code> just in case it was temporarily <code class="language-plaintext highlighter-rouge">away</code> during the first check.</li>
+  <li><strong>Most expensive</strong>: Add biometric tracking with AI on an edge device to verify that a living human took the bins down… but it sounds like fun for <a href="https://github.com/blakeblackshear/frigate">Frigate</a> and I could <em>totally</em> do this. 📷</li>
+  <li><strong>Easiest</strong>: A confirmation notification saying “The bin was already taken down, was that you?”.</li>
+</ul>
+<h2 id="lessons-learned-so-far">
+  
+  
+    Lessons Learned (So Far) <a href="#lessons-learned-so-far" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<ul>
+  <li>Tuning is Key: Adjusting the signal strength thresholds and vibration sensitivity is crucial to getting accurate results.</li>
+  <li>Calendars Over Reminders: Using a calendar integration for trash day schedules is more reliable than reminders/tasks.</li>
+  <li>Health Checks: A simple automation to check the presence sensor’s state weekly helps prevent unexpected issues.</li>
+</ul>
+<h2 id="whats-next">
+  
+  
+    What’s Next? <a href="#whats-next" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>I’m excited to see how this system performs in the long run. I’m going to watch and tweak it if any problems arise.</p>
+
+<p>If you’re interested in creating your smart trash system, feel free to use my configuration as a starting point. If you have any questions or suggestions, drop a comment below!</p>
+
+<p>Happy automating! 🏡📡 🗑️♻️ 🚛</p>
+
+  <div class="line-separator"></div>
+
+  <!-- POST NAVIGATION -->
+<div class="post-nav">
+  
+    <a class="post-nav-link" href="/blog/2024/05/mx-ergo-usb-c-mod/">
+    <div class="link-text previous">&laquo;&nbsp;Upgrading My Logitech MX Ergo Trackball with USB-C</div>
+    
+      <img class="link-image" src="/assets/img/2024/05/mx_ergo_trackball_usb_c.jpg" alt="Previous Article">
+    
+    </a>
+  
+  
+    <a class="post-nav-link" href="/blog/2024/09/soo-machine-and-auto-ai-amplified-legacy/">
+    <div class="link-text next">Soo Machine & Auto: Unearthing a Lost Legacy, Amplified by AI&nbsp;&raquo;</div>
+    
+      <img class="link-image" src="/assets/img/2024/09/soo_machine_showroom.png" alt="Next Article">
+    
+    </a>
+  
+</div>
+
+</article>
+
+
+    
+<!-- Add Disqus comments. -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'kyleniewiada'; // required: replace example with your forum shortname
+  var disqus_identifier = "/blog/2024/06/bluetooth-beacon-waste-bins/";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+    </main>
+  <!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/" >LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl" >GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social" >Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada" >YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel='nofollow'>BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/" >Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- start noncritical style -->
+<link rel="preload" href="/assets/css/noncritical.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/noncritical.css"></noscript>
+<script>
+  /*loadCss*/
+  !function(w){"use strict";var loadCSS=function(href,before,media){function ready(cb){return doc.body?cb():void setTimeout(function(){ready(cb)})}function loadCB(){ss.addEventListener&&ss.removeEventListener("load",loadCB),ss.media=media||"all"}var ref,doc=w.document,ss=doc.createElement("link");if(before)ref=before;else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet",ss.href=href,ss.media="only x",ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){for(var resolvedHref=ss.href,i=sheets.length;i--;)if(sheets[i].href===resolvedHref)return cb();setTimeout(function(){onloadcssdefined(cb)})};return ss.addEventListener&&ss.addEventListener("load",loadCB),ss.onloadcssdefined=onloadcssdefined,onloadcssdefined(loadCB),ss};"undefined"!=typeof exports?exports.loadCSS=loadCSS:w.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+
+  /*link[rel=preload] polyfill*/
+  !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
+</script>
+<!-- end noncritical style -->
+<!-- end footer -->
+
+  </body>
+</html>
