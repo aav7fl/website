@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2025-09-02 08:00'
+updated: '2025-10-16 12:00'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -34,6 +34,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2025-07-09: Tweaked the `notify` conditions to filter out an `unavailable` `from_state` which could occur when manually reloading all template entities in Home Assistant.
 > - 2025-08-28: Tweaked the "rare species" automation to skip sending an alert when the species list changes. This avoids an issue where timestamps are sometimes wrong when a new species is added to the list by the BirdNET-Go API.
 > - 2025-09-02: Removed the `notify` condition after the 'race condition' was resolved via [tphakala/birdnet-go#1242](https://github.com/tphakala/birdnet-go/pull/1242).
+> - 2025-10-16: Updated the `BirdNET Species Summary` command line sensor, `BirdNET Species Summary Persisted Data` template sensor, and `Notify rare bird detection` automation to work correctly. After dropping the attribute changes from history, the state detection changes were only being triggered when the species count increased. Instead, we now set the timestamp of the most recent change.
 
 ## Continuous Bird Detection
 
@@ -238,7 +239,7 @@ template: !include template.yaml
 {% raw %}
 ```yaml
 # command_line.yaml
-# version 1.1
+# version 1.2
 - sensor:
     name: "BirdNET Species Summary"
     unique_id: "birdnet_species_summary"
@@ -248,10 +249,10 @@ template: !include template.yaml
       jq 'if type == "array" then {species_list: .} end'
     # Value_template calculates the number of species in the list
     value_template: >
-      {% if value_json is defined and value_json.species_list is iterable and value_json.species_list is not string %}
-        {{ value_json.species_list | length }}
+      {% if value_json is defined and value_json.species_list is iterable and (value_json.species_list | length) > 0 %}
+        {{ (value_json.species_list | map(attribute='last_heard') | max | as_datetime | as_local) }}
       {% endif %}
-    unit_of_measurement: "species"
+    device_class: timestamp
     json_attributes:
       - species_list
     scan_interval: 60 # Or adjust as needed
@@ -262,7 +263,7 @@ template: !include template.yaml
 {% raw %}
 ```yaml
 # template.yaml
-# version 1.0
+# version 1.1
 # The data in this sensor won't be populated for the first time until the command_line sensor _changes_ to a _different_ state. This can be forced manually in the dev tools states tab.
 - trigger:
    - platform: state
@@ -276,7 +277,7 @@ template: !include template.yaml
      state: '{{ trigger.to_state.state }}'
      attributes:
        species_list: '{{ trigger.to_state.attributes.species_list }}'
-     unit_of_measurement: "species"
+     device_class: timestamp
 ```
 {% endraw %}
 
@@ -1145,7 +1146,7 @@ This can easily be adjusted in the automation below on the {% raw %}`{{ differen
 
 {% raw %}
 ```yaml
-# version 1.3
+# version 1.4
 alias: Notify rare bird detection
 description: >-
   Notify the family when a bird that hasn't been detected for a large number of days
@@ -1210,7 +1211,7 @@ actions:
                 {% if current_last_heard_dt > previous_last_heard_dt %}
                   {% set difference_in_seconds = (current_last_heard_dt - previous_last_heard_dt).total_seconds() %}
                   {% set difference_in_days = difference_in_seconds / (60*60*24) %}
-                  {{ difference_in_days > 60 }}
+                  {{ difference_in_days > 180 }}
                 {% else %}
                   {# current_last_heard is not more recent than previous_last_heard #}
                   false
@@ -1248,7 +1249,9 @@ actions:
               push:
                 interruption-level: time-sensitive
           action: notify.kyle
-mode: single
+# Queued as we might be running slow with our timestamp
+mode: queued
+max: 10
 ```
 {% endraw %}
 </details>
