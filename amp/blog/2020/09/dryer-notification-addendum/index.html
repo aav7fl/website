@@ -1,0 +1,322 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Electric Dryer Monitoring with a CT Clamp</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="An addendum to my previous project on how I now monitor my 240V electric dryer with a CT clamp instead of using a vibration sensor">
+<meta property="og:description" content="An addendum to my previous project on how I now monitor my 240V electric dryer with a CT clamp instead of using a vibration sensor">
+<link rel="canonical" href="/blog/2020/09/dryer-notification-addendum/">
+<meta property="og:url" content="/blog/2020/09/dryer-notification-addendum/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-09-20T12:47:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg">
+<meta property="twitter:title" content="Electric Dryer Monitoring with a CT Clamp">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2020-09-20T12:47:00-04:00","datePublished":"2020-09-20T12:47:00-04:00","description":"An addendum to my previous project on how I now monitor my 240V electric dryer with a CT clamp instead of using a vibration sensor","headline":"Electric Dryer Monitoring with a CT Clamp","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/dryer-notification-addendum/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2020/09/dryer-notification-addendum/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Electric Dryer Monitoring with a CT Clamp</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">September 20, 2020 | 
+        
+          3 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on May 29, 2025</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg" alt="CircuitSetup Split Single Phase Energy Meter monitoring a residential electric dryer" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2020/09/CircuitSetup_Split_Single_Phase_Energy_Meter.jpg" alt="CircuitSetup Split Single Phase Energy Meter monitoring a residential electric dryer" width="800" height="600"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>In July I wrote about a project on how I monitored my washer and dryer cycles. My washer used an ESP32 smart plug while my dryer had an ESP32 board and vibration sensor adhered to the outside paneling. At the time, I believed the shortcomings of a vibration sensor would be overcome by its low cost and fast deployment time. As a developer, I should have probed my methods before proceeding but I wanted to deploy first and ask questions later.</p>
+
+<p><em>Two months later it is clear I made the wrong choice.</em></p>
+
+<blockquote>
+  <p>This post is meant to serve as an addendum. If interested, you can read about how I previously used a <a href="/blog/2020/07/appliance-notifications-through-vibration-and-power/">vibration sensor to track my electric dryer state</a>.</p>
+</blockquote>
+
+<h2 id="reflecting">Reflecting</h2>
+
+<p>Using a vibration sensor to monitor my dryer state was not a <em>terrible</em> idea. As I called out previously, it was an extremely cheap solution that did not require electrical knowledge to deploy. I did not need to understand the how split-phase electricity worked or worry about electrocuting myself.</p>
+
+<p>But the vibration sensor monitoring ended up wasting more time than it was worth. If there was movement from my nearby washer– it triggered. If there was a phantom resonance frequency– it triggered. If my dryer loads were too small– it would <em>fail</em> to trigger.</p>
+
+<p>In the month of July, I was receiving approximately one incorrect notification a week. Each time an improper notification was sent I would recalibrate the vibration sensor and debug the new readings from a phantom dryer load.</p>
+
+<p><em>If I need to babysit an automation, it has failed.</em></p>
+
+<h2 id="failing-forward">Failing Forward</h2>
+
+<p>After my fifth week of inconsistent notifications, I pulled the trigger and ordered a <em>CircuitSetup Split Single Phase Energy Meter</em> kit.</p>
+
+<ul>
+  <li>✔️ <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Open source hardware/software</a>
+</li>
+  <li>✔️ Monitors energy with CT clamps</li>
+  <li>✔️ Interfaces with <a href="https://esphome.io/components/sensor/atm90e32.html">ESPHome (ATM90E32)</a>
+</li>
+  <li>✔️ Available as a completed kit</li>
+  <li>❌ Significantly more expensive than a vibration sensor</li>
+  <li>❌ Requires a base electrical understanding to <em>safely</em> deploy</li>
+</ul>
+
+<p>After studying the wiring diagram for my electric dryer and learning about US split-phase circuits, hooking up the new gear was straightforward. I flashed my custom ESPHome firmware to the board and ran a test load. <em>Perfect unequivocal monitoring</em>.</p>
+
+<p><amp-img src="/assets/img/2020/09/monitored_L1_wire.jpg" alt="CT Clamp connected to an electric dryer for monitoring" width="800" height="1067" layout="responsive"><noscript><img src="/assets/img/2020/09/monitored_L1_wire.jpg" alt="CT Clamp connected to an electric dryer for monitoring" width="800" height="1067"></noscript></amp-img><em>CT Clamp for monitoring the dryer power consumption</em></p>
+
+<p>Here are the important ESPHome sensor configurations from my deployment.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">substitutions</span><span class="pi">:</span>
+  <span class="na">devicename</span><span class="pi">:</span> <span class="s">Dryer</span>
+
+<span class="na">spi</span><span class="pi">:</span>
+  <span class="na">clk_pin</span><span class="pi">:</span> <span class="m">18</span>
+  <span class="na">miso_pin</span><span class="pi">:</span> <span class="m">19</span>
+  <span class="na">mosi_pin</span><span class="pi">:</span> <span class="m">23</span>
+
+<span class="c1"># Sensors that the ESPhome unit is capable of reporting</span>
+<span class="c1">#  Calibration values sourced from GitHub meter library</span>
+<span class="c1">#  https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/blob/master/Software/EmonESP/src/energy_meter.h#L55-L75</span>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">wifi_signal</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">WiFi</span><span class="nv"> </span><span class="s">Signal"</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">300s</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">atm90e32</span>
+    <span class="na">cs_pin</span><span class="pi">:</span> <span class="m">5</span>
+    <span class="na">phase_a</span><span class="pi">:</span>
+      <span class="na">voltage</span><span class="pi">:</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">CT1_voltage</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Line</span><span class="nv"> </span><span class="s">Voltage"</span>
+      <span class="na">current</span><span class="pi">:</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">CT1_current</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">CT1</span><span class="nv"> </span><span class="s">Current"</span>
+      <span class="na">power</span><span class="pi">:</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">CT1_power</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">CT1</span><span class="nv"> </span><span class="s">Power"</span>
+      <span class="na">gain_voltage</span><span class="pi">:</span> <span class="m">3920</span> <span class="c1"># For Meters &gt;= v1.4 rev.3</span>
+      <span class="na">gain_ct</span><span class="pi">:</span> <span class="m">39473</span>
+    <span class="c1"># Library states phase_c is used for CT2 on single split-phase meter on this specific board</span>
+    <span class="c1"># phase_c:</span>
+    <span class="c1">#   current:</span>
+    <span class="c1">#     id: CT2_current</span>
+    <span class="c1">#     internal: true</span>
+    <span class="c1">#     name: "CT2 Current"</span>
+    <span class="c1">#   power:</span>
+    <span class="c1">#     id: CT2_power</span>
+    <span class="c1">#     internal: true</span>
+    <span class="c1">#     name: "CT2 Power"</span>
+    <span class="c1">#   gain_voltage: 3920 # For Meters &gt;= v1.4 rev.3</span>
+    <span class="c1">#   gain_ct: 39473</span>
+    <span class="na">frequency</span><span class="pi">:</span>
+      <span class="na">internal</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Line</span><span class="nv"> </span><span class="s">Frequency"</span>
+    <span class="na">line_frequency</span><span class="pi">:</span> <span class="s">60Hz</span>
+    <span class="na">gain_pga</span><span class="pi">:</span> <span class="s">4X</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">3s</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Power"</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">calculated_power</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">W"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:flash"</span>
+    <span class="c1"># Ignore any anomalous states below 2W</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">if (id(CT1_power).state &lt; 2) {</span>
+        <span class="s">return 0.0;</span>
+      <span class="s">} else {</span>
+        <span class="s">return id(CT1_power).state;</span>
+      <span class="s">}</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">3s</span>
+
+<span class="na">binary_sensor</span><span class="pi">:</span>  
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Running"</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">delayed_on_off</span><span class="pi">:</span> <span class="s">10s</span> <span class="c1"># Avoid extra alerts when opening dryer door to check status</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">if (id(CT1_power).state &gt;= 10) {</span>
+        <span class="s">// Dryer is running</span>
+        <span class="s">return true;</span>
+      <span class="s">} else {</span>
+        <span class="s">// Dryer is off</span>
+        <span class="s">return false;</span>
+      <span class="s">}</span>
+</code></pre></div></div>
+
+<h2 id="wiring-explained">Wiring Explained</h2>
+
+<blockquote>
+  <p><strong>I am not an electrician</strong>. The information below is my current (pun intended) understanding on how the circuits work. I have done my best to research the basic ideas in split-phase circuits in US homes but I lack confidence to demonstrate further knowledge.</p>
+</blockquote>
+
+<p>The following is my understanding on how my specific appliance operates. My 240V electric dryer plugs into a <a href="https://en.wikipedia.org/wiki/NEMA_connector">NEMA 14-30R</a>. According to the dryer wiring schematic, it uses the <code class="language-plaintext highlighter-rouge">L1 (Hot)</code> and <code class="language-plaintext highlighter-rouge">L2 (Hot)</code> lines for the dryer heating element while the drum motor runs between <code class="language-plaintext highlighter-rouge">L1 (Hot)</code> and <code class="language-plaintext highlighter-rouge">Neutral</code>. To calculate the total power consumption I need to measure the current on <code class="language-plaintext highlighter-rouge">L1 (Hot)</code> since it includes both the dryer heating element and the drum motor.</p>
+
+<p>It <em>should</em> look something like this.</p>
+
+<p><amp-img src="/assets/img/2020/09/circuit.svg" alt="Circuit diagram for the dryer heating element and drum motor" width="800" height="463.1578947368421" layout="responsive"><noscript><img src="/assets/img/2020/09/circuit.svg" alt="Circuit diagram for the dryer heating element and drum motor" width="800" height="463.1578947368421"></noscript></amp-img><em>Simplified split-phase 240V circuit for my electric dryer and motor.</em></p>
+
+<p>I chose to take the default calibration values provided by the CircuitSetup library for my hardware since it was shipped as a kit. My numbers are only close estimates unless I calibrate them myself. However, even if the numbers are leagues off, the primary requirement of detecting the dryer running is satisfied.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>I am pleased with my updated dryer monitoring solution. There is no more ambiguity when I am alerted. I should have used the CT clamps from the start, but I wanted to see if I could get away with a cheaper budget. It turns out that the vibration sensor had too many concessions for my liking. At least my CT clamp solution is forward compatible with minimal modifications. If my dryers are using electricity to run, I should be able to monitor them for the foreseeable future. 🔮</p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2020/09/dryer-notification-addendum/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>
