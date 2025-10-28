@@ -1,7 +1,7 @@
 ---
 title: Tackle Tracking Water Usage
 date: '2023-10-13 21:07'
-updated: '2025-05-29 12:00'
+updated: '2025-10-28 08:00'
 comments: true
 image:
   path: /assets/img/2023/10/garden_bed_watering.jpg
@@ -16,6 +16,10 @@ description: "Tackle tracking water consumption across my house and irrigation w
 Data driven decision making is how I prefer to approach my smart home. A few years ago, I started the journey of tracking my electric and gas utilities. Water tracking eluded me. With our meager household consumption, it never made sense to tackle tracking water usage. But our family grew. I restored parts of our ancient irrigation system. Then we added garden beds! Suddenly we using more water. 
 
 Now I had a reason to track it.
+
+## Changelog
+
+> - 2025-10-28: [Added to my post](#water-shutoff-actuator-installed) to include the shutoff EcoNet shutoff valve I installed earlier this year.
 
 ## Why Track Consumption?
 
@@ -428,6 +432,25 @@ I wish my solution had a built-in shutoff, but I wasn't able to budget for it at
 When my water sub-meters were installed, I made sure to add additional quarter-turn shutoff valves before each meter. My goal is to eventually install a water valve actuator around the shutoff. Then I can activate it if  I ever [detect a leak from one of my sensors](/blog/2021/10/affordable-water-leak-and-temp-monitoring/) or detect a usage anomaly. Something like the Zooz Titan Water Valve Actuator (ZAC36) or the EcoNet Bulldog Valve Robot (EVC200-HCSML) would work nicely. 
 
 ![Shutoff valve and water meter together](/assets/img/2023/10/shutoff_valve.jpg)*Shutoff valve installed below water sub-meter, ready for a water valve actuator*
+
+> Update: I've installed one! See below.
+
+#### Water Shutoff Actuator Installed
+
+After 2 years, I have finally installed a smart shutoff actuator. I went with the EcoNet Bulldog EVC200 instead of the Zooz Titan. Both valves use Z-Wave, have optional battery backups, and optional wired leak sensors. But I went with the EcoNet because:
+
+- Preferred mounting system on the valve body instead of the pipe
+- Can be manually controlled via the button, or bypassed entirely with a physical button to disengage the motor
+
+The EcoNet Bulldog checks all of my boxes. The only drawback for me is the price, and that its Z-Wave Plus implementation doesn't support S1 or S2 security.
+
+![Shutoff with EcoNet Bulldog EVC200 water shutoff actuator installed](/assets/img/2023/10/EcoNet_Bulldog_EVC200_water_shutoff_actuator.jpg)*Shutoff with EcoNet Bulldog EVC200 water shutoff actuator installed*
+
+I run a monthly automation to test my shutoff valve to ensure the shutoff valve doesn't get stuck over time. 
+
+When the water shutoff actuator gets triggered by a water leak, I include a tapable action in my water leak notifications that opens the water valve back up (in case I accidentally splashed a leak sensor, or I finished cleaning up a mess).
+
+Since installing, I've already had it trigger after I improperly re-installed a faucet aerator that caused water to backflow into the faucet body and below my sink.
 
 ### Low Flow Drawbacks
 
