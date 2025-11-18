@@ -1,37 +1,22 @@
-// https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll/.devcontainer
 {
-	"name": "Jekyll",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update 'VARIANT' to pick a Debian OS version: bullseye, buster
-			// Use bullseye when on local arm64/Apple Silicon.
-			"VARIANT": "bullseye",
-			// Enable Node.js: pick the latest LTS version
-			"NODE_VERSION": "lts/*"
-		}	
-	},
+	"name": "Jekyll Site",
+	"image": "mcr.microsoft.com/devcontainers/ruby:3.2-bullseye",
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		// Jekyll server
-		4000,
-		// Live reload server
-		35729
-	],
+	// Since I'm using Podman, 'root' inside maps to 'local user' outside.
+	// This gives you perfect permissions without chown hacks (which make a big mess).
+	"remoteUser": "root",
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sh .devcontainer/post-create.sh",
-
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"streetsidesoftware.code-spell-checker"
+				"streetsidesoftware.code-spell-checker",
+				"Shopify.ruby-lsp"
 			]
 		}
 	},
 
-	"updateRemoteUserUID": true
+	"forwardPorts": [4000, 35729],
+
+	// Run the setup script (configures git, installs bundle)
+	"postCreateCommand": "sh .devcontainer/post-create.sh"
 }
