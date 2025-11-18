@@ -1,5 +1,4 @@
 #!/bin/sh
-# https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll/.devcontainer
 
 # Install the version of Bundler.
 if [ -f Gemfile.lock ] && grep "BUNDLED WITH" Gemfile.lock > /dev/null; then
