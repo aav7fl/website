@@ -63,6 +63,7 @@ task :html_proofer do
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*uplink.nmu.edu/.*}, # They've started returning a 403 to us
       %r{.*/#comment-.*}, # Internal Disqus comments
+      %r{https://www.audiokarma.org.*}, # 403s
       %r{https://www.linkedin.com.*}, # They always return a 999
       %r{https://www.reddit.com.*}, # Reddit is blocking us :(
       %r{.*x.com/.*}, # This site now hates HTML Proofer
