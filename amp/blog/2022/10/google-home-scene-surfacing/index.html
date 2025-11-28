@@ -1,0 +1,277 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Surfacing Scenes to All Google Home Household Members</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Members of a household who try to invoke Home Assistant scenes in Google Home cannot always access them. Here’s how to fix it.">
+<meta property="og:description" content="Members of a household who try to invoke Home Assistant scenes in Google Home cannot always access them. Here’s how to fix it.">
+<link rel="canonical" href="/blog/2022/10/google-home-scene-surfacing/">
+<meta property="og:url" content="/blog/2022/10/google-home-scene-surfacing/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2022/10/google_home_scenes_banner.jpg">
+<meta property="og:image:height" content="578">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-01T17:49:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2022/10/google_home_scenes_banner.jpg">
+<meta property="twitter:title" content="Surfacing Scenes to All Google Home Household Members">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2022-10-01T17:49:00-04:00","datePublished":"2022-10-01T17:49:00-04:00","description":"Members of a household who try to invoke Home Assistant scenes in Google Home cannot always access them. Here’s how to fix it.","headline":"Surfacing Scenes to All Google Home Household Members","image":{"height":578,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2022/10/google_home_scenes_banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/10/google-home-scene-surfacing/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2022/10/google-home-scene-surfacing/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Surfacing Scenes to All Google Home Household Members</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">October 01, 2022 | 
+        
+          5 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on October 01, 2022</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2022/10/google_home_scenes_banner.jpg" alt="Locating synced scenes inside of the Google Home app" width="800" height="578" layout="responsive"><noscript><img src="/assets/img/2022/10/google_home_scenes_banner.jpg" alt="Locating synced scenes inside of the Google Home app" width="800" height="578"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>Google Home <a href="https://support.google.com/googlenest/answer/9155535">supports the concept activating scenes</a> to simplify common room configurations. This trait allows users to group devices under the same service and update them simultaneously. It’s very similar to the <code class="language-plaintext highlighter-rouge">routines</code> control inside Google Home, but instead, the scene handling is done by the respective linked service.</p>
+
+<p>For example, a user could activate a scene to lower each curtain in a room when taking a nap. Or a scene could arrange holiday lights to specific colors configured in the Philips Hue app.</p>
+
+<p>Instead of sending 15 requests to adjust every light bulb with a linked service, we can instead send a single scene request. If you’ve ever had reliability issues with Google Home adjusting too many devices at once, this could help.</p>
+
+<h2 id="the-flaw">The Flaw</h2>
+
+<p>Google Home has this concept called <a href="https://support.google.com/googlenest/answer/9155535">Household</a>. It allows a user to invite other members in their house into the same Google Home instance. Anyone in the household can control the smart devices and even link their own services to the Google Home.</p>
+
+<p>Scenes are a bit trickier though. Google seems to be doing a very poor job of surfacing them to the user.</p>
+
+<p>Scenes are difficult to locate in the Google Home app. The only reliable place I could find scenes are when I am editing a routine… under home controls… under the scene adjustment option. So <em>really straight forward</em>, yea? Or if I know the “✨magic phrase✨”, I can say something like “Hey Google, activate the monthly driveway lights”. The scene support is tragic.</p>
+
+<h2 id="i-still-want-scenes">I Still Want Scenes</h2>
+
+<p>Ok, but I <em>still</em> want to use scenes.</p>
+
+<p><amp-img src="/assets/img/2022/10/google_home_scenes_banner.jpg" alt="Google Home scene menu" width="800" height="578" layout="responsive"><noscript><img src="/assets/img/2022/10/google_home_scenes_banner.jpg" alt="Google Home scene menu" width="800" height="578"></noscript></amp-img><em>The closest we have to locating scenes in Google Home</em></p>
+
+<p>Here I can see the scenes in Google Home that I added through Home Assistant. I spot 7 scenes available to me.</p>
+
+<p>That’s great! Let me use my magic phrase that I mentioned earlier.</p>
+
+<p>If I say “Hey Google, activate the monthly driveway lights”, the lights adjust and everything looks great.</p>
+
+<p>But if my wife says “Hey Google, activate the monthly driveway lights”, the Google Home apologizes as it can’t find that device.</p>
+
+<h2 id="what-gives">What Gives?</h2>
+
+<p>Remember how scenes are notoriously difficult to trigger without the magic phrases? Scenes also have magically awful support.</p>
+
+<p>If a <code class="language-plaintext highlighter-rouge">scene</code> is added to the Google Home, and the <code class="language-plaintext highlighter-rouge">scene</code> is not assigned to a room, then <em>only</em> the user who linked that service to Google Home can activate it. Like… what?</p>
+
+<p>Here is what my wife sees on her phone under scene control. Notice how she’s missing a few scenes that are available to me? Isn’t that just peachy?</p>
+
+<p><amp-img src="/assets/img/2022/10/scenes_3_missing.jpg" alt="Google Home scenes missing" width="400" height="496" layout="responsive"><noscript><img src="/assets/img/2022/10/scenes_3_missing.jpg" alt="Google Home scenes missing" width="400" height="496"></noscript></amp-img><em>Where did the other scenes go?</em></p>
+
+<p>However, if the service provider assigns a room to the <code class="language-plaintext highlighter-rouge">scene</code>, that entity will get “properly linked” to the Google Home. Then <em>everyone</em> in the household can activate the <code class="language-plaintext highlighter-rouge">scene</code>.</p>
+
+<p>I haven’t been able to figure out how to assign a <code class="language-plaintext highlighter-rouge">scene</code> to a rooms <em>inside</em> the Google Home app. The Google Home app doesn’t appear to have an area to view/rename/modify scenes. To assign a <code class="language-plaintext highlighter-rouge">scene</code> to a room, it appears that it <em>must</em> be set from the service which is providing it to the Google Home. <em>How intuitive</em>.</p>
+
+<blockquote>
+  <p>tl;dr Assign rooms/areas to your scenes so other household members can use them.</p>
+</blockquote>
+
+<h2 id="how-to-assign-areas-in-home-assistant">How To Assign Areas in Home Assistant</h2>
+
+<blockquote>
+  <p>Did you know <code class="language-plaintext highlighter-rouge">scripts</code> in Home Assistant are added to the Google Home in <a href="https://github.com/home-assistant/core/blob/dd7a06b9dca8a04152f6c4ef4828c8e214260393/homeassistant/components/google_assistant/trait.py#L522-L530">the same way <code class="language-plaintext highlighter-rouge">scenes</code> are</a>?</p>
+</blockquote>
+
+<p>How do we fix this? Let’s jump back into Home Assistant to take a look at our scripts or scenes.</p>
+
+<p><amp-img src="/assets/img/2022/10/home_assistant_scene_settings.jpg" alt="Assigning a script to an area in Home Assistant" width="800" height="490" layout="responsive"><noscript><img src="/assets/img/2022/10/home_assistant_scene_settings.jpg" alt="Assigning a script to an area in Home Assistant" width="800" height="490"></noscript></amp-img><em>Assigning a script to an area in Home Assistant</em></p>
+
+<p>Here I’ve selected a script that we’re syncing with Google Home. It hasn’t been assigned to an area yet. That means it won’t belong to a room in Google Home.</p>
+
+<p>If I update this script and assign it to an area, the next time we sync with the Google Home, Home Assistant will be able to provide a <em>hint</em> at which respective room it should be assigned to.</p>
+
+<p>If the room hint from Home Assistant was successful, then Google Home will have assigned the <code class="language-plaintext highlighter-rouge">scene</code> to a room. Now the <code class="language-plaintext highlighter-rouge">scene</code> should be available to all users in the Google Home household.</p>
+
+<blockquote>
+  <p>I <a href="https://github.com/home-assistant/home-assistant.io/pull/24310">submitted a pull request</a> to update the Home Assistant documentation and mention this scene/script limitation so others don’t sink the same time that I did.</p>
+</blockquote>
+
+<h2 id="why-does-this-happen">Why Does This Happen?</h2>
+
+<p>In order for devices to be used by Google Home, they need to be set up <em>completely</em>. Linking devices to your account in Google Home is not enough. Devices and scenes need to be assigned to a room in order to become part of the household.</p>
+
+<p>Here is an example of an entity that I added from Home Assistant which was never assigned to an area. When Google Home sees this entity, it doesn’t know where to place it. Without a placement, the rest of my Google Home household cannot see that entity.</p>
+
+<p><amp-img src="/assets/img/2022/10/google_home_not_linked.jpg" alt="An entity has not assigned a room or added to the household in Google Home" width="484" height="390" layout="responsive"><noscript><img src="/assets/img/2022/10/google_home_not_linked.jpg" alt="An entity has not assigned a room or added to the household in Google Home" width="484" height="390"></noscript></amp-img><em>This entity has not assigned a room or added to the household in Google Home</em></p>
+
+<p>I believe the exact same thing is happening to the <code class="language-plaintext highlighter-rouge">scene</code> and <code class="language-plaintext highlighter-rouge">script</code> entities. Except in our case, scenes do not have a standard view in the Google Home app so we’re unable to move them into a room from inside the app.</p>
+
+<blockquote>
+  <p>One <em>might</em> be able to trigger a view to move existing scenes if they completely unlink and then relink their service to the Google Home. The opportunity may be present upon “first setup”. But that’s not a very friendly solution.</p>
+</blockquote>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’m not the first user who is bewildered with their Google Home when it accepts my command, but then rejects the same command from my wife. Why would a family trust the reliability of their smart home if every other command failed?</p>
+
+<p>It would be great if Google added a UI to manage scenes, or increased their visibility in the Google Home app. At the very least, Google Home should be able to recognize when a scene is only available for the linking user and raise that error.</p>
+
+<p>I hope Google cares about their Google Home product and continues to make improvements. If they don’t grow this feature, I fear that scene support is destined to be <a href="https://killedbygoogle.com/">killed by Google</a>.</p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2022/10/google-home-scene-surfacing/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>
