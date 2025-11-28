@@ -1,7 +1,7 @@
 ---
 title: Tackle Tracking Water Usage
 date: '2023-10-13 21:07'
-updated: '2025-10-28 08:00'
+updated: '2025-11-27 21:30'
 comments: true
 image:
   path: /assets/img/2023/10/garden_bed_watering.jpg
@@ -20,6 +20,7 @@ Now I had a reason to track it.
 ## Changelog
 
 > - 2025-10-28: [Added to my post](#water-shutoff-actuator-installed) to include the shutoff EcoNet shutoff valve I installed earlier this year.
+> - 2025-11-27: Add note about new Water Meter sub-devices (Individual water devices) in 2025.12
 
 ## Why Track Consumption?
 
@@ -353,6 +354,8 @@ mode: single
 Home Assistant energy monitoring allows users to track separate electric devices, like smart plugs, in addition to the main meter. I really wish Home Assistant supported sub-metering devices for water. That way I could track the irrigation long-term statistics without another templated sensor. I understand why it's not included. I don't think having sub-meters in series is very common.
 
 To work around this setback, I need to create a template sensor that subtracts my irrigation sub-meter consumption from the total consumption of my household. I then add both meters back into the dashboard to give me a full picture of my consumption.
+
+> 2025-11-27: As of 2025-12, Home Assistant supports adding water meters as sub-devices. So now I can use the main water meter and see in a snakey chart how much usage is going to irrigation (but I still need to keep this sensor below if I want a better look at realtime usage).
 
 ```yaml
 {% raw %}
