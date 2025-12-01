@@ -1,7 +1,7 @@
 ---
 title: Automating Attic Pest Control
 date: '2025-04-13 22:22'
-updated: '2025-05-05 06:22'
+updated: '2025-11-30 21:03'
 comments: true
 image:
   path: /assets/img/2025/04/mousetrap.jpg
@@ -83,42 +83,17 @@ Here are the lists of helper sensors and automations that I use to track the sta
 
 ### Helper Sensors
 
-#### Last Seen Helper
-
-A simple helper sensor to track the last time the trap was seen. This uses the `*_last_seen` sensor created automatically by `Z-Wave JS UI`, but makes a few tweaks. That's because when Home Assistant starts up or Z-Wave JS UI restarts, the state for their exposed sensor will be `unknown` or `unavailable` until updated (which may take hours on a battery-operated device). I want my value to persist over a reboot, so I create a helper sensor that stores the last time we _knew_ it was updated.
-
-It's true that the device could technically update when we're rebooting, and we'd miss it. But that's why I don't consider it "lost" until we miss any updates for 24+ hours—which should cover 2 missed check-in events.
-
-- Used for: [Healthcheck Notifications](#healthcheck-notifications)
-
-> At the time of writing, this is the only `sensor` that can't be created in the UI. I had to create this in YAML. I hope that changes in the future.
-
-```yaml
-template:
-  - trigger:
-    - platform: state
-      entity_id: sensor.attic_mousetrap_last_seen
-      not_to:
-        - unknown
-        - unavailable
-    sensor:
-    - name: Attic mousetrap Last Seen
-      unique_id: attic_mousetrap_last_seen_helper
-      state: '{{ trigger.to_state.state }}'
-      device_class: timestamp
-```
-
 #### Healthcheck
 
 This is the `template` code for a `binary sensor` that checks if the trap has been "seen" in the last 24 hours. This is useful for ensuring that the trap is still operational and connected to the network. If the trap hasn't been seen recently, the `binary sensor` will return `off`.
 
 - Used for: [Healthcheck Notifications](#healthcheck-notifications)
 
-Create a new [template binary sensor](https://www.home-assistant.io/integrations/template/) in the UI with the following template value. It takes our `*_last_seen_helper` from above and checks if it is greater than 24 hours ago. If it has been longer than 24 hours, it returns `off` signifying that the trap hasn't been seen in a while.
+Create a new [template binary sensor](https://www.home-assistant.io/integrations/template/) in the UI with the following template value. It takes our `*_last_seen` from above and checks if it is greater than 24 hours ago. If it has been longer than 24 hours, it returns `off` signifying that the trap hasn't been seen in a while.
 
 {% raw %}
 ```yaml
-{{ (states('sensor.attic_mousetrap_last_seen_helper') | as_timestamp(0) | int) > ((utcnow() - timedelta(hours=24)) | as_timestamp | int) }}
+{{ (states('sensor.attic_mousetrap_last_seen') | as_timestamp(0) | int) > ((utcnow() - timedelta(hours=24)) | as_timestamp | int) }}
 ```
 {% endraw %}
 
