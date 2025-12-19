@@ -16,6 +16,7 @@ amp:
   - video
 redirect_from:
   - "/blog/2024/09/soo-machine-and-auto-ai-aplified-legacy/"
+  - "/soo-machine/"
 ---
 
 ## Late Nights and Legacy: A Digital Excavation into Soo Machine & Auto
