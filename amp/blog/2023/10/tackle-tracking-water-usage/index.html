@@ -1,0 +1,670 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Tackle Tracking Water Usage</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Tackle tracking water consumption across my house and irrigation with Home Assistant, ESPHome, and OpenSprinkler">
+<meta property="og:description" content="Tackle tracking water consumption across my house and irrigation with Home Assistant, ESPHome, and OpenSprinkler">
+<link rel="canonical" href="/blog/2023/10/tackle-tracking-water-usage/">
+<meta property="og:url" content="/blog/2023/10/tackle-tracking-water-usage/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2023/10/garden_bed_watering.jpg">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-10-13T21:07:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2023/10/garden_bed_watering.jpg">
+<meta property="twitter:title" content="Tackle Tracking Water Usage">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2023-10-13T21:07:00-04:00","datePublished":"2023-10-13T21:07:00-04:00","description":"Tackle tracking water consumption across my house and irrigation with Home Assistant, ESPHome, and OpenSprinkler","headline":"Tackle Tracking Water Usage","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2023/10/garden_bed_watering.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/10/tackle-tracking-water-usage/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2023/10/tackle-tracking-water-usage/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Tackle Tracking Water Usage</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">October 13, 2023 | 
+        
+          13 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on November 27, 2025</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2023/10/garden_bed_watering.jpg" alt="Garden beds with drip irrigation" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2023/10/garden_bed_watering.jpg" alt="Garden beds with drip irrigation" width="800" height="600"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>Data driven decision making is how I prefer to approach my smart home. A few years ago, I started the journey of tracking my electric and gas utilities. Water tracking eluded me. With our meager household consumption, it never made sense to tackle tracking water usage. But our family grew. I restored parts of our ancient irrigation system. Then we added garden beds! Suddenly we using more water.</p>
+
+<p>Now I had a reason to track it.</p>
+
+<h2 id="changelog">Changelog</h2>
+
+<blockquote>
+  <ul>
+    <li>2025-10-28: <a href="#water-shutoff-actuator-installed">Added to my post</a> to include the shutoff EcoNet shutoff valve I installed earlier this year.</li>
+    <li>2025-11-27: Add note about new Water Meter sub-devices (Individual water devices) in 2025.12</li>
+  </ul>
+</blockquote>
+
+<h2 id="why-track-consumption">Why Track Consumption?</h2>
+
+<p>While on a walk last week, I spotted a neighbor with a busted sprinkler head. Water was gushing into the street and washing out their new grass.</p>
+
+<p>How would <em>you</em> know if your sprinkler head breaks off?</p>
+
+<p>What if the toilet keeps running in the middle of the night and no one hears it?</p>
+
+<p>I want to track these things. With a little bit of help from some automations, I can get <em>pretty close</em> to detecting similar anomalies and overage.</p>
+
+<h2 id="options">Options</h2>
+
+<p>Ok. How can I track my water usage?</p>
+
+<p>The first thing I did was spend considerable time researching how my township tracks <em>my</em> water consumption. At my residence, they have a water meter installed in my basement with a wireless module reading the meter’s pulse output signals. Since this hardware is owned by the township, I’m not allowed to touch or modify it in any way. But I <em>could</em> simply listen to it.</p>
+
+<p>I thought this would be an easy win. Simply hook up a radio receiver and listen to the signals the device broadcasts. But once I started capturing the signals, I soon realized that they were encrypted. Continuing down this path would not have been an easy effort.</p>
+
+<p>Next, I considered buying a consumer-ready product for tracking. There are some top contenders like the Moen Flo or Flume. Both track water usage, and some have extra features like a built-in water shutoff. But nearly all of them require the cloud and cost a small fortune.</p>
+
+<p>My goal was to avoid vendor lock-in and cloud-only support. I <a href="/blog/2019/05/trading-nest-for-tensorflow/"><em>despise</em> devices that require the cloud</a> ❌.</p>
+
+<p>After spending <em>way too long</em> researching different routes and getting nowhere, I reluctantly pivoted to roll my own local setup for tracking consumption.</p>
+
+<h2 id="rolling-my-own">Rolling My Own</h2>
+
+<p>Here’s the overview</p>
+
+<ul>
+  <li>
+<a href="https://www.home-assistant.io/">Home Assistant</a> will live at the center and collect all data</li>
+  <li>I will use water meters that support sending pulse output signals after each gallon is consumed</li>
+  <li>The first water meter will track our total home consumption
+    <ul>
+      <li>It will use a custom <a href="https://esphome.io/">ESPHome</a> device for counting the water meter pulse output</li>
+    </ul>
+  </li>
+  <li>The second water meter will track our irrigation consumption
+    <ul>
+      <li>It will connect to <a href="https://opensprinkler.com/">OpenSprinkler</a> and connect with Home Assistant to calculate consumption</li>
+    </ul>
+  </li>
+</ul>
+
+<p>I will track our entire household consumption by installing our own sub-meter immediately after the township’s water meter. A custom ESPHome device will be deployed to track the pulse outputs from the sub-meter. The consumption data will be stored in Home Assistant.</p>
+
+<p>I will track our irrigation water consumption with a second sub-meter. In some homes with a connected sewer system, they sometimes run a second water line metered exclusively for irrigation. This is because local governments often exclude sewer fees for irrigation consumption.</p>
+
+<p>However, we don’t have a separate water line for irrigation. Our house uses a septic tank for waste. This means that we don’t pay sewer costs for any water that our household consumes. The township has no interest in running out an additional metered line for irrigation as there is no cost difference in billing. Instead, they have us consume our irrigation water from our main water line.</p>
+
+<blockquote>
+  <p>I guess the irrigation meter is more a sub-sub-meter since it’s in series with the other sub-meter (more on how that impacts my calculations later!).</p>
+</blockquote>
+
+<h2 id="what-i-used">What I Used</h2>
+
+<h3 id="main-water-meter">Main Water Meter</h3>
+
+<ul>
+  <li>DAE MJ-75 (potable water meter with pulse output)</li>
+  <li>ESP32 dev board</li>
+  <li>PCB screw terminal block for easy assembly</li>
+  <li>Solderless prototype breadboard</li>
+  <li>Extra wire laying around</li>
+  <li>USB cable</li>
+  <li>USB wall plug</li>
+</ul>
+
+<h3 id="irrigation-water-meter">Irrigation Water Meter</h3>
+
+<ul>
+  <li>DAE MJ-75 (potable water meter with pulse output)</li>
+  <li>OpenSprinkler controller</li>
+  <li>Jameco GPU572401500WA00 24 Volt @ 1500mA Transformer (to run multiple low-flow zones in parallel)</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+
+<p>For tracking water consumption, I am using a DAE MJ-75 water meters for each leg. They’re NSF61 certified, safe for cold potable water, and already have a built-in reed sensor with pulse outputs for every gallon consumed.</p>
+
+<p><amp-img src="/assets/img/2023/10/water_meters.png" alt="Two DAE MJ-75 water meters" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2023/10/water_meters.png" alt="Two DAE MJ-75 water meters" width="800" height="600"></noscript></amp-img><em>DAE MJ-75 water meters ready to install</em></p>
+
+<h3 id="main-meter-with-esphome">Main Meter with ESPHome</h3>
+
+<p>I’m tracking my overall consumption from the main sub-meter by running the meter wires into an ESP32 dev board. I’m wiring the meter reed switch directly into the <code class="language-plaintext highlighter-rouge">GPIO32</code> and <code class="language-plaintext highlighter-rouge">GROUND</code>.</p>
+
+<p>I chose an ESP32 dev board because it’s cheap, works with ESPHome, and has built-in pull-up resistors. These pull-up resistors allow me to prevent the incoming reed switch signal from floating around while open. I could have created a pull-up resistor with <em>actual resistors</em>, but this was easier.</p>
+
+<p><amp-img src="/assets/img/2023/10/ESP32_dev.jpg" alt="ESP32 dev board connected to a water meter" width="752" height="1003" layout="responsive"><noscript><img src="/assets/img/2023/10/ESP32_dev.jpg" alt="ESP32 dev board connected to a water meter" width="752" height="1003"></noscript></amp-img><em>ESP32 dev board connected to a water meter with <code class="language-plaintext highlighter-rouge">GPIO32</code> and <code class="language-plaintext highlighter-rouge">GROUND</code>. Extra wiring present on the <code class="language-plaintext highlighter-rouge">3.3V</code> and <code class="language-plaintext highlighter-rouge">GROUND</code> from earlier testing.</em></p>
+
+<p>Here is my ESPHome Water Meter Configuration:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Basic Config</span>
+<span class="c1"># esp_32_02</span>
+<span class="c1"># Water Meter</span>
+<span class="c1"># Updated for 2025.5.0</span>
+
+<span class="c1"># Alleged Reed Switch data from manufacturer:</span>
+<span class="c1">#   Pulse Output: 1 gallon per pulse</span>
+<span class="c1">#   Qmax: 20 GPM (gallon per min.)</span>
+<span class="c1">#   Width of the pulse: 3 sec</span>
+<span class="c1">#   Width of the pulse with continuous output: 0.75 sec</span>
+<span class="c1">#   The angle with continuous output: 90 degree</span>
+
+<span class="c1"># external_components:</span>
+<span class="c1">#   # use pulse_meter from ESPHome's dev branch in GitHub</span>
+<span class="c1">#   - source:</span>
+<span class="c1">#       type: git</span>
+<span class="c1">#       url: https://github.com/aav7fl/esphome</span>
+<span class="c1">#       ref: dev</span>
+<span class="c1">#     components: [ pulse_meter ]</span>
+
+<span class="na">substitutions</span><span class="pi">:</span>
+  <span class="na">board_id</span><span class="pi">:</span> <span class="s">esp-32-02</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Main Water Meter</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Main Water Meter</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ssid</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_ssid</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+  <span class="c1"># manual_ip:</span>
+    <span class="c1"># static_ip: 192.168.95.110</span>
+    <span class="c1"># gateway: 192.168.95.1</span>
+    <span class="c1"># subnet: 255.255.255.0</span>
+
+  <span class="c1"># Enable fallback hotspot (captive portal) in case wifi connection fails</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">${board_id}</span><span class="nv"> </span><span class="s">Hotspot"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">ap_hotspot_password</span>
+
+  <span class="c1">#use_address: energy-meter.local</span>
+
+<span class="c1"># Enable captive portal if wifi ever changes</span>
+<span class="na">captive_portal</span><span class="pi">:</span>
+
+<span class="c1"># Enable Home Assistant API</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">key</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">encryption_pre_shared_key</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">platform</span><span class="pi">:</span> <span class="s">esphome</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">ota_password</span>
+
+<span class="na">esphome</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">${name}</span>
+  <span class="na">comment</span><span class="pi">:</span> <span class="s">${board_id}</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">${friendly_name}</span>
+  <span class="na">on_boot</span><span class="pi">:</span>
+    <span class="na">priority</span><span class="pi">:</span> <span class="m">800</span>
+    <span class="na">then</span><span class="pi">:</span> 
+      <span class="c1"># Set default value on boot so it doesn't show as unknown</span>
+      <span class="pi">-</span> <span class="na">sensor.template.publish</span><span class="pi">:</span>
+          <span class="na">id</span><span class="pi">:</span> <span class="s">water_consumption_submeter</span>
+          <span class="na">state</span><span class="pi">:</span> <span class="kt">!lambda</span> <span class="s2">"</span><span class="s">return</span><span class="nv"> </span><span class="s">0;"</span>
+
+<span class="na">esp32</span><span class="pi">:</span>
+  <span class="na">board</span><span class="pi">:</span> <span class="s">nodemcu-32s</span>
+
+<span class="c1"># Enable logging</span>
+<span class="na">logger</span><span class="pi">:</span>
+
+<span class="na">button</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">restart</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Restart"</span>
+
+<span class="c1"># Sensors that the ESPhome unit is capable of reporting</span>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">pulse_meter</span>
+    <span class="na">pin</span><span class="pi">:</span>
+      <span class="na">number</span><span class="pi">:</span> <span class="s">GPIO32</span>
+      <span class="na">inverted</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">mode</span><span class="pi">:</span>
+        <span class="na">input</span><span class="pi">:</span> <span class="kc">true</span>
+        <span class="na">pullup</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">internal_filter_mode</span><span class="pi">:</span> <span class="s">PULSE</span>
+    <span class="na">internal_filter</span><span class="pi">:</span> <span class="s">200ms</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gal/min'</span>
+    <span class="na">accuracy_decimals</span><span class="pi">:</span> <span class="m">1</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Flow"</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mdi:water'</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">clamp</span><span class="pi">:</span>
+          <span class="na">max_value</span><span class="pi">:</span> <span class="m">20</span>
+    <span class="na">total</span><span class="pi">:</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">water_total</span>
+      <span class="na">internal</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">icon</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mdi:water'</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s1">'</span><span class="s">water'</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gal'</span>
+      <span class="c1"># This automation will be triggered when a new value that has passed through all filters is published. </span>
+      <span class="c1"># In Lambdas you can get the value from the trigger with x.</span>
+      <span class="na">on_value</span><span class="pi">:</span>
+        <span class="na">then</span><span class="pi">:</span> 
+          <span class="pi">-</span> <span class="na">sensor.template.publish</span><span class="pi">:</span>
+              <span class="na">id</span><span class="pi">:</span> <span class="s">water_consumption_submeter</span>
+              <span class="na">state</span><span class="pi">:</span> <span class="kt">!lambda</span> <span class="s2">"</span><span class="s">return</span><span class="nv"> </span><span class="s">x;"</span>
+
+  <span class="c1"># Templated sensor to provide native total_increasing sensor information to Home Assistant </span>
+  <span class="c1"># This makes it easier to add to the Energy Dashboard</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">water_consumption_submeter</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Consumption</span><span class="nv"> </span><span class="s">Submeter"</span>
+    <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">gal"</span>
+    <span class="na">state_class</span><span class="pi">:</span> <span class="s">total_increasing</span>
+    <span class="c1"># Return 0 decimal places as the water meter only measures in whole gallons</span>
+    <span class="na">accuracy_decimals</span><span class="pi">:</span> <span class="m">0</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">water</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s2">"</span><span class="s">mdi:gauge"</span>
+    <span class="c1"># Return 0 when device is restarted</span>
+    <span class="c1"># lambda: return 0;</span>
+
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">wifi_signal</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">WiFi</span><span class="nv"> </span><span class="s">Signal"</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">300s</span>
+
+<span class="c1"># Enables status LED</span>
+<span class="na">status_led</span><span class="pi">:</span>
+  <span class="na">pin</span><span class="pi">:</span> <span class="s">GPIO2</span>
+</code></pre></div></div>
+
+<p>After the dev board is deployed, I simply add it to Home Assistant through the ESPHome integration. Now all of the sensors are available in Home Assistant.</p>
+
+<h3 id="irrigation-meter-with-opensprinkler">Irrigation Meter with OpenSprinkler</h3>
+
+<p>The sub-meter being used for tracking irrigation consumption is <em>also</em> the DAE MJ-75. Reminder; the meter produces a pulse for each gallon of water consumed. I read this data by connecting the meter to my special sprinkler controller, OpenSprinkler.</p>
+
+<p>My OpenSprinkler controller supports different input sensors. One of the supported sensors is a pulse meter, which is exactly what I have. There are 3 easy steps to get it working:</p>
+
+<ol>
+  <li>Install the pulse-output water meter</li>
+  <li>Connect the wires from the water meter to the sensor ports on the OpenSprinkler controller</li>
+  <li>Configure the sensor input on the OpenSprinkler dashboard</li>
+</ol>
+
+<p>Now OpenSprinkler can track water usage. But how do I get the data in OpenSprinkler over to Home Assistant?</p>
+
+<p>Simple. By using the <a href="https://github.com/vinteo/hass-opensprinkler">hass-opensprinkler</a> integration. This integration exposes entities, controls, and data over to Home Assistant.</p>
+
+<p>When I first started using this integration, I don’t believe there was an entity to show water consumption via the integration I was using (I think this is still true?). Since there was no consumption entity, I had to figure out a different way to calculate my consumption.</p>
+
+<p>Luckily, the other exposed entities seemed to work without issue. As a rule of thumb, irrigation flow rates are generally constant and don’t fluctuate too much. Since I have a reliable flow <em>rate</em> coming from the controller, I can calculate the consumption by using a <a href="https://www.home-assistant.io/integrations/integration/">Riemann sum</a> calculation of the current rate. This is basically plotting out a graph of the flow rate over time, and calculating the sum of all area under that line (e.g. a less precise integral).</p>
+
+<h4 id="1-converting-liters-to-gallons">1. Converting Liters to Gallons</h4>
+
+<p><strong>Input:</strong> <code class="language-plaintext highlighter-rouge">sensor.opensprinkler_flow_rate</code> (Flow rate from OpenSprinkler integration, but it’s in <code class="language-plaintext highlighter-rouge">Liters</code>)</p>
+
+<p>Even if the OpenSprinker controller is set to use Imperial units, the OpenSprinkler API still exposes all values in SI. This means that I need to create a new sensor in Home Assistant to convert <code class="language-plaintext highlighter-rouge">L/min</code> to <code class="language-plaintext highlighter-rouge">gal/min</code>. That way the units match the rest of my system.</p>
+
+<p>Here is my template sensor to convert the OpenSprinkler flow rate from <code class="language-plaintext highlighter-rouge">L/min</code> to <code class="language-plaintext highlighter-rouge">gal/min</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">OpenSprinkler</span><span class="nv"> </span><span class="s">Flow</span><span class="nv"> </span><span class="s">Rate</span><span class="nv"> </span><span class="s">Gallons</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">Minute"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">opensprinkler_flow_rate_gallons</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gal/min'</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">float(states('sensor.opensprinkler_flow_rate')</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">float(0))</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">0.2641720524</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">sensor.opensprinkler_flow_rate_gallons</code> (Flow rate in gallons)</p>
+
+<h4 id="2-converting-rate-to-consumption">2. Converting Rate to Consumption</h4>
+
+<p><strong>Input:</strong> <code class="language-plaintext highlighter-rouge">sensor.opensprinkler_flow_rate_gallons</code> (Flow rate in gallons)</p>
+
+<p>Now that we have a rate in our preferred unit, we need to calculate the actual <em>consumption</em>. I’m using the <a href="https://www.home-assistant.io/integrations/integration/">Riemann sum helper</a> to convert rate into consumption.</p>
+
+<blockquote>
+  <p>Note: I’m using a right-hand side Riemann sum for this calculation. If I use a left-hand/mid-point, and I don’t capture any water usage for a while, we would see a huge spike in consumption when the next data point is tracked because it would assume a non-zero rate occurred over the entire duration. This is corrected by using a right-hand Riemann sum.</p>
+
+  <p>Note 2: <a href="https://github.com/home-assistant/core/pull/110685">Starting in 2024.7</a>, make sure you force the <code class="language-plaintext highlighter-rouge">max_sub_interval</code> to something like 30s - 60s. That is because the source data (flow rate) sensor from the sprinkler may not update frequently if the water flow is stable. If we let this value sit, our Riemann sum won’t update for a while and cause the calculations between our two meters to be slightly off until it can correct itself later.</p>
+</blockquote>
+
+<p><amp-img src="/assets/img/2023/10/riemann_sum.png" alt="Riemann sum of OpenSprinkler flow rate" width="800" height="1196" layout="responsive"><noscript><img src="/assets/img/2023/10/riemann_sum.png" alt="Riemann sum of OpenSprinkler flow rate" width="800" height="1196"></noscript></amp-img><em>Consumption by Riemann sum integration</em></p>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">sensor.sprinkler_consumption_sum_gallons</code> (Consumption in gallons)</p>
+
+<h4 id="3-adding-consumption-to-a-utility-meter">3. Adding Consumption to a Utility Meter</h4>
+
+<p><strong>Input:</strong> <code class="language-plaintext highlighter-rouge">sensor.sprinkler_consumption_sum_gallons</code> (Consumption in gallons)</p>
+
+<p>Next, I track the consumption with a <a href="https://www.home-assistant.io/integrations/utility_meter/">utility meter</a> helper.</p>
+
+<p><amp-img src="/assets/img/2023/10/utility_meter_helper.png" alt="Utility meter of OpenSprinkler consumption" width="800" height="1094" layout="responsive"><noscript><img src="/assets/img/2023/10/utility_meter_helper.png" alt="Utility meter of OpenSprinkler consumption" width="800" height="1094"></noscript></amp-img><em>Utility Meter of OpenSprinkler consumption</em></p>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">sensor.sprinkler_consumption_gallons</code> (Utility meter sensor)</p>
+
+<h4 id="4-fixing-the-utility-meter">4. Fixing the Utility Meter</h4>
+
+<p><strong>Input:</strong> <code class="language-plaintext highlighter-rouge">sensor.sprinkler_consumption_gallons</code> (Utility meter sensor)</p>
+
+<p>We’re almost done. For whatever reason, the utility meter that I create above ends up missing key components that allow me to add it to my Energy Dashboard. To remedy this, I have to manually add a <code class="language-plaintext highlighter-rouge">device_class</code> and <code class="language-plaintext highlighter-rouge">unit_of_measurement</code> through the <a href="https://www.home-assistant.io/docs/configuration/customizing-devices/">customization entry</a> for the sensor in order for it to be allowed in the Home Assistant <code class="language-plaintext highlighter-rouge">Energy</code> dashboard.</p>
+
+<blockquote>
+  <p>I believe this problem can be avoided by defining the utility meter in <code class="language-plaintext highlighter-rouge">yaml</code> instead of the UI.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sensor.sprinkler_consumption_gallons</span><span class="pi">:</span>
+  <span class="na">device_class</span><span class="pi">:</span> <span class="s">water</span>
+  <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">gal</span>
+</code></pre></div></div>
+
+<p>Correctly capturing the irrigation water consumption was more involved than I initially thought. But now I can add irrigation consumption to my energy dashboard and track long-term data.</p>
+
+<h2 id="companion-automation">Companion Automation</h2>
+
+<p>At the time of writing, I don’t have an <em>advanced</em> alerting system to tell me if my usage is higher than normal. But I do have a <em>basic</em> one. This is the best I could come up with this past summer on my limited time.</p>
+
+<p>This automation will alert my family if we’re using a higher than expected quantity of water (2000+ gallons). It’s only useful if the irrigation consumption is consistent each run. There are ways to make it dynamic, but this met my acceptance criteria to get something deployed.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">alias</span><span class="pi">:</span> <span class="s">Alert - Notify irrigation usage high</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Send</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">notification</span><span class="nv"> </span><span class="s">alert</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">irrigation</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">higher</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">expected</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">end</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">day"</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time</span>
+    <span class="na">at</span><span class="pi">:</span> <span class="s2">"</span><span class="s">19:00:00"</span>
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">numeric_state</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.sprinkler_consumption_gallons</span>
+    <span class="na">above</span><span class="pi">:</span> <span class="m">2000</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s">💧🌱 Irrigation Usage High!</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+        <span class="s">Irrigation has used {{states('sensor.sprinkler_consumption_gallons')}}</span>
+        <span class="s">gallons today. That was previously considered high. Please investigate.</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:sprinkler-variant</span>
+        <span class="na">group</span><span class="pi">:</span> <span class="s">irrigation-alert</span>
+        <span class="na">channel</span><span class="pi">:</span> <span class="s">irrigation-alert</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+</code></pre></div></div>
+
+<h2 id="additional-wishes">Additional Wishes</h2>
+
+<h3 id="water-sub-metering-devices">Water Sub-Metering Devices</h3>
+
+<p>Home Assistant energy monitoring allows users to track separate electric devices, like smart plugs, in addition to the main meter. I really wish Home Assistant supported sub-metering devices for water. That way I could track the irrigation long-term statistics without another templated sensor. I understand why it’s not included. I don’t think having sub-meters in series is very common.</p>
+
+<p>To work around this setback, I need to create a template sensor that subtracts my irrigation sub-meter consumption from the total consumption of my household. I then add both meters back into the dashboard to give me a full picture of my consumption.</p>
+
+<blockquote>
+  <p>2025-11-27: As of 2025-12, Home Assistant supports adding water meters as sub-devices. So now I can use the main water meter and see in a snakey chart how much usage is going to irrigation (but I still need to keep this sensor below if I want a better look at realtime usage).</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># Calculate standard home water consumption without irrigation</span>
+<span class="c1"># Fixes issue where there are two meters in series, and we want to avoid double-counting consumption</span>
+<span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+  <span class="na">sensor</span><span class="pi">:</span>
+    <span class="na">standard_water_consumption</span><span class="pi">:</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">total_increasing</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">gal</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">water</span>
+      <span class="na">availability</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">is_number(states('sensor.main_water_meter_consumption_submeter_daily'))</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">is_number(states('sensor.sprinkler_consumption_gallons'))</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="c1"># Subtract the values of 2 utility meters.</span>
+      <span class="c1"># - One is a utility meter of the ESPHome main_water_meter_consumption_submeter</span>
+      <span class="c1"># - One is a utility meter of the sprinkler_consumption_sum_gallons</span>
+      <span class="c1"># Create another helper utility meter</span>
+      <span class="c1"># - The last helper is a utility meter of this sensor that we use to compare against (and to make sure it's always available after restarts)</span>
+      <span class="c1"># All utility meters reset at midnight. This makes it easier and clearer to make corrections if something goes wrong.</span>
+      <span class="na">state</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+        <span class="s">{# Set up some variables to make reading my conditions easier #}</span>
+
+        <span class="s">{# Daily utility meter of my main submeter #}</span>
+        <span class="s">{% set main_submeter_daily = states('sensor.main_water_meter_consumption_submeter_daily') | float(0) %}</span>
+
+        <span class="s">{# Daily utility meter of my sprinkler submeter #}</span>
+        <span class="s">{% set sprinkler_submeter_daily = states('sensor.sprinkler_consumption_gallons') | float(0) %}</span>
+
+        <span class="s">{# Current difference between both daily utility meters #}</span>
+        <span class="s">{% set new_standard_water_consumption = main_submeter_daily - sprinkler_submeter_daily %}</span>
+
+        <span class="s">{# Mirror the value in this template sensor to a utility meter helper, and retrieve it below. This ensures #}</span>
+        <span class="s">{#  that _this_ template sensor always has a value on restart, and that the value is never unknown. #}</span>
+        <span class="s">{% set old_standard_water_consumption = states('sensor.standard_water_consumption_meter_daily') | float(0) %}</span>
+
+        <span class="s">{# Keep an eye on the sprinkler flow rate to know if both meters should be going off #}</span>
+        <span class="s">{% set sprinkler_submeter_flow_rate = states('sensor.opensprinkler_flow_rate_gallons') | float(0) %}</span>
+
+        <span class="s">{# Giving it a default value in case I mess up the logic below. #}</span>
+        <span class="s">{% set standard_water_consumption = 0 %}</span>
+
+        <span class="s">{# We first check if the time is around midnight and ignore any value (temporarily). That is because #}</span>
+        <span class="s">{#  the meters we're using to calculate the value all reset _around_ midnight. Sometimes they don't clear #}</span>
+        <span class="s">{#  _exactly_ at midnight before we try to calculate the value, then we end up with a spiked value #}</span>
+        <span class="s">{#  right at midnight as the calculations shouldn't run until everything optimistically resets. #}</span>
+        <span class="s">{# Any missed values we be re-calculated correctly as soon as the time window passes. #}</span>
+        <span class="s">{# It's possible to miss the reset at midnight if the server rebooted during that time, #}</span>
+        <span class="s">{# but that shouldn't matter since all of the meters reset together (ignoring super precise edge cases). #}</span>
+        <span class="s">{% if today_at('00:00:00') &lt;= now() &lt;= today_at('00:01:00') %}</span>
+          <span class="s">{% set standard_water_consumption = 0 %}</span>
+
+        <span class="s">{# When irrigation is running, and the difference is small, (before we consume water in other ways), #}</span>
+        <span class="s">{#  then we assume that the meters are probably slow to update if they're this close. #}</span>
+        <span class="s">{# This could miss water consumption if we use less than 10 gallons on a day that we run the sprinklers #}</span>
+        <span class="s">{#  .. but.. really? That edge case isn't worth it. #}</span>
+        <span class="s">{% elif sprinkler_submeter_flow_rate &gt; 0 and new_standard_water_consumption | abs &lt; 10 %}</span>
+          <span class="s">{% set standard_water_consumption = old_standard_water_consumption %}</span>
+
+        <span class="s">{% else %}</span>
+          <span class="s">{# Take the max value between the old value and the new calculated value. #}</span>
+          <span class="s">{# This is to prevent the new value from going down if the meters are slow to update, #}</span>
+          <span class="s">{#  or my floating point math is off. This is a problem I had before. #}</span>
+          <span class="s">{% set standard_water_consumption = max(new_standard_water_consumption, old_standard_water_consumption, 0) %}</span>
+        <span class="s">{% endif %}</span>
+
+        <span class="s">{# Use the ceil rounding since the float values can shuffle around so much when subtracting the meters. #}</span>
+        <span class="s">{# It makes the sensor update less frequently and doesn't loose any meaningful precision. #}</span>
+        <span class="s">{{ standard_water_consumption | round(0, 'ceil') }}</span>
+
+</code></pre></div></div>
+
+<p><amp-img src="/assets/img/2023/10/water_consumption.png" alt="Water consumption from Home Assistant Energy Dashboard" width="800" height="514" layout="responsive"><noscript><img src="/assets/img/2023/10/water_consumption.png" alt="Water consumption from Home Assistant Energy Dashboard" width="800" height="514"></noscript></amp-img><em>Water consumption in the Home Assistant Energy Dashboard</em></p>
+
+<h3 id="auto-shutoff">Auto Shutoff</h3>
+
+<p>I wish my solution had a built-in shutoff, but I wasn’t able to budget for it at the time of install. Luckily, this is easy to fix.</p>
+
+<p>When my water sub-meters were installed, I made sure to add additional quarter-turn shutoff valves before each meter. My goal is to eventually install a water valve actuator around the shutoff. Then I can activate it if  I ever <a href="/blog/2021/10/affordable-water-leak-and-temp-monitoring/">detect a leak from one of my sensors</a> or detect a usage anomaly. Something like the Zooz Titan Water Valve Actuator (ZAC36) or the EcoNet Bulldog Valve Robot (EVC200-HCSML) would work nicely.</p>
+
+<p><amp-img src="/assets/img/2023/10/shutoff_valve.jpg" alt="Shutoff valve and water meter together" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2023/10/shutoff_valve.jpg" alt="Shutoff valve and water meter together" width="800" height="600"></noscript></amp-img><em>Shutoff valve installed below water sub-meter, ready for a water valve actuator</em></p>
+
+<blockquote>
+  <p>Update: I’ve installed one! See below.</p>
+</blockquote>
+
+<h4 id="water-shutoff-actuator-installed">Water Shutoff Actuator Installed</h4>
+
+<p>After 2 years, I have finally installed a smart shutoff actuator. I went with the EcoNet Bulldog EVC200 instead of the Zooz Titan. Both valves use Z-Wave, have optional battery backups, and optional wired leak sensors. But I went with the EcoNet because:</p>
+
+<ul>
+  <li>Preferred mounting system on the valve body instead of the pipe</li>
+  <li>Can be manually controlled via the button, or bypassed entirely with a physical button to disengage the motor</li>
+</ul>
+
+<p>The EcoNet Bulldog checks all of my boxes. The only drawback for me is the price, and that its Z-Wave Plus implementation doesn’t support S1 or S2 security.</p>
+
+<p><amp-img src="/assets/img/2023/10/EcoNet_Bulldog_EVC200_water_shutoff_actuator.jpg" alt="Shutoff with EcoNet Bulldog EVC200 water shutoff actuator installed" width="800" height="602" layout="responsive"><noscript><img src="/assets/img/2023/10/EcoNet_Bulldog_EVC200_water_shutoff_actuator.jpg" alt="Shutoff with EcoNet Bulldog EVC200 water shutoff actuator installed" width="800" height="602"></noscript></amp-img><em>Shutoff with EcoNet Bulldog EVC200 water shutoff actuator installed</em></p>
+
+<p>I run a monthly automation to test my shutoff valve to ensure the shutoff valve doesn’t get stuck over time.</p>
+
+<p>When the water shutoff actuator gets triggered by a water leak, I include a tapable action in my water leak notifications that opens the water valve back up (in case I accidentally splashed a leak sensor, or I finished cleaning up a mess).</p>
+
+<p>Since installing, I’ve already had it trigger after I improperly re-installed a faucet aerator that caused water to backflow into the faucet body and below my sink.</p>
+
+<h3 id="low-flow-drawbacks">Low Flow Drawbacks</h3>
+
+<p>One drawback with the DAE MJ-75 water meter is that the meter doesn’t detect <em>super slow</em> water flows. For example, if my whole-home humidifier is running, my DAE meter usually won’t pick up any water flow since there isn’t enough volume moving. On the other hand, the water meter installed by the township (which is far more expensive) easily detects the slower water flow.</p>
+
+<p>I suspect other commercial products like the Flume and Moen Flo have no trouble detecting these lower flow rates, since this is an advertised selling point.</p>
+
+<p>While the township meter and my sub-meter both list a minimum flow rate of 0.25 GPM, the township water meter performs <em>slightly better</em> outside of the spec and still manages to track consumption when our humidifier is running. On the other hand, the DAE meter doesn’t reliably track the water consumed by the humidifier.</p>
+
+<p>The drawback with these findings is that I don’t think I’ll be able to detect super small leaks as easily as a commercial product (unless I use a different meter).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I like tracking our water usage. While I haven’t fully matched commercial offerings, I feel that I am close. Next summer I hope to become more involved with tracking abnormal usages. My solution doesn’t require internet, there are no subscription fees, and these parts are stupid easy to replace if they ever fail. I also have a path forward to implement premium features like auto-shutoff.</p>
+
+<p>It’s possible that using a more expensive sub-meter would have eliminated these low-flow concerns. But generally, everything is being tracked as it should.</p>
+
+<p>I’ve reached the trifecta of tracking all utilities in my house.</p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2023/10/tackle-tracking-water-usage/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#3d256d">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#3d256d">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+      
+        <link rel="amphtml" href="https://www.kyleniewiada.org/amp/blog/2016/07/preventing-windows-application-notifications/" data-proofer-ignore>
+      
+    
+
+    <!-- Messy way to capture custom page title to replace SEO Tags -->
+    
+    
+    <title>Preventing Windows Apps from Broadcasting a Taskbar Notification</title>
+    <meta property="og:title" content="Preventing Windows Apps from Broadcasting a Taskbar Notification" />
+
+    <!-- Come and get me RSS readers -->
+    <link type="application/atom+xml" rel="alternate" href="https://www.kyleniewiada.org/feed.xml" title="Kyle Niewiada&apos;s Website" />
+
+    <!-- Critical Stylesheet -->
+    <style type="text/css">
+      
+      @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header{background-image:url("/assets/img/banner.svg");background-color:#3a3a3a;background-size:cover;background-position:center center;padding:0;height:auto;margin-bottom:16px}.header .navigation{background:#262626}.header .nav-container{max-width:1000px;margin:0 auto}@media(min-width: 600px){.header{min-height:10em;position:relative;margin-bottom:16px}}nav{height:70px;overflow:hidden}nav ul{margin:0;padding:0;list-style-type:none;max-height:140px;position:relative}nav ul .active{background:#3d256d}nav li{display:inline-block;padding:0}nav a{display:inline-block;padding:0 1em;color:#fff;text-decoration:none;white-space:nowrap;line-height:70px;height:70px}nav a:hover{color:#fff;background-color:#00b2d9}nav li:first-child{left:0;vertical-align:top;font-size:75%}nav li:first-child :hover{color:#fff;background-color:#262626}@media(min-width: 330px){nav li:first-child{font-size:100%}}@media(min-width: 400px){nav li:first-child{font-size:140%}}nav li:last-child{position:absolute;right:0;bottom:70px;background-image:linear-gradient(to right, rgba(38, 38, 38, 0) 0, #262626 2em);padding-left:3em}nav li:nth-last-child(2){display:none}nav#menu:target{height:auto;padding:0}nav#menu:target ul{max-height:none}nav#menu:target li{display:block}nav#menu:target a{display:block;background-color:hsla(0,0%,100%,.05)}nav#menu:target li:not(:first-child){margin-top:2px}nav#menu:target li:not(:first-child) a:hover{background-color:#00b2d9}nav#menu:target li:last-child{display:none}nav#menu:target li:nth-last-child(2){display:inline-block;position:absolute;top:0;right:0;margin:0;border-left:2px solid #262626;background:#3a3a3a}
+      
+    </style>
+
+    <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1" />
+
+<meta name="author" content="Kyle Niewiada" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using the Windows 10 registry editor to remove or mute application notifications in the system taskbar that will not stay hidden after a reboot." />
+<meta property="og:description" content="Using the Windows 10 registry editor to remove or mute application notifications in the system taskbar that will not stay hidden after a reboot." />
+<link rel="canonical" href="https://www.kyleniewiada.org/blog/2016/07/preventing-windows-application-notifications/" />
+<meta property="og:url" content="https://www.kyleniewiada.org/blog/2016/07/preventing-windows-application-notifications/" />
+<meta property="og:site_name" content="Kyle Niewiada’s Website" />
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" />
+<meta property="og:image:height" content="480" />
+<meta property="og:image:width" content="1011" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-07-02T12:33:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2016/07/banner.png" />
+<meta property="twitter:title" content="Preventing Windows Apps from Broadcasting a Taskbar Notification" />
+<meta name="twitter:site" content="@CrypticCitrus" />
+<meta name="twitter:creator" content="@CrypticCitrus" />
+<meta property="fb:app_id" content="137961485759" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2016-07-02T12:33:00-04:00","datePublished":"2016-07-02T12:33:00-04:00","description":"Using the Windows 10 registry editor to remove or mute application notifications in the system taskbar that will not stay hidden after a reboot.","headline":"Preventing Windows Apps from Broadcasting a Taskbar Notification","image":{"height":480,"width":1011,"url":"https://www.kyleniewiada.org/assets/img/2016/07/banner.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2016/07/preventing-windows-application-notifications/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2016/07/preventing-windows-application-notifications/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP46JK222K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZP46JK222K');
+</script> 
+</head>
+
+
+  <body>
+  <!-- start header -->
+<header class="header">
+  <div class="navigation">
+    <div class="nav-container">
+      <nav id="menu">
+        <ul class="menu-closed">
+          
+            
+            <li class="normal"><a href="/">Kyle Niewiada</a></li>
+          
+            
+            <li class="normal"><a href="/">Home</a></li>
+          
+            
+            <li class="normal"><a href="/about/">About</a></li>
+          
+            
+            <li class="normal"><a href="/archive/">Archive</a></li>
+          
+            
+            <li class="normal"><a href="/contact/">Contact</a></li>
+          
+            
+            <li class="normal"><a href="/resume/">Résumé</a></li>
+          
+          <li><a href="#">&#215; Close menu</a></li>
+          <li><a href="#menu">&#9776; Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <main class="content">
+    <!-- lazy way to hide page title on blog posts -->
+    
+
+    <article>
+  <header>
+    <h1 class="page-title">Preventing Windows Apps from Broadcasting a Taskbar Notification</h1>
+
+    <h2 class="meta">Kyle Niewiada on July 02, 2016</h2>
+
+    <h3 class="meta">
+      
+      4 Minute Read
+       | Small project</h3>
+  </header>
+
+  
+  <h4 class="sub-meta">Updated on October 01, 2021</h4>
+    
+
+  
+  <img src="/assets/img/2016/07/banner.png" alt="Windows registry notification entry" />
+  
+
+  <div class="line-separator"></div>
+
+  <p>A few weeks ago a Windows application on my computer was broadcasting notifications that I did not care for. I have an application that communicates with my uninterruptible power supply to shut down my machine in the event of a power outage after a few minutes. If this program estimates less than five minutes of reserve power, the program will broadcast a notification in the system taskbar (with sound!) letting me know.</p>
+
+<blockquote>
+  <p>UPDATE: After the Windows 10 Anniversary Update, misbehaving applications no longer re-register an entry for notifications. This guide has now been made out of date as hiding Windows Notifications will now handle behavior correctly.</p>
+</blockquote>
+
+<p>If you are familiar with Windows, then you know that there is a feature that allows you to hide notifications and icons to programs in the system tray. However, this application does not seem to respect those rules. Every time the application launches, it appears to reassociate itself and reset all settings made to keep it quiet. If I did manage to mute it, the changes would not survive a system reboot.</p>
+
+<p>The notification is posted frequently, as my system’s max power draw while gaming will trigger the UPS power draw warning. I found this to happen quite frequently when I was playing in virtual reality and it was continually breaking my immersion by ringing out system notifications in the middle of <a href="https://store.steampowered.com/app/322770/">Vanishing Realms</a>.</p>
+
+<p>I understand that this is to help prevent the user from unknowingly leaving their system vulnerable during an outage when the user is not there. But if I lose power while in my VR headset, I am going to know very quickly that my machine should be shut off (not to mention my entire VR world will go black).</p>
+
+<p>I wanted to keep the functionality of my uninterruptible power supply communications program, but I also wanted to remove the annoying notification. I did a bit of digging inside the Windows registry (Windows 10 64-bit) and found to be what looks like a set of the registry keys responsible for relaying an application notification.</p>
+<h2 id="removing-the-notification">
+  
+  
+    Removing the Notification <a href="#removing-the-notification" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>This is a <em>very quick and dirty</em> registry hack to prevent applications from relaying notifications in the system taskbar. Windows notifications are sent by writing to a parent registry key associated with an application. Each application will attempt to add notifications as a sub-key to the registered parent key. By removing my user’s permission to write to the parent key, the application will be unable to add sub-keys, and silently fails when it attempts to send notifications. I have not noticed any problems yet, but your mileage may vary.</p>
+
+<p>In case it helps, my machine is using Windows 10 Pro 64-bit.</p>
+<h3 id="finding-the-notification-key">
+  
+  
+    Finding the Notification Key <a href="#finding-the-notification-key" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>The first step is to find the key inside the registry associated with the application. Browse to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Current\
+</code></pre></div></div>
+
+<p>One will find a list of keys for applications registered for the system notifications. If the application you’re looking for does not immediately jump out, it is probably one of the <code class="language-plaintext highlighter-rouge">Microsoft.Explorer.Notification.{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}</code> keys.</p>
+
+<p>The only information that I could find about this and how the key is decided is the claim that <a href="https://github.com/mumble-voip/mumble/issues/1777">it is the application GUID</a>. However, my research has found that this registry key does not match the GUID for the installed application. My theory is that it is randomly generated upon install. But I have not yet verified this.</p>
+
+<p><img src="/assets/img/2016/07/regedit0.png" alt="The notification for my battery adding a subkey in the registry" /><em>The notification for my battery adding a subkey in the registry</em></p>
+
+<p>When the registered application has no notification to display, there will be no subkeys listed for that registry key. However, while a notification is displayed, one can refresh the registry editor (F5 key) and see that a subkey has been added. This will help identify which registry keys are associated with the application notifications.</p>
+<h3 id="removing-control-permissions">
+  
+  
+    Removing Control Permissions <a href="#removing-control-permissions" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Next, control permissions need to be removed from that specific registry key. Right-click on the parent key and select <code class="language-plaintext highlighter-rouge">Permissions…</code>.
+<img src="/assets/img/2016/07/regedit1.png" alt="Editing Windows registry permissions" /></p>
+
+<p>Select the user currently logged into the machine and deny <code class="language-plaintext highlighter-rouge">Full control</code> and <code class="language-plaintext highlighter-rouge">Read</code> permissions. Apply these changes. Attempt to re-create the application notification in the taskbar. If unable to re-create, the correct changes were made. If not, undo the changes and try looking for the key again.</p>
+
+<p><img src="/assets/img/2016/07/regedit2.png" alt="Denying full control permissions in Windows registry" /></p>
+
+<p>These changes should allow for the removal of annoying applications that do not follow the proper guidelines or rules when it comes to Windows taskbar notifications. Sometimes programs have unintended consequences when the programmer makes assumptions about how and when a user will interact with their program. I was hit with a combination of a program that did not properly register notifications as well as provide no advanced options to disable such notifications (there <em>are</em> other advanced options under the program).</p>
+
+<p>If anyone out there has a better method or would like to point out any unforeseen consequences with this, please let me know. For everyone else, this should help tame such applications inside their Windows taskbar.</p>
+
+  <div class="line-separator"></div>
+
+  <!-- POST NAVIGATION -->
+<div class="post-nav">
+  
+    <a class="post-nav-link" href="/blog/2016/05/raspberry-pi-steam-vr-streaming/">
+    <div class="link-text previous">&laquo;&nbsp;Streaming a Virtual Reality Spectator View to My Raspberry Pi 2</div>
+    
+      <img class="link-image" src="/assets/img/2016/05/banner2.jpg" alt="Previous Article">
+    
+    </a>
+  
+  
+    <a class="post-nav-link" href="/blog/2016/07/fixing-no-google-profile-for-contact/">
+    <div class="link-text next">Fixing 'No Google Profile for Contact'&nbsp;&raquo;</div>
+    
+      <img class="link-image" src="/assets/img/2016/07/banner2.jpg" alt="Next Article">
+    
+    </a>
+  
+</div>
+
+</article>
+
+
+    
+<!-- Add Disqus comments. -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'kyleniewiada'; // required: replace example with your forum shortname
+  var disqus_identifier = "/blog/2016/07/preventing-windows-application-notifications/";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+    </main>
+  <!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/" >LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl" >GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social" >Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada" >YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel='nofollow'>BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/" >Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- start noncritical style -->
+<link rel="preload" href="/assets/css/noncritical.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/noncritical.css"></noscript>
+<script>
+  /*loadCss*/
+  !function(w){"use strict";var loadCSS=function(href,before,media){function ready(cb){return doc.body?cb():void setTimeout(function(){ready(cb)})}function loadCB(){ss.addEventListener&&ss.removeEventListener("load",loadCB),ss.media=media||"all"}var ref,doc=w.document,ss=doc.createElement("link");if(before)ref=before;else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet",ss.href=href,ss.media="only x",ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){for(var resolvedHref=ss.href,i=sheets.length;i--;)if(sheets[i].href===resolvedHref)return cb();setTimeout(function(){onloadcssdefined(cb)})};return ss.addEventListener&&ss.addEventListener("load",loadCB),ss.onloadcssdefined=onloadcssdefined,onloadcssdefined(loadCB),ss};"undefined"!=typeof exports?exports.loadCSS=loadCSS:w.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+
+  /*link[rel=preload] polyfill*/
+  !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
+</script>
+<!-- end noncritical style -->
+<!-- end footer -->
+
+  </body>
+</html>

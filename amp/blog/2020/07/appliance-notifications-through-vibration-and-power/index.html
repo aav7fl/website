@@ -1,0 +1,347 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="How I notify and detect the completion of my washing machine and dryer through the use of a vibration sensor, NodeMCU, smart plug, and ESPHome.">
+<meta property="og:description" content="How I notify and detect the completion of my washing machine and dryer through the use of a vibration sensor, NodeMCU, smart plug, and ESPHome.">
+<link rel="canonical" href="/blog/2020/07/appliance-notifications-through-vibration-and-power/">
+<meta property="og:url" content="/blog/2020/07/appliance-notifications-through-vibration-and-power/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2020/07/dryer_vibration_monitor.jpg">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-07-26T08:00:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2020/07/dryer_vibration_monitor.jpg">
+<meta property="twitter:title" content="Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2020-07-26T08:00:00-04:00","datePublished":"2020-07-26T08:00:00-04:00","description":"How I notify and detect the completion of my washing machine and dryer through the use of a vibration sensor, NodeMCU, smart plug, and ESPHome.","headline":"Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2020/07/dryer_vibration_monitor.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/07/appliance-notifications-through-vibration-and-power/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2020/07/appliance-notifications-through-vibration-and-power/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Using Vibrations and Power to Notify When My Washing Machine and Dryer Finish</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">July 26, 2020 | 
+        
+          7 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on May 29, 2025</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2020/07/dryer_vibration_monitor.jpg" alt="NodeMCU board with SW-420 vibration sensor attached" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2020/07/dryer_vibration_monitor.jpg" alt="NodeMCU board with SW-420 vibration sensor attached" width="800" height="600"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>My washing machine and dryer do not have an audible notification upon completion. When they finish they go silent 🔇. Because I live in a small space, I usually shut the door to the laundry room to reduce noise leakage in the main living area. On more than one occasion I have missed the end of the washer/dryer cycle because other ambient noises mask them. Rather than letting the clothes wrinkle up in the dryer or stay forgotten overnight in the washer, I would rather receive an audible alert upon a cycle completion.</p>
+
+<p>The process of detecting the completion state of each appliance is its own task.</p>
+
+<h2 id="-identifying-the-washing-machine-state">🧼 Identifying the Washing Machine State</h2>
+
+<p>This one is easy. To detect the running state of the washing machine I need to monitor the power consumption on the standard wall plug.</p>
+
+<p>In my last blog post I wrote about how I <a href="/blog/2020/07/replacing-z-wave-with-esphome/">deployed a handful of ESPHome smart plugs</a>. One of those plugs became a dedicated device to monitoring the power consumption of the washing machine. After running one cycle to see a baseline power usage, I was able to determine that at no point during any cycle does the washing machine drop below 3 W of power consumption.</p>
+
+<p>Since my plug is running ESPHome, I just need to add a new <code class="language-plaintext highlighter-rouge">binary_sensor</code> to the device based on the plug’s power consumption.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">binary_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Running"</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">delayed_off</span><span class="pi">:</span> <span class="s">15s</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">if (isnan(id(power).state)) {</span>
+        <span class="s">return {};</span>
+      <span class="s">} else if (id(power).state &gt;= 2) {</span>
+        <span class="s">// Running</span>
+        <span class="s">return true;</span>
+      <span class="s">} else {</span>
+        <span class="s">// Not running</span>
+        <span class="s">return false;</span>
+      <span class="s">}    </span>
+</code></pre></div></div>
+
+<h2 id="️identifying-the-dryer-state">♨️Identifying the Dryer State</h2>
+
+<blockquote>
+  <p>Update (2020-09-20): After a month of using the vibration sensor with the dryer outlined below, I decided to switch to using a clamp style split phase energy meter. If you’re interested in my current monitoring method, <a href="/blog/2020/09/dryer-notification-addendum/">you can read about my post here</a>.</p>
+</blockquote>
+
+<p>Tracking the state of the dryer is a bit trickier. Since the dryer is connected to a 240V outlet, it essentially eliminates any reasonably priced smart plug.</p>
+
+<p>This left me with four options (that I could come up with):</p>
+
+<ol>
+  <li>Open the dryer and hook up a CT clamp (magnetic induction sensor) to the 240V hot wire</li>
+  <li>Open the dryer and connect a NodeMCU sensor input to a nonlethal connector on the main circuit board</li>
+  <li>Throw a wireless sensor on the drum and track when it stops moving (or a handful of nickels so I can hear it better <code class="language-plaintext highlighter-rouge">/s</code>)</li>
+  <li>Mount a vibration sensor to the side of the dryer and detect when the dryer stops shaking</li>
+</ol>
+
+<h3 id="reviewing-dryer-status-options">Reviewing Dryer Status Options</h3>
+
+<p>I chose to use option 4, the vibration sensor. Let us walk through each idea above to figure out why I went with that solution.</p>
+
+<h4 id="1-open-the-dryer-and-attach-a-ct-clamp">1. Open the Dryer and Attach a CT Clamp</h4>
+
+<p>Originally I thought using a CT clamp was going to be a good idea. In the end I opted against it. Ordering a CT clamp and another board to read data from it would require more parts that I didn’t feel like purchasing. I am also not too comfortable working around devices that are running 240V. I am sure everything would have been fine considering the CT clamp is a passive sensor, but the added costs caused me to choose a different option. I might revisit this option someday.</p>
+
+<h4 id="2-connecting-a-nodemcu-to-the-dryer-main-circuit-board">2. Connecting a NodeMCU to the Dryer Main Circuit Board</h4>
+
+<p>This was another reasonable idea because it is very device specific. Because I can’t easily replicate this behavior across all dryers, I ruled it out early on.</p>
+
+<p>My dryer does not have a digital display. In fact, it does not even have a light for the inside drum when you open the door. It is lacking quite a few features. The dryer strongly follows the “keep it stupid simple” policy.</p>
+
+<p>If I were to connect a NodeMCU to the main circuit board, I would have to spend time figuring out which leads to run a sensor to. This is probably the clean approach, but I wanted to avoid a solution that was device specific. Whatever solution I came up with needed to be generic for anyone to replicate in the future.</p>
+
+<p>Keeping it generic also reduces the “re-factoring in real life” when the dryer gets replaced someday…<em>maybe</em>.</p>
+
+<h4 id="3-using-a-wireless-sensor-on-the-drum-to-track-gyro-movement">3. Using a Wireless Sensor on the Drum to Track Gyro Movement</h4>
+
+<p>Truthfully, I am not that interested in using a low powered wireless sensor. This is just another device to charge and keep track of. If I have to think about it and manage it, it’s not really automated anymore.</p>
+
+<h4 id="4-using-a-vibration-sensor">4. Using a Vibration Sensor</h4>
+
+<p>The last solution I am going to describe is using a vibration sensor to track the completion of the dryer. While researching ways that people have tracked their dryer status, one of the fun ways mentioned has been using a vibration sensor.</p>
+
+<p>It is a simple concept. You connect a vibration sensor to a NodeMCU. When the vibration sensor detects movement the sensor signal being sent to the NodeMCU will change. If the vibration is stopped for long enough, one can infer that the dryer has completed its cycle.</p>
+
+<p>I really like this idea because it is generously cheap and generic enough to work on most dryers. The only exceptions I can think of are for stacked units, a <em>really</em> good dryer bearing that doesn’t vibrate, or an unstable room that shakes a lot.</p>
+
+<p>The sensor most people use for their dryer detection is the <code class="language-plaintext highlighter-rouge">SW-420 vibration sensor</code>. I ended up getting a 5-pack for $7.</p>
+
+<p><amp-img src="/assets/img/2020/07/dryer_vibration_monitor.jpg" alt="NodeMCU board with SW-420 vibration sensor attached" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2020/07/dryer_vibration_monitor.jpg" alt="NodeMCU board with SW-420 vibration sensor attached" width="800" height="600"></noscript></amp-img><em>NodeMCU with SW-420 vibration sensor attached</em></p>
+
+<h3 id="configuring-esphome-with-the-vibration-sensor">Configuring ESPHome with the Vibration Sensor</h3>
+
+<p>When I see most people use a vibration sensor to track the dryer status, they consider the dryer as <code class="language-plaintext highlighter-rouge">running</code> when the vibration sensor is <em>first</em> triggered. After <code class="language-plaintext highlighter-rouge">15s</code> without any re-triggers, they mark the dryer status as <code class="language-plaintext highlighter-rouge">done</code>.</p>
+
+<p>This might be fine for people that have their dryer in a closet hidden in the back room. For me, the dryer is in a high traffic room. This means it is easy to bump the dryer sensor and create a false positive event. Other concerns include large thunder strikes and the nearby semi-trucks from a busy road that are known to set off car alarms.</p>
+
+<p>To avoid false positives, I decided to treat the vibration sensor like a <code class="language-plaintext highlighter-rouge">pulse counter</code>. I then take a <code class="language-plaintext highlighter-rouge">moving median window</code> of the <code class="language-plaintext highlighter-rouge">pulse counter</code> rate to eliminate any outliers that are not producing consistent vibration.</p>
+
+<p>Adding a <code class="language-plaintext highlighter-rouge">moving median window</code> does decrease the reactivity of the dryer status by approximately 10-15s. But in turn it eliminates all false positives from inconsistent vibrations.</p>
+
+<p>Here are the relevant changes in ESPHome I made to my NodeMCU chip that allow it to interpret the vibrations with a <code class="language-plaintext highlighter-rouge">moving median window</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Sensors that the ESPHome unit is capable of reporting</span>
+<span class="na">sensor</span><span class="pi">:</span>
+    <span class="c1"># Handle a moving average of vibrations </span>
+    <span class="c1"># Avoids `turning on` when bumping the dryer</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">pulse_counter</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Vibration</span><span class="nv"> </span><span class="s">Pulse</span><span class="nv"> </span><span class="s">Rate"</span>
+    <span class="na">internal</span><span class="pi">:</span> <span class="kc">false</span> <span class="c1"># It may be easier to expose this when setting up and testing</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">vibration_pulse_rate</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s">mdi:vibrate</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">250ms</span> <span class="c1"># 4x a second</span>
+    <span class="na">pin</span><span class="pi">:</span>
+      <span class="na">number</span><span class="pi">:</span> <span class="s">GPIO15</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="s">INPUT</span>
+    <span class="na">filters</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">median</span><span class="pi">:</span>
+        <span class="na">window_size</span><span class="pi">:</span> <span class="m">61</span> <span class="c1"># ~15 second moving window</span>
+        <span class="na">send_every</span><span class="pi">:</span> <span class="m">4</span> <span class="c1"># Every 1 second</span>
+        <span class="na">send_first_at</span><span class="pi">:</span> <span class="s">3</span> 
+
+<span class="c1"># SW-420 Vibration Sensor</span>
+<span class="na">binary_sensor</span><span class="pi">:</span>  
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Running"</span>
+    <span class="na">device_class</span><span class="pi">:</span> <span class="s">vibration</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">delayed_on_off</span><span class="pi">:</span> <span class="s">120s</span> <span class="c1"># Avoid debounce shaking from washing machine in close proximity</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">if (id(vibration_pulse_rate).state &gt;= 240) {</span>
+        <span class="s">// Dryer is running</span>
+        <span class="s">return true;</span>
+      <span class="s">} else {</span>
+        <span class="s">// Dryer is off</span>
+        <span class="s">return false;</span>
+      <span class="s">}    </span>
+</code></pre></div></div>
+
+<p>I then create a <code class="language-plaintext highlighter-rouge">binary_sensor</code> from the <code class="language-plaintext highlighter-rouge">pulse_counter</code> sensor expose it to Home Assistant.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">binary_sensor</code> helps obfuscates the of the raw <code class="language-plaintext highlighter-rouge">pulse counter</code> values that I do not need to send over the network. It also reduces the refactoring need in Home Assistant since the state will be determined entirely on the NodeMCU node.</p>
+
+<p><amp-img src="/assets/img/2020/07/dryer_monitor_installed.jpg" alt="Monitoring contraption attached to the side of a dryer" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2020/07/dryer_monitor_installed.jpg" alt="Monitoring contraption attached to the side of a dryer" width="800" height="600"></noscript></amp-img><em>Dryer monitoring contraption installed</em></p>
+
+<h2 id="notifications">Notifications</h2>
+
+<p>Finally, after I have captured the states of the washer and dryer inside Home Assistant, I can determine how I want to broadcast the notification upon completing the washing machine and dryer cycles.</p>
+
+<p><amp-img src="/assets/img/2020/07/node_red_cleaning_notifications.png" alt="Node-RED dashboard showing flow for washer and dryer notifications" width="800" height="300" layout="responsive"><noscript><img src="/assets/img/2020/07/node_red_cleaning_notifications.png" alt="Node-RED dashboard showing flow for washer and dryer notifications" width="800" height="300"></noscript></amp-img><em>Node-RED washer/dryer notification flow</em></p>
+
+<p>In the flow above I am using Node-RED to create the automation handling the notification alert.</p>
+
+<p>The top flow checks if the <code class="language-plaintext highlighter-rouge">washing machine</code> state changes from <code class="language-plaintext highlighter-rouge">on</code> -&gt; <code class="language-plaintext highlighter-rouge">off</code>.</p>
+
+<p>The bottom flow checks if the <code class="language-plaintext highlighter-rouge">dryer</code> state changes from <code class="language-plaintext highlighter-rouge">on</code> -&gt; <code class="language-plaintext highlighter-rouge">off</code>.</p>
+
+<p>If either of those two devices are complete, it will call service within Home Assistant to broadcast a notification to all Google Homes that the respective appliance is done running.</p>
+
+<p>The catch is that I do not want any alerts to be sent out unless they are <em>actionable</em>. What I mean is that I do not wish to be notified if the washer is done but the dryer is still running. That is because there is nothing I can do. There is nowhere to put the wet clothes yet. You can see this modification in the top flow where I restrict notifications from being sent if the dryer is still running.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is an automation that I have been dreaming about for a while but have not spent the time to examine all approaches until recently.</p>
+
+<p>I feel content with my low-cost approach on each appliance and I admire the fact that they are mostly generic. This will allow me to continue using these methods in the future unless there are unforeseen changes.</p>
+
+<p>I have a smart way to monitor the state of the washing machine and dryer. My system sends alerts only when they are actionable and reduces the downtime between each load. An automation that increases efficiency is a pleasant one.</p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2020/07/appliance-notifications-through-vibration-and-power/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>

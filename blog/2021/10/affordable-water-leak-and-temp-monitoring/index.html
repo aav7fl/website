@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#3d256d">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#3d256d">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+      
+        <link rel="amphtml" href="https://www.kyleniewiada.org/amp/blog/2021/10/affordable-water-leak-and-temp-monitoring/" data-proofer-ignore>
+      
+    
+
+    <!-- Messy way to capture custom page title to replace SEO Tags -->
+    
+    
+    <title>Affordable Leak Detection and Temperature Monitoring in Home Assistant</title>
+    <meta property="og:title" content="Affordable Leak Detection and Temperature Monitoring in Home Assistant" />
+
+    <!-- Come and get me RSS readers -->
+    <link type="application/atom+xml" rel="alternate" href="https://www.kyleniewiada.org/feed.xml" title="Kyle Niewiada&apos;s Website" />
+
+    <!-- Critical Stylesheet -->
+    <style type="text/css">
+      
+      @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header{background-image:url("/assets/img/banner.svg");background-color:#3a3a3a;background-size:cover;background-position:center center;padding:0;height:auto;margin-bottom:16px}.header .navigation{background:#262626}.header .nav-container{max-width:1000px;margin:0 auto}@media(min-width: 600px){.header{min-height:10em;position:relative;margin-bottom:16px}}nav{height:70px;overflow:hidden}nav ul{margin:0;padding:0;list-style-type:none;max-height:140px;position:relative}nav ul .active{background:#3d256d}nav li{display:inline-block;padding:0}nav a{display:inline-block;padding:0 1em;color:#fff;text-decoration:none;white-space:nowrap;line-height:70px;height:70px}nav a:hover{color:#fff;background-color:#00b2d9}nav li:first-child{left:0;vertical-align:top;font-size:75%}nav li:first-child :hover{color:#fff;background-color:#262626}@media(min-width: 330px){nav li:first-child{font-size:100%}}@media(min-width: 400px){nav li:first-child{font-size:140%}}nav li:last-child{position:absolute;right:0;bottom:70px;background-image:linear-gradient(to right, rgba(38, 38, 38, 0) 0, #262626 2em);padding-left:3em}nav li:nth-last-child(2){display:none}nav#menu:target{height:auto;padding:0}nav#menu:target ul{max-height:none}nav#menu:target li{display:block}nav#menu:target a{display:block;background-color:hsla(0,0%,100%,.05)}nav#menu:target li:not(:first-child){margin-top:2px}nav#menu:target li:not(:first-child) a:hover{background-color:#00b2d9}nav#menu:target li:last-child{display:none}nav#menu:target li:nth-last-child(2){display:inline-block;position:absolute;top:0;right:0;margin:0;border-left:2px solid #262626;background:#3a3a3a}
+      
+    </style>
+
+    <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1" />
+
+<meta name="author" content="Kyle Niewiada" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Identifying affordable devices for water-leak detection and temperature monitoring in Home Assistant." />
+<meta property="og:description" content="Identifying affordable devices for water-leak detection and temperature monitoring in Home Assistant." />
+<link rel="canonical" href="https://www.kyleniewiada.org/blog/2021/10/affordable-water-leak-and-temp-monitoring/" />
+<meta property="og:url" content="https://www.kyleniewiada.org/blog/2021/10/affordable-water-leak-and-temp-monitoring/" />
+<meta property="og:site_name" content="Kyle Niewiada’s Website" />
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2021/10/banner.jpg" />
+<meta property="og:image:height" content="600" />
+<meta property="og:image:width" content="800" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-01T10:22:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2021/10/banner.jpg" />
+<meta property="twitter:title" content="Affordable Leak Detection and Temperature Monitoring in Home Assistant" />
+<meta name="twitter:site" content="@CrypticCitrus" />
+<meta name="twitter:creator" content="@CrypticCitrus" />
+<meta property="fb:app_id" content="137961485759" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2021-10-01T10:22:00-04:00","datePublished":"2021-10-01T10:22:00-04:00","description":"Identifying affordable devices for water-leak detection and temperature monitoring in Home Assistant.","headline":"Affordable Leak Detection and Temperature Monitoring in Home Assistant","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2021/10/banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kyleniewiada.org/blog/2021/10/affordable-water-leak-and-temp-monitoring/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"https://www.kyleniewiada.org/blog/2021/10/affordable-water-leak-and-temp-monitoring/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP46JK222K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZP46JK222K');
+</script> 
+</head>
+
+
+  <body>
+  <!-- start header -->
+<header class="header">
+  <div class="navigation">
+    <div class="nav-container">
+      <nav id="menu">
+        <ul class="menu-closed">
+          
+            
+            <li class="normal"><a href="/">Kyle Niewiada</a></li>
+          
+            
+            <li class="normal"><a href="/">Home</a></li>
+          
+            
+            <li class="normal"><a href="/about/">About</a></li>
+          
+            
+            <li class="normal"><a href="/archive/">Archive</a></li>
+          
+            
+            <li class="normal"><a href="/contact/">Contact</a></li>
+          
+            
+            <li class="normal"><a href="/resume/">Résumé</a></li>
+          
+          <li><a href="#">&#215; Close menu</a></li>
+          <li><a href="#menu">&#9776; Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <main class="content">
+    <!-- lazy way to hide page title on blog posts -->
+    
+
+    <article>
+  <header>
+    <h1 class="page-title">Affordable Leak Detection and Temperature Monitoring in Home Assistant</h1>
+
+    <h2 class="meta">Kyle Niewiada on October 01, 2021</h2>
+
+    <h3 class="meta">
+      
+      7 Minute Read
+       | Medium project</h3>
+  </header>
+
+  
+  <h4 class="sub-meta">Updated on August 26, 2025</h4>
+    
+
+  
+  <img src="/assets/img/2021/10/banner.jpg" alt="Govee H5054 Water-Leak Detectors" />
+  
+
+  <div class="line-separator"></div>
+
+  <p>Home automation should be open, affordable, and functional. I think it’s silly for devices to stop functioning if there’s a regional AWS outage or the internet goes out. As I was looking into energy monitoring solutions for my house, I stumbled upon the world of software-defined radios (SDR). I believe I have found affordable methods using an SDR to track localized weather data, monitor the refrigerator, and detect minor water leaks.</p>
+
+<p>A cheap SDR can listen to oodles of devices on common RF bands. For example, devices that operate on 433 MHz can include TPMS sensors, weather sensors, or even utility meters. Thankfully, there are some terrific communities who have figured out how to decode many of the popular device signals for the average user to track.</p>
+
+<p>By leveraging one of these projects, we can use our own SDR with some 433 MHz sensors to send useful information over to Home Assistant.</p>
+
+<details>
+
+  <summary>Post Changelog</summary>
+
+  <ul>
+    <li><strong>2025-08-26</strong>: Add <code class="language-plaintext highlighter-rouge">device:</code> blocks to MQTT sensors to tie entities under a single device.</li>
+  </ul>
+
+</details>
+<h2 id="goals">
+  
+  
+    Goals <a href="#goals" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<ul>
+  <li>Track the refrigerator and freezer temps
+    <ul>
+      <li>Possible result: Be notified when a door is left open, or the refrigerator stops working</li>
+    </ul>
+  </li>
+  <li>Track weather in the backyard
+    <ul>
+      <li>Possible result: Be notified when the windows should be opened or closed</li>
+    </ul>
+  </li>
+  <li>Monitor areas where water leaks can occur
+    <ul>
+      <li>Possible result: Be notified when a possible leak is detected</li>
+      <li>Possible result: (Future goal) Shut off water main to prevent further damage</li>
+    </ul>
+  </li>
+</ul>
+<h2 id="requirements">
+  
+  
+    Requirements <a href="#requirements" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+<h3 id="hardware">
+  
+  
+    Hardware <a href="#hardware" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Here’s a list of the hardware I use and the prices I bought them at. It should help give a good idea on how much everything costs.</p>
+<ul>
+  <li>$40: Nooelec NESDR Smart v4 Bundle</li>
+  <li>$45: 5x Govee H5054 Water-Leak detectors</li>
+  <li>$13: AcuRite 06002M outdoor temp/humidity sensor</li>
+  <li>$37: AcuRite 00986 refrigerator thermometer display with 2 sensors</li>
+</ul>
+<h3 id="software">
+  
+  
+    Software <a href="#software" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Before proceeding with these projects, ensure Home Assistant is set up and has an MQTT integration. I’ll be using these projects.</p>
+
+<ul>
+  <li><a href="https://www.home-assistant.io/">Home Assistant</a> (I’m running the <code class="language-plaintext highlighter-rouge">2021.9</code> release at the time of writing)</li>
+  <li><a href="https://github.com/eclipse/mosquitto">Mosquitto MQTT Server</a></li>
+  <li><a href="https://github.com/merbanan/rtl_433">rtl_433</a></li>
+</ul>
+<h2 id="setup">
+  
+  
+    Setup <a href="#setup" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>The brain of this operation is the rtl_433 software. You can run it as a standalone program (<a href="https://github.com/merbanan/rtl_433">merbanan/rtl_433</a>) or in a Docker container (<a href="https://github.com/hertzg/rtl_433_docker">hertzg/rtl_433_docker</a>).</p>
+
+<blockquote>
+  <p>At the time of writing, I use the latest <code class="language-plaintext highlighter-rouge">master</code> branch build since it includes support for the Govee H5054 Leak Detector.</p>
+</blockquote>
+
+<p>This application receives data over the air using an SDR and decodes it. A list of supported devices can be found in the project <a href="https://github.com/merbanan/rtl_433/blob/master/README.md">README.md</a>. Once the application is running, it can publish the decoded data to an MQTT server where we can ingest it into Home Assistant.</p>
+
+<p>In the examples below we are going to use it for some AcuRite sensors and Govee water-leak detectors mentioned earlier.</p>
+<h2 id="running-rtl_433">
+  
+  
+    Running rtl_433 <a href="#running-rtl_433" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>Something like this should get you off the ground, scanning for data, and pushing the results to the MQTT server.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rtl_433 <span class="nt">-R</span> 40 <span class="nt">-R</span> 41 <span class="nt">-R</span> 192 <span class="nt">-F</span> <span class="s2">"mqtt://&lt;&lt;MQTT_IP&gt;&gt;:8883,user=&lt;&lt;USERNAME&gt;&gt;,pass=&lt;&lt;PASSWORD&gt;&gt;,retain=1,devices=rtl_433[/model][/id],events=rtl_433[/model][/id]"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>The <code class="language-plaintext highlighter-rouge">-R 40 -R 41 -R 192</code> restrict the config to only look for our specific device types. That helps cut down on extra noise.</p>
+</blockquote>
+
+<p>If everything starts, it might look something like this in the logs:</p>
+
+<pre><code class="language-log">Publishing MQTT data to &lt;&lt;MQTT_IP&gt;&gt; port 8883
+Publishing device info to MQTT topic "rtl_433[/model][/id]".
+Publishing events info to MQTT topic "rtl_433[/model][/id]".
+Registered 3 out of 192 device decoding protocols [ 40-41 192 ]
+Detached kernel driver
+Found Rafael Micro R820T tuner
+Exact sample rate is: 250000.000414 Hz
+[R82XX] PLL not locked!
+Sample rate set to 250000 S/s.
+Tuner gain set to Auto.
+Tuned to 433.993MHz.
+Allocating 15 zero-copy buffers
+MQTT Connected...
+MQTT Connection established.
+</code></pre>
+
+<p>Great! Everything connects and we can start receiving data from our devices.</p>
+<h2 id="localized-weather-data">
+  
+  
+    Localized Weather Data <a href="#localized-weather-data" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>My preferred localized weather sensor is the <code class="language-plaintext highlighter-rouge">AcuRite 06002M outdoor temp/humidity sensor</code>. At $13 I would be hard-pressed to find any sensor more affordable without taking days to plan, program, and build. Just throw in some fresh batteries, tie a piece of string around it, and hang it in the backyard.</p>
+
+<p>I find the sensor to be fairly accurate and it broadcasts a signal every 30 seconds.</p>
+
+<p><img src="/assets/img/2021/10/localized_weather.png" alt="Home Assistant dashboard showing localized weather data" /><em>AcuRite 06002M sensor data in Home Assistant</em></p>
+
+<p>Here’s my Home Assistant config. It provides the sensor’s temperature, humidity, and battery status. Even though these sensors report in °C, Home Assistant settings can automatically convert the values to the preferred units in the dashboard.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Your sensor ID will vary. I've put in a placeholder of 5555 below.</span>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">binary_sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555/battery_ok</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">Temperature</span><span class="nv"> </span><span class="s">Battery"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">backyard_temperature_battery</span>
+      <span class="na">payload_on</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">payload_off</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">backyard_sensor"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard"</span>
+  <span class="na">sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555/temperature_C</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">temperature</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">temperature"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">backyard_temperature</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">°C"</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">backyard_sensor"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard"</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555/humidity</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-Tower/5555</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">humidity</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">humidity"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">backyard_humidity</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">%"</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">backyard_sensor"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Backyard"</span>
+</code></pre></div></div>
+<h2 id="refrigerator-and-freezer-monitoring">
+  
+  
+    Refrigerator and Freezer Monitoring <a href="#refrigerator-and-freezer-monitoring" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>The <code class="language-plaintext highlighter-rouge">AcuRite 00986 refrigerator thermometer</code> includes a magnetic display and two sensors. One sensor for the freezer, one sensor for the fridge, and a magnetic display to track min/max values or sound an alarm. 
+It’s a bit more expensive than the other sensors, but it continues working with the display after the power goes out (which is super valuable to me).</p>
+
+<p><img src="/assets/img/2021/10/refrigerator_temps.png" alt="Home Assistant dashboard showing refrigerator data" /><em>AcuRite 00986 refrigerator and freezer temps in Home Assistant</em></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Your sensor IDs will vary. I've put in placeholders of 54321 and 98765 below.</span>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">binary_sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/54321/battery_ok</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/54321</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Fridge</span><span class="nv"> </span><span class="s">Temperature</span><span class="nv"> </span><span class="s">Battery"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">basement_fridge_temperature_battery</span>
+      <span class="na">payload_on</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">payload_off</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">basement_fridge"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Fridge</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Storage"</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/98765/battery_ok</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/98765</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Freezer</span><span class="nv"> </span><span class="s">Temperature</span><span class="nv"> </span><span class="s">Battery"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">basement_freezer_temperature_battery</span>
+      <span class="na">payload_on</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">payload_off</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">basement_freezer"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Freezer</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Storage"</span>
+  <span class="na">sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/54321/temperature_F</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/54321</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">temperature</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Fridge</span><span class="nv"> </span><span class="s">Temperature"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">basement_fridge_temperature</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">°F"</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">basement_fridge"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Fridge</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Storage"</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/98765/temperature_F</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Acurite-986/98765</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">temperature</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Freezer</span><span class="nv"> </span><span class="s">Temperature"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">basement_freezer_temperature</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">°F"</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">basement_freezer"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Basement</span><span class="nv"> </span><span class="s">Freezer</span><span class="nv"> </span><span class="s">Sensor"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AcuRite"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">06002M"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Storage"</span>
+</code></pre></div></div>
+<h2 id="water-leak-detection">
+  
+  
+    Water-Leak Detection <a href="#water-leak-detection" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>The sensor I chose for water-leak detection is an interesting one. The <code class="language-plaintext highlighter-rouge">Govee H5054 water-leak detector</code> does not advertise itself is a 433 MHz device. In fact, they encourage you to buy their Wi-Fi gateway hub to receive alerts. Luckily, none of the functionality requires the Wi-Fi Gateway.</p>
+
+<p>The device broadcasts its encoded signals around 433 MHz. It still detects water and can be silenced with the button without ever “pairing” to their gateway.</p>
+
+<blockquote>
+  <p><strong>Shameless plug</strong>; I helped figure out how to validate the parity check with this device when rtl_433 receives the data. Doing so helps avoid any corrupt or false positives from similar signals. This led to a long day of development with safety earmuffs on to block out the leak detector alarms as I tested signals.</p>
+
+  <p>Check out both pull requests!</p>
+  <ul>
+    <li><a href="https://github.com/merbanan/rtl_433/pull/1810">merbanan/rtl_433#1810</a></li>
+    <li><a href="https://github.com/merbanan/rtl_433/pull/1812">merbanan/rtl_433#1812</a></li>
+  </ul>
+</blockquote>
+
+<p>Why did I choose this water-leak detector?</p>
+<ul>
+  <li>IP66 rated</li>
+  <li>100db on-device alarm</li>
+  <li>Physical button to turn off alarm</li>
+  <li>Standard batteries (2x AAA)</li>
+  <li>Affordable (as little as $8 when purchased in 5-packs)</li>
+</ul>
+
+<p>The Govee H5054 water-leak detector sends a signal when:</p>
+<ul>
+  <li>Water is detected across any of its contacts</li>
+  <li>The button is pressed</li>
+  <li>There has been a major change in the battery since the last battery event</li>
+  <li>Batteries are first inserted</li>
+</ul>
+
+<blockquote>
+  <p>There are reports that older devices send an occasional heartbeat signal but that has since been removed in later revisions.</p>
+</blockquote>
+
+<p>With the configuration below Home Assistant will register the sensor as <code class="language-plaintext highlighter-rouge">wet</code> when moisture is detected. The user must press the physical button on the Govee water-leak detector to change the Home Assistant sensor back to <code class="language-plaintext highlighter-rouge">dry</code>. This ensures the “leak event” has been investigated.</p>
+
+<p><img src="/assets/img/2021/10/water_detectors.png" alt="Home Assistant dashboard showing water-leak sensor data" /><em>Govee H5054 water-leak detector data in Home Assistant</em></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="c1"># Your sensor ID will vary. I've put in a placeholder of 88888 below.</span>
+<span class="na">mqtt</span><span class="pi">:</span>
+  <span class="na">binary_sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Govee-Water/88888/event</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Govee-Water/88888</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">moisture</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">88888_govee_water</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Dishwasher Water Leak</span>
+      <span class="na">payload_on</span><span class="pi">:</span> <span class="s">Water Leak</span>
+      <span class="na">payload_off</span><span class="pi">:</span> <span class="s">Button Press</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">dishwasher"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Dishwasher</span><span class="nv"> </span><span class="s">Water</span><span class="nv"> </span><span class="s">Detector"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Govee"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">H5054"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Kitchen"</span>
+  <span class="na">sensor</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">state_topic</span><span class="pi">:</span> <span class="s">rtl_433/Govee-Water/88888/battery_ok</span>
+      <span class="na">json_attributes_topic</span><span class="pi">:</span> <span class="s">rtl_433/Govee-Water/88888</span>
+      <span class="na">device_class</span><span class="pi">:</span> <span class="s">battery</span>
+      <span class="na">state_class</span><span class="pi">:</span> <span class="s">measurement</span>
+      <span class="na">value_template</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">(value_json</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">float</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">100)</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">int</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="na">unique_id</span><span class="pi">:</span> <span class="s">88888_govee_water_battery</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Dishwasher Water Detector Battery</span>
+      <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s2">"</span><span class="s">%"</span>
+      <span class="na">device</span><span class="pi">:</span>
+        <span class="na">identifiers</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">dishwasher"</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Dishwasher</span><span class="nv"> </span><span class="s">Water</span><span class="nv"> </span><span class="s">Detector"</span>
+        <span class="na">manufacturer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Govee"</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">H5054"</span>
+        <span class="na">suggested_area</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Kitchen"</span>
+<span class="c1">#</span>
+</code></pre></div></div>
+<h2 id="alerts-for-all">
+  
+  
+    Alerts for All <a href="#alerts-for-all" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>Since we have the temperature and water-leak detection monitored, it makes sense to set up automations so we can ignore our dashboard. Here are some helpful Home Assistant automations and blueprints I use to get started.</p>
+<h3 id="blueprint-alerts-on-water-leaks">
+  
+  
+    Blueprint: Alerts on Water-Leaks <a href="#blueprint-alerts-on-water-leaks" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Send an alert if <em>any</em> moisture class device changes to wet.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="na">blueprint</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Leak detection &amp; notifier</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Send a notification when any configured moisture sensor becomes moist</span>
+  <span class="na">domain</span><span class="pi">:</span> <span class="s">automation</span>
+  <span class="na">input</span><span class="pi">:</span>
+    <span class="na">actions</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Actions</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">Notifications or similar to be run. {{ trigger.event.data.new_state.attributes.friendly_name }} is replaced with</span>
+        <span class="s">the name of triggered device that is moist.</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">action</span><span class="pi">:</span> <span class="pi">{}</span>          
+
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">event_data</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">event_type</span><span class="pi">:</span> <span class="s">state_changed</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">event</span>
+
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">(trigger.event.data.new_state.attributes)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">(trigger.event.data.new_state.attributes.device_class</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">"moisture")</span><span class="nv"> </span><span class="s">}}'</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">value_template</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">trigger.event.data.new_state.state</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">"on"</span><span class="nv"> </span><span class="s">}}'</span>
+
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span> <span class="pi">[]</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s1">'</span><span class="s">actions'</span>
+
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+<span class="c1">#</span>
+</code></pre></div></div>
+<h3 id="automation-alerts-on-warm-freezer-temp">
+  
+  
+    Automation: Alerts on Warm Freezer Temp <a href="#automation-alerts-on-warm-freezer-temp" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>Just a simple automation to alert the user if the freezer temperature is too high.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="na">alias</span><span class="pi">:</span> <span class="s">Temperature Alert - Freezer</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Send a notification if the temperature in the freezer is too high</span>
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time_pattern</span>
+    <span class="na">minutes</span><span class="pi">:</span> <span class="s1">'</span><span class="s">5'</span>
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">condition</span><span class="pi">:</span> <span class="s">numeric_state</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="s">sensor.basement_freezer_temperature</span>
+    <span class="na">above</span><span class="pi">:</span> <span class="s1">'</span><span class="s">30'</span>
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.notify</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+        <span class="s">The freezer temperature is too high at {{</span>
+        <span class="s">states('sensor.basement_freezer_temperature') }}</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s">🌡️ Freezer Temperature is too high!</span>
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+<span class="c1">#</span>
+</code></pre></div></div>
+<h3 id="blueprint-alerts-for-device-healthcheck">
+  
+  
+    Blueprint: Alerts for Device Healthcheck <a href="#blueprint-alerts-for-device-healthcheck" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h3>
+    
+
+<p>This is one of my favorite blueprints. Since I’m using the rtl_433 project to push device states over MQTT, I can choose to include a timestamp with the event. The blueprint loops through all <code class="language-plaintext highlighter-rouge">temperature</code> and <code class="language-plaintext highlighter-rouge">battery</code> devices and checks if their <code class="language-plaintext highlighter-rouge">time</code> attribute (<em>if it exists</em>) is within a specific timeframe.</p>
+
+<p><img src="/assets/img/2021/10/sensor_time_attribute.png" alt="Showing water-leak sensor attributes while highlighting the time attribute" /><em>Govee Water-leak sensor attributes in Home Assistant</em></p>
+
+<p>I would like to know if a device battery dies, the sensor stops working, or there is a signal failure. I can do that by predicting when I expect to hear another signal.</p>
+
+<p>For the AcuRite sensors, they send signals and highly regular intervals. It’s easy to anticipate.</p>
+
+<p>But the Govee water-leak sensors no longer ship with a heartbeat signal. My only <em>semi</em> predictable updates from those devices will come when there is a significant battery change. I anticipate it will be a few months before I hear another signal from them.</p>
+
+<p>By ensuring I anticipate both regular and <em>semi</em> regular events, I can predict whether or not my devices are still operating.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="na">blueprint</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Healthcheck for SDR (rtl_433) sensors</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Send a notification when SDR (rtl_433) sensors haven't sent a message in a while.</span>
+  <span class="na">domain</span><span class="pi">:</span> <span class="s">automation</span>
+  <span class="na">input</span><span class="pi">:</span>
+    <span class="na">temp_healthcheck</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Temperature Sensor Healthcheck</span> 
+      <span class="na">description</span><span class="pi">:</span> <span class="s">How many hours until we consider a temperature sensor unresponsive.</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="m">12</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">number</span><span class="pi">:</span>
+            <span class="na">min</span><span class="pi">:</span> <span class="m">1</span>
+            <span class="na">max</span><span class="pi">:</span> <span class="m">24</span>
+            <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">hours</span>
+            <span class="na">mode</span><span class="pi">:</span> <span class="s">box</span>
+    <span class="na">battery_healthcheck</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Battery Sensor Healthcheck</span> 
+      <span class="na">description</span><span class="pi">:</span> <span class="s">How many days until we consider a battery sensor unresponsive (like in water sensors).</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="m">180</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">number</span><span class="pi">:</span>
+            <span class="na">min</span><span class="pi">:</span> <span class="m">1</span>
+            <span class="na">max</span><span class="pi">:</span> <span class="m">365</span>
+            <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">days</span>
+            <span class="na">mode</span><span class="pi">:</span> <span class="s">box</span>
+    <span class="na">actions</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Actions</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">Notifications or similar to be run. {{sensors}} is replaced with</span>
+        <span class="s">the names of sensors that are no longer checking in.</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">action</span><span class="pi">:</span> <span class="pi">{}</span>
+
+<span class="na">variables</span><span class="pi">:</span>
+  <span class="na">temp_healthcheck</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">temp_healthcheck</span>
+  <span class="na">battery_healthcheck</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">battery_healthcheck</span>
+  <span class="na">sensors</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+    <span class="s">{% set result = namespace(sensors=[]) %}</span>
+    <span class="s">{% for state in states.sensor | selectattr('attributes.device_class', '==', 'temperature') %}</span>
+        <span class="s">{% if (as_timestamp(now()) | int - as_timestamp(state.attributes.time | default(now())) | int) &gt; (60 * 60 * temp_healthcheck) %}</span>
+          <span class="s">{% set result.sensors = result.sensors + [state.name] %}</span>
+        <span class="s">{% endif %}</span>
+    <span class="s">{% endfor %}</span>
+    <span class="s">{% for state in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}</span>
+        <span class="s">{% if (as_timestamp(now()) | int - as_timestamp(state.attributes.time | default(now())) | int) &gt; (60 * 60 * 24 * battery_healthcheck) %}</span>
+          <span class="s">{% set result.sensors = result.sensors + [state.name] %}</span>
+        <span class="s">{% endif %}</span>
+    <span class="s">{% endfor %}</span>
+    <span class="s">{{result.sensors|join(', ')}}</span>
+
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">time_pattern</span>
+    <span class="na">minutes</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/5'</span>
+
+<span class="na">condition</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">sensors</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">'</span><span class="s1">'</span><span class="s">'</span><span class="s1">'</span><span class="nv"> </span><span class="s">}}'</span>
+
+<span class="na">action</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">choose</span><span class="pi">:</span> <span class="pi">[]</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s1">'</span><span class="s">actions'</span>
+
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+<span class="c1">#</span>
+</code></pre></div></div>
+<h2 id="final-thoughts">
+  
+  
+    Final Thoughts <a href="#final-thoughts" aria-hidden="true" tabindex="-1"><svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg></a>
+  
+  
+</h2>
+    
+
+<p>By adding these hands-off automations, I can deploy my devices and ignore them until I am notified of potential problems. Home automation should be open, affordable, and functional. Using a cheap SDR with a handful of 433 MHz devices provides an affordable alternative for those wanting to avoid cloud subscriptions or internet dependent devices.</p>
+
+  <div class="line-separator"></div>
+
+  <!-- POST NAVIGATION -->
+<div class="post-nav">
+  
+    <a class="post-nav-link" href="/blog/2021/04/android-work-profile-assistant-bug/">
+    <div class="link-text previous">&laquo;&nbsp;Fixing the Google Assistant on My Android Work Profile</div>
+    
+      <img class="link-image" src="/assets/img/2021/04/banner.png" alt="Previous Article">
+    
+    </a>
+  
+  
+    <a class="post-nav-link" href="/blog/2022/07/doorbell-alerts/">
+    <div class="link-text next">Transforming an Old Doorbell with Smart Alerts&nbsp;&raquo;</div>
+    
+      <img class="link-image" src="/assets/img/2022/07/banner.jpg" alt="Next Article">
+    
+    </a>
+  
+</div>
+
+</article>
+
+
+    
+<!-- Add Disqus comments. -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'kyleniewiada'; // required: replace example with your forum shortname
+  var disqus_identifier = "/blog/2021/10/affordable-water-leak-and-temp-monitoring/";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+    </main>
+  <!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/" >LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl" >GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social" >Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada" >YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel='nofollow'>BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/" >Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- start noncritical style -->
+<link rel="preload" href="/assets/css/noncritical.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/noncritical.css"></noscript>
+<script>
+  /*loadCss*/
+  !function(w){"use strict";var loadCSS=function(href,before,media){function ready(cb){return doc.body?cb():void setTimeout(function(){ready(cb)})}function loadCB(){ss.addEventListener&&ss.removeEventListener("load",loadCB),ss.media=media||"all"}var ref,doc=w.document,ss=doc.createElement("link");if(before)ref=before;else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet",ss.href=href,ss.media="only x",ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){for(var resolvedHref=ss.href,i=sheets.length;i--;)if(sheets[i].href===resolvedHref)return cb();setTimeout(function(){onloadcssdefined(cb)})};return ss.addEventListener&&ss.addEventListener("load",loadCB),ss.onloadcssdefined=onloadcssdefined,onloadcssdefined(loadCB),ss};"undefined"!=typeof exports?exports.loadCSS=loadCSS:w.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+
+  /*link[rel=preload] polyfill*/
+  !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
+</script>
+<!-- end noncritical style -->
+<!-- end footer -->
+
+  </body>
+</html>

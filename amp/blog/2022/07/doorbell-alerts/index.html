@@ -1,0 +1,610 @@
+<!doctype html>
+<html amp lang="en">
+
+
+
+  <meta charset="utf-8">
+  <title>Transforming an Old Doorbell with Smart Alerts</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#3d256d">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#3d256d">
+
+  <!-- Contain all special checks needed on AMP pages. Attempt to consolidate checks. -->
+
+
+  
+  <!-- Extract extra <title> tag. -->
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+    <!-- Assumes AmpDir is always first instance in page.url based on how amp-jekyll builds it -->
+    
+    
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+
+<meta name="generator" content="Jekyll v4.4.1">
+
+<meta name="author" content="Kyle Niewiada">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Transforming our existing doorbells to send alerts through Home Assistant when someone rings.">
+<meta property="og:description" content="Transforming our existing doorbells to send alerts through Home Assistant when someone rings.">
+<link rel="canonical" href="/blog/2022/07/doorbell-alerts/">
+<meta property="og:url" content="/blog/2022/07/doorbell-alerts/">
+<meta property="og:site_name" content="Kyle Niewiada’s Website">
+<meta property="og:image" content="https://www.kyleniewiada.org/assets/img/2022/07/banner.jpg">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="800">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-07-03T13:18:00-04:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://www.kyleniewiada.org/assets/img/2022/07/banner.jpg">
+<meta property="twitter:title" content="Transforming an Old Doorbell with Smart Alerts">
+<meta name="twitter:site" content="@CrypticCitrus">
+<meta name="twitter:creator" content="@CrypticCitrus">
+<meta property="fb:app_id" content="137961485759">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyle Niewiada"},"dateModified":"2022-07-03T13:18:00-04:00","datePublished":"2022-07-03T13:18:00-04:00","description":"Transforming our existing doorbells to send alerts through Home Assistant when someone rings.","headline":"Transforming an Old Doorbell with Smart Alerts","image":{"height":600,"width":800,"url":"https://www.kyleniewiada.org/assets/img/2022/07/banner.jpg","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/07/doorbell-alerts/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.kyleniewiada.org/assets/img/logo.png"},"name":"Kyle Niewiada"},"url":"/blog/2022/07/doorbell-alerts/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+
+
+  <style amp-custom>
+  
+  @font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:300;src:local("Open Sans Light"),local("OpenSans-Light"),url("/assets/fonts/open-sans-v17-latin-300.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-300.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:400;src:local("Open Sans"),local("OpenSans"),url("/assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-regular.woff") format("woff")}@font-face{font-family:"Open Sans";font-display:swap;font-style:normal;font-weight:600;src:local("Open Sans Semibold"),local("OpenSans-Semibold"),url("/assets/fonts/open-sans-v17-latin-600.woff2") format("woff2"),url("/assets/fonts/open-sans-v17-latin-600.woff") format("woff")}.page-title{text-align:left;font-size:200%;line-height:1.2;font-weight:normal}@media(min-width: 600px){.page-title{font-size:250%}}@media(min-width: 1000px){.page-title{font-size:300%}}.meta{color:dimgray;font-weight:300;font-size:120%}@media(min-width: 600px){.meta{font-size:130%}}@media(min-width: 1000px){.meta{font-size:140%}}.sub-meta{color:dimgray;font-weight:300;font-size:100%}@media(min-width: 600px){.sub-meta{font-size:110%}}@media(min-width: 1000px){.sub-meta{font-size:120%}}a.meta{text-align:center;display:block}.title-meta{overflow:auto;color:dimgray;font-size:100%}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{margin:0 0 .5rem;font-weight:600}a{color:#3d256d}a:hover{color:hsl(260,49.3150684932%,13.6274509804%)}code,pre{border-radius:.2em;background-color:#f5f5f5;border:.1em solid #d3d3d3}code{padding:2px 4px;color:#902f74}pre{padding:16px;overflow-y:hidden}pre code{color:inherit;background-color:rgba(0,0,0,0);padding:0;border:0}h1 .octicon,h2 .octicon,h3 .octicon,h4 .octicon,h5 .octicon,h6 .octicon{visibility:hidden}h1:hover .octicon,h2:hover .octicon,h3:hover .octicon,h4:hover .octicon,h5:hover .octicon,h6:hover .octicon{visibility:visible}.octicon{fill:currentColor;padding:0;vertical-align:middle}body{margin:0}body,p,li,ul,input,textarea{font-size:1em;line-height:1.58;color:#111;font-family:"Open Sans",Helvetica,Arial,sans-serif;overflow-wrap:break-word}img,video,audio,iframe,object{max-width:100%}main{display:block}.line-separator{height:2px;background:#d3d3d3;margin-top:16px;margin-bottom:16px}.clearfix:after{content:"";display:block;clear:both}.content{max-width:700px;margin-right:auto;margin-left:auto;padding:0 16px}.content img{display:block;margin-left:auto;margin-right:auto}.content video{display:block;margin-left:auto;margin-right:auto}.no-list{list-style:none;padding-left:0;margin-left:0}.left{float:left}.right{float:right}.post-list li{margin-bottom:4em;position:relative}.post-list li:before{content:"";position:absolute;bottom:-2em;left:0;background:hsl(0,0%,90%);height:2px;width:60px}.post-list li a{text-decoration:none}.post-list li a:hover{text-decoration:underline}.post-list li .date{color:dimgray;font-size:.8em}.header-amp{background:#262626;margin-bottom:16px;padding:16px;text-align:center;font-size:1.4em;font-weight:normal}.header-amp a,.header-amp a:hover{color:#fff;text-decoration:none;overflow:visible}
+
+  
+
+  
+  footer{padding:16px 0}footer .flex-list{position:relative;margin:1em;overflow:hidden;border-top:1px solid #d3d3d3}footer .flex-list ul{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin-left:-1px;padding:0}footer .flex-list li{list-style:none;flex-grow:1;flex-basis:auto;margin:.25em 0;padding:0 1em;text-align:center;border-left:1px solid #ccc;background-color:#fff}@media(min-width: 600px){footer .flex-list li{font-size:110%}}footer a{text-decoration:none}footer a:hover{background:#3d256d;color:#fff}article img+em,article amp-img+em,article video+em{text-align:center;font-size:.9em;font-style:italic;color:rgb(93.5,93.5,93.5);display:block}article img+p,article amp-img+p{margin-bottom:2em}blockquote{background:#ffa;border-left:10px solid #dc0;margin:1.5em 10px;padding:.5em 10px}.post-nav{display:flex;flex-direction:column}.post-nav .post-nav-link{height:6em;margin:.1em;overflow:hidden;position:relative}.post-nav .post-nav-link .link-text{z-index:1;position:absolute;height:100%;width:100%;box-sizing:border-box;padding:.5em;font-weight:bold;color:#fff;background:rgba(0,0,0,.6)}.post-nav .post-nav-link .previous{text-align:left}.post-nav .post-nav-link .next{text-align:right}.post-nav .post-nav-link .link-image{position:absolute;filter:blur(1px);transition:all .35s ease-in-out;top:50%;transform:translateY(-50%);width:auto;height:auto;min-width:100%;min-height:100%}.post-nav .post-nav-link:hover img{transform:translateY(-50%) scale(1.2)}@media all and (min-width: 600px){.post-nav{flex-direction:row}.post-nav .post-nav-link{flex-basis:0;flex-grow:1}}.button-outline{line-height:1.2em;padding:.5em 1.5em;border-radius:4px;text-decoration:none;cursor:pointer}.button-outline{background-color:rgba(0,0,0,0);border:3px solid #3d256d;color:#3d256d}.button-outline:hover{background-color:#3d256d;color:#fff}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}details:not([open]) summary{border-radius:5px}details[open]{border-color:#bce5ff;border-bottom-style:solid;border-left-style:solid;border-right-style:solid}details[open] p{margin-left:16px;margin-right:16px}details[open] summary::after{transform:rotate(-180deg)}details{margin-top:16px;margin-bottom:16px}details summary{background-color:#bce5ff;list-style:none;color:#111;padding:16px;display:flex;justify-content:space-between;align-items:center}details summary::after{content:"";width:0;height:0;border-top:10px solid #111;border-inline:7px solid rgba(0,0,0,0);transition:.2s}details summary::-webkit-details-marker{display:none}details div:first-child{border-radius:0 0 5px 5px;border:.2em solid #e5e5e5}details pre:first-child{margin:0px;border-radius:0 0 .2em .2em}
+  </style>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+  
+
+
+
+<body>
+ <!-- https://github.com/analytics-debugger/google-analytics-4-for-amp -->
+<amp-analytics type="googleanalytics" config="https://www.kyleniewiada.org/assets/ga4.json" data-credentials="include">
+  <script type="application/json">
+  {
+      "vars": {
+                  "GA4_MEASUREMENT_ID": "G-ZP46JK222K",
+                  "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+                  "DEFAULT_PAGEVIEW_ENABLED": true,    
+                  "GOOGLE_CONSENT_ENABLED": false,
+                  "WEBVITALS_TRACKING": false,
+                  "PERFORMANCE_TIMING_TRACKING": false,
+                  "SEND_DOUBLECLICK_BEACON": false
+      }
+  }
+  </script>
+</amp-analytics>
+
+
+
+<!-- start header -->
+<header>
+  <h1 class="header-amp">
+    <a href="/">Kyle Niewiada</a>
+  </h1>
+</header>
+<!-- end header -->
+
+
+
+<main class="content">
+  <article>
+    <div class="post_info">
+      <h1 class="page-title">Transforming an Old Doorbell with Smart Alerts</h1>
+
+      <h2 class="meta">Kyle Niewiada
+
+      <h3 class="meta">July 03, 2022 | 
+        
+          5 Minute Read
+        
+      </h3>
+
+      
+      <h4 class="sub-meta">Updated on May 29, 2025</h4>
+        
+
+      
+      <div class="featuredImage">
+        <amp-img src="/assets/img/2022/07/banner.jpg" alt="Original doorbell to the house" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2022/07/banner.jpg" alt="Original doorbell to the house" width="800" height="600"></noscript></amp-img>
+      </div>
+      
+
+      <div class="line-separator"></div>
+
+    </h2>
+</div>
+
+    <p>For the last year I’ve been retrofitting tech into our home. 
+Our house is the epitome of luxury featuring a ragged carpeted wall to promote sound deadening. Due to this ingenious addition, it’s difficult to hear things like the doorbell while we’re watching TV or in a meeting.</p>
+
+<p>How do we solve this? <del>Take out the carpeted wall and make the doorbell louder</del>. <strong>NO</strong>. We make the doorbell <em>smart</em> 🧠 and take pride it doing it ourselves!</p>
+
+<blockquote>
+  <p>This is going to be <em>super casual</em>.</p>
+
+  <p>It will be a pretty high level overview at getting Shelly 1 relays to intercept my doorbell signals. I will skip over things like how to flash ESPHome onto the Shelly relay.</p>
+
+  <p>It’s really to allow users near this ecosystem to steal from my project. Just like how <a href="https://frenck.dev/diy-smart-doorbell-for-just-2-dollar/">I stole some ideas from Frenck</a>.</p>
+</blockquote>
+
+<h2 id="goals">Goals</h2>
+
+<ul>
+  <li>Get alerts on our devices when the doorbell rings</li>
+  <li>Ability to discern our different doorbells</li>
+  <li>Avoid subscription costs</li>
+  <li>Ability to silence the doorbell chime</li>
+  <li>Create a repeating doorbell alarm for <del>no good reason</del> <em>fun</em>
+</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<h3 id="hardware-requirements">Hardware Requirements</h3>
+
+<p>Here’s an approximation for the hardware costs involved with the project.</p>
+
+<ul>
+  <li>$35: 2x Shelly 1 (one for each doorbell)</li>
+  <li>$15: Low voltage power supply (couldn’t run it off of transformer in my case, but others might be able to)</li>
+  <li>$10: Low voltage wire to power Shelly 1</li>
+  <li>$15: (Optional) Fancy junction box so wires don’t hang everywhere</li>
+</ul>
+
+<blockquote>
+  <p>I used a waterproof junction box because the doorbell wiring was too close to the main water line for my comfort. It helps me sleep better.</p>
+</blockquote>
+
+<p><amp-img src="/assets/img/2022/07/doorbell_wiring.jpg" alt="Two Shelly 1 inside of a conduit box wired up to each doorbell" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2022/07/doorbell_wiring.jpg" alt="Two Shelly 1 inside of a conduit box wired up to each doorbell" width="800" height="600"></noscript></amp-img><em>Wiring a Shelly 1 for each doorbell</em></p>
+
+<h3 id="software-requirements">Software Requirements</h3>
+
+<p>This guide is going to assume the user is familiar with Home Assistant and ESPHome. If they are not, check them out! Those are <em>great</em> projects.</p>
+
+<ul>
+  <li>
+<a href="https://www.home-assistant.io/">Home Assistant</a> (I’m running the <code class="language-plaintext highlighter-rouge">2022.6</code> release at the time of writing)</li>
+  <li>
+<a href="https://esphome.io/">ESPHome</a> flashed onto a Shelly 1</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="two-shelly-relays">Two Shelly Relays?</h3>
+
+<p>If you’ve read the hardware requirements above, you might be asking yourself “Why are there two Shelly 1 relays? Surely you don’t need that.”</p>
+
+<p>You’d be right! However, did you know some homes have <em>two</em> doorbells? I guess the thought is that you put the second doorbell by your back door in case a neighbor is stopping by.</p>
+
+<p>When this happens, a chime box can be wired to give each doorbell a different chime (<code class="language-plaintext highlighter-rouge">Ding</code> vs <code class="language-plaintext highlighter-rouge">Ding Dong</code>) allowing the homeowner to know which door their visitor is at. <em>Neat!</em></p>
+
+<p>Except our second doorbell is <em>also</em> in the front of our house.. just 15 steps from the first doorbell. We’ve had people ring our second doorbell before, so we’re just going to proceed supporting it because I think it’s bougie. 😎</p>
+
+<h3 id="shelly-1-configuration">Shelly 1 Configuration</h3>
+
+<p>Mentioned earlier, we’re going to use ESPHome to configure our Shelly 1 relays.</p>
+
+<p>There are 5 inputs on the Shelly 1 relay.</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">Line</code> &amp; <code class="language-plaintext highlighter-rouge">Neutral</code> for power</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">Input</code> &amp; <code class="language-plaintext highlighter-rouge">Output</code> for the signal we’re controlling</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">Switch</code> to communicate changes to the Shelly 1</li>
+</ul>
+
+<p>The Shelly 1 relay will be powered from our low voltage wires (or really, whatever you can find for the <code class="language-plaintext highlighter-rouge">line</code> and <code class="language-plaintext highlighter-rouge">neutral</code>).</p>
+
+<p>We’ll connect the Shelly 1 <code class="language-plaintext highlighter-rouge">input</code> connector to the doorbell transformer power. That power (when switched on) will travel through the Shelly 1 <code class="language-plaintext highlighter-rouge">output</code> connector, triggering the chime box.</p>
+
+<p>Finally, the doorbell button signal will be captured by the Shelly 1 <code class="language-plaintext highlighter-rouge">switch</code> input.</p>
+
+<p>Capturing the doorbell signal with the <code class="language-plaintext highlighter-rouge">switch</code> input accomplishes two things.</p>
+
+<ol>
+  <li>We now <em>know</em> via software that the doorbell was pressed since we triggered it via the Shelly <code class="language-plaintext highlighter-rouge">switch</code> input.</li>
+  <li>Because we’re choosing to pass the signal onto our doorbell chime, we can also choose <em>not</em> to pass the signal along 🔇.</li>
+</ol>
+
+<p>I’ve added functionality to mute the doorbell chime via an exposed input. It’s useful to pair with bedtime routines to keep the house quiet.</p>
+
+<blockquote>
+  <p>🏅 Achievement unlocked: Muting a doorbell</p>
+</blockquote>
+
+<p><amp-img src="/assets/img/2022/07/doorbell_device.png" alt="Home Assistant dashboard showing contents of the front door doorbell" width="314" height="545" layout="responsive"><noscript><img src="/assets/img/2022/07/doorbell_device.png" alt="Home Assistant dashboard showing contents of the front door doorbell" width="314" height="545"></noscript></amp-img><em>Home Assistant dashboard of Front Door Doorbell</em></p>
+
+<p>But we can take that a step further. Since we’re in control of <em>when</em> our doorbell chimes, why not have some fun with that power? In the ESPHome config below, I’ve included a little <code class="language-plaintext highlighter-rouge">script</code> that will repeatedly trigger the doorbell chime for 30s when toggled on. <em>DING-DONG.. Ding-Dong.. ding-dong..</em> After 30s, the script <em>should</em> stop toggling the relay.</p>
+
+<p><em>Why have I done this?</em> I’m not really sure. It just seemed like a fun idea. Maybe you enjoy making dogs bark, annoying your significant other, or pretending to have a high-tech burglar alarm to annoy them away.</p>
+
+<p>It’s probably a bad idea. But don’t let that stop you! Just be careful of burning out your relay or doorbell chime. I’m <em>at least</em> 20% sure it’s not meant to operate like that (hence the 30s cap).</p>
+
+<blockquote>
+  <p>🏅 Achievement unlocked: Annoying as bell</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="c1"># Basic Config</span>
+<span class="c1"># shelly-one-01</span>
+<span class="c1"># Front Door Doorbell</span>
+<span class="c1"># Updated for 2025.5.0</span>
+
+<span class="na">substitutions</span><span class="pi">:</span>
+  <span class="na">board_id</span><span class="pi">:</span> <span class="s">shelly-one-01</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">front-door-doorbell</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">Front Door Doorbell</span>
+
+<span class="na">wifi</span><span class="pi">:</span>
+  <span class="na">ssid</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_ssid</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">wifi_password</span>
+
+  <span class="c1"># Enable fallback hotspot (captive portal) in case wifi connection fails</span>
+  <span class="na">ap</span><span class="pi">:</span>
+    <span class="na">ssid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">${board_id}</span><span class="nv"> </span><span class="s">Hotspot"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">ap_hotspot_password</span>
+
+<span class="c1"># Enable captive portal if wifi ever changes</span>
+<span class="na">captive_portal</span><span class="pi">:</span>
+
+<span class="c1"># Enable Home Assistant API</span>
+<span class="na">api</span><span class="pi">:</span>
+  <span class="na">encryption</span><span class="pi">:</span>
+    <span class="na">key</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">encryption_pre_shared_key</span>
+
+<span class="na">ota</span><span class="pi">:</span>
+  <span class="na">platform</span><span class="pi">:</span> <span class="s">esphome</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="kt">!secret</span> <span class="s">ota_password</span>
+
+<span class="na">esphome</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">${name}</span>
+  <span class="na">comment</span><span class="pi">:</span> <span class="s">${board_id}</span>
+  <span class="na">friendly_name</span><span class="pi">:</span> <span class="s">${friendly_name}</span>
+
+<span class="na">esp8266</span><span class="pi">:</span>
+  <span class="na">board</span><span class="pi">:</span> <span class="s">esp01_1m</span>
+
+<span class="c1"># Global to store the on/off state of the chime</span>
+<span class="na">globals</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">chime_var</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">bool</span>
+    <span class="na">restore_value</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">initial_value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">chime_alarm_var</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">bool</span>
+    <span class="na">restore_value</span><span class="pi">:</span> <span class="kc">false</span>
+    <span class="na">initial_value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span>  
+
+<span class="c1"># Enable logging</span>
+<span class="na">logger</span><span class="pi">:</span>
+
+<span class="na">time</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">homeassistant</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">my_time</span>
+
+<span class="c1"># Sensors that the ESPhome unit is capable of reporting</span>
+<span class="na">sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">wifi_signal</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">WiFi</span><span class="nv"> </span><span class="s">Signal"</span>
+    <span class="na">update_interval</span><span class="pi">:</span> <span class="s">300s</span>
+
+<span class="na">binary_sensor</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">gpio</span>
+    <span class="na">pin</span><span class="pi">:</span>
+      <span class="na">number</span><span class="pi">:</span> <span class="s">GPIO5</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">None</span>
+    <span class="na">filters</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">delayed_on</span><span class="pi">:</span> <span class="s">100ms</span>
+      <span class="pi">-</span> <span class="na">delayed_off</span><span class="pi">:</span> <span class="s">25ms</span>
+    <span class="na">on_press</span><span class="pi">:</span>
+      <span class="c1"># Only turn on the chime when it is active.</span>
+      <span class="na">then</span><span class="pi">:</span>
+        <span class="na">if</span><span class="pi">:</span>
+          <span class="na">condition</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">switch.is_on</span><span class="pi">:</span> <span class="s">chime_is_enabled</span>
+          <span class="na">then</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">switch.turn_on</span><span class="pi">:</span> <span class="s">relay</span>
+    <span class="na">on_release</span><span class="pi">:</span>
+      <span class="c1"># On release, turn of the chime.</span>
+      <span class="pi">-</span> <span class="na">switch.turn_off</span><span class="pi">:</span> <span class="s">relay</span>
+
+<span class="na">switch</span><span class="pi">:</span>
+  <span class="c1"># Switch to enable/disable chime when</span>
+  <span class="c1"># doorbell button is pushed.</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">chime_is_enabled</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">Chime</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s">mdi:power-settings</span>
+    <span class="na">restore_mode</span><span class="pi">:</span> <span class="s">DISABLED</span>
+    <span class="na">turn_on_action</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">globals.set</span><span class="pi">:</span>
+          <span class="na">id</span><span class="pi">:</span> <span class="s">chime_var</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+    <span class="na">turn_off_action</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">globals.set</span><span class="pi">:</span>
+          <span class="na">id</span><span class="pi">:</span> <span class="s">chime_var</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">return id(chime_var);</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">template</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">chime_alarm</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">Alarm</span>
+    <span class="na">icon</span><span class="pi">:</span> <span class="s">mdi:alarm-bell</span>
+    <span class="na">restore_mode</span><span class="pi">:</span> <span class="s">DISABLED</span>
+    <span class="na">turn_on_action</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">globals.set</span><span class="pi">:</span>
+          <span class="na">id</span><span class="pi">:</span> <span class="s">chime_alarm_var</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+      <span class="pi">-</span> <span class="na">script.execute</span><span class="pi">:</span> <span class="s">alarm_script</span>
+      <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s">30s</span>
+      <span class="pi">-</span> <span class="na">switch.turn_off</span><span class="pi">:</span> <span class="s">chime_alarm</span>
+    <span class="na">turn_off_action</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">globals.set</span><span class="pi">:</span>
+          <span class="na">id</span><span class="pi">:</span> <span class="s">chime_alarm_var</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span>
+    <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+      <span class="s">return id(chime_alarm_var);</span>
+  <span class="pi">-</span> <span class="na">platform</span><span class="pi">:</span> <span class="s">gpio</span>
+    <span class="na">id</span><span class="pi">:</span> <span class="s">relay</span>
+    <span class="na">internal</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">Doorbell Switch</span>
+    <span class="na">pin</span><span class="pi">:</span> <span class="s">GPIO4</span>
+    <span class="na">restore_mode</span><span class="pi">:</span> <span class="s">RESTORE_DEFAULT_OFF</span>
+    
+<span class="na">script</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">alarm_script</span>
+    <span class="na">then</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">while</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span>
+          <span class="na">lambda</span><span class="pi">:</span> <span class="pi">|-</span>
+            <span class="s">return id(chime_alarm_var);</span>
+        <span class="na">then</span><span class="pi">:</span>    
+        <span class="pi">-</span> <span class="na">switch.turn_on</span><span class="pi">:</span> <span class="s">relay</span>
+        <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s">500ms</span>
+        <span class="pi">-</span> <span class="na">switch.turn_off</span><span class="pi">:</span> <span class="s">relay</span>
+        <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s">500ms</span>
+<span class="c1">#</span>
+</code></pre></div></div>
+
+<h2 id="alerts-for-all">Alerts for All</h2>
+
+<p>Great, we have a chime that we can add into Home Assistant. That’s not very useful yet. So let’s add notifications!</p>
+
+<blockquote>
+  <p>I also <em>happen</em> to have a camera by the doorbell, so I include a camera snapshot in my notifications.</p>
+</blockquote>
+
+<p>Using the companion Home Assistant app on our phone, we can <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/">push notifications to our device</a> using the <code class="language-plaintext highlighter-rouge">notify</code> service.</p>
+
+<p><amp-img src="/assets/img/2022/07/phone_notification.jpg" alt="Simulated phone doorbell notification" width="1080" height="1066" layout="responsive"><noscript><img src="/assets/img/2022/07/phone_notification.jpg" alt="Simulated phone doorbell notification" width="1080" height="1066"></noscript></amp-img><em>Simulated phone notification from a doorbell press</em></p>
+
+<p>If we use an Android TV, we can also use the <a href="https://www.home-assistant.io/integrations/nfandroidtv/"><code class="language-plaintext highlighter-rouge">nfandroidtv</code></a> integration in order to display alerts on our TV.</p>
+
+<p><amp-img src="/assets/img/2022/07/tv_notification.jpg" alt="Simulated Android TV doorbell notification" width="800" height="600" layout="responsive"><noscript><img src="/assets/img/2022/07/tv_notification.jpg" alt="Simulated Android TV doorbell notification" width="800" height="600"></noscript></amp-img><em>Simulated Android TV notification from a doorbell press</em></p>
+
+<p>Here’s a useful Home Assistant automation blueprint that I use to configure my doorbells and notify my various devices.</p>
+
+<blockquote>
+  <p>There’s probably a better way to send the images without saving them to the disk in different locations. But it’s malleable enough that I can tweak settings without too many breaking changes.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
+<span class="na">blueprint</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Doorbell Alert Notifications</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;</span>
+    <span class="s">This automation blueprint creates a camera snapshot if doorbell is detected </span>
+    <span class="s">and sends a notification to your device with the picture.</span>
+    
+    <span class="s">Requirements:</span>
+      <span class="s">- Add `- /tmp` to `allowlist_external_dirs:` in the `configuration.yaml`</span>
+    
+    <span class="s">Required entities:</span>
+      <span class="s">- Doorbell sensor (binary_sensor in None class)</span>
+      <span class="s">- Camera entity</span>
+      <span class="s">- Notify device entity    </span>
+ 
+  <span class="na">domain</span><span class="pi">:</span> <span class="s">automation</span>
+
+  <span class="na">input</span><span class="pi">:</span>
+    <span class="na">doorbell_sensor</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Doorbell sensor</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">The sensor which triggers the snapshot creation (domain binary_sensor).</span>
+      <span class="na">selector</span><span class="pi">:</span>
+          <span class="na">entity</span><span class="pi">:</span>
+            <span class="na">domain</span><span class="pi">:</span> <span class="s">binary_sensor</span>
+
+    <span class="na">camera</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">Camera</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">The camera to create the snapshot (domain camera).</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">entity</span><span class="pi">:</span>
+          <span class="na">domain</span><span class="pi">:</span> <span class="s">camera</span>
+          
+    <span class="na">camera_delay</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">(Optional) Camera Delay</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">Delay after doorbell before taking a snapshot from the camera. Useful when your camera stream has a bit of lag.</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">number</span><span class="pi">:</span>
+            <span class="na">min</span><span class="pi">:</span> <span class="m">0</span>
+            <span class="na">max</span><span class="pi">:</span> <span class="m">15</span>
+            <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">seconds</span>
+            <span class="na">mode</span><span class="pi">:</span> <span class="s">slider</span>             
+
+    <span class="na">snapshot_delay</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">(Optional) Snapshot Delay</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">Delay before sending the notification after writing the camera snapshot to disk.</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">number</span><span class="pi">:</span>
+            <span class="na">min</span><span class="pi">:</span> <span class="m">0</span>
+            <span class="na">max</span><span class="pi">:</span> <span class="m">15</span>
+            <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">seconds</span>
+            <span class="na">mode</span><span class="pi">:</span> <span class="s">slider</span>            
+            
+    <span class="na">rate_limit</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">(Optional) Rate Limit</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">How many seconds to wait before we can send another notification.</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="m">10</span>
+      <span class="na">selector</span><span class="pi">:</span>
+        <span class="na">number</span><span class="pi">:</span>
+            <span class="na">min</span><span class="pi">:</span> <span class="m">0</span>
+            <span class="na">max</span><span class="pi">:</span> <span class="m">60</span>
+            <span class="na">unit_of_measurement</span><span class="pi">:</span> <span class="s">seconds</span>
+            <span class="na">mode</span><span class="pi">:</span> <span class="s">slider</span>             
+
+    <span class="na">notification_title</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">(Optional) Notification title</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Default:</span><span class="nv"> </span><span class="s">"🔔</span><span class="nv"> </span><span class="s">{{doorbell_sensor_name}}"'</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">🔔</span><span class="nv"> </span><span class="s">{{doorbell_sensor_name}}"</span>
+      
+    <span class="na">notification_message_standard</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">(Optional) Notification Standard message</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Default:</span><span class="nv"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">doorbell_sensor_name</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">triggered."'</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">doorbell_sensor_name</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">triggered."</span>      
+
+<span class="na">trigger</span><span class="pi">:</span>
+  <span class="na">platform</span><span class="pi">:</span> <span class="s">state</span>
+  <span class="na">entity_id</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">doorbell_sensor</span>
+  <span class="na">from</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+  <span class="na">to</span><span class="pi">:</span> <span class="s2">"</span><span class="s">on"</span>
+
+<span class="na">variables</span><span class="pi">:</span>
+  <span class="na">doorbell_sensor</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">doorbell_sensor</span>
+  <span class="na">doorbell_sensor_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">states[doorbell_sensor].name</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="na">camera</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">camera</span>
+  <span class="na">notification_title</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">notification_title</span>
+  <span class="na">snapshot_delay</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">snapshot_delay</span>
+  <span class="na">camera_delay</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">camera_delay</span>  
+  <span class="na">rate_limit</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">rate_limit</span>
+  <span class="na">snapshot_file_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/config/www/tmp/snapshot_{{</span><span class="nv"> </span><span class="s">states[camera].object_id</span><span class="nv"> </span><span class="s">}}.jpg"</span>
+  <span class="na">snapshot_image_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/local/tmp/snapshot_{{</span><span class="nv"> </span><span class="s">states[camera].object_id</span><span class="nv"> </span><span class="s">}}.jpg"</span>
+  <span class="na">notification_message_standard</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">notification_message_standard</span>
+
+<span class="na">action</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">camera_delay</span><span class="nv"> </span><span class="s">}}"</span>   
+  
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">camera.snapshot</span>
+    <span class="na">entity_id</span><span class="pi">:</span> <span class="kt">!input</span> <span class="s">camera</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">snapshot_file_path</span><span class="nv"> </span><span class="s">}}"</span>
+      
+  <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">snapshot_delay</span><span class="nv"> </span><span class="s">}}"</span>      
+
+  <span class="c1"># Update this service group with whomever you'd like to notify</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.family</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">notification_title</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">notification_message_standard</span><span class="nv"> </span><span class="s">}}"</span>  
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">ttl</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">high</span>      
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">notification_icon</span><span class="pi">:</span> <span class="s">mdi:bell</span>
+        <span class="na">group</span><span class="pi">:</span> <span class="s">doorbell</span>
+        <span class="na">channel</span><span class="pi">:</span> <span class="s">doorbell</span>
+        <span class="na">push</span><span class="pi">:</span>
+          <span class="na">interruption-level</span><span class="pi">:</span> <span class="s">time-sensitive</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">snapshot_image_path</span><span class="nv"> </span><span class="s">}}"</span>
+
+  <span class="c1"># Update this service group with whomever you'd like to notify</span>
+  <span class="pi">-</span> <span class="na">service</span><span class="pi">:</span> <span class="s">notify.screens</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">notification_title</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">notification_message_standard</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="na">data</span><span class="pi">:</span>
+        <span class="na">duration</span><span class="pi">:</span> <span class="m">10</span>
+        <span class="na">image</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">snapshot_file_path</span><span class="nv"> </span><span class="s">}}"</span> 
+
+  <span class="pi">-</span> <span class="na">delay</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">rate_limit</span><span class="nv"> </span><span class="s">}}"</span>
+
+<span class="na">mode</span><span class="pi">:</span> <span class="s">single</span>
+<span class="na">max_exceeded</span><span class="pi">:</span> <span class="s">silent</span>     
+
+<span class="c1">#</span>
+</code></pre></div></div>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>I don’t think I’m a luddite, but sometimes I really appreciate older things. Who knows, maybe I’ll come around to buying a video doorbell once they are better looking.</p>
+
+<p>It’s super useful to get alerts when I’m busy, away from home, or have the ability to mute alerts while the baby naps.</p>
+
+<p>I had an existing doorbell, existing camera, and accessible wiring. With a little bit of fun, I was able to transform (pun intended) our doorbell setup into something I’d seen advertised by other smart doorbells. But doing it myself makes me happy.</p>
+
+
+  </article>
+</main>
+
+
+<a href="/blog/2022/07/doorbell-alerts/" class="meta center">Comments are available on the full webpage.</a>
+
+
+<!-- start footer -->
+<footer class="content">
+  <div class="flex-list">
+  <ul>
+  
+    <li>
+      <a href="https://www.linkedin.com/in/kyleniewiada/">LinkedIn</a>
+    </li>
+  
+    <li>
+      <a href="https://github.com/aav7fl">GitHub</a>
+    </li>
+  
+    <li>
+      <a href="https://bsky.app/profile/crypticcitrus.bsky.social">Bluesky</a>
+    </li>
+  
+    <li>
+      <a href="https://www.youtube.com/user/KyleNiewiada">YouTube</a>
+    </li>
+  
+    <li>
+      <a href="https://kyleniewiada.bandcamp.com/" rel="nofollow">BandCamp</a>
+    </li>
+  
+    <li>
+      <a href="/sitemap/">Sitemap</a>
+    </li>
+  
+  </ul>
+</div>
+
+</footer>
+<!-- end footer -->
+
+
+</body>
+
+</html>
