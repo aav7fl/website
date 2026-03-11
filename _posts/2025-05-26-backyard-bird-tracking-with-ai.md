@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2025-10-16 12:00'
+updated: '2026-03-11 8:00'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -37,6 +37,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2025-08-28: Tweaked the "rare species" automation to skip sending an alert when the species list changes. This avoids an issue where timestamps are sometimes wrong when a new species is added to the list by the BirdNET-Go API.
 > - 2025-09-02: Removed the `notify` condition after the 'race condition' was resolved via [tphakala/birdnet-go#1242](https://github.com/tphakala/birdnet-go/pull/1242).
 > - 2025-10-16: Updated the `BirdNET Species Summary` command line sensor, `BirdNET Species Summary Persisted Data` template sensor, and `Notify rare bird detection` automation to work correctly. After dropping the attribute changes from history, the state detection changes were only being triggered when the species count increased. Instead, we now set the timestamp of the most recent change.
+> - 2026-03-11: Include notes about latest snapshots adding native webhook and notification channels.
 
 ## Continuous Bird Detection
 
@@ -681,6 +682,8 @@ content: >-
 
 ![A Pileated Woodpecker searching for food in a dead tree.](/assets/img/2025/05/pilwoo.jpg)*A Pileated Woodpecker pecking away at a dead tree in my backyard.*
 
+> 2026-03-11: The most [recent snapshot updates](https://github.com/tphakala/birdnet-go/releases/tag/nightly-20260310) of BirdNET-Go have added a handful of new notification channels and settings. This allows you create custom conditions for species, confidence, time of day, and location all under BirdNET-Go. These may cover most of your needs. I would explore the new features before implementing my custom notification setup below. 
+
 Here is where the fun begins. Below are my collections of notifications that I've set up in Home Assistant based on the created sensors above. 
 
 I've simplified some of the notifications from my personal setup. But here are some ideas that you could implement on your own:
@@ -1264,6 +1267,8 @@ max: 10
 I've recorded some pretty cool bird sounds with BirdNET-Go, and I wanted to share them with my family and friends. Since it's difficult to share raw audio files, I created a script that generates a video from the audio file, adds some metadata, and overlays some of the information.
 
 Just so you're aware, the audio download process from BirdNET-Go seems to be in flux at the moment depending on which page you download the audio from.
+
+> 2026-03-11: This is _still_ absolutely in flux and may or may not work anymore. You may need to make tweaks. Or at the very least, manually pass in the input args to get the correct text to display in the audio-"video".
 
 If you download the bird sounds from the audio player in the `Main Dashboard` or the `Search Bar` at the top of BirdNET-Go, it appears to download the _original_ audio file from the `/api/v1/media/audio` endpoint. That audio file will follow a naming scheme close to `<scientific_name>_<confidence>_<timestamp>.<original_extension>`. 
 
