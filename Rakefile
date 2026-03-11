@@ -63,10 +63,13 @@ task :html_proofer do
       %r{.*savaslabs.com/.*}, # SavasLabs blocking Travis CI/typhoeus
       %r{.*uplink.nmu.edu/.*}, # They've started returning a 403 to us
       %r{.*/#comment-.*}, # Internal Disqus comments
+      %r{^https://bluecharmbeacons.com/}, # Returns a 403
       %r{^https://boardgamegeek.com/}, # Returns a 403
       %r{^https://www.audiokarma.org.*}, # 403s
       %r{^https://www.linkedin.com.*}, # They always return a 999
       %r{^https://www.reddit.com.*}, # Reddit is blocking us :(
+      %r{^https://www.sweetscape.com/}, # Returns response code 0???
+      %r{^https://zeldaspeedruns.wikia.com/}, # Returns a 403
       %r{.*x.com/.*}, # This site now hates HTML Proofer
       %r{^https://frenck.dev.*}, # Cloudflare is blocking us :(
       %r{^https://github.com/aav7fl/website/blob/72e003eba56facb762a0bd2ffb79876e5a9e299a/.travis.yml#L23}, # GitHub is saying the anchor is an error
