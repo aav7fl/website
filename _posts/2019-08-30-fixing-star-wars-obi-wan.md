@@ -142,7 +142,7 @@ If you’re like me, you’re probably noticing something here. Everything looks
 
 After a quick discussion on how they should resolve it, they offered me the opportunity to create the PR to implement the fix. The fix was to include a different header with the controller capabilities header `struct` that prevented it from adding an unused byte in the memory layout.
 
-> [Cxbx-Reloaded Pull Request #1708](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708)
+> [Cxbx-Reloaded Pull Request #1708](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded-Legacy/pull/1708)
 
 About an hour later, the pull request was merged. As a bonus side effect, the community has begun discovering other games with controller input issues that were solved with this fix.
 
