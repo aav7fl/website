@@ -152,7 +152,7 @@ last_manual_update: 2023-01-16
 
 - Traced through machine instructions to discover a compiler was padding an extra byte into memory causing many games to reject controller input
 - [Blog post](/blog/2019/08/fixing-star-wars-obi-wan/)
-- [GitHub PR](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/pull/1708)
+- [GitHub PR](https://github.com/Cxbx-Reloaded/Cxbx-Reloaded-Legacy/pull/1708)
 
 ### Enhanced the Jekyll SEO Tag Plugin
 
