@@ -682,7 +682,7 @@ content: >-
 
 ![A Pileated Woodpecker searching for food in a dead tree.](/assets/img/2025/05/pilwoo.jpg)*A Pileated Woodpecker pecking away at a dead tree in my backyard.*
 
-> 2026-03-11: The most [recent snapshot updates](https://github.com/tphakala/birdnet-go/releases/tag/nightly-20260310) of BirdNET-Go have added a handful of new notification channels and settings. This allows you create custom conditions for species, confidence, time of day, and location all under BirdNET-Go. These may cover most of your needs. I would explore the new features before implementing my custom notification setup below. 
+> 2026-03-11: The most [recent snapshot updates](https://github.com/tphakala/birdnet-go/releases/) of BirdNET-Go have added a handful of new notification channels and settings. This allows you create custom conditions for species, confidence, time of day, and location all under BirdNET-Go. These may cover most of your needs. I would explore the new features before implementing my custom notification setup below. 
 
 Here is where the fun begins. Below are my collections of notifications that I've set up in Home Assistant based on the created sensors above. 
 
