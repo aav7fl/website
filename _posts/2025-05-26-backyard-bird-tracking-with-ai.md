@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2026-03-11 8:00'
+updated: '2026-05-23 20:56'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -38,6 +38,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2025-09-02: Removed the `notify` condition after the 'race condition' was resolved via [tphakala/birdnet-go#1242](https://github.com/tphakala/birdnet-go/pull/1242).
 > - 2025-10-16: Updated the `BirdNET Species Summary` command line sensor, `BirdNET Species Summary Persisted Data` template sensor, and `Notify rare bird detection` automation to work correctly. After dropping the attribute changes from history, the state detection changes were only being triggered when the species count increased. Instead, we now set the timestamp of the most recent change.
 > - 2026-03-11: Include notes about latest snapshots adding native webhook and notification channels.
+> - 2026-05-23: Update custom notification script to work better with latest snapshot builds. Fixes displaying confidence percentage and updates to using id mappings of camera sources.
 
 ## Continuous Bird Detection
 
@@ -827,17 +828,18 @@ fi
 # Use a temporary variable for the source before mapping
 # This remaps and source that contains the IP and replaces the entire source with a friendly name
 SOURCE_MAPPED="$SOURCE_VAL"
-# Check if the source value CONTAINS a known IP using pattern matching (*)
+# Check if the source id value CONTAINS a known HEX using pattern matching (*)
+# /api/v2/streams/sources
 case "$SOURCE_VAL" in
-    *"10.0.0.1"*) SOURCE_MAPPED="Pool Camera" ;;
-    *"10.0.0.2"*) SOURCE_MAPPED="Tree Camera" ;;
-    *"10.0.0.3"*) SOURCE_MAPPED="Spy Camera" ;;
+    *"abcd1234"*) SOURCE_MAPPED="Pool Camera" ;;
+    *"123123ab"*) SOURCE_MAPPED="Tree Camera" ;;
+    *"ab12cd34"*) SOURCE_MAPPED="Spy Camera" ;;
 esac
 # --- End Source Mapping ---
 
 # --- Confidence Formatting ---
 # Convert decimal confidence to percentage string
-CONFIDENCE_DISPLAY=$(awk -v conf="$CONFIDENCE_VAL" 'BEGIN { printf "%.0f%%", conf * 100 }')
+CONFIDENCE_DISPLAY=$(awk -v conf="$CONFIDENCE_VAL" 'BEGIN { printf "%.0f%%", conf }')
 # --- End Confidence Formatting ---
 
 # === JSON Construction ===
