@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2026-05-23 20:56'
+updated: '2026-05-24 21:03'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -39,6 +39,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2025-10-16: Updated the `BirdNET Species Summary` command line sensor, `BirdNET Species Summary Persisted Data` template sensor, and `Notify rare bird detection` automation to work correctly. After dropping the attribute changes from history, the state detection changes were only being triggered when the species count increased. Instead, we now set the timestamp of the most recent change.
 > - 2026-03-11: Include notes about latest snapshots adding native webhook and notification channels.
 > - 2026-05-23: Update custom notification script to work better with latest snapshot builds. Fixes displaying confidence percentage and updates to using id mappings of camera sources.
+> - 2026-05-24: Update markdown cards to better handle missing or invalid data (and still display _something_).
 
 ## Continuous Bird Detection
 
@@ -437,7 +438,7 @@ I also included another idea from [Alexandre](https://community.home-assistant.i
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_daily_summary') %}  
@@ -456,13 +457,13 @@ content: >-
 
   {#- Basic Info -#}
 
-  {%- set time = bird.latest_heard -%}
+  {%- set time = bird.get('latest_heard', '00:00:00') -%}
 
-  {%- set name = bird.common_name -%}
+  {%- set name = bird.get('common_name', 'Unknown') -%}
 
-  {%- set count = bird.count -%}
+  {%- set count = bird.get('count', 0) -%}
 
-  {%- set species_code = bird.species_code %}
+  {%- set species_code = bird.get('species_code', '') %}
 
   {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}
 
@@ -549,7 +550,7 @@ Unlike the daily summary card, this card does not reset after midnight. It's hel
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -558,9 +559,9 @@ content: >-
     Latest Detections | &nbsp;&nbsp;&nbsp;Last Heard 
     :-- | :-- 
     {% for bird in (species_data | sort(attribute='last_heard', reverse=true))[0:11] %}
-      {%- set time = bird.last_heard -%}
-      {%- set name = bird.common_name -%}
-      {%- set species_code = bird.species_code %}
+      {%- set time = bird.get('last_heard', '1970-01-01 00:00:00') -%}
+      {%- set name = bird.get('common_name', 'Unknown') -%}
+      {%- set species_code = bird.get('species_code', '') %}
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}
       {%- set last_heard_datetime = strptime(time, '%Y-%m-%d %H:%M:%S') %}[{{ name }}]({{ ebird_url }}) | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
     {% endfor %}
@@ -593,7 +594,7 @@ It's a pretty manual process to add the birds to the list, but I change this so 
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -619,9 +620,9 @@ content: >-
     Latest Detections | &nbsp;&nbsp;&nbsp;Last Heard
     :-- | :-- 
     {% for bird in (species_data_filtered | sort(attribute='last_heard', reverse=true)) %}
-      {%- set time = bird.last_heard -%}   
-      {%- set name = bird.common_name -%}   
-      {%- set species_code = bird.species_code %}   
+      {%- set time = bird.get('last_heard', '1970-01-01 00:00:00') -%}   
+      {%- set name = bird.get('common_name', 'Unknown') -%}   
+      {%- set species_code = bird.get('species_code', '') %}   
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}   
       {%- set last_heard_datetime = strptime(time, '%Y-%m-%d %H:%M:%S') %}[{{ name }}]({{ ebird_url }}) | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
     {% endfor %}
