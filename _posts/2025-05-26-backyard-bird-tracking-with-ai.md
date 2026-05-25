@@ -653,7 +653,7 @@ _However_, once a bird makes this list and rolls off, it will never be on this l
 
 {% raw %}
 ```yaml
-# version 1.0
+# version 1.1
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -662,10 +662,10 @@ content: >-
     Latest Detections | &nbsp;&nbsp;&nbsp;Count | &nbsp;&nbsp;&nbsp;First Heard 
     :-- | :-- | :--
     {% for bird in (species_data | sort(attribute='first_heard', reverse=true))[0:11] %}
-      {%- set time = bird.first_heard -%}
-      {%- set name = bird.common_name -%}
-      {%- set count = bird.count -%}
-      {%- set species_code = bird.species_code %}
+      {%- set time = bird.get('first_heard', '1970-01-01 00:00:00') -%}   
+      {%- set name = bird.get('common_name', 'Unknown') -%}   
+      {%- set species_code = bird.get('species_code', '') %}   
+      {%- set count = bird.get('count', 0) -%}
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}
       {%- set first_heard_datetime = strptime(time, '%Y-%m-%d %H:%M:%S') %}[{{ name }}]({{ ebird_url }}) | &nbsp;&nbsp;&nbsp;{{ count }} | &nbsp;&nbsp;&nbsp;{{ relative_time(first_heard_datetime) }} ago 
     {% endfor %}
