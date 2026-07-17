@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2026-07-13 12:15'
+updated: '2026-07-17 7:56'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -41,6 +41,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2026-05-23: Update custom notification script to work better with latest snapshot builds. Fixes displaying confidence percentage and updates to using id mappings of camera sources.
 > - 2026-05-24: Update markdown cards to better handle missing or invalid data (and still display _something_).
 > - 2026-07-13: Update cards to only display ebird links when the `species_code` is exactly 6 characters (likely indicating a bird). Adjust relative datetime field in cards to work with `BirdNET-Go 20260712`.
+> - 2026-07-17: Adjust ebird url to accept `species_code` lengths >= 1 and <=7. This captures birds like `sora` and `easowl1`. This will _probably_ correctly cover 99% of the `species_code`/URLs.
 
 ## Continuous Bird Detection
 
@@ -439,7 +440,7 @@ I also included another idea from [Alexandre](https://community.home-assistant.i
 
 {% raw %}
 ```yaml
-# version 1.2
+# version 1.3
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_daily_summary') %}  
@@ -507,7 +508,7 @@ content: >-
 
   {#- Output Row -#}
 
-  {{ today_at(time) | as_timestamp  | timestamp_custom('%H:%M', true)}} | {% if species_code | length == 6 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | {{ count }} | {{ sparkline_str }}
+  {{ today_at(time) | as_timestamp  | timestamp_custom('%H:%M', true)}} | {% if species_code | length >= 1 and species_code | length <= 7 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | {{ count }} | {{ sparkline_str }}
 
   {% endfor %}
 
@@ -550,7 +551,7 @@ Unlike the daily summary card, this card does not reset after midnight. It's hel
 
 {% raw %}
 ```yaml
-# version 1.2
+# version 1.3
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -563,7 +564,7 @@ content: >-
       {%- set name = bird.get('common_name', 'Unknown') -%}
       {%- set species_code = bird.get('species_code', '') %}
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}
-      {%- set last_heard_datetime = as_datetime(time) %}{% if species_code | length == 6 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
+      {%- set last_heard_datetime = as_datetime(time) %}{% if species_code | length >= 1 and species_code | length <= 7 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
     {% endfor %}
   {% else %} 
     No recent bird data available. 
@@ -594,7 +595,7 @@ It's a pretty manual process to add the birds to the list, but I change this so 
 
 {% raw %}
 ```yaml
-# version 1.2
+# version 1.3
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -624,7 +625,7 @@ content: >-
       {%- set name = bird.get('common_name', 'Unknown') -%}   
       {%- set species_code = bird.get('species_code', '') %}   
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}   
-      {%- set last_heard_datetime = as_datetime(time) %}{% if species_code | length == 6 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
+      {%- set last_heard_datetime = as_datetime(time) %}{% if species_code | length >= 1 and species_code | length <= 7 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ relative_time(last_heard_datetime) }} ago 
     {% endfor %}
   {% else %} 
     No recent detections of specified birds. 
@@ -653,7 +654,7 @@ _However_, once a bird makes this list and rolls off, it will never be on this l
 
 {% raw %}
 ```yaml
-# version 1.2
+# version 1.3
 type: markdown
 content: >-
   {% if has_value('sensor.birdnet_species_summary') %}  
@@ -667,7 +668,7 @@ content: >-
       {%- set species_code = bird.get('species_code', '') %}   
       {%- set count = bird.get('count', 0) -%}
       {%- set ebird_url = "https://ebird.org/species/" ~ species_code %}
-      {%- set first_heard_datetime = as_datetime(time) %}{% if species_code | length == 6 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ count }} | &nbsp;&nbsp;&nbsp;{{ relative_time(first_heard_datetime) }} ago 
+      {%- set first_heard_datetime = as_datetime(time) %}{% if species_code | length >= 1 and species_code | length <= 7 %}[{{ name }}]({{ ebird_url }}){% else %}{{ name }}{% endif %} | &nbsp;&nbsp;&nbsp;{{ count }} | &nbsp;&nbsp;&nbsp;{{ relative_time(first_heard_datetime) }} ago 
     {% endfor %}
   {% else %} 
     No recent bird data available. 
