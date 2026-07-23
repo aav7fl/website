@@ -1,7 +1,7 @@
 ---
 title: "Bringing Home Automation Back Home"
 date: "2018-06-03 16:47"
-updated: 2024-02-05
+updated: 2026-07-23
 comments: true
 image:
   path: /assets/img/2018/06/banner.png
@@ -35,7 +35,7 @@ Commanding my lights using my voice was another simple-ish task. All I needed to
 
 ## What Did I Really Fix?
 
-![xkcd Automation](/assets/img/2018/06/xkcd_automation.png)*Automation ([Source](https://xkcd.com/1871/))*
+![xkcd Automation](/assets/img/2018/06/xkcd_automation.png)*Automation ([Source](https://xkcd.com/1319/))*
 
 I think understand what you're about to say; "Kyle, I thought you were trying to get away from the cloud, not build your own components in the cloud!" To that I would say you are absolutely correct! All I did was shift the cloud problem from my Google Home... back to my Google Home... huh. But remember, I can still control my devices locally if I pull up the web interface on my network... but then I could just open the Hue App on my phone. _What was I solving by doing this again?_
 
