@@ -66,6 +66,7 @@ task :html_proofer do
       %r{.*/#comment-.*}, # Internal Disqus comments
       %r{^https://bluecharmbeacons.com/}, # Returns a 403
       %r{^https://boardgamegeek.com/}, # Returns a 403
+      %r{^https://merlin.allaboutbirds.org.*}, # Returns a 403
       %r{^https://www.audiokarma.org.*}, # 403s
       %r{^https://www.linkedin.com.*}, # They always return a 999
       %r{^https://www.reddit.com.*}, # Reddit is blocking us :(
