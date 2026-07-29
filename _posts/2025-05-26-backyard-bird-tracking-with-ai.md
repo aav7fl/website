@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2026-07-17 7:56'
+updated: '2026-07-29 12:03'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -42,6 +42,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2026-05-24: Update markdown cards to better handle missing or invalid data (and still display _something_).
 > - 2026-07-13: Update cards to only display ebird links when the `species_code` is exactly 6 characters (likely indicating a bird). Adjust relative datetime field in cards to work with `BirdNET-Go 20260712`.
 > - 2026-07-17: Adjust ebird url to accept `species_code` lengths >= 1 and <=7. This captures birds like `sora` and `easowl1`. This will _probably_ correctly cover 99% of the `species_code`/URLs.
+> - 2026-07-29: Update rare bird notification automation to work with updated timestamps.
 
 ## Continuous Bird Detection
 
@@ -1155,7 +1156,7 @@ This can easily be adjusted in the automation below on the {% raw %}`{{ differen
 
 {% raw %}
 ```yaml
-# version 1.4
+# version 1.5
 alias: Notify rare bird detection
 description: >-
   Notify the family when a bird that hasn't been detected for a large number of days
@@ -1214,10 +1215,10 @@ actions:
               {% if current_bird.last_heard is defined and current_bird.last_heard is string and 
                     previous_bird.last_heard is defined and previous_bird.last_heard is string %}
                 
-                {% set current_last_heard_dt = strptime(current_bird.last_heard, '%Y-%m-%d %H:%M:%S') %}
-                {% set previous_last_heard_dt = strptime(previous_bird.last_heard, '%Y-%m-%d %H:%M:%S') %}
+                {% set current_last_heard_dt = current_bird.last_heard | as_datetime %}
+                {% set previous_last_heard_dt = previous_bird.last_heard | as_datetime %}
 
-                {% if current_last_heard_dt > previous_last_heard_dt %}
+                {% if current_last_heard_dt != none and previous_last_heard_dt != none and current_last_heard_dt > previous_last_heard_dt %}
                   {% set difference_in_seconds = (current_last_heard_dt - previous_last_heard_dt).total_seconds() %}
                   {% set difference_in_days = difference_in_seconds / (60*60*24) %}
                   {{ difference_in_days > 180 }}
