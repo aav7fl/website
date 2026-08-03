@@ -3,7 +3,27 @@
 require 'html-proofer'
 require 'jekyll'
 
-task :build do
+desc 'Pre-render Mermaid diagrams to static SVGs'
+task :mermaid do
+  script = File.join('scripts', 'pre-render-mermaid.js')
+
+  unless system('node', '--version', out: File::NULL, err: File::NULL)
+    puts 'Node.js not found. Skipping Mermaid pre-render.'.yellow
+    next
+  end
+
+  # Render when we can. Environments without mermaid-cli, or with a Node too old
+  # to run it (some dev containers), fall back to verifying that every diagram
+  # already has an up-to-date SVG committed -- which is all a build really needs.
+  next if File.exist?(File.join('node_modules', '.bin', 'mmdc')) && system('node', script)
+
+  puts 'Could not pre-render Mermaid diagrams here; checking committed SVGs instead.'.yellow
+  next if system('node', script, '--check')
+
+  abort 'Mermaid diagrams are missing or out of date. Render them where mermaid-cli works (`npm ci && npm run mermaid`) and commit the SVGs plus _data/mermaid.json.'.red
+end
+
+task :build => :mermaid do
   buildOptions = {
     future: true,
   }
@@ -17,15 +37,25 @@ task :build do
   Jekyll::Commands::Build.process(buildOptions)
 end
 
-task :serve do
+task :serve => :mermaid do
   puts 'Serving site...'.yellow.bold
+
+  # `open_url` below asks the OS to open a browser. Inside a dev container that
+  # routes through VS Code's CLI shim, which calls the deprecated url.parse()
+  # and prints a DEP0169 warning on every start. It is VS Code's code, not ours,
+  # so silence just that one code for the processes this task spawns.
+  ENV['NODE_OPTIONS'] =
+    [ENV['NODE_OPTIONS'], '--disable-warning=DEP0169'].compact.join(' ').strip
 
   buildOptions = {
     future: true,
     incremental: true,
     watch: true,
+    # Lets Build.process start the watcher and return, instead of blocking
+    # forever, so the server can be started on this same thread afterwards.
+    serving: true,
   }
-  
+
   serveOptions = {
     host: "0.0.0.0",
     livereload: true,
@@ -33,11 +63,13 @@ task :serve do
     open_url: true,
   }
 
-  build = Thread.new { Jekyll::Commands::Build.process(buildOptions) }
-  serve = Thread.new { Jekyll::Commands::Serve.process(serveOptions) }
-
-  commands = [build, serve]
-  commands.each { |c| c.join }
+  # Build twice for the same reason :build does: FastImage can only read the
+  # dimensions of images that already exist in _site, so the AMP layout gets
+  # them on the second pass. Serve.process only starts the web server -- it
+  # never builds -- so both passes have to happen here.
+  Jekyll::Commands::Build.process(future: true)
+  Jekyll::Commands::Build.process(buildOptions)
+  Jekyll::Commands::Serve.process(serveOptions)
 end
 
 desc 'Test website with html_proofer'

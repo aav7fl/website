@@ -26,6 +26,13 @@ object {
 	max-width: 100%;
 }
 
+/* Pre-rendered Mermaid diagrams ship with explicit width/height attributes,
+   so the height has to scale with the width once max-width kicks in.
+   Scoped to img so AMP's own responsive sizing of amp-img is left alone. */
+img.mermaid-diagram {
+	height: auto;
+}
+
 main {
 	display: block;
 }

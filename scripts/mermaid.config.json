@@ -1,0 +1,15 @@
+{
+  "theme": "default",
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false,
+    "useMaxWidth": false
+  },
+  "sequence": {
+    "useMaxWidth": false
+  },
+  "gantt": {
+    "useMaxWidth": false
+  },
+  "themeCSS": ".edgeLabel rect { opacity: 1 !important; }"
+}

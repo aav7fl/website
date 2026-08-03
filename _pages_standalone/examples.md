@@ -45,6 +45,18 @@ Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapi
 
 ![BirdNET-Go main dashboard](/assets/img/2025/05/birdnet-go_main_dashboard.png)*My main dashboard on BirdNET-Go*
 
+## Mermaid Diagram
+
+```mermaid
+graph TD
+    accTitle: Example Image Name
+    accDescr: Example Description
+    A[Start] --> B{Is it working?}
+    B -- Yes --> C[Great!]
+    B -- No --> D[Check the logs]
+    D --> B
+```
+
 ## Details
 
 <!-- If an HTML tag has an attribute markdown="block", then the content of the tag is parsed as block level elements. -->

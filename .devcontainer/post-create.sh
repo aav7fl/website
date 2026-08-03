@@ -10,3 +10,22 @@ fi
 if [ -f Gemfile ]; then
     bundle install
 fi
+
+# Chromium, used headlessly by mermaid-cli to pre-render diagrams to SVG.
+# Puppeteer has no linux/arm64 Chromium build, so Debian's package is what
+# PUPPETEER_EXECUTABLE_PATH points at (see devcontainer.json).
+# fonts-liberation gives Chromium metric-compatible stand-ins for the Arial and
+# Verdana that Mermaid's default font stack asks for.
+if ! command -v chromium > /dev/null 2>&1; then
+    SUDO=""
+    [ "$(id -u)" -ne 0 ] && SUDO="sudo"
+    export DEBIAN_FRONTEND=noninteractive
+    $SUDO apt-get update
+    $SUDO apt-get install -y --no-install-recommends chromium fonts-liberation
+    $SUDO rm -rf /var/lib/apt/lists/*
+fi
+
+# Node dependencies (mermaid-cli).
+if [ -f package-lock.json ]; then
+    npm ci
+fi
