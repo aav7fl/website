@@ -32,3 +32,21 @@ This is my personal website that I tweak and write about projects I have worked 
 - Open in VSCode
 - Open in dev container
 - After container is built run `bundle exec rake`
+
+## Diagrams
+
+Write Mermaid in a fenced ` ```mermaid ` block. `bundle exec rake` renders it to
+a static SVG under `assets/img/<YEAR>/<MONTH>/`, catalogued in
+`_data/mermaid.json`, and swaps the block for an `<img>` — no Mermaid
+JavaScript is served, and the AMP layout gets a valid `<amp-img>`.
+
+- Commit the generated SVGs and `_data/mermaid.json` alongside the post.
+- Adding, editing, and deleting diagrams all sync automatically on build.
+- Alt text comes from the diagram's own `accDescr:` (or `accTitle:`).
+- CI only verifies (`npm run mermaid:check`); it never renders.
+
+Re-rendering reports whether a diagram changed structurally (labels, connectors,
+shapes) or only cosmetically, so a few pixels of font drift stays quiet while a
+moved arrow prints `REVIEW:` and lists the file. Upgrading `mermaid-cli` does not
+re-render on its own; run `npm run mermaid:force` if you want every diagram on
+the new renderer, and review what it reports.

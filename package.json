@@ -4,16 +4,25 @@
   "description": "https://www.kyleniewiada.org/",
   "main": "index.js",
   "scripts": {
+    "mermaid": "node scripts/pre-render-mermaid.js",
+    "mermaid:check": "node scripts/pre-render-mermaid.js --check",
+    "mermaid:force": "node scripts/pre-render-mermaid.js --force",
+    "build": "bundle exec rake build",
+    "serve": "bundle exec rake serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aav7fl/website.git"
   },
+  "engines": {
+    "node": "^18.19 || >=20.0"
+  },
   "author": "Kyle Niewiada",
   "license": "ISC",
   "homepage": "https://github.com/aav7fl/website#readme",
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.16.0",
     "amphtml-validator": "^1.0.38"
   }
 }

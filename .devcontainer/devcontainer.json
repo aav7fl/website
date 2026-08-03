@@ -6,6 +6,26 @@
 	// This gives you perfect permissions without chown hacks (which make a big mess).
 	"remoteUser": "root",
 
+	// Node is needed to pre-render Mermaid diagrams to SVG (scripts/pre-render-mermaid.js).
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "22"
+		}
+	},
+
+	"containerEnv": {
+		// Puppeteer publishes no Chromium build for linux/arm64, so skip its
+		// download and use the Chromium that post-create.sh installs from apt.
+		"PUPPETEER_SKIP_DOWNLOAD": "true",
+		"PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium"
+	},
+
+	// Keep node_modules out of the bind mount so the container's Linux install
+	// and the host's macOS install cannot overwrite each other.
+	"mounts": [
+		"source=website-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+
 	"customizations": {
 		"vscode": {
 			"extensions": [
