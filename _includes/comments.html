@@ -1,3 +1,4 @@
+{% if jekyll.environment == 'production' %}
 {% if page.comments %}
 <!-- Add Disqus comments. -->
 <div id="disqus_thread"></div>
@@ -15,5 +16,6 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+{% endif %}
 {% endif %}
 
