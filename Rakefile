@@ -28,6 +28,9 @@ task :build => :mermaid do
     future: true,
   }
 
+  # Force site into production mode under this step to ensure comments and analytics are enabled.
+  ENV['JEKYLL_ENV'] = 'production'
+
   # Build twice to handle FastImage issue of non-existent images on init build
   puts 'Building site...'.yellow.bold
   orig_stdout = $stdout.clone

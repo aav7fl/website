@@ -54,5 +54,5 @@
 
     {% include amp-check.html src="SEO" %}
 
-    {% if site.data.analytics.google_analytics %} {% include child/google_analytics.html %} {% endif %}
+    {% if site.data.analytics.google_analytics %} {% if jekyll.environment == 'production' %} {% include child/google_analytics.html %} {% endif %} {% endif %}
 </head>
