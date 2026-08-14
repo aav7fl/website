@@ -21,7 +21,7 @@ redirect_from:
 
 Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
-## Table of Contents
+<!-- ## Table of Contents -->
 
 {% include toc.html %}
 
@@ -45,9 +45,20 @@ Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapi
 
 ![BirdNET-Go main dashboard](/assets/img/2025/05/birdnet-go_main_dashboard.png)*My main dashboard on BirdNET-Go*
 
+## Remove Metadata
+
+```bash
+exiftool -all= -overwrite_original -r .
+
+exiftool -gpslatitude .
+```
+
 ## Mermaid Diagram
 
 ```mermaid
+%%{init: {
+  "themeVariables": {"edgeLabelBackground": "#ffffff"}
+}}%%
 graph TD
     accTitle: Example Image Name
     accDescr: Example Description
