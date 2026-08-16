@@ -104,7 +104,9 @@ task :html_proofer do
       %r{^https://fcc.report/}, # Blocking us now
       %r{^https://merlin.allaboutbirds.org.*}, # Returns a 403
       %r{^https://www.audiokarma.org.*}, # 403s
+      %r{^https://www.howtogeek.com.*}, # 403s
       %r{^https://www.linkedin.com.*}, # They always return a 999
+      %r{^https://www.raspberrypi.com.*}, # 403s
       %r{^https://www.reddit.com.*}, # Reddit is blocking us :(
       %r{^https://www.sweetscape.com/}, # Returns response code 0???
       %r{^https://zeldaspeedruns.wikia.com/}, # Returns a 403
