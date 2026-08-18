@@ -28,7 +28,9 @@ TABLE STYLES
 
 		&:first-child {
 			font-weight: bold;
-			white-space: nowrap;
+			white-space: normal; 
+  			word-wrap: break-word;
+  			word-break: break-word;
 		}
 	}
 

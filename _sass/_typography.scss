@@ -94,6 +94,81 @@ pre code {
     border: 0;
 }
 
+/* Line numbers, from `{% highlight lang linenos %}`. Rouge nests a table inside
+   the figure > pre > code that Jekyll wraps around it, so the `pre` rules above
+   land on the inner `pre`s as well and have to be unwound. Plain fenced blocks
+   are untouched. */
+figure.highlight {
+    margin: config.$margin 0; // Figures carry a browser default of 1em 40px.
+}
+
+.rouge-table {
+    // A fixed layout keeps a long line inside its cell for `pre` to scroll,
+    // rather than widening the table past the post.
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-spacing: 0;
+
+    td {
+        padding: 0;
+        border: 0;
+        vertical-align: top;
+    }
+
+    // The outer figure > pre already draws the border, background, and padding.
+    pre {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background-color: transparent;
+    }
+
+    .gutter {
+        width: 2em; // Room for three digits.
+        padding-right: .8em;
+        text-align: right;
+        color: config.$dim-grey;
+        user-select: none; // Leaves the numbers out of a manual selection.
+    }
+}
+
+/* Copy button, appended to every code block by the script in footer.html.
+   AMP forbids custom JS, so AMP pages go without. */
+figure.highlight,
+div.highlighter-rouge {
+    position: relative;
+}
+
+.copy-code {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    padding: .2em .6em;
+    font-family: config.$sans-serif;
+    font-size: .8em;
+    color: config.$dark-grey;
+    background-color: config.$white;
+    border: .1em solid config.$light-grey;
+    border-radius: config.$btn-br;
+    cursor: pointer;
+    // Kept in the layout rather than display:none so it stays keyboard reachable.
+    opacity: 0;
+    transition: opacity .15s ease-in-out;
+
+    &:hover {
+        color: config.$black;
+        border-color: config.$dim-grey;
+    }
+}
+
+figure.highlight:hover .copy-code,
+div.highlighter-rouge:hover .copy-code,
+.copy-code:focus-visible {
+    opacity: 1;
+}
+
 /***************
 Anchor Heading Styling
 https://github.com/allejo/jekyll-anchor-headings/wiki/Examples
