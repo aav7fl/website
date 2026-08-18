@@ -13,4 +13,36 @@
   !function(w){if(w.loadCSS){var rp=loadCSS.relpreload={};if(rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return!1}},rp.poly=function(){for(var links=w.document.getElementsByTagName("link"),i=0;i<links.length;i++){var link=links[i];"preload"===link.rel&&"style"===link.getAttribute("as")&&(w.loadCSS(link.href,link),link.rel=null)}},!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);w.addEventListener&&w.addEventListener("load",function(){w.clearInterval(run)}),w.attachEvent&&w.attachEvent("onload",function(){w.clearInterval(run)})}}}(this);
 </script>
 <!-- end noncritical style -->
+<!-- start copy code button -->
+<script>
+  /* Appends a copy button to every code block. AMP pages skip this by design. */
+  if (navigator.clipboard) {
+    document.querySelectorAll('figure.highlight, div.highlighter-rouge').forEach(function (block) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-code';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+
+      button.addEventListener('click', function () {
+        /* With line numbers on, td.code holds the code and the gutter is a sibling
+           cell, so reaching for it first keeps the numbers out of the clipboard. */
+        var code = block.querySelector('td.code pre') || block.querySelector('pre');
+
+        var label = function (text) {
+          button.textContent = text;
+          setTimeout(function () { button.textContent = 'Copy'; }, 2000);
+        };
+
+        navigator.clipboard.writeText(code.innerText.replace(/\n+$/, '')).then(
+          function () { label('Copied'); },
+          function () { label('Failed'); }
+        );
+      });
+
+      block.appendChild(button);
+    });
+  }
+</script>
+<!-- end copy code button -->
 <!-- end footer -->

@@ -53,6 +53,23 @@ exiftool -all= -overwrite_original -r .
 exiftool -gpslatitude .
 ```
 
+## Line Numbers
+
+{% highlight bash linenos %}
+exiftool -all= -overwrite_original -r .
+
+exiftool -gpslatitude .
+{% endhighlight %}
+
+## Table
+
+{: .table-post}
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
+
+
 ## Mermaid Diagram
 
 ```mermaid
