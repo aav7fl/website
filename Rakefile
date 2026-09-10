@@ -103,6 +103,7 @@ task :html_proofer do
       %r{^https://boardgamegeek.com/}, # Returns a 403
       %r{^https://fcc.report/}, # Blocking us now
       %r{^https://merlin.allaboutbirds.org.*}, # Returns a 403
+      %r{^https://www.androidauthority.com.*}, # 403s
       %r{^https://www.audiokarma.org.*}, # 403s
       %r{^https://www.howtogeek.com.*}, # 403s
       %r{^https://www.linkedin.com.*}, # They always return a 999
