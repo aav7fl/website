@@ -2,7 +2,7 @@
 layout: post
 title: 'My BirdNET-Go Remote Mic Relay Setup'
 date: '2026-09-02 08:53'
-# updated: '2026-09-02 08:53'
+updated: '2026-09-20 21:08'
 comments: true
 image:
   path: /assets/img/2026/09/raspberry_pi_sink_ground_final_1.jpg
@@ -22,7 +22,14 @@ My secondary goal was to continue using a single instance of BirdNET-Go for all 
 
 {% include toc.html %}
 
+## Changelog
+
+> Changelog:
+> - 2026-09-20: Add mention of `tphakala/birdnet-go-remote-mic`.
+
 ## Overview
+
+> 2026-09-20: After I posted this, tphakala informed me that they were working on a remote microphone app that runs on Raspberry Pi devices. It natively connects to BirdNET-Go instead of doing it my way. The project just cut its first release and I think you should check it out before continuing: [tphakala/birdnet-go-remote-mic](https://github.com/tphakala/birdnet-go-remote-mic)
 
 Below is an overview of the hardware components in my setup. I'll go through the more interesting parts below.
 
