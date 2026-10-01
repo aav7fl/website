@@ -102,6 +102,7 @@ task :html_proofer do
       %r{^https://bluecharmbeacons.com/}, # Returns a 403
       %r{^https://boardgamegeek.com/}, # Returns a 403
       %r{^https://fcc.report/}, # Blocking us now
+      %r{^https://linktr.ee/}, # Returns a 406
       %r{^https://merlin.allaboutbirds.org.*}, # Returns a 403
       %r{^https://www.androidauthority.com.*}, # 403s
       %r{^https://www.audiokarma.org.*}, # 403s
