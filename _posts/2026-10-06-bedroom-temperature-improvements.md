@@ -3,7 +3,7 @@ layout: post
 title: Building a Vent Booster & Other Cool Ideas for My Bedroom
 date: '2026-10-06 20:53'
 # updated: '2026-10-06 20:53'
-comments: false
+comments: true
 image:
   path: /assets/img/2026/10/04-register-fans-realignment.jpg
   height: 600
