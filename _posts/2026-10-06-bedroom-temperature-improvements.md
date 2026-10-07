@@ -255,7 +255,7 @@ Oh look, did I already make a new prototype? I wonder what will happen in 2027..
 
 ![3D-printed baseboard register vent with fans installed](/assets/img/2026/10/vent-prototype-v2.jpg)*3D-printed baseboard register vent prototype for future testing 👀*
 
-- <https://www.thingiverse.com/thing:7413541>
+- I uploaded my design here: <https://www.thingiverse.com/thing:7413541>
 
 ---
 
