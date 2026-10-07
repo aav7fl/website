@@ -4,6 +4,7 @@ title: 'Examples'
 date: '2025-05-25 08:08'
 updated: '2025-05-26 13:47'
 comments: false
+#comments: true
 image:
   path: /assets/img/default-card.png
   height: 600
