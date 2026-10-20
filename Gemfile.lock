@@ -63,7 +63,7 @@ GEM
       bigdecimal
       rake (~> 13.3)
     hashery (2.1.2)
-    html-proofer (5.2.2)
+    html-proofer (5.2.3)
       addressable (~> 2.3)
       async (~> 2.1)
       benchmark (~> 0.5)
@@ -137,11 +137,10 @@ GEM
       sawyer (~> 0.9)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    pdf-reader (2.15.1)
+    pdf-reader (2.16.0)
       Ascii85 (>= 1.0, < 3.0, != 2.0.0)
       afm (>= 0.2.1, < 2)
       hashery (~> 2.0)
-      ruby-rc4
       ttfunk
     public_suffix (7.0.5)
     racc (1.8.1)
@@ -152,7 +151,6 @@ GEM
       ffi (~> 1.0)
     rexml (3.4.4)
     rouge (4.7.0)
-    ruby-rc4 (0.1.5)
     safe_yaml (1.0.5)
     sass-embedded (1.105.1-aarch64-linux-gnu)
       google-protobuf (~> 4.31)
@@ -174,7 +172,7 @@ GEM
     uri (1.1.1)
     webrick (1.9.2)
     yell (2.2.2)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux
