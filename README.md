@@ -50,3 +50,13 @@ shapes) or only cosmetically, so a few pixels of font drift stays quiet while a
 moved arrow prints `REVIEW:` and lists the file. Upgrading `mermaid-cli` does not
 re-render on its own; run `npm run mermaid:force` if you want every diagram on
 the new renderer, and review what it reports.
+
+## License
+
+This repository is split-licensed:
+
+- **Source code** is under the [MIT License](LICENSE.txt).
+- **Bird photographs** in [`assets/img/birds/`](assets/img/birds/) are
+  © Kyle Niewiada, **all rights reserved**. They are not covered by the MIT
+  License and may not be copied, reused, or redistributed without written
+  permission. See [`assets/img/birds/LICENSE.txt`](assets/img/birds/LICENSE.txt).

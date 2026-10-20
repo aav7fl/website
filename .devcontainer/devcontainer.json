@@ -1,6 +1,6 @@
 {
 	"name": "Jekyll Site",
-	"image": "mcr.microsoft.com/devcontainers/ruby:3.2-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/ruby:3.2-bookworm",
 
 	// Since I'm using Podman, 'root' inside maps to 'local user' outside.
 	// This gives you perfect permissions without chown hacks (which make a big mess).
@@ -35,7 +35,18 @@
 		}
 	},
 
-	"forwardPorts": [4000, 35729],
+	// The site goes through VS Code's port forwarding, which is what makes the
+	// auto-opened browser tab use http://localhost:3000.
+	"forwardPorts": [3000],
+	// LiveReload is published straight from Podman instead. VS Code's forwarder
+	// keeps accepting connections while Jekyll is down or restarting, and Jekyll
+	// loads livereload.js with a blocking document.write, so a stalled livereload
+	// connection froze the whole page.
+	"appPort": [35729],
+	"portsAttributes": {
+		"3000": { "label": "Jekyll" },
+		"35729": { "label": "LiveReload", "onAutoForward": "ignore" }
+	},
 
 	// Run the setup script (configures git, installs bundle)
 	"postCreateCommand": "sh .devcontainer/post-create.sh"

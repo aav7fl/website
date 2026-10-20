@@ -19,10 +19,8 @@ permalink: /sitemap/
 
 ## Other Pages
 
-{% for page in site.pages_standalone %}
-{% if page.title != "examples" %}
-{% continue %}
-{% endif %}
+{%- for page in site.pages_standalone -%}
+{%- if page.url == "/examples/" %}{% continue %}{% endif %}
 - [{{ page.title }}]({{ page.url }})
-{% endfor %}
+{%- endfor %}
 - [RSS](/feed.xml)

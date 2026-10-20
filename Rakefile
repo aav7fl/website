@@ -66,11 +66,21 @@ task :serve => :mermaid do
     open_url: true,
   }
 
+  # Jekyll builds the URL it opens (and logs) from the bind address, giving
+  # http://0.0.0.0:3000, which VS Code then opens as 127.0.0.1. Show and open
+  # localhost instead -- same server, friendlier URL.
+  Jekyll::Commands::Serve.singleton_class.prepend(Module.new do
+    def server_address(server, options = {})
+      super.sub('://0.0.0.0:', '://localhost:')
+    end
+  end)
+
   # Build twice for the same reason :build does: FastImage can only read the
   # dimensions of images that already exist in _site, so the AMP layout gets
   # them on the second pass. Serve.process only starts the web server -- it
-  # never builds -- so both passes have to happen here.
-  Jekyll::Commands::Build.process(future: true)
+  # never builds -- so both passes have to happen here. A _site left over from
+  # an earlier run already has the images, so skip the extra ~10s pass then.
+  Jekyll::Commands::Build.process(future: true) unless Dir.exist?('_site/assets')
   Jekyll::Commands::Build.process(buildOptions)
   Jekyll::Commands::Serve.process(serveOptions)
 end
@@ -135,3 +145,68 @@ task :clean do
 end
 
 task :default => [:serve]
+
+# Lives outside the workspace: Jekyll's file watcher walks every directory in
+# the repo (its excludes only filter events), and torch's ~2,500 directories
+# over the bind mount added ~45s to every `rake serve` start.
+BIRDS_PYTHON = '/opt/venv-birds/bin/python'
+
+namespace :birds do
+  desc "Set up offline data: eBird codes, ABA checklist, the pinned AI model and its embeddings (safe to re-run)"
+  task :setup do
+    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
+  end
+
+  desc "Import photos from _staging/ into assets/img/birds/ and _data/birds.yml (options after --, e.g. -- --americas)"
+  task :import do
+    # Capture any arguments passed after a "--" separator
+    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
+    
+    # Prevent Rake from trying to execute those arguments as if they were task names
+    extra_args.each { |arg| task arg.to_sym do ; end }
+
+    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py #{extra_args.join(' ')}"
+  end
+
+  desc "Report (or, with -- --apply, remove) old bird photo versions from git history. Rewrites history!"
+  task :compact_history do
+    # Capture any arguments passed after a "--" separator (e.g. --apply)
+    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
+    extra_args.each { |arg| task arg.to_sym do ; end }
+
+    sh "#{BIRDS_PYTHON} scripts/birds/compact_history.py #{extra_args.join(' ')}"
+  end
+
+  desc "Run auto-ingestion for high-confidence AI matches (>90%)"
+  task :auto do
+    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --auto"
+  end
+
+  desc "Update the bird pipeline's Python packages now (only switches if the new versions pass the checks)"
+  task :update_deps do
+    sh "#{BIRDS_PYTHON} scripts/birds/update_deps.py"
+  end
+
+  desc "Check every bird pipeline dependency and explain how to fix anything broken"
+  task :doctor do
+    sh "#{BIRDS_PYTHON} scripts/birds/doctor.py"
+  end
+
+  desc "Measure the AI model's accuracy on the catalog photos (try a candidate with -- --model-dir DIR)"
+  task :evaluate do
+    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
+    extra_args.each { |arg| task arg.to_sym do ; end }
+
+    sh "#{BIRDS_PYTHON} scripts/birds/evaluate_model.py #{extra_args.join(' ')}"
+  end
+
+  desc "Write copyright tags into every already-imported bird photo"
+  task :copyright do
+    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --stamp-copyright"
+  end
+
+  desc "Force re-import of all photos in _staging/"
+  task :reimport do
+    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --force"
+  end
+end

@@ -1,0 +1,9 @@
+# What the core bird pipeline needs (no versions). update_deps.py installs the latest
+# of these, tests them, and writes the exact versions to requirements.txt.
+pyyaml           # reads/writes _data/birds.yml
+natsort          # natural filename order in _staging/
+shapely          # GPS -> county lookup
+prompt_toolkit   # interactive prompts and fuzzy search
+rich             # coloured console output
+pillow           # loads photos for the AI model
+git-filter-repo  # only for the rare `rake birds:compact_history`
