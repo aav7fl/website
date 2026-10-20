@@ -111,6 +111,7 @@ task :html_proofer do
       %r{^https://www.raspberrypi.com.*}, # 403s
       %r{^https://www.reddit.com.*}, # Reddit is blocking us :(
       %r{^https://www.sweetscape.com/}, # Returns response code 0???
+      %r{^https://www.thingiverse.com/}, # 403s
       %r{^https://zeldaspeedruns.wikia.com/}, # Returns a 403
       %r{.*x.com/.*}, # This site now hates HTML Proofer
       %r{^https://frenck.dev.*}, # Cloudflare is blocking us :(
@@ -118,6 +119,7 @@ task :html_proofer do
       %r{^https://github.com/home-assistant/core/blob/dd7a06b9dca8a04152f6c4ef4828c8e214260393/homeassistant/components/google_assistant/trait.py#L522-L530}, # GitHub is saying the anchor is an error
       %r{^https://github.com/Koenkk/zigbee2mqtt/issues/23661#issuecomment-3843098714}, # GitHub is saying the anchor is an error
       %r{^https://kyleniewiada.bandcamp.com/}, # Returns a 403
+      %r{^https://scoresaber.com/}, # 403s
       %r{^https://sooeveningnews.newsbank.com/.*}, # NewsBank thinks we're a bot if we test too often
       %r{^https://travis-ci.com/*}, # Blocked with 415
     ],
