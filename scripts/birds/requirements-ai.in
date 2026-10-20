@@ -1,0 +1,9 @@
+# What the optional AI suggestions need (no versions). update_deps.py installs the
+# latest of these, tests them, and writes the exact versions to requirements-ai.txt.
+# CPU-only PyTorch builds. Without this index, Linux installs the CUDA build, which adds
+# ~2.7 GB of NVIDIA libraries that can't run in the dev container anyway.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+open_clip_torch
+huggingface_hub

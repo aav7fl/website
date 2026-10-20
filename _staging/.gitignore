@@ -1,0 +1,3 @@
+# Ignore all staged raw photos
+*
+!.gitignore

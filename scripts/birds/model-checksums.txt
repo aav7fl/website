@@ -1,0 +1,3 @@
+# sha256 of the AI model files (imageomics/bioclip @ ce901ab3c6a913f9e9ef94ce6d27761069f4f01c)
+86d418d7046fa9212ab70eb7cb3deeef02be46f39d7948bad5dc7649f8277208  open_clip_config.json
+e380384f0c30d425d8c6c40f24471f9dd497fbdfa734a89c461a94aee95f0ef4  open_clip_pytorch_model.bin

@@ -12,3 +12,14 @@ vendor/
 .DS_Store
 
 .idea/
+
+# Bird pipeline virtualenv & offline caches
+scripts/birds/bioclip_species_embeddings.pt
+__pycache__/
+# The pinned AI model (~600 MB, see scripts/birds/bird_model.py). Back it up with your photos.
+scripts/birds/models/
+# Local-only data: the ABA Checklist is copyrighted and can't be published (see scripts/birds/bird_model.py)
+scripts/birds/data/
+# Auto-update bookkeeping (scripts/birds/update_deps.py)
+scripts/birds/.deps-state.json
+scripts/birds/.deps-update.log

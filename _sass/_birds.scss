@@ -1,0 +1,1163 @@
+@use "sass:color";
+@use "_config";
+
+/***************
+BIRD PORTFOLIO STYLING
+***************/
+
+// Wide enough for the 700px content column plus a category index in each margin.
+$index-breakpoint: 1200px;
+$index-max-width: 280px;
+$index-gap: config.$padding * 1.5;
+
+// Only inlined on the birds page, so this doesn't affect the rest of the site.
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// The desktop index is positioned against <main> so it starts level with the
+// page title. `main` (not `.content`) because the footer is `.content` too.
+@media (min-width: $index-breakpoint) {
+  main.content {
+    position: relative;
+  }
+}
+
+// Read by screen readers but not shown, e.g. "Location:" beside the 📍 emoji
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Category Links (shared by the side index and the mobile picker) */
+.bird-category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: config.$padding * 0.75;
+    padding: .4em .6em;
+    border-radius: config.$br;
+    color: config.$dark-grey;
+    font-size: .85em;
+    line-height: 1.25;
+    text-decoration: none;
+    text-wrap: pretty; // Avoids a lone word on the second line
+
+    &:hover {
+      color: config.$black;
+      background: config.$white-smoke;
+
+      // The row turns the pill's grey, so invert the pill to keep it visible
+      .count {
+        border-color: config.$dim-grey;
+        color: config.$white;
+        background: config.$dim-grey;
+      }
+    }
+
+    &[aria-current] {
+      color: config.$link-color;
+      background: rgba(config.$primary-color, 0.08);
+      font-weight: 600;
+
+      .count {
+        border-color: config.$primary-color;
+        color: config.$white;
+        background: config.$primary-color;
+      }
+    }
+  }
+
+  // Counts sit in a fixed-width outlined pill so they read as counters in their
+  // own column, not digits trailing the names.
+  .count {
+    flex: none;
+    box-sizing: border-box;
+    min-width: 2.4em;
+    padding: .15em .5em;
+    border: 1px solid config.$light-grey;
+    border-radius: 1em;
+    background: config.$white-smoke;
+    line-height: 1.2;
+    color: config.$dim-grey;
+    font-size: .8em;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+}
+
+.bird-portfolio {
+  // Birds and categories filtered out by the find box. Needed because their own
+  // display rules (flex, etc.) would otherwise override the hidden attribute.
+  [hidden] {
+    display: none !important;
+  }
+
+  /* Intro */
+  // Key stats under the title, together in one small grey pill with a thin
+  // divider between them. Phones are too narrow for one line, so there the
+  // stats stack inside the pill without the divider.
+  .bird-stats {
+    display: inline-flex;
+    flex-direction: column;
+    margin: 0 0 1em;
+    padding: .25em .9em;
+    border-radius: .9em;
+    background: config.$white-smoke;
+    color: config.$dark-grey;
+    font-size: .8em;
+    line-height: 1.5;
+
+    li {
+      margin: 0;
+    }
+
+    time {
+      color: config.$dim-grey;
+    }
+
+    @media (min-width: config.$breakpoint-2) {
+      flex-direction: row;
+      border-radius: 1em;
+
+      li + li::before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: .9em;
+        margin: 0 .75em;
+        background: config.$light-grey;
+        vertical-align: -.1em;
+      }
+    }
+  }
+
+  // The "My gear" toggle is fine print: a small grey label with small text under
+  // it, so it's there when wanted without crowding the intro.
+  %bird-small-label {
+    color: config.$dim-grey;
+    font-size: .85em;
+    font-weight: 600;
+  }
+
+  // A plain text toggle in place of the site-wide blue <details> bar
+  .bird-gear {
+    margin: 0 0 1em;
+    border: 0;
+
+    summary {
+      @extend %bird-small-label;
+      display: inline-flex;
+      align-items: center;
+      gap: .35em;
+      padding: 0;
+      background: none;
+      cursor: pointer;
+
+      &::after {
+        border-top-width: 4px;
+        border-top-color: currentColor;
+        border-inline-width: 3px;
+      }
+
+      &:hover {
+        color: config.$dark-grey;
+      }
+    }
+
+    // Indented under the toggle, with a thin guide line hanging from below the
+    // 🎒, so the list reads as the toggle's contents rather than loose page text
+    ul {
+      margin: .4em 0 0 .55em;
+      padding: .1em 0 .1em 1.6em;
+      border-left: 2px solid config.$light-grey;
+      font-size: .85em;
+      line-height: 1.6;
+      color: config.$dark-grey;
+    }
+
+    li {
+      margin-bottom: .15em;
+    }
+  }
+
+  // The discussion's intro line
+  .bird-fineprint {
+    margin: .2em 0;
+    color: config.$dim-grey;
+    font-size: .8em;
+  }
+
+  // The photo copyright: a slim bordered notice under the search, set apart
+  // from the intro text so it reads as a notice
+  .bird-copyright {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 config.$padding;
+    margin: .5em 0 0;
+    padding: .35em .75em;
+    border: 1px solid config.$light-grey;
+    border-radius: config.$br;
+    background: config.$white-smoke;
+
+    color: config.$dim-grey;
+    font-size: .75em;
+    line-height: 1.5;
+
+    a {
+      color: inherit;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        color: config.$link-color;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Under the search bar (when it's shown), the notice hangs from it as one
+  // piece: no gap, and only the outer corners rounded
+  .bird-find:not([hidden]) + .bird-copyright {
+    margin-top: 0;
+    border-top: 0;
+    border-radius: 0 0 config.$br config.$br;
+  }
+
+  /* Find A Bird */
+  // The search field and the "New" button are one control: a single grey bar,
+  // with the button as its right end behind a thin divider
+  .bird-find {
+    display: flex;
+    box-sizing: border-box;
+    height: 2.6em;
+    margin: config.$padding * 2 0 0; // Room below "My Gear", so the search starts the gallery
+    border: 1px solid transparent;
+    border-radius: config.$br;
+    background: color.adjust(config.$white, $lightness: -10%); // Same grey as the site's contact form fields
+    overflow: hidden; // Keeps the pressed button's fill inside the rounded corners
+
+    // The copyright notice hangs from the bottom edge (see .bird-copyright)
+    &:has(+ .bird-copyright) {
+      border-radius: config.$br config.$br 0 0;
+    }
+
+    // Typing in the field lights up the whole bar
+    &:has(input:focus) {
+      border-color: config.$primary-color;
+      background: config.$white;
+    }
+  }
+
+  .bird-find-field {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0 .8em 0 2.4em; // Room for the icon
+      text-overflow: ellipsis;
+      border: 0;
+      background: transparent;
+      font-family: config.$sans-serif;
+      font-size: 1em;
+      color: config.$black;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .bird-find-icon {
+    position: absolute;
+    top: 50%;
+    left: .8em;
+    transform: translateY(-50%);
+    color: config.$dim-grey;
+    pointer-events: none;
+  }
+
+  // Room for the match count only while it's showing, so the placeholder
+  // gets the whole field the rest of the time
+  .bird-find.is-filtered input {
+    padding-right: 5.5em;
+  }
+
+  // "12 of 167", inside the right end of the field
+  .bird-find-status {
+    position: absolute;
+    top: 50%;
+    right: 2.2em; // Clear of the browser's clear-field button
+    transform: translateY(-50%);
+    color: config.$dim-grey;
+    font-size: .8em;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+
+  // Shows only new birds. Same height, weight and colours as the field's text;
+  // filled purple while pressed.
+  .bird-new-toggle {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: .4em;
+    height: 100%;
+    margin: 0;
+    padding: 0 .8em;
+    border: 0;
+    border-left: 1px solid rgba(config.$black, 0.12);
+    border-radius: 0;
+    background: transparent;
+    color: config.$dark-grey;
+    font-family: config.$sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+
+    .count {
+      min-width: 1.6em;
+      padding: .1em .4em;
+      border-radius: 1em;
+      background: rgba(config.$primary-color, 0.12);
+      color: config.$primary-color;
+      font-size: .75em;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
+    &:hover {
+      background: rgba(config.$black, 0.05);
+    }
+
+    &:focus-visible {
+      outline: 3px solid config.$link-color;
+      outline-offset: -3px; // Inside the bar, which clips anything outside it
+    }
+
+    &[aria-pressed="true"] {
+      background: config.$primary-color;
+      color: config.$white;
+
+      .count {
+        background: config.$white;
+        color: config.$primary-color;
+      }
+    }
+  }
+
+  .bird-find-empty {
+    margin: config.$padding * 2 0;
+    color: config.$dim-grey;
+    text-align: center;
+  }
+
+  /* Desktop Side Index */
+  .bird-index {
+    display: none;
+
+    @media (min-width: $index-breakpoint) {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: calc(100% + #{$index-gap});
+      // Use the margin's width up to a limit, so wider screens get fewer wrapped names
+      width: min(#{$index-max-width}, calc((100vw - #{config.$content-width + config.$padding * 2}) / 2 - #{$index-gap + config.$padding}));
+    }
+  }
+
+  .bird-index-inner {
+    position: sticky;
+    top: config.$padding;
+    max-height: calc(100vh - #{config.$padding * 2});
+    // Tablet browsers count the area under their toolbars in 100vh, which would
+    // put the bottom of the index off screen. dvh is just the visible window.
+    max-height: calc(100dvh - #{config.$padding * 2});
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .bird-index-title {
+    margin: 0 0 config.$padding * 0.5;
+    padding: 0 .6rem;
+    color: config.$dim-grey;
+    font-size: .75em;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* Category Sections */
+  .sibley-category-section {
+    margin-top: config.$padding * 2;
+    scroll-margin-top: config.$padding * 0.5;
+
+    // Close under the search, so the search reads as part of the gallery
+    &:first-child {
+      margin-top: config.$padding * 1.25;
+    }
+  }
+
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: config.$padding;
+    border-bottom: 2px solid config.$light-grey;
+    margin-bottom: config.$padding;
+
+    // Desktop only. On mobile the floating bar shows the current section instead.
+    @media (min-width: $index-breakpoint) {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: config.$white;
+      padding-top: config.$padding * 0.5;
+      // Extend the white sideways past the cards' drop shadows, which spread beyond
+      // each card and would otherwise show beside the heading as cards scroll under
+      // it. 32px stays clear of the category index in the left margin.
+      box-shadow: -32px 0 0 config.$white, 32px 0 0 config.$white;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.15em;
+
+      @media (min-width: config.$breakpoint-2) {
+        font-size: 1.5em;
+      }
+    }
+
+    // No hover on touch screens to reveal the permalink, so show it faintly.
+    @media (hover: none) {
+      .octicon {
+        visibility: visible;
+        opacity: .4;
+      }
+    }
+  }
+
+  // Heads the Disqus thread after the last category; styled like a category
+  // heading, but it doesn't stick
+  .bird-discussion {
+    margin-top: config.$padding * 3;
+    scroll-margin-top: config.$padding * 0.5;
+
+    .category-header {
+      position: static;
+      margin-bottom: .5em;
+    }
+  }
+
+  // A soft pill, so the count reads apart from the category name
+  .species-count {
+    flex: none;
+    align-self: center;
+    padding: .15em .65em;
+    border-radius: 1em;
+    background: config.$white-smoke;
+    color: config.$dim-grey;
+    font-size: .75em;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  // Sections fade in as they scroll into view. The class is added by JS.
+  @media (prefers-reduced-motion: no-preference) {
+    &.js-fade .sibley-category-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+
+      &.visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  /* Bird Grid & Cards */
+  .bird-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: config.$padding * 0.5;
+
+    @media (min-width: config.$breakpoint-2) {
+      gap: config.$padding;
+    }
+  }
+
+  // Cards rest on a soft shadow so they read as prints on a page, not table cells.
+  .bird-card {
+    // Jumping to a card (the "latest" link up top) leaves room for the sticky category heading
+    scroll-margin-top: config.$padding * 5;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: config.$br * 1.6;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: config.$white;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  // A real <button>: reset its default look so it's just the photo
+  // Keyboard focus on a photo, and the photo you return to when the viewer
+  // closes (however it was opened), outline the whole card, outside its border
+  .bird-card:has(.bird-image-wrapper:focus-visible),
+  .bird-card.is-returned {
+    outline: 3px solid config.$link-color;
+    outline-offset: 3px;
+  }
+
+  // Briefly outlines the card you just jumped to, so it's easy to spot.
+  // It fades out as a colour change, not movement.
+  .bird-card:target {
+    animation: bird-card-found 2.5s ease-out;
+  }
+
+  @keyframes bird-card-found {
+    0%,
+    40% {
+      box-shadow: 0 0 0 3px config.$primary-color;
+    }
+
+    100% {
+      box-shadow: 0 0 0 3px rgba(config.$primary-color, 0);
+    }
+  }
+
+  // Small label beside the name for birds photographed in the last 60 days
+  .bird-new-badge {
+    display: inline-block;
+    margin-left: .2em;
+    padding: .2em .5em;
+    border-radius: 1em;
+    background: config.$primary-color;
+    color: config.$white;
+    font-size: .6em;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    vertical-align: .25em;
+    white-space: nowrap;
+  }
+
+  .bird-image-wrapper {
+    display: block;
+    width: 100%;
+    order: -1; // Shown above the details, though it comes after them for screen readers
+    aspect-ratio: 4 / 3; // Holds the photo's space before it loads
+    padding: 0;
+    border: 0;
+    font: inherit;
+    cursor: zoom-in;
+    overflow: hidden;
+    background: config.$white-smoke;
+    // Faint line where the photo meets the text
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    // Fallback for browsers without :has(): outline just inside the photo
+    &:focus-visible {
+      outline: 3px solid config.$link-color;
+      outline-offset: -3px;
+    }
+
+    // Otherwise the outline goes around the whole card (below), where it sits on the
+    // white page instead of a dark photo
+    @supports selector(:has(*)) {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+    }
+
+    // Until the script loads it, the image takes no space and the button's own 4:3
+    // grey box stands in (no broken-image icon, no layout shift).
+    img:not([src]) {
+      display: none;
+    }
+
+    // Fade each photo in as it arrives (a fade, not motion, so it stays under reduced motion)
+    img[data-src] {
+      opacity: 0;
+      // Keeps the hover zoom's transition too, which this more specific rule would otherwise replace
+      transition: opacity .2s ease, transform .4s ease;
+
+      &.is-loaded {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Lift and zoom only where there's a real hover, so it doesn't stick on touch.
+  // These are small enough to keep under reduced motion; the section fade-in
+  // and smooth scrolling are the larger motions, and those still switch off.
+  @media (hover: hover) {
+    .bird-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 2px 4px rgba(0, 0, 0, 0.06),
+          0 12px 28px rgba(0, 0, 0, 0.16);
+      }
+    }
+
+    .bird-image-wrapper {
+      img {
+        transition: transform .4s ease;
+      }
+
+      &:hover img {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .bird-info {
+    padding: config.$padding * 0.5;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: config.$breakpoint-2) {
+      padding: 1rem;
+    }
+  }
+
+  .species-common {
+    font-size: 1em;
+    line-height: 1.3;
+    margin: 0 0 .25rem;
+
+    @media (min-width: config.$breakpoint-2) {
+      font-size: 1.15em;
+    }
+  }
+
+  .species-scientific {
+    color: config.$dim-grey;
+    font-size: .85em;
+    margin: 0 0 .75rem;
+  }
+
+  // Location and date as small rounded tags, each with a line icon
+  .bird-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin: 0;
+    font-size: .75em;
+
+    // Keeps notes at least this far below, however tall the row's other cards
+    &:has(+ .bird-notes) {
+      margin-bottom: config.$padding;
+    }
+
+    .location,
+    .date {
+      display: inline-flex;
+      align-items: center;
+      gap: .35em;
+      max-width: 100%;
+      padding: .2em .6em;
+      border-radius: 1em;
+      background: config.$white-smoke;
+      color: config.$dark-grey;
+      line-height: 1.35;
+
+      &::before {
+        content: "";
+        flex: none;
+        width: 1em;
+        height: 1em;
+        background: config.$dim-grey;
+        mask: var(--icon) center / contain no-repeat;
+      }
+    }
+
+    .location {
+      --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.5a4.5 4.5 0 0 0-4.5 4.5C3.5 9.4 8 14.5 8 14.5s4.5-5.1 4.5-8.5A4.5 4.5 0 0 0 8 1.5z' fill='none' stroke='black' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='6' r='1.7'/%3E%3C/svg%3E");
+    }
+
+    .date {
+      --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Crect x='2.25' y='3.25' width='11.5' height='10.5' rx='1.5'/%3E%3Cpath d='M2.25 6.75h11.5M5.5 1.75v3M10.5 1.75v3'/%3E%3C/svg%3E");
+    }
+  }
+
+  // Long notes stop after four lines with an ellipsis; the full note is in the
+  // photo viewer's caption. Screen readers still get the whole note here.
+  // The box (padding, grey, purple edge) is the wrapper, and only the text
+  // inside is cut: an element cut to four lines still shows whatever falls in its
+  // own padding, which would be the top half of the fifth line.
+  .bird-notes {
+    font-size: .85em;
+    padding: .75rem;
+    border-left: 2px solid config.$link-color;
+    background: config.$white-smoke;
+    // Pushed to the bottom of the card, so notes line up across a row even when
+    // the cards beside them have longer names or no notes at all. The space
+    // above comes from the details (below), since an auto margin can't have a minimum.
+    margin: auto 0 0;
+
+    // Shares the box with the expand button below it
+    &:has(.bird-notes-more:not([hidden])) {
+      padding-bottom: .35rem;
+    }
+  }
+
+  .bird-notes-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  // Added by the script under notes that were cut off: an expand icon at the
+  // bottom right of the note's box that opens the photo viewer
+  .bird-notes-more {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: .2rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: config.$dim-grey;
+    cursor: pointer;
+
+    svg {
+      flex: none;
+    }
+
+    &:hover {
+      color: config.$link-color;
+    }
+
+    &:focus-visible {
+      outline: 3px solid config.$link-color;
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* Floating Buttons */
+%bird-round-button {
+  display: flex; // Centres the chevron icon exactly, unlike a text arrow
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: config.$line-height;
+  height: config.$line-height;
+  border-radius: 50%;
+  text-decoration: none;
+  background-color: config.$primary-color;
+  color: config.$white;
+
+  &:hover {
+    color: config.$white;
+    background-color: config.$link-hover-color;
+  }
+}
+
+// Desktop only. Mobile gets the one inside the floating bar.
+.bird-back-to-top {
+  @extend %bird-round-button;
+  display: none;
+  position: fixed;
+  right: config.$padding;
+  bottom: config.$padding;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out;
+
+  @media (min-width: $index-breakpoint) {
+    display: flex;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// Mobile only, and only once JS has enabled it.
+.bird-nav-bar {
+  display: none;
+  position: fixed;
+  left: config.$padding;
+  right: config.$padding;
+  bottom: config.$padding;
+  z-index: 100;
+  max-width: config.$content-width - config.$padding * 2;
+  margin: 0 auto;
+  padding: config.$padding * 0.25;
+  align-items: center;
+  gap: config.$padding * 0.5;
+  background: config.$white;
+  border: 1px solid config.$light-grey;
+  border-radius: config.$line-height;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+
+  &.is-enabled {
+    display: flex;
+
+    @media (min-width: $index-breakpoint) {
+      display: none;
+    }
+  }
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .bird-nav-current {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    padding: 0 config.$padding * 0.75;
+    height: config.$line-height;
+    border: 0;
+    background: none;
+    font-family: config.$sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    color: config.$black;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .bird-nav-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .caret {
+    flex: none;
+    color: config.$dim-grey;
+  }
+
+  .bird-nav-top {
+    @extend %bird-round-button;
+  }
+}
+
+/* Mobile Category Picker */
+.bird-picker {
+  // Bottom sheet on phones
+  width: 100%;
+  max-width: 100%;
+  max-height: 75vh;
+  overflow-y: auto; // The sheet scrolls; opening it centers the current category
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: config.$br config.$br 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+
+  // Centered panel on larger screens
+  @media (min-width: config.$breakpoint-2) {
+    width: 400px;
+    margin: auto;
+    border-radius: config.$br;
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .bird-picker-inner {
+    padding: config.$padding;
+  }
+
+  // Stays pinned at the top of the sheet while the list scrolls under it. The
+  // divider and soft shadow set it apart as the sheet's header, not a list item.
+  .bird-picker-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: (-(config.$padding)) (-(config.$padding)) config.$padding * 0.5;
+    padding: config.$padding * 0.75 config.$padding;
+    background: config.$white;
+    border-bottom: 1px solid config.$light-grey;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.15);
+
+    h2 {
+      margin: 0;
+      font-size: 1.15em;
+    }
+  }
+
+  .bird-picker-close {
+    border: 0;
+    background: none;
+    font-size: 1.75em;
+    line-height: 1;
+    color: config.$dim-grey;
+    cursor: pointer;
+
+    &:hover {
+      color: config.$black;
+    }
+  }
+
+  .bird-category-list a {
+    font-size: 1em;
+    padding: .5em;
+  }
+}
+
+/* Lightbox Modal */
+// A native <dialog>, so undo the browser's default dialog box styling
+.bird-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: config.$white;
+  background-color: rgba(0, 0, 0, 0.9);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  // Swipes belong to the lightbox (next/previous photo), not to the browser's
+  // swipe-to-go-back gesture. Pinch-zoom still works for a closer look.
+  touch-action: pinch-zoom;
+  overscroll-behavior: contain;
+
+  &[open] {
+    display: flex;
+  }
+
+  // The dialog paints its own dark background (so swipe-down can fade it)
+  &::backdrop {
+    background: transparent;
+  }
+}
+
+// Full-width window onto the three-slide track; only the middle slide shows at rest
+.bird-modal-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.bird-modal-track {
+  display: flex;
+  will-change: transform;
+}
+
+.bird-modal-slide {
+  flex: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  figcaption {
+    margin-top: 1rem;
+    color: config.$white;
+    font-family: config.$sans-serif;
+    font-size: 1em;
+  }
+
+  .caption-title,
+  .caption-date,
+  .caption-notes {
+    display: block;
+  }
+
+  .caption-link {
+    display: inline-block;
+    margin-top: .6em;
+    color: config.$light-grey;
+    font-size: .85em;
+    text-decoration: underline;
+    text-decoration-color: rgba(config.$white, 0.35);
+
+    &:hover,
+    &:focus-visible {
+      color: config.$white;
+      text-decoration-color: currentColor;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    // The usual "opens elsewhere" box-and-arrow icon
+    .external-icon {
+      margin-left: .3em;
+      vertical-align: -.05em;
+    }
+  }
+
+  .caption-notes {
+    max-width: 40em;
+    margin: .5em auto 0;
+    font-size: .9em;
+    font-style: italic;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .caption-date {
+    margin-top: .2em;
+    color: config.$light-grey;
+    font-size: .85em;
+  }
+}
+
+.bird-modal-content {
+  max-width: 100%;
+  // Never taller than this share of the window, and never so tall that its caption
+  // (and the arrows below on phones) runs off screen: the script measures each
+  // caption and sets --fit-height, so long captions shrink the photo
+  max-height: min(65vh, var(--fit-height, 65vh));
+  object-fit: contain;
+  border-radius: config.$br;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  // Stops the browser's own image drag from fighting the swipe
+  -webkit-user-drag: none;
+  user-select: none;
+
+  @media (min-width: config.$breakpoint-2) {
+    max-height: min(80vh, var(--fit-height, 80vh));
+  }
+}
+
+// Phones: a row under the caption, so the arrows never cover the bird
+.bird-modal-controls {
+  display: flex;
+  justify-content: center;
+  gap: config.$padding * 2;
+  margin-top: config.$padding;
+}
+
+.bird-modal-nav {
+  width: config.$line-height * 1.5;
+  height: config.$line-height;
+  border: 0;
+  border-radius: config.$br;
+  background: rgba(255, 255, 255, 0.15);
+  color: config.$white-smoke;
+  font-size: 2em;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  // Larger screens: out at the screen edges, beside the photo
+  @media (min-width: config.$breakpoint-2) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: config.$line-height;
+    height: config.$line-height * 1.5;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (min-width: config.$breakpoint-2) {
+  .bird-modal-controls {
+    margin: 0;
+  }
+
+  .bird-modal-prev {
+    left: config.$padding * 0.5;
+  }
+
+  .bird-modal-next {
+    right: config.$padding * 0.5;
+  }
+}
+
+.bird-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  padding: 0 .25em;
+  border: 0;
+  border-radius: config.$br;
+  background: none;
+  line-height: 1;
+  color: config.$white-smoke;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+
+  &:hover,
+  &:focus-visible {
+    color: config.$light-grey;
+  }
+
+  &:focus-visible {
+    outline: 2px solid config.$white;
+  }
+}

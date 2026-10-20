@@ -1,0 +1,754 @@
+---
+layout: default
+---
+
+<!-- Categories in Sibley's order; birds within each are sorted separately below
+     (Jekyll's sort isn't stable, so chaining two sorts could scramble that order) -->
+{% assign birds_by_category = site.data.birds | sort: "sibley_category_order" %}
+{% assign grouped_categories = birds_by_category | group_by: "sibley_category" %}
+
+<!-- Same permalink icon the blog posts use (_layouts/post.html) -->
+{% capture octicon %}<svg class='octicon' viewBox='0 0 16 16' version='1.1' width='16' height='32' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>{% endcapture %}
+
+<!-- Rendered in both the desktop side index and the mobile picker, so the order always matches -->
+{% capture category_links %}
+  {% for category in grouped_categories %}
+    <li><a href="#{{ category.name | slugify }}" data-category="{{ category.name | slugify }}"><span class="name">{{ category.name }}</span><span class="count">{{ category.items.size }}<span class="visually-hidden"> species</span></span></a></li>
+  {% endfor %}
+{% endcapture %}
+
+<div class="bird-portfolio">
+  <!-- Desktop side index. Positioned against <main> so it runs from the page title
+       down. Not a <nav> element: _sass/__header.scss styles every nav as the site menu bar. -->
+  <div class="bird-index" role="navigation" aria-labelledby="bird-index-title">
+    <div class="bird-index-inner">
+      <h2 id="bird-index-title" class="bird-index-title">Categories</h2>
+      <ol class="no-list bird-category-list">{{ category_links }}</ol>
+    </div>
+  </div>
+
+  {% assign sorted_by_date = site.data.birds | sort: "date_taken" | reverse %}
+  {% assign latest_bird = sorted_by_date.first %}
+
+  <!-- Key stats as small pills right under the title -->
+  {% if latest_bird %}
+    <ul class="no-list bird-stats" role="list">
+      <li><strong>{{ site.data.birds.size }}</strong> species photographed</li>
+      <li>Last updated: <a href="#{{ latest_bird.species_common | slugify }}">{{ latest_bird.species_common }}</a> <time datetime="{{ latest_bird.date_taken | date: '%Y-%m-%d' }}">({{ latest_bird.date_taken | date: "%b %-d, %Y" }})</time></li>
+    </ul>
+  {% endif %}
+
+  {{ content }}
+
+  <!-- Filters the grid as you type. Shown by the script, so it never appears without JavaScript. -->
+  <div class="bird-find" hidden>
+    <div class="bird-find-field">
+      <label for="bird-find-input" class="visually-hidden">Find a bird</label>
+      <svg class="bird-find-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+      <input type="search" id="bird-find-input" placeholder="Find a bird by name…" autocomplete="off" spellcheck="false" aria-describedby="bird-find-status">
+      <!-- Match count, shown inside the right end of the field -->
+      <span class="bird-find-status" id="bird-find-status" aria-live="polite"></span>
+    </div>
+    <!-- Shows only the birds with a "New" badge. The count is filled in by the
+         script, which also hides this when nothing is new. -->
+    <button type="button" class="bird-new-toggle" aria-pressed="false" hidden>New<span class="visually-hidden"> photos only:</span> <span class="count"></span></button>
+  </div>
+
+  {% if latest_bird %}
+    <!-- Copyright years span the oldest to the newest photo on the page. A small
+         bordered notice right under the search, so it reads as a notice, not intro text. -->
+    {% assign first_year = sorted_by_date.last.date_taken | date: "%Y" %}
+    {% assign last_year = latest_bird.date_taken | date: "%Y" %}
+    <p class="bird-copyright">
+      <span>Photos &copy; {{ first_year }}{% if last_year != first_year %}&ndash;{{ last_year }}{% endif %} Kyle Niewiada</span>
+      <a href="{{ site.baseurl }}/assets/img/birds/LICENSE.txt">All rights reserved</a>
+    </p>
+  {% endif %}
+
+  <p class="bird-find-empty" hidden>No birds match that search.</p>
+
+  <noscript><p class="bird-find-empty">Turn on JavaScript to see the photos.</p></noscript>
+
+  <!-- Floating navigation appears once this scrolls out of view -->
+  <div class="bird-nav-sentinel"></div>
+
+  <div class="sibley-categories">
+      {% for category in grouped_categories %}
+        <!-- The id lives on the section, not the sticky header's h2: browsers measure a
+             jump to a sticky element from where it's stuck, so jumping upward landed
+             at the end of the section (and highlighted the next category). -->
+        <section class="sibley-category-section" id="{{ category.name | slugify }}" data-category="{{ category.name | slugify }}" data-name="{{ category.name }}">
+          <div class="category-header">
+            <!-- Same permalink markup _includes/anchor-headings.html gives blog headings -->
+            <h2>{{ category.name }} <a href="#{{ category.name | slugify }}" aria-hidden="true" tabindex="-1">{{ octicon }}</a></h2>
+            <span class="species-count">{{ category.items.size }} species</span>
+          </div>
+
+          <div class="bird-grid">
+            {% assign category_birds = category.items | sort: "taxonomic_order" %}
+            {% for bird in category_birds %}
+              {% assign bird_slug = bird.species_common | slugify %}
+              <!-- Collages (several photos combined into one image) say so in their alt text -->
+              {% if bird.source_filename contains "COLLAGE" %}
+                {% capture bird_alt %}Collage of {{ bird.species_common }} photos{% endcapture %}
+              {% else %}
+                {% capture bird_alt %}{{ bird.species_common }}{% endcapture %}
+              {% endif %}
+              <article class="bird-card" id="{{ bird_slug }}" aria-labelledby="{{ bird_slug }}-name" data-date="{{ bird.date_taken | date: '%Y-%m-%d' }}" data-search="{{ bird.species_common }} {{ bird.species_scientific }}">
+                <!-- The details come first so screen readers hear the name before the
+                     photo button; CSS still shows the photo on top -->
+                <div class="bird-info">
+                  <h3 class="species-common" id="{{ bird_slug }}-name">{{ bird.species_common }}</h3>
+                  <p class="species-scientific"><em lang="la">{{ bird.species_scientific }}</em></p>
+                  <p class="bird-meta">
+                    <span class="location"><span class="visually-hidden">Location: </span>{{ bird.location }}</span>
+                    <span class="date"><span class="visually-hidden">Photographed </span><time datetime="{{ bird.date_taken | date: '%Y-%m-%d' }}">{{ bird.date_taken | date: "%B %-d, %Y" }}</time></span>
+                  </p>
+                  {% if bird.notes and bird.notes != "" %}
+                    <div class="bird-notes"><p class="bird-notes-text">{{ bird.notes }}</p></div>
+                  {% endif %}
+                </div>
+                <button type="button" class="bird-image-wrapper" aria-haspopup="dialog" aria-label="View larger: {{ bird_alt }}" data-caption="{{ bird.species_common }} · {{ bird.location }}" data-caption-date="{{ bird.date_taken | date: '%B %d, %Y at %I:%M %p' }}"{% if bird.notes and bird.notes != "" %} data-caption-notes="{{ bird.notes | escape }}"{% endif %}{% if bird.ebird_code %} data-ebird="{{ bird.ebird_code }}"{% endif %}>
+                  <!-- data-src, not src: the script below loads each photo only once
+                       scrolling settles near it, so photos flown past (smooth scroll,
+                       End key, scrollbar drag) are never downloaded. There's deliberately
+                       no <noscript> copy: it was the only place the photo URLs appeared
+                       as plain HTML for scrapers that don't run JavaScript. -->
+                  <!-- data-proofer-ignore: HTML-Proofer (CI) can't see a src that's filled in later -->
+                  <img
+                    data-src="{{ site.baseurl }}/assets/img/birds/{{ bird.filename }}"
+                    alt="{{ bird_alt }}"
+                    width="800"
+                    data-proofer-ignore
+                  >
+                </button>
+              </article>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+  </div>
+
+  <!-- Heads the Disqus thread that _layouts/default.html adds right after this
+       layout, under the same condition as _includes/comments.html -->
+  {% if jekyll.environment == 'production' and page.comments %}
+    <section class="bird-discussion" id="discussion">
+      <div class="category-header">
+        <h2>Discussion <a href="#discussion" aria-hidden="true" tabindex="-1">{{ octicon }}</a></h2>
+      </div>
+      <p class="bird-fineprint">Ask a question, suggest an ID correction, or share your own sightings.</p>
+    </section>
+  {% endif %}
+</div>
+
+<!-- Desktop: back to top. Mobile uses the one in the floating bar instead. -->
+<a href="#" class="bird-back-to-top" aria-label="Back to top"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M3.5 10.25 8 5.75l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+<!-- Mobile: shows the current category and opens the picker. Enabled by JS. -->
+<div class="bird-nav-bar">
+  <button type="button" class="bird-nav-current" aria-haspopup="dialog">
+    <span class="visually-hidden">Choose a category. Current: </span><span class="bird-nav-label">Categories</span> <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <a href="#" class="bird-nav-top" aria-label="Back to top"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M3.5 10.25 8 5.75l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
+<dialog class="bird-picker" aria-labelledby="bird-picker-title">
+  <div class="bird-picker-inner">
+    <div class="bird-picker-header">
+      <h2 id="bird-picker-title">Categories</h2>
+      <button type="button" class="bird-picker-close" aria-label="Close">&times;</button>
+    </div>
+    <ol class="no-list bird-category-list">{{ category_links }}</ol>
+  </div>
+</dialog>
+
+<!-- Lightbox Modal -->
+<!-- A native <dialog>: opened with showModal(), it moves focus inside, keeps Tab
+     within it, hides the page from screen readers, and closes on Escape -->
+<dialog id="bird-modal" class="bird-modal" aria-label="Photo viewer">
+  <button type="button" class="bird-modal-close" aria-label="Close photo viewer">&times;</button>
+  <!-- A three-slide track (previous, current, next) so a swipe drags the
+       neighbouring photo into view, like a phone's photo gallery -->
+  <div class="bird-modal-viewport">
+    <div class="bird-modal-track">
+      {% for i in (1..3) %}
+        <!-- Only the middle slide is on screen; the neighbours are hidden from screen readers -->
+        <figure class="bird-modal-slide"{% unless i == 2 %} aria-hidden="true" inert{% endunless %}>
+          <img class="bird-modal-content" alt="" data-proofer-ignore>
+          <!-- Species and location, then the date, then any notes (hidden when empty) -->
+          <figcaption><span class="caption-title"></span><span class="caption-date"></span><span class="caption-notes"></span><a class="caption-link" target="_blank" rel="noopener" data-proofer-ignore>View on eBird<span class="visually-hidden"> (opens in a new tab)</span><svg class="external-icon" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M11.5 9.5v3a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- Below the photo on phones; moved out to the screen edges on larger screens -->
+  <div class="bird-modal-controls">
+    <button type="button" class="bird-modal-nav bird-modal-prev" aria-label="Previous image">&lsaquo;</button>
+    <button type="button" class="bird-modal-nav bird-modal-next" aria-label="Next image">&rsaquo;</button>
+  </div>
+  <!-- Announces each new photo to screen readers -->
+  <p class="visually-hidden" id="bird-modal-status" aria-live="polite"></p>
+</dialog>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const portfolio = document.querySelector(".bird-portfolio");
+  const sections = document.querySelectorAll(".sibley-category-section");
+  const categoryLinks = document.querySelectorAll(".bird-category-list a");
+  const indexScroller = document.querySelector(".bird-index-inner");
+  const navBar = document.querySelector(".bird-nav-bar");
+  const navLabel = document.querySelector(".bird-nav-label");
+  const backToTop = document.querySelector(".bird-back-to-top");
+  const picker = document.querySelector(".bird-picker");
+  const hasObserver = "IntersectionObserver" in window;
+
+  // --- Settle-Then-Load Images ---
+  // Native loading="lazy" downloads every photo that passes near the screen, so a
+  // smooth-scrolled jump, the End key, or a scrollbar drag downloads everything
+  // in between and can't cancel it. Instead, a photo only loads if it is still
+  // near the screen a moment after it arrives, so flown-past photos never load.
+  const gridImages = document.querySelectorAll(".bird-card img[data-src]");
+  const loadGridImage = (img) => {
+    const reveal = () => img.classList.add("is-loaded");
+    img.addEventListener("load", reveal, { once: true });
+    img.addEventListener("error", reveal, { once: true }); // Show the alt text rather than a blank card
+    img.src = img.dataset.src;
+  };
+  if (hasObserver) {
+    const SETTLE_MS = 150;
+    const pending = new Map();
+    // Watches each photo's 4:3 box (the button), since the image has no size until it loads
+    const loadObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        const box = entry.target;
+        if (entry.isIntersecting) {
+          pending.set(box, setTimeout(() => {
+            pending.delete(box);
+            observer.unobserve(box);
+            loadGridImage(box.querySelector("img[data-src]"));
+          }, SETTLE_MS));
+        } else {
+          clearTimeout(pending.get(box));
+          pending.delete(box);
+        }
+      });
+    }, { rootMargin: "600px 0px" }); // Start ~3/4 of a screen early so normal scrolling never waits
+    gridImages.forEach(img => loadObserver.observe(img.closest(".bird-image-wrapper")));
+  } else {
+    gridImages.forEach(loadGridImage);
+  }
+
+  const cards = Array.from(document.querySelectorAll(".bird-card"));
+
+  // --- New Badges ---
+  // The page is built ahead of time, so "new" is worked out in the visitor's
+  // browser: anything photographed in the last 60 days gets a small badge.
+  // Compared as whole calendar days in the visitor's timezone, so a photo from
+  // exactly 60 days ago still counts no matter the time of day.
+  const NEW_DAYS = 60;
+  const today = new Date();
+  const newCutoff = new Date(today.getFullYear(), today.getMonth(), today.getDate() - NEW_DAYS);
+  cards.forEach(card => {
+    const [year, month, day] = card.dataset.date.split("-").map(Number);
+    if (new Date(year, month - 1, day) < newCutoff) return;
+    card.dataset.new = "";
+    const badge = document.createElement("span");
+    badge.className = "bird-new-badge";
+    badge.textContent = "New";
+    // Beside the name rather than over the photo, so it never covers the bird
+    card.querySelector(".species-common").append(" ", badge);
+  });
+
+  // --- Long Notes ---
+  // Notes are cut to four lines in the grid (see .bird-notes-text). Under any note that
+  // actually got cut, add a button that opens the photo, whose caption has it all.
+  // Re-checked when cards change width, since that changes where the text cuts off.
+  const noteMoreIcon = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5l-4 4M2.5 13.5l4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const checkNote = (note) => {
+    const clamped = note.scrollHeight > note.clientHeight + 1;
+    let more = note.nextElementSibling;
+    if (!more || !more.classList.contains("bird-notes-more")) {
+      if (!clamped) return;
+      const card = note.closest(".bird-card");
+      more = document.createElement("button");
+      more.type = "button";
+      more.className = "bird-notes-more";
+      more.setAttribute("aria-haspopup", "dialog");
+      // Just the icon on screen; the label is for screen readers and the hover tooltip
+      more.setAttribute("aria-label", "Full note in photo view");
+      more.title = "Full note in photo view";
+      more.innerHTML = noteMoreIcon;
+      more.addEventListener("click", () => card.querySelector(".bird-image-wrapper").click());
+      note.after(more);
+    }
+    more.hidden = !clamped;
+  };
+  const notes = document.querySelectorAll(".bird-notes-text");
+  notes.forEach(checkNote);
+  if ("ResizeObserver" in window) {
+    const noteObserver = new ResizeObserver(entries => entries.forEach(entry => checkNote(entry.target)));
+    notes.forEach(note => noteObserver.observe(note));
+  }
+
+  // --- Section Fade-In ---
+  // Opt-in from JS so sections are never left invisible without it.
+  if (hasObserver && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    portfolio.classList.add("js-fade");
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "200px 0px" });
+    sections.forEach(section => fadeObserver.observe(section));
+  }
+
+  // --- Floating Navigation Visibility ---
+  if (hasObserver) {
+    navBar.classList.add("is-enabled");
+    const sentinelObserver = new IntersectionObserver(entries => {
+      // Use the latest entry: a jump right after load can deliver a stale one first
+      const latest = entries[entries.length - 1];
+      const pastIntro = !latest.isIntersecting && latest.boundingClientRect.top < 0;
+      navBar.classList.toggle("is-visible", pastIntro);
+      backToTop.classList.toggle("is-visible", pastIntro);
+    });
+    sentinelObserver.observe(document.querySelector(".bird-nav-sentinel"));
+  }
+
+  // Jump without the page's smooth scrolling. Some mobile browsers (older iOS
+  // Safari) reject scrollIntoView's "instant" option outright, so switch the
+  // CSS smooth scrolling off for the moment instead.
+  const jumpTo = (element, block) => {
+    const root = document.documentElement;
+    root.style.scrollBehavior = "auto";
+    element.scrollIntoView({ block: block || "start" });
+    root.style.scrollBehavior = "";
+  };
+
+  // --- Scrollspy ---
+  // The current section is the last one whose top has passed near the top of the window.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let current = null;
+  const setCurrent = (section) => {
+    if (section === current) return;
+    current = section;
+    const slug = section ? section.dataset.category : null;
+    categoryLinks.forEach(link => {
+      if (link.dataset.category === slug) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+    navLabel.textContent = section ? section.dataset.name : "Categories";
+
+    // Scroll the side index along with the page, keeping the active item in the
+    // middle of the part of the index that's actually on screen
+    const active = indexScroller.querySelector("[aria-current]");
+    if (active && indexScroller.scrollHeight > indexScroller.clientHeight) {
+      const item = active.parentElement;
+      const visible = Math.min(indexScroller.clientHeight, window.innerHeight - indexScroller.getBoundingClientRect().top);
+      indexScroller.scrollTo({
+        top: item.offsetTop - (visible - item.offsetHeight) / 2,
+        behavior: reduceMotion.matches ? "auto" : "smooth",
+      });
+    }
+  };
+
+  let ticking = false;
+  const updateCurrent = () => {
+    ticking = false;
+    let found = null;
+    sections.forEach(section => {
+      if (!section.hidden && section.getBoundingClientRect().top <= 120) found = section;
+    });
+    setCurrent(found);
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateCurrent);
+    }
+  }, { passive: true });
+
+  // --- Find A Bird ---
+  // Hides birds whose common or scientific name doesn't contain every typed word,
+  // along with any category left empty (in the grid, side index and picker).
+  // Accents, hyphens and apostrophes are ignored, so "wood pewee" finds
+  // "Eastern Wood-Pewee" and "bairds" finds "Baird's Sandpiper".
+  const findBox = portfolio.querySelector(".bird-find");
+  const findInput = document.getElementById("bird-find-input");
+  const findStatus = document.getElementById("bird-find-status");
+  const findEmpty = portfolio.querySelector(".bird-find-empty");
+  const normalize = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, " ");
+  cards.forEach(card => { card.dataset.search = ` ${normalize(card.dataset.search)} `; });
+  const sectionCounts = new Map([...sections].map(section => [section, section.querySelector(".species-count")]));
+
+  // The "New" button beside the find box narrows the grid the same way
+  const newToggle = portfolio.querySelector(".bird-new-toggle");
+  const newCount = cards.filter(card => "new" in card.dataset).length;
+  newToggle.querySelector(".count").textContent = newCount;
+  newToggle.hidden = newCount === 0;
+  const newOnly = () => newToggle.getAttribute("aria-pressed") === "true";
+
+  const applyFind = () => {
+    const words = normalize(findInput.value).trim().split(" ").filter(Boolean);
+    const filtered = words.length > 0 || newOnly();
+    let shown = 0;
+    cards.forEach(card => {
+      card.hidden = !words.every(word => card.dataset.search.includes(word)) || (newOnly() && !("new" in card.dataset));
+      if (!card.hidden) shown++;
+    });
+    sections.forEach(section => {
+      const total = section.querySelectorAll(".bird-card").length;
+      const matches = section.querySelectorAll(".bird-card:not([hidden])").length;
+      section.hidden = matches === 0;
+      sectionCounts.get(section).textContent = filtered ? `${matches} of ${total} species` : `${total} species`;
+      document.querySelectorAll(`.bird-category-list a[data-category="${section.dataset.category}"]`).forEach(link => {
+        link.parentElement.hidden = matches === 0;
+        link.querySelector(".count").firstChild.nodeValue = filtered ? matches : total;
+      });
+    });
+    findStatus.textContent = filtered ? `${shown} of ${cards.length}` : "";
+    findBox.classList.toggle("is-filtered", filtered);
+    findEmpty.hidden = !filtered || shown > 0;
+    updateCurrent();
+  };
+  findBox.hidden = false;
+  // The narrowest phones have no room for the whole placeholder beside the "New"
+  // button, so it's shortened there rather than cut off
+  const narrowFind = window.matchMedia("(max-width: 359px)");
+  const fullPlaceholder = findInput.placeholder;
+  const fitPlaceholder = () => { findInput.placeholder = narrowFind.matches ? "Find a bird…" : fullPlaceholder; };
+  fitPlaceholder();
+  narrowFind.addEventListener("change", fitPlaceholder);
+  findInput.addEventListener("input", applyFind);
+  newToggle.addEventListener("click", () => {
+    newToggle.setAttribute("aria-pressed", String(!newOnly()));
+    applyFind();
+  });
+
+  // A link to a bird the find box is hiding (like the "latest" link up top)
+  // clears the filter first, so the jump has somewhere to land
+  window.addEventListener("hashchange", () => {
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (!target || !target.closest("[hidden]") || target.closest(".bird-find")) return;
+    findInput.value = "";
+    newToggle.setAttribute("aria-pressed", "false");
+    applyFind();
+    jumpTo(target);
+  });
+
+  // --- Room To Scroll The Last Category Up ---
+  // Pads the bottom of the page (below the footer, so it still scrolls up into
+  // view) just enough for the last category to reach the top of the window.
+  // Otherwise the last few categories could never be jumped to or highlighted,
+  // especially on a tall screen.
+  // The last section still shown, since the find box can hide categories
+  const lastShownSection = () => [...sections].reverse().find(section => !section.hidden);
+  const sideIndex = document.querySelector(".bird-index");
+  const main = document.querySelector("main");
+  const padForLastSection = () => {
+    const lastSection = lastShownSection();
+    document.body.style.paddingBottom = "";
+    sideIndex.style.bottom = "";
+    let shortBy = 0;
+    if (lastSection) {
+      const top = lastSection.getBoundingClientRect().top + window.scrollY;
+      const marginTop = parseFloat(getComputedStyle(lastSection).scrollMarginTop) || 0;
+      shortBy = (top - marginTop + window.innerHeight) - document.documentElement.scrollHeight;
+    }
+    // On mobile, always leave room below the footer for the floating bar to sit
+    // in, so it never covers the footer (zero on desktop, where the bar is hidden)
+    const barRoom = navBar.offsetHeight ? navBar.offsetHeight + parseFloat(getComputedStyle(navBar).bottom) * 2 : 0;
+    const padding = Math.max(shortBy, barRoom);
+    document.body.style.paddingBottom = padding > 0 ? `${Math.ceil(padding)}px` : "";
+
+    // The side index's column normally ends with <main>. Stretch it down past the
+    // footer and padding to the end of the page, so the pinned list stays put
+    // instead of being pushed up and off screen at the bottom.
+    const mainBottom = main.getBoundingClientRect().bottom + window.scrollY;
+    const pageBottom = document.documentElement.scrollHeight;
+    sideIndex.style.bottom = `${Math.min(0, mainBottom - pageBottom)}px`;
+  };
+  padForLastSection();
+  window.addEventListener("resize", padForLastSection);
+  // Layout keeps settling after load (fonts, lazy images), so re-measure whenever
+  // the categories or footer change size. The padding itself doesn't resize them.
+  if ("ResizeObserver" in window) {
+    const settleObserver = new ResizeObserver(padForLastSection);
+    settleObserver.observe(document.querySelector(".sibley-categories"));
+    settleObserver.observe(document.querySelector("footer"));
+    // Disqus grows once it loads, which changes how much padding is needed
+    const discussion = document.getElementById("disqus_thread");
+    if (discussion) settleObserver.observe(discussion);
+  }
+  window.addEventListener("load", () => {
+    padForLastSection();
+    // A link straight to one of the last categories (/birds/#finches-and-allies)
+    // arrives before the padding exists, so jump there again now that it can.
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (target) jumpTo(target);
+    updateCurrent();
+  });
+  updateCurrent();
+
+  // --- Category Picker (mobile) ---
+  if (typeof picker.showModal === "function") {
+    document.querySelector(".bird-nav-current").addEventListener("click", () => {
+      picker.showModal();
+      // The list is longer than the sheet, so start it centered on the current category
+      const active = picker.querySelector("[aria-current]");
+      if (active) {
+        const offset = active.getBoundingClientRect().top - picker.getBoundingClientRect().top;
+        picker.scrollTop += offset - (picker.clientHeight - active.offsetHeight) / 2;
+      }
+    });
+    document.querySelector(".bird-picker-close").addEventListener("click", () => picker.close());
+    // Clicks on the dimmed backdrop land on the dialog itself
+    picker.addEventListener("click", (e) => {
+      if (e.target === picker) picker.close();
+    });
+    picker.querySelectorAll(".bird-category-list a").forEach(link => {
+      link.addEventListener("click", () => picker.close());
+    });
+  }
+
+  // --- Lightbox Modal Logic ---
+  const modal = document.getElementById("bird-modal");
+  const viewport = modal.querySelector(".bird-modal-viewport");
+  const track = modal.querySelector(".bird-modal-track");
+  const slides = Array.from(track.children); // [previous, current, next]
+  const closeBtn = document.querySelector(".bird-modal-close");
+  const modalStatus = document.getElementById("bird-modal-status");
+  const imageWrappers = Array.from(document.querySelectorAll(".bird-image-wrapper"));
+  const SLIDE_EASING = "transform .3s cubic-bezier(.2, .8, .2, 1)";
+  let modalIndex = 0;
+  let sliding = false;
+
+  // Wrap around at either end of the page
+  // The photos the viewer pages through: whatever the find box currently shows
+  let gallery = imageWrappers;
+  const wrapIndex = (index) => (index + gallery.length) % gallery.length;
+
+  const fillSlide = (slide, index) => {
+    const wrapper = gallery[wrapIndex(index)];
+    const img = wrapper.querySelector("img");
+    const slideImg = slide.querySelector("img");
+    slideImg.src = img.dataset.src; // The grid copy may not have loaded yet
+    slideImg.alt = img.alt;
+    slide.querySelector(".caption-title").textContent = wrapper.dataset.caption || img.alt;
+    slide.querySelector(".caption-date").textContent = wrapper.dataset.captionDate || "";
+    slide.querySelector(".caption-notes").textContent = wrapper.dataset.captionNotes || "";
+    // Species page on eBird, only in the viewer so it can't be hit by accident in the grid
+    const ebird = slide.querySelector(".caption-link");
+    ebird.hidden = !wrapper.dataset.ebird;
+    ebird.href = wrapper.dataset.ebird ? `https://ebird.org/species/${wrapper.dataset.ebird}` : "";
+  };
+
+  // Offset is relative to the current photo; the track rests one slide to the left
+  const setTrackOffset = (dx, animate) => {
+    track.style.transition = animate ? SLIDE_EASING : "none";
+    track.style.transform = `translateX(${dx - viewport.clientWidth}px)`;
+  };
+
+  // Shrink each photo so everything under it (its caption, which can run to several
+  // lines with a note, and the arrows row on phones) fits in the window. Equal space
+  // is kept above and below, so the photo stays clear of the close button.
+  const fitSlides = () => {
+    const controls = modal.querySelector(".bird-modal-controls");
+    const controlsSpace = controls.getBoundingClientRect().height + parseFloat(getComputedStyle(controls).marginTop);
+    const edgeSpace = 2 * closeBtn.getBoundingClientRect().bottom;
+    slides.forEach(slide => {
+      const caption = slide.querySelector("figcaption");
+      const captionSpace = caption.getBoundingClientRect().height + parseFloat(getComputedStyle(caption).marginTop);
+      const fit = window.innerHeight - edgeSpace - captionSpace - controlsSpace;
+      slide.querySelector("img").style.setProperty("--fit-height", `${Math.max(120, Math.floor(fit))}px`);
+    });
+  };
+
+  const showImage = (index) => {
+    modalIndex = wrapIndex(index);
+    fillSlide(slides[0], modalIndex - 1);
+    fillSlide(slides[1], modalIndex);
+    fillSlide(slides[2], modalIndex + 1);
+    fitSlides();
+    setTrackOffset(0, false);
+    const caption = slides[1].querySelector("figcaption");
+    // End the note with a period if it has no punctuation, so it doesn't run into "Photo N"
+    const notes = caption.querySelector(".caption-notes").textContent.replace(/[^.!?]$/, "$&.");
+    modalStatus.textContent = `${caption.querySelector(".caption-title").textContent}, ${caption.querySelector(".caption-date").textContent}.${notes ? ` ${notes}` : ""} Photo ${modalIndex + 1} of ${gallery.length}.`;
+  };
+
+  // On close, jump (no scroll animation) to the bird you were last looking at.
+  // Skipped when its card is already on screen, so the page only moves if it must.
+  const jumpToCard = (card) => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) return;
+    jumpTo(card, "center");
+  };
+
+  // Runs once the slide animation finishes, with a fallback in case
+  // transitionend never fires (e.g. the track didn't actually move)
+  const afterSlide = (callback) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      callback();
+    };
+    track.addEventListener("transitionend", finish, { once: true });
+    setTimeout(finish, 400);
+  };
+
+  // Slide to the next (1) or previous (-1) photo, starting from wherever a drag left the track
+  const slideTo = (direction) => {
+    if (sliding) return;
+    sliding = true;
+    setTrackOffset(-direction * viewport.clientWidth, true);
+    afterSlide(() => {
+      showImage(modalIndex + direction);
+      sliding = false;
+    });
+  };
+
+  const resetDismiss = () => {
+    viewport.style.transition = "";
+    viewport.style.transform = "";
+    modal.style.backgroundColor = "";
+  };
+
+  const openModal = (wrapper) => {
+    resetDismiss();
+    modal.showModal();
+    // Page through only the birds the find box is showing
+    gallery = imageWrappers.filter(w => !w.closest(".bird-card").hidden);
+    showImage(gallery.indexOf(wrapper));
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
+    document.documentElement.style.overscrollBehaviorX = "none"; // No swipe-to-go-back while open
+  };
+
+  const closeModal = () => modal.close();
+
+  // Runs however the viewer closes (button, backdrop, swipe, or Escape)
+  modal.addEventListener("close", () => {
+    resetDismiss();
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overscrollBehaviorX = "";
+    jumpToCard(gallery[modalIndex].closest(".bird-card"));
+    // Return keyboard focus to the photo you ended on, not the one you opened,
+    // and outline its card so it's easy to find again. Browsers only show focus
+    // outlines after keyboard use, so after a tap or click the outline needs
+    // its own class; it goes away once focus moves on.
+    const returnTo = gallery[modalIndex];
+    returnTo.focus({ preventScroll: true });
+    const card = returnTo.closest(".bird-card");
+    card.classList.add("is-returned");
+    returnTo.addEventListener("blur", () => card.classList.remove("is-returned"), { once: true });
+  });
+
+  // The photos are real buttons, so Enter and Space already work
+  imageWrappers.forEach(wrapper => {
+    wrapper.addEventListener("click", () => openModal(wrapper));
+  });
+
+  // Previous/next buttons and arrow keys swap instantly; only swipes slide
+  document.querySelector(".bird-modal-prev").addEventListener("click", () => {
+    if (!sliding) showImage(modalIndex - 1);
+  });
+  document.querySelector(".bird-modal-next").addEventListener("click", () => {
+    if (!sliding) showImage(modalIndex + 1);
+  });
+
+  // --- Swipe Gestures ---
+  // Sideways drags move the track with the finger. A downward drag pulls the
+  // photo away and closes the lightbox, like a phone's photo gallery.
+  let touch = null;
+  modal.addEventListener("touchstart", (e) => {
+    if (e.touches.length > 1 || sliding) {
+      touch = null; // Leave pinch-zoom alone
+      return;
+    }
+    touch = { x: e.touches[0].clientX, y: e.touches[0].clientY, time: Date.now(), axis: null };
+  }, { passive: true });
+
+  modal.addEventListener("touchmove", (e) => {
+    if (!touch || e.touches.length > 1) {
+      touch = null;
+      return;
+    }
+    const dx = e.touches[0].clientX - touch.x;
+    const dy = e.touches[0].clientY - touch.y;
+    // Lock to one direction once the finger has clearly moved
+    if (!touch.axis && Math.hypot(dx, dy) > 8) {
+      touch.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    if (touch.axis === "x") {
+      setTrackOffset(dx, false);
+    } else if (touch.axis === "y" && dy > 0) {
+      viewport.style.transition = "none";
+      viewport.style.transform = `translateY(${dy}px)`;
+      modal.style.backgroundColor = `rgba(0, 0, 0, ${0.9 * Math.max(0, 1 - dy / 400)})`;
+    }
+  }, { passive: true });
+
+  modal.addEventListener("touchend", (e) => {
+    if (!touch || !touch.axis) {
+      touch = null;
+      return;
+    }
+    const dx = e.changedTouches[0].clientX - touch.x;
+    const dy = e.changedTouches[0].clientY - touch.y;
+    const elapsed = Math.max(1, Date.now() - touch.time);
+    const axis = touch.axis;
+    touch = null;
+
+    if (axis === "x") {
+      // Far enough, or a quick flick, moves on. Otherwise spring back.
+      const flick = Math.abs(dx) > 30 && Math.abs(dx) / elapsed > 0.4;
+      if (Math.abs(dx) > viewport.clientWidth * 0.25 || flick) {
+        slideTo(dx < 0 ? 1 : -1);
+      } else {
+        setTrackOffset(0, true);
+      }
+    } else if (dy > 120 || (dy > 40 && dy / elapsed > 0.5)) {
+      closeModal();
+    } else {
+      viewport.style.transition = SLIDE_EASING;
+      viewport.style.transform = "";
+      modal.style.backgroundColor = "";
+    }
+  });
+
+  // Keep the current photo centered if the window changes size while open
+  window.addEventListener("resize", () => {
+    if (modal.open) {
+      fitSlides();
+      setTrackOffset(0, false);
+    }
+  });
+
+  // Close modal bindings
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    // Clicks on the dark space around the photo close it
+    if (e.target === modal || e.target === viewport || e.target === track || e.target.classList.contains("bird-modal-slide")) {
+      closeModal();
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!modal.open) return; // Escape is handled by the dialog itself
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      if (!sliding) showImage(modalIndex + 1);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      if (!sliding) showImage(modalIndex - 1);
+    }
+  });
+});
+</script>
