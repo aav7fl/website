@@ -157,6 +157,11 @@ namespace :birds do
     sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
   end
 
+  desc "Rebuild scripts/birds/taxonomy_sibley.csv from eBird's current release (e.g. after a taxonomy update), then its embeddings"
+  task :update_taxonomy do
+    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py --refresh-taxonomy"
+  end
+
   desc "Import photos from _staging/ into assets/img/birds/ and _data/birds.yml (options after --, e.g. -- --americas)"
   task :import do
     # Capture any arguments passed after a "--" separator
