@@ -12,6 +12,8 @@ Features:
 - Converts colorspace to sRGB, resizes to 800px wide, exports WebP, and strips all EXIF/ICC metadata
   (GPS, camera, timestamps), then writes back only copyright tags (see stamp_copyright)
 - Preserves or wipes user-authored 'notes' field when replacing an existing species photo
+- Asks for the real date and time of Google Photos collages (e.g. 20261023_142445-COLLAGE.jpg),
+  whose own timestamp is when the collage was made, not when the photos were taken
 - Never replaces a species whose catalog entry has `locked: true` (warns and leaves the file staged)
 - Outputs chronologically sorted _data/birds.yml for Jekyll consumption
 """
@@ -128,6 +130,85 @@ def normalize_timestamp(exif: Dict[str, Any], filepath: Path) -> str:
 
     mtime = datetime.datetime.fromtimestamp(filepath.stat().st_mtime)
     return mtime.strftime("%Y-%m-%dT%H:%M:%S")
+
+
+# Google Photos names the collages it makes like 20261023_142445-COLLAGE.jpg. Their
+# timestamp (EXIF and file name) is when the collage was made, and Google Photos
+# doesn't export the date its info panel shows for them, so the importer asks.
+COLLAGE_NAME_RE = re.compile(r"-COLLAGE\b", re.IGNORECASE)
+
+
+def is_collage(filepath: Path) -> bool:
+    return bool(COLLAGE_NAME_RE.search(filepath.stem))
+
+
+def parse_user_timestamp(text: str) -> Optional[str]:
+    """
+    Parse a typed date and time into YYYY-MM-DDTHH:MM:SS, or None if it isn't one.
+    Accepts 24-hour or am/pm times, with or without seconds, e.g.
+    "2025-04-12 09:09", "2025-04-12 9:09 am", "2025-04-12T21:09:30", and the
+    style of the collage captions in Google Photos: "October 23, 2026 @ 1:16 PM"
+    (month names may be abbreviated, and "at" works in place of "@").
+    """
+    time_part = r"(\d{1,2}):(\d{2})(?::(\d{2}))?\s*([ap]\.?m\.?)?"
+    numeric = re.fullmatch(r"\s*(\d{4})-(\d{1,2})-(\d{1,2})[ T]+" + time_part + r"\s*", text, re.IGNORECASE)
+    written = re.fullmatch(r"\s*([a-z]+)\.?\s+(\d{1,2}),?\s+(\d{4})\s*(?:@|at|,)?\s*" + time_part + r"\s*", text, re.IGNORECASE)
+    if numeric:
+        year, month, day, hour, minute, second, meridiem = numeric.groups()
+    elif written:
+        month_name, day, year, hour, minute, second, meridiem = written.groups()
+        months = [datetime.date(2000, m, 1).strftime("%B").lower() for m in range(1, 13)]
+        # Full names, or abbreviations of at least three letters ("Oct", "Sept")
+        month = next((i for i, name in enumerate(months, start=1)
+                      if len(month_name) >= 3 and name.startswith(month_name.lower())), None)
+        if not month:
+            return None
+    else:
+        return None
+    hour = int(hour)
+    if meridiem:
+        if not 1 <= hour <= 12:
+            return None
+        hour = hour % 12 + (12 if meridiem.lower().startswith("p") else 0)
+    try:
+        parsed = datetime.datetime(int(year), int(month), int(day), hour, int(minute), int(second or 0))
+    except ValueError:
+        return None
+    return parsed.strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def prompt_collage_timestamp(filepath: Path, file_timestamp: str) -> Optional[str]:
+    """
+    Ask for when a collage's photos were taken. Returns the timestamp, or None to
+    skip the photo. Typing 'k' keeps the collage's own timestamp.
+    """
+    made = file_timestamp.replace("T", " ")
+    console.print(
+        f"  [bold yellow]{filepath.name} is a Google Photos collage.[/bold yellow] Its timestamp ({made}) is when the "
+        "collage was made.\n"
+        "  Enter the date and time of the most recent photo in it (shown in Google Photos' info panel), "
+        "e.g. [bold]2025-04-12 9:09 am[/bold] or [bold]April 12, 2025 @ 9:09 AM[/bold]."
+    )
+    while True:
+        answer = prompt("  Date and time taken ('k' to keep the collage's, 's' to skip): ").strip()
+        if answer.lower() == "s":
+            return None
+        if answer.lower() == "k":
+            return file_timestamp
+        timestamp = parse_user_timestamp(answer)
+        if not timestamp:
+            console.print("[red]  Not a date and time. Use YYYY-MM-DD HH:MM (am/pm optional) or October 23, 2026 @ 1:16 PM.[/red]")
+            continue
+        if timestamp > datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"):
+            console.print("[red]  That's in the future. Check the date and try again.[/red]")
+            continue
+        if timestamp > file_timestamp:
+            # The photos must be older than the collage made from them, unless its own date is off
+            confirm = prompt(f"  That's after the collage was made ({made}). Use it anyway? [y/N]: ").strip().lower()
+            if confirm != "y":
+                continue
+        console.print(f"  [dim]Using {timestamp.replace('T', ' ')} as the date taken.[/dim]")
+        return timestamp
 
 
 def build_source_id(filepath: Path, iso_timestamp: str) -> str:
@@ -545,7 +626,15 @@ def main() -> None:
             continue
 
         console.rule(f"[bold cyan]File [{idx}/{len(staged_files)}]: {filepath.name}[/bold cyan]")
-        console.print(f"  [dim]Captured:[/dim] {iso_dt}   [dim]Source ID:[/dim] {source_id}")
+        collage = is_collage(filepath)
+        captured_note = "  [yellow](collage: when it was made; you'll be asked for the real date)[/yellow]" if collage else ""
+        console.print(f"  [dim]Captured:[/dim] {iso_dt}{captured_note}   [dim]Source ID:[/dim] {source_id}")
+
+        if collage and args.auto:
+            console.print(
+                "  [yellow][AUTO-SKIP][/yellow] Collages need their real date typed in. Left in staging for a manual run."
+            )
+            continue
 
         chosen_species: Optional[Dict[str, Any]] = None
         predictions = classifier.predict_top_k(filepath, k=3)
@@ -645,6 +734,14 @@ def main() -> None:
                 else:
                     retained_note = existing_note
                     console.print("  [dim]Retained existing note.[/dim]")
+
+        # The source_id above keeps the collage's own timestamp, so the same file is
+        # still recognised as imported on later runs
+        if collage:
+            iso_dt = prompt_collage_timestamp(filepath, iso_dt)
+            if not iso_dt:
+                console.print("  [dim]Skipped.[/dim]")
+                continue
 
         lat = exif.get("GPSLatitude")
         lon = exif.get("GPSLongitude")

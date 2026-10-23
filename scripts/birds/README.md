@@ -28,8 +28,9 @@ For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes be
    - Fuzzy search matches the common name, scientific name or 4-letter banding code across every species, even ones the AI isn't considering.
    - Guesses are marked "(already in catalog)" or "(locked, can't be replaced)".
 3. **Replacing a photo.** If the species is already in the catalog, it asks before overwriting. If that bird has a note, choose `r` to keep it or `w` to wipe it.
-4. **Location.** The county comes from the photo's GPS, offline. Without GPS, pick one of your recent counties or type `County, ST`.
-5. **Saved.** The photo is converted and stamped, the catalog entry is written, and the staged original is removed.
+4. **Collage date.** For a Google Photos collage (named like `20261023_142445-COLLAGE.jpg`), it asks when the photos were taken. See [Collages](#collages).
+5. **Location.** The county comes from the photo's GPS, offline. Without GPS, pick one of your recent counties or type `County, ST`.
+6. **Saved.** The photo is converted and stamped, the catalog entry is written, and the staged original is removed.
 
 ### Options
 
@@ -46,9 +47,19 @@ For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes be
 Imports without any prompts, but only when it's safe:
 - the AI's top suggestion is above 90% confidence,
 - the species isn't already in the catalog (auto mode never replaces a photo), and
-- the photo has GPS, so the county is known.
+- the photo has GPS, so the county is known, and
+- it isn't a collage, whose date has to be typed in.
 
 Everything else is logged as `[AUTO-SKIP]` with the reason and left in `_staging/`, so a normal `rake birds:import` afterwards handles just the leftovers.
+
+### Collages
+Google Photos collages (any file with `-COLLAGE` in its name) carry the date the collage was *made*, in both the file name and the EXIF. Google Photos doesn't export the date its info panel shows for them, so the import asks for it, after you've picked the species:
+
+- Type the date and time of the most recent photo in the collage, which is the date the page shows: `2025-04-12 9:09 am`, `2025-04-12 21:09`, `2025-04-12T21:09:30`, or the style of your Google Photos captions, `October 23, 2026 @ 1:16 PM` (`Oct 23 2026 at 1:16 pm` works too). A date without a time isn't accepted, because the photo viewer shows the time.
+- `k` keeps the collage's own date, and `s` skips the photo.
+- A date in the future is refused. A date after the collage was made asks you to confirm, since its photos can't be newer than the collage.
+
+The typed date becomes `date_taken` and the copyright year. The `source_id` still uses the collage's own timestamp, so the same file is recognised as already imported next time.
 
 ### Locking a photo
 To keep a species' photo from ever being replaced, add `locked: true` to its entry in `_data/birds.yml`:

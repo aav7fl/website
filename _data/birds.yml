@@ -20,6 +20,21 @@
   notes: ""
   source_filename: P7250502.JPG
   source_id: P7250502.JPG_20130725T135208_61052b07
+- species_common: Wild Turkey
+  species_scientific: Meleagris gallopavo
+  banding_code: WITU
+  slug: wild-turkey
+  filename: wild-turkey.webp
+  family: Phasianidae
+  sibley_category: Pheasants, Grouse, and Allies
+  sibley_category_order: 2
+  taxonomic_order: 1274
+  ebird_code: wiltur
+  date_taken: '2025-04-12T09:09:00'
+  location: Ottawa County, MI
+  notes: "Male & Female (with chicks)"
+  source_filename: 20260714_094847-COLLAGE.jpg
+  source_id: 20260714_094847-COLLAGE.jpg_20260714T094847_12284515
 - species_common: Townsend's Warbler
   species_scientific: Setophaga townsendi
   banding_code: TOWA
@@ -155,21 +170,6 @@
   notes: ""
   source_filename: DSCN0044.jpg
   source_id: DSCN0044.jpg_20251227T102507_45828ab6
-- species_common: Dark-eyed Junco
-  species_scientific: Junco hyemalis
-  banding_code: DEJU
-  slug: dark-eyed-junco
-  filename: dark-eyed-junco.webp
-  family: Passerellidae
-  sibley_category: Towhees, Sparrows, and Juncos
-  sibley_category_order: 31
-  taxonomic_order: 33124
-  ebird_code: daejun
-  date_taken: '2025-12-27T10:26:02'
-  location: Ottawa County, MI
-  notes: ""
-  source_filename: DSCN0052.jpg
-  source_id: DSCN0052.jpg_20251227T102602_181ce326
 - species_common: Mallard
   species_scientific: Anas platyrhynchos
   banding_code: MALL
@@ -215,6 +215,21 @@
   notes: ""
   source_filename: DSCN0128.jpg
   source_id: DSCN0128.jpg_20260104T090811_dda0c29c
+- species_common: Downy Woodpecker
+  species_scientific: Dryobates pubescens
+  banding_code: DOWO
+  slug: downy-woodpecker
+  filename: downy-woodpecker.webp
+  family: Picidae
+  sibley_category: Woodpeckers
+  sibley_category_order: 17
+  taxonomic_order: 11400
+  ebird_code: dowwoo
+  date_taken: '2026-02-15T08:50:00'
+  location: Ottawa County, MI
+  notes: "Male & Female (different seasons; same feeder)"
+  source_filename: 20260714_091858-COLLAGE.jpg
+  source_id: 20260714_091858-COLLAGE.jpg_20260714T091858_21f0269d
 - species_common: European Starling
   species_scientific: Sturnus vulgaris
   banding_code: EUST
@@ -230,6 +245,36 @@
   notes: ""
   source_filename: DSCN0426.jpg
   source_id: DSCN0426.jpg_20260215T133320_c7ea8d69
+- species_common: Northern Cardinal
+  species_scientific: Cardinalis cardinalis
+  banding_code: NOCA
+  slug: northern-cardinal
+  filename: northern-cardinal.webp
+  family: Cardinalidae
+  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
+  sibley_category_order: 32
+  taxonomic_order: 34515
+  ebird_code: norcar
+  date_taken: '2026-02-15T13:38:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_113006-COLLAGE.jpg
+  source_id: 20260715_113006-COLLAGE.jpg_20260715T113006_083819c0
+- species_common: House Sparrow
+  species_scientific: Passer domesticus
+  banding_code: HOSP
+  slug: house-sparrow
+  filename: house-sparrow.webp
+  family: Passeridae
+  sibley_category: Old World Sparrows and Weaver Finches
+  sibley_category_order: 35
+  taxonomic_order: 31534
+  ebird_code: houspa
+  date_taken: '2026-03-14T11:40:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260714_094432-COLLAGE.jpg
+  source_id: 20260714_094432-COLLAGE.jpg_20260714T094432_37bf105f
 - species_common: American Woodcock
   species_scientific: Scolopax minor
   banding_code: AMWO
@@ -290,6 +335,21 @@
   notes: ""
   source_filename: DSCN2309.jpg
   source_id: DSCN2309.jpg_20260411T152559_926aa9fe
+- species_common: Brown-headed Cowbird
+  species_scientific: Molothrus ater
+  banding_code: BHCO
+  slug: brown-headed-cowbird
+  filename: brown-headed-cowbird.webp
+  family: Icteridae
+  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
+  sibley_category_order: 33
+  taxonomic_order: 33833
+  ebird_code: bnhcow
+  date_taken: '2026-04-12T09:43:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_121949-COLLAGE.jpg
+  source_id: 20260715_121949-COLLAGE.jpg_20260715T121949_34420061
 - species_common: Carolina Wren
   species_scientific: Thryothorus ludovicianus
   banding_code: CARW
@@ -320,6 +380,21 @@
   notes: ""
   source_filename: DSCN2876.jpg
   source_id: DSCN2876.jpg_20260417T100110_55094d7c
+- species_common: Ruby-crowned Kinglet
+  species_scientific: Corthylio calendula
+  banding_code: RCKI
+  slug: ruby-crowned-kinglet
+  filename: ruby-crowned-kinglet.webp
+  family: Regulidae
+  sibley_category: Kinglets, Old World Warblers, and Thrush Allies
+  sibley_category_order: 25
+  taxonomic_order: 26844
+  ebird_code: ruckin
+  date_taken: '2026-04-17T10:08:00'
+  location: Ottawa County, MI
+  notes: "Male & Female (but you can't see the top of its head here)"
+  source_filename: 20260715_131420-COLLAGE.jpg
+  source_id: 20260715_131420-COLLAGE.jpg_20260715T131420_3203ee06
 - species_common: Hermit Thrush
   species_scientific: Catharus guttatus
   banding_code: HETH
@@ -380,6 +455,21 @@
   notes: ""
   source_filename: DSCN3811.jpg
   source_id: DSCN3811.jpg_20260424T090104_b3354755
+- species_common: Purple Finch
+  species_scientific: Haemorhous purpureus
+  banding_code: PUFI
+  slug: purple-finch
+  filename: purple-finch.webp
+  family: Fringillidae
+  sibley_category: Finches and Allies
+  sibley_category_order: 34
+  taxonomic_order: 32324
+  ebird_code: purfin
+  date_taken: '2026-04-24T09:19:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260714_112542-COLLAGE.jpg
+  source_id: 20260714_112542-COLLAGE.jpg_20260714T112542_fc55e0c9
 - species_common: Field Sparrow
   species_scientific: Spizella pusilla
   banding_code: FISP
@@ -395,6 +485,21 @@
   notes: ""
   source_filename: DSCN4069.jpg
   source_id: DSCN4069.jpg_20260424T112557_fa716d6a
+- species_common: Eastern Bluebird
+  species_scientific: Sialia sialis
+  banding_code: EABL
+  slug: eastern-bluebird
+  filename: eastern-bluebird.webp
+  family: Turdidae
+  sibley_category: Kinglets, Old World Warblers, and Thrush Allies
+  sibley_category_order: 25
+  taxonomic_order: 28126
+  ebird_code: easblu
+  date_taken: '2026-04-28T18:50:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_121655-COLLAGE.jpg
+  source_id: 20260715_121655-COLLAGE.jpg_20260715T121655_425ce6fc
 - species_common: Song Sparrow
   species_scientific: Melospiza melodia
   banding_code: SOSP
@@ -485,6 +590,21 @@
   notes: ""
   source_filename: DSCN6574.jpg
   source_id: DSCN6574.jpg_20260508T110626_0a970da4
+- species_common: Hairy Woodpecker
+  species_scientific: Leuconotopicus villosus
+  banding_code: HAWO
+  slug: hairy-woodpecker
+  filename: hairy-woodpecker.webp
+  family: Picidae
+  sibley_category: Woodpeckers
+  sibley_category_order: 17
+  taxonomic_order: 11427
+  ebird_code: haiwoo
+  date_taken: '2026-05-09T07:35:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_112202-COLLAGE.jpg
+  source_id: 20260715_112202-COLLAGE.jpg_20260715T112202_7adc547b
 - species_common: Black-and-white Warbler
   species_scientific: Mniotilta varia
   banding_code: BAWW
@@ -500,6 +620,81 @@
   notes: "Male"
   source_filename: DSCN7661.jpg
   source_id: DSCN7661.jpg_20260509T094201_5faceb0d
+- species_common: Tree Swallow
+  species_scientific: Tachycineta bicolor
+  banding_code: TRES
+  slug: tree-swallow
+  filename: tree-swallow.webp
+  family: Hirundinidae
+  sibley_category: Larks and Swallows
+  sibley_category_order: 22
+  taxonomic_order: 24064
+  ebird_code: treswa
+  date_taken: '2026-05-09T10:51:00'
+  location: Ottawa County, MI
+  notes: "Male & second-year female"
+  source_filename: 20260714_113058-COLLAGE.jpg
+  source_id: 20260714_113058-COLLAGE.jpg_20260714T113058_45fbfd0e
+- species_common: Baltimore Oriole
+  species_scientific: Icterus galbula
+  banding_code: BAOR
+  slug: baltimore-oriole
+  filename: baltimore-oriole.webp
+  family: Icteridae
+  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
+  sibley_category_order: 33
+  taxonomic_order: 33770
+  ebird_code: balori
+  date_taken: '2026-05-09T10:54:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260714_114123-COLLAGE.jpg
+  source_id: 20260714_114123-COLLAGE.jpg_20260714T114123_345be548
+- species_common: Barn Swallow
+  species_scientific: Hirundo rustica
+  banding_code: BARS
+  slug: barn-swallow
+  filename: barn-swallow.webp
+  family: Hirundinidae
+  sibley_category: Larks and Swallows
+  sibley_category_order: 22
+  taxonomic_order: 24187
+  ebird_code: barswa
+  date_taken: '2026-05-09T11:04:00'
+  location: Kent County, MI
+  notes: ""
+  source_filename: 20260715_121300-COLLAGE.jpg
+  source_id: 20260715_121300-COLLAGE.jpg_20260715T121300_55e1e9b2
+- species_common: Northern Yellow Warbler
+  species_scientific: Setophaga aestiva
+  banding_code: YEWA
+  slug: northern-yellow-warbler
+  filename: northern-yellow-warbler.webp
+  family: Parulidae
+  sibley_category: Wood-Warblers
+  sibley_category_order: 30
+  taxonomic_order: 34098
+  ebird_code: yelwar1
+  date_taken: '2026-05-09T11:51:00'
+  location: Ottawa County, MI
+  notes: "Male & Female (gathering nesting material)"
+  source_filename: 20260715_121059-COLLAGE.jpg
+  source_id: 20260715_121059-COLLAGE.jpg_20260715T121059_f1c56864
+- species_common: Eastern Towhee
+  species_scientific: Pipilo erythrophthalmus
+  banding_code: EATO
+  slug: eastern-towhee
+  filename: eastern-towhee.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 33415
+  ebird_code: eastow
+  date_taken: '2026-05-10T15:18:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_120645-COLLAGE.jpg
+  source_id: 20260715_120645-COLLAGE.jpg_20260715T120645_faaa13fd
 - species_common: Solitary Sandpiper
   species_scientific: Tringa solitaria
   banding_code: SOSA
@@ -680,6 +875,21 @@
   notes: ""
   source_filename: DSCN1167.jpg
   source_id: DSCN1167.jpg_20260516T202152_7d52f474
+- species_common: Red-bellied Woodpecker
+  species_scientific: Melanerpes carolinus
+  banding_code: RBWO
+  slug: red-bellied-woodpecker
+  filename: red-bellied-woodpecker.webp
+  family: Picidae
+  sibley_category: Woodpeckers
+  sibley_category_order: 17
+  taxonomic_order: 11199
+  ebird_code: rebwoo
+  date_taken: '2026-05-17T07:12:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_120442-COLLAGE.jpg
+  source_id: 20260715_120442-COLLAGE.jpg_20260715T120442_e50c91dc
 - species_common: Pine Warbler
   species_scientific: Setophaga pinus
   banding_code: PIWA
@@ -770,6 +980,21 @@
   notes: "Male"
   source_filename: DSCN2846.jpg
   source_id: DSCN2846.jpg_20260518T081101_57a9749f
+- species_common: American Redstart
+  species_scientific: Setophaga ruticilla
+  banding_code: AMRE
+  slug: american-redstart
+  filename: american-redstart.webp
+  family: Parulidae
+  sibley_category: Wood-Warblers
+  sibley_category_order: 30
+  taxonomic_order: 34058
+  ebird_code: amered
+  date_taken: '2026-05-18T09:15:00'
+  location: Mackinac County, MI
+  notes: "Male & Female"
+  source_filename: 20260714_103843-COLLAGE.jpg
+  source_id: 20260714_103843-COLLAGE.jpg_20260714T103843_42ab32b6
 - species_common: Western Tanager
   species_scientific: Piranga ludoviciana
   banding_code: WETA
@@ -785,6 +1010,21 @@
   notes: "Vagrant male in breeding plumage! Was lucky enough to re-locate after searching the area for 2 days. Kind neighbors invited into their back yard to photograph this wonderful bird."
   source_filename: DSCN3247.jpg
   source_id: DSCN3247.jpg_20260518T100221_070f4808
+- species_common: Rose-breasted Grosbeak
+  species_scientific: Pheucticus ludovicianus
+  banding_code: RBGR
+  slug: rose-breasted-grosbeak
+  filename: rose-breasted-grosbeak.webp
+  family: Cardinalidae
+  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
+  sibley_category_order: 32
+  taxonomic_order: 34557
+  ebird_code: robgro
+  date_taken: '2026-05-18T10:03:00'
+  location: Mackinac County, MI
+  notes: "Male & Female"
+  source_filename: 20260714_113728-COLLAGE.jpg
+  source_id: 20260714_113728-COLLAGE.jpg_20260714T113728_c2200ba6
 - species_common: Eastern Warbling Vireo
   species_scientific: Vireo gilvus
   banding_code: EAWV
@@ -830,6 +1070,21 @@
   notes: ""
   source_filename: DSCN4404.jpg
   source_id: DSCN4404.jpg_20260522T091646_9113731b
+- species_common: Red-tailed Hawk
+  species_scientific: Buteo jamaicensis
+  banding_code: RTHA
+  slug: red-tailed-hawk
+  filename: red-tailed-hawk.webp
+  family: Accipitridae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 8506
+  ebird_code: rethaw
+  date_taken: '2026-05-22T11:33:00'
+  location: Ottawa County, MI
+  notes: "Abhorrent individual"
+  source_filename: 20260715_122634-COLLAGE.jpg
+  source_id: 20260715_122634-COLLAGE.jpg_20260715T122634_ef5f334c
 - species_common: Turkey Vulture
   species_scientific: Cathartes aura
   banding_code: TUVU
@@ -905,6 +1160,21 @@
   notes: ""
   source_filename: DSCN6537.jpg
   source_id: DSCN6537.jpg_20260529T080622_bb063482
+- species_common: Orchard Oriole
+  species_scientific: Icterus spurius
+  banding_code: OROR
+  slug: orchard-oriole
+  filename: orchard-oriole.webp
+  family: Icteridae
+  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
+  sibley_category_order: 33
+  taxonomic_order: 33679
+  ebird_code: orcori
+  date_taken: '2026-05-29T08:23:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260715_113958-COLLAGE.jpg
+  source_id: 20260715_113958-COLLAGE.jpg_20260715T113958_f26ecf0c
 - species_common: Mute Swan
   species_scientific: Cygnus olor
   banding_code: MUSW
@@ -1160,21 +1430,6 @@
   notes: ""
   source_filename: DSCN2252.jpg
   source_id: DSCN2252.jpg_20260626T075920_e43bc683
-- species_common: Black-crowned Night Heron
-  species_scientific: Nycticorax nycticorax
-  banding_code: BCNH
-  slug: black-crowned-night-heron
-  filename: black-crowned-night-heron.webp
-  family: Ardeidae
-  sibley_category: Wading Birds
-  sibley_category_order: 6
-  taxonomic_order: 7600
-  ebird_code: bcnher
-  date_taken: '2026-06-26T09:22:29'
-  location: Wayne County, MI
-  notes: ""
-  source_filename: DSCN2768.jpg
-  source_id: DSCN2768.jpg_20260626T092229_d174d771
 - species_common: Wood Duck
   species_scientific: Aix sponsa
   banding_code: WODU
@@ -1190,36 +1445,6 @@
   notes: "Male & Female"
   source_filename: 20260626_120406-COLLAGE.jpg
   source_id: 20260626_120406-COLLAGE.jpg_20260626T120406_bfd5a4d4
-- species_common: Savannah Sparrow
-  species_scientific: Passerculus sandwichensis
-  banding_code: SAVS
-  slug: savannah-sparrow
-  filename: savannah-sparrow.webp
-  family: Passerellidae
-  sibley_category: Towhees, Sparrows, and Juncos
-  sibley_category_order: 31
-  taxonomic_order: 33244
-  ebird_code: savspa
-  date_taken: '2026-07-03T06:34:18'
-  location: Kent County, MI
-  notes: ""
-  source_filename: DSCN2955.jpg
-  source_id: DSCN2955.jpg_20260703T063418_f91bb09f
-- species_common: Eastern Meadowlark
-  species_scientific: Sturnella magna
-  banding_code: EAME
-  slug: eastern-meadowlark
-  filename: eastern-meadowlark.webp
-  family: Icteridae
-  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
-  sibley_category_order: 33
-  taxonomic_order: 33568
-  ebird_code: easmea
-  date_taken: '2026-07-03T11:13:53'
-  location: Kent County, MI
-  notes: "In front of airport control tower"
-  source_filename: DSCN3863.jpg
-  source_id: DSCN3863.jpg_20260703T111353_2675c3b2
 - species_common: Chimney Swift
   species_scientific: Chaetura pelagica
   banding_code: CHSW
@@ -1235,36 +1460,36 @@
   notes: "Flock was skimming the pond for a drink. Never seen them this low before."
   source_filename: 20260705_220138-COLLAGE.jpg
   source_id: 20260705_220138-COLLAGE.jpg_20260705T220138_b2a215d6
-- species_common: Dickcissel
-  species_scientific: Spiza americana
-  banding_code: DICK
-  slug: dickcissel
-  filename: dickcissel.webp
-  family: Cardinalidae
-  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
-  sibley_category_order: 32
-  taxonomic_order: 34627
-  ebird_code: dickci
-  date_taken: '2026-07-03T09:28:00'
+- species_common: Black-crowned Night Heron
+  species_scientific: Nycticorax nycticorax
+  banding_code: BCNH
+  slug: black-crowned-night-heron
+  filename: black-crowned-night-heron.webp
+  family: Ardeidae
+  sibley_category: Wading Birds
+  sibley_category_order: 6
+  taxonomic_order: 7600
+  ebird_code: bcnher
+  date_taken: '2026-06-26T09:22:29'
+  location: Wayne County, MI
+  notes: ""
+  source_filename: DSCN2768.jpg
+  source_id: DSCN2768.jpg_20260626T092229_d174d771
+- species_common: Savannah Sparrow
+  species_scientific: Passerculus sandwichensis
+  banding_code: SAVS
+  slug: savannah-sparrow
+  filename: savannah-sparrow.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 33244
+  ebird_code: savspa
+  date_taken: '2026-07-03T06:34:18'
   location: Kent County, MI
-  notes: "Male & Female"
-  source_filename: 20260705_220349-COLLAGE.jpg
-  source_id: 20260705_220349-COLLAGE.jpg_20260705T220349_8629b22f
-- species_common: House Finch
-  species_scientific: Haemorhous mexicanus
-  banding_code: HOFI
-  slug: house-finch
-  filename: house-finch.webp
-  family: Fringillidae
-  sibley_category: Finches and Allies
-  sibley_category_order: 34
-  taxonomic_order: 32310
-  ebird_code: houfin
-  date_taken: '2026-07-05T14:38:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260705_221019-COLLAGE.jpg
-  source_id: 20260705_221019-COLLAGE.jpg_20260705T221019_5b42c8dd
+  notes: ""
+  source_filename: DSCN2955.jpg
+  source_id: DSCN2955.jpg_20260703T063418_f91bb09f
 - species_common: Bobolink
   species_scientific: Dolichonyx oryzivorus
   banding_code: BOBO
@@ -1280,6 +1505,51 @@
   notes: "Male & Female/Immature male"
   source_filename: 20260706_085438-COLLAGE.jpg
   source_id: 20260706_085438-COLLAGE.jpg_20260706T085438_6a4468d6
+- species_common: Dickcissel
+  species_scientific: Spiza americana
+  banding_code: DICK
+  slug: dickcissel
+  filename: dickcissel.webp
+  family: Cardinalidae
+  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
+  sibley_category_order: 32
+  taxonomic_order: 34627
+  ebird_code: dickci
+  date_taken: '2026-07-03T09:28:00'
+  location: Kent County, MI
+  notes: "Male & Female"
+  source_filename: 20260705_220349-COLLAGE.jpg
+  source_id: 20260705_220349-COLLAGE.jpg_20260705T220349_8629b22f
+- species_common: Eastern Meadowlark
+  species_scientific: Sturnella magna
+  banding_code: EAME
+  slug: eastern-meadowlark
+  filename: eastern-meadowlark.webp
+  family: Icteridae
+  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
+  sibley_category_order: 33
+  taxonomic_order: 33568
+  ebird_code: easmea
+  date_taken: '2026-07-03T11:13:53'
+  location: Kent County, MI
+  notes: "In front of airport control tower"
+  source_filename: DSCN3863.jpg
+  source_id: DSCN3863.jpg_20260703T111353_2675c3b2
+- species_common: House Finch
+  species_scientific: Haemorhous mexicanus
+  banding_code: HOFI
+  slug: house-finch
+  filename: house-finch.webp
+  family: Fringillidae
+  sibley_category: Finches and Allies
+  sibley_category_order: 34
+  taxonomic_order: 32310
+  ebird_code: houfin
+  date_taken: '2026-07-05T14:38:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260705_221019-COLLAGE.jpg
+  source_id: 20260705_221019-COLLAGE.jpg_20260705T221019_5b42c8dd
 - species_common: Red-winged Blackbird
   species_scientific: Agelaius phoeniceus
   banding_code: RWBL
@@ -1295,336 +1565,6 @@
   notes: "Male & Female"
   source_filename: 20260710_153739-COLLAGE.jpg
   source_id: 20260710_153739-COLLAGE.jpg_20260710T153739_fe38ee07
-- species_common: Scarlet Tanager
-  species_scientific: Piranga olivacea
-  banding_code: SCTA
-  slug: scarlet-tanager
-  filename: scarlet-tanager.webp
-  family: Cardinalidae
-  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
-  sibley_category_order: 32
-  taxonomic_order: 34436
-  ebird_code: scatan
-  date_taken: '2026-07-11T15:07:18'
-  location: Ottawa County, MI
-  notes: "Male"
-  source_filename: DSCN5620.jpg
-  source_id: DSCN5620.jpg_20260711T150718_e3a42a78
-- species_common: Chipping Sparrow
-  species_scientific: Spizella passerina
-  banding_code: CHSP
-  slug: chipping-sparrow
-  filename: chipping-sparrow.webp
-  family: Passerellidae
-  sibley_category: Towhees, Sparrows, and Juncos
-  sibley_category_order: 31
-  taxonomic_order: 32990
-  ebird_code: chispa
-  date_taken: '2026-07-13T07:45:59'
-  location: Ottawa County, MI
-  notes: ""
-  source_filename: DSCN5937.jpg
-  source_id: DSCN5937.jpg_20260713T074559_4a85ec03
-- species_common: Downy Woodpecker
-  species_scientific: Dryobates pubescens
-  banding_code: DOWO
-  slug: downy-woodpecker
-  filename: downy-woodpecker.webp
-  family: Picidae
-  sibley_category: Woodpeckers
-  sibley_category_order: 17
-  taxonomic_order: 11400
-  ebird_code: dowwoo
-  date_taken: '2026-02-15T08:50:00'
-  location: Ottawa County, MI
-  notes: "Male & Female (different seasons; same feeder)"
-  source_filename: 20260714_091858-COLLAGE.jpg
-  source_id: 20260714_091858-COLLAGE.jpg_20260714T091858_21f0269d
-- species_common: House Sparrow
-  species_scientific: Passer domesticus
-  banding_code: HOSP
-  slug: house-sparrow
-  filename: house-sparrow.webp
-  family: Passeridae
-  sibley_category: Old World Sparrows and Weaver Finches
-  sibley_category_order: 35
-  taxonomic_order: 31534
-  ebird_code: houspa
-  date_taken: '2026-03-14T11:40:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260714_094432-COLLAGE.jpg
-  source_id: 20260714_094432-COLLAGE.jpg_20260714T094432_37bf105f
-- species_common: Wild Turkey
-  species_scientific: Meleagris gallopavo
-  banding_code: WITU
-  slug: wild-turkey
-  filename: wild-turkey.webp
-  family: Phasianidae
-  sibley_category: Pheasants, Grouse, and Allies
-  sibley_category_order: 2
-  taxonomic_order: 1274
-  ebird_code: wiltur
-  date_taken: '2025-04-12T09:09:00'
-  location: Ottawa County, MI
-  notes: "Male & Female (with chicks)"
-  source_filename: 20260714_094847-COLLAGE.jpg
-  source_id: 20260714_094847-COLLAGE.jpg_20260714T094847_12284515
-- species_common: American Redstart
-  species_scientific: Setophaga ruticilla
-  banding_code: AMRE
-  slug: american-redstart
-  filename: american-redstart.webp
-  family: Parulidae
-  sibley_category: Wood-Warblers
-  sibley_category_order: 30
-  taxonomic_order: 34058
-  ebird_code: amered
-  date_taken: '2026-05-18T09:15:00'
-  location: Mackinac County, MI
-  notes: "Male & Female"
-  source_filename: 20260714_103843-COLLAGE.jpg
-  source_id: 20260714_103843-COLLAGE.jpg_20260714T103843_42ab32b6
-- species_common: Black-capped Chickadee
-  species_scientific: Poecile atricapillus
-  banding_code: BCCH
-  slug: black-capped-chickadee
-  filename: black-capped-chickadee.webp
-  family: Paridae
-  sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
-  sibley_category_order: 23
-  taxonomic_order: 22065
-  ebird_code: bkcchi
-  date_taken: '2026-07-12T15:52:00'
-  location: Ottawa County, MI
-  notes: "Adult & Juvenile (recently fledged our nest box)"
-  source_filename: 20260714_104946-COLLAGE.jpg
-  source_id: 20260714_104946-COLLAGE.jpg_20260714T104946_c4e0c5df
-- species_common: Purple Finch
-  species_scientific: Haemorhous purpureus
-  banding_code: PUFI
-  slug: purple-finch
-  filename: purple-finch.webp
-  family: Fringillidae
-  sibley_category: Finches and Allies
-  sibley_category_order: 34
-  taxonomic_order: 32324
-  ebird_code: purfin
-  date_taken: '2026-04-24T09:19:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260714_112542-COLLAGE.jpg
-  source_id: 20260714_112542-COLLAGE.jpg_20260714T112542_fc55e0c9
-- species_common: Tree Swallow
-  species_scientific: Tachycineta bicolor
-  banding_code: TRES
-  slug: tree-swallow
-  filename: tree-swallow.webp
-  family: Hirundinidae
-  sibley_category: Larks and Swallows
-  sibley_category_order: 22
-  taxonomic_order: 24064
-  ebird_code: treswa
-  date_taken: '2026-05-09T10:51:00'
-  location: Ottawa County, MI
-  notes: "Male & second-year female"
-  source_filename: 20260714_113058-COLLAGE.jpg
-  source_id: 20260714_113058-COLLAGE.jpg_20260714T113058_45fbfd0e
-- species_common: Rose-breasted Grosbeak
-  species_scientific: Pheucticus ludovicianus
-  banding_code: RBGR
-  slug: rose-breasted-grosbeak
-  filename: rose-breasted-grosbeak.webp
-  family: Cardinalidae
-  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
-  sibley_category_order: 32
-  taxonomic_order: 34557
-  ebird_code: robgro
-  date_taken: '2026-05-18T10:03:00'
-  location: Mackinac County, MI
-  notes: "Male & Female"
-  source_filename: 20260714_113728-COLLAGE.jpg
-  source_id: 20260714_113728-COLLAGE.jpg_20260714T113728_c2200ba6
-- species_common: Baltimore Oriole
-  species_scientific: Icterus galbula
-  banding_code: BAOR
-  slug: baltimore-oriole
-  filename: baltimore-oriole.webp
-  family: Icteridae
-  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
-  sibley_category_order: 33
-  taxonomic_order: 33770
-  ebird_code: balori
-  date_taken: '2026-05-09T10:54:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260714_114123-COLLAGE.jpg
-  source_id: 20260714_114123-COLLAGE.jpg_20260714T114123_345be548
-- species_common: Hairy Woodpecker
-  species_scientific: Leuconotopicus villosus
-  banding_code: HAWO
-  slug: hairy-woodpecker
-  filename: hairy-woodpecker.webp
-  family: Picidae
-  sibley_category: Woodpeckers
-  sibley_category_order: 17
-  taxonomic_order: 11427
-  ebird_code: haiwoo
-  date_taken: '2026-05-09T07:35:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_112202-COLLAGE.jpg
-  source_id: 20260715_112202-COLLAGE.jpg_20260715T112202_7adc547b
-- species_common: Northern Cardinal
-  species_scientific: Cardinalis cardinalis
-  banding_code: NOCA
-  slug: northern-cardinal
-  filename: northern-cardinal.webp
-  family: Cardinalidae
-  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
-  sibley_category_order: 32
-  taxonomic_order: 34515
-  ebird_code: norcar
-  date_taken: '2026-02-15T13:38:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_113006-COLLAGE.jpg
-  source_id: 20260715_113006-COLLAGE.jpg_20260715T113006_083819c0
-- species_common: Orchard Oriole
-  species_scientific: Icterus spurius
-  banding_code: OROR
-  slug: orchard-oriole
-  filename: orchard-oriole.webp
-  family: Icteridae
-  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
-  sibley_category_order: 33
-  taxonomic_order: 33679
-  ebird_code: orcori
-  date_taken: '2026-05-29T08:23:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_113958-COLLAGE.jpg
-  source_id: 20260715_113958-COLLAGE.jpg_20260715T113958_f26ecf0c
-- species_common: Red-bellied Woodpecker
-  species_scientific: Melanerpes carolinus
-  banding_code: RBWO
-  slug: red-bellied-woodpecker
-  filename: red-bellied-woodpecker.webp
-  family: Picidae
-  sibley_category: Woodpeckers
-  sibley_category_order: 17
-  taxonomic_order: 11199
-  ebird_code: rebwoo
-  date_taken: '2026-05-17T07:12:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_120442-COLLAGE.jpg
-  source_id: 20260715_120442-COLLAGE.jpg_20260715T120442_e50c91dc
-- species_common: Eastern Towhee
-  species_scientific: Pipilo erythrophthalmus
-  banding_code: EATO
-  slug: eastern-towhee
-  filename: eastern-towhee.webp
-  family: Passerellidae
-  sibley_category: Towhees, Sparrows, and Juncos
-  sibley_category_order: 31
-  taxonomic_order: 33415
-  ebird_code: eastow
-  date_taken: '2026-05-10T15:18:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_120645-COLLAGE.jpg
-  source_id: 20260715_120645-COLLAGE.jpg_20260715T120645_faaa13fd
-- species_common: Northern Yellow Warbler
-  species_scientific: Setophaga aestiva
-  banding_code: YEWA
-  slug: northern-yellow-warbler
-  filename: northern-yellow-warbler.webp
-  family: Parulidae
-  sibley_category: Wood-Warblers
-  sibley_category_order: 30
-  taxonomic_order: 34098
-  ebird_code: yelwar1
-  date_taken: '2026-05-09T11:51:00'
-  location: Ottawa County, MI
-  notes: "Male & Female (gathering nesting material)"
-  source_filename: 20260715_121059-COLLAGE.jpg
-  source_id: 20260715_121059-COLLAGE.jpg_20260715T121059_f1c56864
-- species_common: Barn Swallow
-  species_scientific: Hirundo rustica
-  banding_code: BARS
-  slug: barn-swallow
-  filename: barn-swallow.webp
-  family: Hirundinidae
-  sibley_category: Larks and Swallows
-  sibley_category_order: 22
-  taxonomic_order: 24187
-  ebird_code: barswa
-  date_taken: '2026-05-09T11:04:00'
-  location: Kent County, MI
-  notes: ""
-  source_filename: 20260715_121300-COLLAGE.jpg
-  source_id: 20260715_121300-COLLAGE.jpg_20260715T121300_55e1e9b2
-- species_common: Eastern Bluebird
-  species_scientific: Sialia sialis
-  banding_code: EABL
-  slug: eastern-bluebird
-  filename: eastern-bluebird.webp
-  family: Turdidae
-  sibley_category: Kinglets, Old World Warblers, and Thrush Allies
-  sibley_category_order: 25
-  taxonomic_order: 28126
-  ebird_code: easblu
-  date_taken: '2026-04-28T18:50:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_121655-COLLAGE.jpg
-  source_id: 20260715_121655-COLLAGE.jpg_20260715T121655_425ce6fc
-- species_common: Brown-headed Cowbird
-  species_scientific: Molothrus ater
-  banding_code: BHCO
-  slug: brown-headed-cowbird
-  filename: brown-headed-cowbird.webp
-  family: Icteridae
-  sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
-  sibley_category_order: 33
-  taxonomic_order: 33833
-  ebird_code: bnhcow
-  date_taken: '2026-04-12T09:43:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_121949-COLLAGE.jpg
-  source_id: 20260715_121949-COLLAGE.jpg_20260715T121949_34420061
-- species_common: Red-tailed Hawk
-  species_scientific: Buteo jamaicensis
-  banding_code: RTHA
-  slug: red-tailed-hawk
-  filename: red-tailed-hawk.webp
-  family: Accipitridae
-  sibley_category: Diurnal Raptors
-  sibley_category_order: 7
-  taxonomic_order: 8506
-  ebird_code: rethaw
-  date_taken: '2026-05-22T11:33:00'
-  location: Ottawa County, MI
-  notes: "Abhorrent individual"
-  source_filename: 20260715_122634-COLLAGE.jpg
-  source_id: 20260715_122634-COLLAGE.jpg_20260715T122634_ef5f334c
-- species_common: Ruby-crowned Kinglet
-  species_scientific: Corthylio calendula
-  banding_code: RCKI
-  slug: ruby-crowned-kinglet
-  filename: ruby-crowned-kinglet.webp
-  family: Regulidae
-  sibley_category: Kinglets, Old World Warblers, and Thrush Allies
-  sibley_category_order: 25
-  taxonomic_order: 26844
-  ebird_code: ruckin
-  date_taken: '2026-04-17T10:08:00'
-  location: Ottawa County, MI
-  notes: "Male & Female (but you can't see the top of its head here)"
-  source_filename: 20260715_131420-COLLAGE.jpg
-  source_id: 20260715_131420-COLLAGE.jpg_20260715T131420_3203ee06
 - species_common: Northern Rough-winged Swallow
   species_scientific: Stelgidopteryx serripennis
   banding_code: NRWS
@@ -1640,6 +1580,36 @@
   notes: ""
   source_filename: 20260715_215611-COLLAGE.jpg
   source_id: 20260715_215611-COLLAGE.jpg_20260715T215611_2d43dcd2
+- species_common: Scarlet Tanager
+  species_scientific: Piranga olivacea
+  banding_code: SCTA
+  slug: scarlet-tanager
+  filename: scarlet-tanager.webp
+  family: Cardinalidae
+  sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
+  sibley_category_order: 32
+  taxonomic_order: 34436
+  ebird_code: scatan
+  date_taken: '2026-07-11T15:07:18'
+  location: Ottawa County, MI
+  notes: "Male"
+  source_filename: DSCN5620.jpg
+  source_id: DSCN5620.jpg_20260711T150718_e3a42a78
+- species_common: Black-capped Chickadee
+  species_scientific: Poecile atricapillus
+  banding_code: BCCH
+  slug: black-capped-chickadee
+  filename: black-capped-chickadee.webp
+  family: Paridae
+  sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
+  sibley_category_order: 23
+  taxonomic_order: 22065
+  ebird_code: bkcchi
+  date_taken: '2026-07-12T15:52:00'
+  location: Ottawa County, MI
+  notes: "Adult & Juvenile (recently fledged our nest box)"
+  source_filename: 20260714_104946-COLLAGE.jpg
+  source_id: 20260714_104946-COLLAGE.jpg_20260714T104946_c4e0c5df
 - species_common: Peregrine Falcon
   species_scientific: Falco peregrinus
   banding_code: PEFA
@@ -1655,21 +1625,6 @@
   notes: ""
   source_filename: DSCN6637.jpg
   source_id: DSCN6637.jpg_20260724T074211_e24f177d
-- species_common: Osprey
-  species_scientific: Pandion haliaetus
-  banding_code: OSPR
-  slug: osprey
-  filename: osprey.webp
-  family: Pandionidae
-  sibley_category: Diurnal Raptors
-  sibley_category_order: 7
-  taxonomic_order: 7832
-  ebird_code: osprey
-  date_taken: '2026-07-24T10:54:18'
-  location: Ottawa County, MI
-  notes: "Adult bringing fish to another adult + 2 immature"
-  source_filename: DSCN6952.jpg
-  source_id: DSCN6952.jpg_20260724T105418_995eb545
 - species_common: American Kestrel
   species_scientific: Falco sparverius
   banding_code: AMKE
@@ -1685,6 +1640,51 @@
   notes: "Male & Female"
   source_filename: 20260724_145130-COLLAGE.jpg
   source_id: 20260724_145130-COLLAGE.jpg_20260724T145130_1748bd5c
+- species_common: Osprey
+  species_scientific: Pandion haliaetus
+  banding_code: OSPR
+  slug: osprey
+  filename: osprey.webp
+  family: Pandionidae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 7832
+  ebird_code: osprey
+  date_taken: '2026-07-24T10:54:18'
+  location: Ottawa County, MI
+  notes: "Adult bringing fish to another adult + 2 immature"
+  source_filename: DSCN6952.jpg
+  source_id: DSCN6952.jpg_20260724T105418_995eb545
+- species_common: Common Yellowthroat
+  species_scientific: Geothlypis trichas
+  banding_code: COYE
+  slug: common-yellowthroat
+  filename: common-yellowthroat.webp
+  family: Parulidae
+  sibley_category: Wood-Warblers
+  sibley_category_order: 30
+  taxonomic_order: 34028
+  ebird_code: comyel
+  date_taken: '2026-07-31T08:21:00'
+  location: Ottawa County, MI
+  notes: "Male & Female (gathering food that I watched it feed to a fledgling male)"
+  source_filename: 20260731_230543-COLLAGE.jpg
+  source_id: 20260731_230543-COLLAGE.jpg_20260731T230543_63e74c0c
+- species_common: American Goldfinch
+  species_scientific: Spinus tristis
+  banding_code: AGOL
+  slug: american-goldfinch
+  filename: american-goldfinch.webp
+  family: Fringillidae
+  sibley_category: Finches and Allies
+  sibley_category_order: 34
+  taxonomic_order: 32617
+  ebird_code: amegfi
+  date_taken: '2026-07-31T08:58:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260731_225914-COLLAGE.jpg
+  source_id: 20260731_225914-COLLAGE.jpg_20260731T225914_55fc3454
 - species_common: Least Sandpiper
   species_scientific: Calidris minutilla
   banding_code: LESA
@@ -1745,36 +1745,6 @@
   notes: "(Possible juvenile) Male & Female"
   source_filename: 20260731_225145-COLLAGE.jpg
   source_id: 20260731_225145-COLLAGE.jpg_20260731T225145_2c0954ff
-- species_common: American Goldfinch
-  species_scientific: Spinus tristis
-  banding_code: AGOL
-  slug: american-goldfinch
-  filename: american-goldfinch.webp
-  family: Fringillidae
-  sibley_category: Finches and Allies
-  sibley_category_order: 34
-  taxonomic_order: 32617
-  ebird_code: amegfi
-  date_taken: '2026-07-31T08:58:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260731_225914-COLLAGE.jpg
-  source_id: 20260731_225914-COLLAGE.jpg_20260731T225914_55fc3454
-- species_common: Common Yellowthroat
-  species_scientific: Geothlypis trichas
-  banding_code: COYE
-  slug: common-yellowthroat
-  filename: common-yellowthroat.webp
-  family: Parulidae
-  sibley_category: Wood-Warblers
-  sibley_category_order: 30
-  taxonomic_order: 34028
-  ebird_code: comyel
-  date_taken: '2026-07-31T08:21:00'
-  location: Ottawa County, MI
-  notes: "Male & Female (gathering food that I watched it feed to a fledgling male)"
-  source_filename: 20260731_230543-COLLAGE.jpg
-  source_id: 20260731_230543-COLLAGE.jpg_20260731T230543_63e74c0c
 - species_common: Mourning Dove
   species_scientific: Zenaida macroura
   banding_code: MODO
@@ -1970,6 +1940,21 @@
   notes: ""
   source_filename: DSCN2443.jpg
   source_id: DSCN2443.jpg_20260821T103207_eb39ed90
+- species_common: Bald Eagle
+  species_scientific: Haliaeetus leucocephalus
+  banding_code: BAEA
+  slug: bald-eagle
+  filename: bald-eagle.webp
+  family: Accipitridae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 8367
+  ebird_code: baleag
+  date_taken: '2026-08-21T11:23:00'
+  location: Muskegon County, MI
+  notes: "Immature & Adult"
+  source_filename: 20260822_010955-COLLAGE.jpg
+  source_id: 20260822_010955-COLLAGE.jpg_20260822T010955_862a1b6a
 - species_common: Green-winged Teal
   species_scientific: Anas crecca
   banding_code: GWTE
@@ -2045,21 +2030,6 @@
   notes: ""
   source_filename: 000403.jpg
   source_id: 000403.jpg_20260821T125503_6f5aef12
-- species_common: Bald Eagle
-  species_scientific: Haliaeetus leucocephalus
-  banding_code: BAEA
-  slug: bald-eagle
-  filename: bald-eagle.webp
-  family: Accipitridae
-  sibley_category: Diurnal Raptors
-  sibley_category_order: 7
-  taxonomic_order: 8367
-  ebird_code: baleag
-  date_taken: '2026-08-21T11:23:00'
-  location: Muskegon County, MI
-  notes: "Immature & Adult"
-  source_filename: 20260822_010955-COLLAGE.jpg
-  source_id: 20260822_010955-COLLAGE.jpg_20260822T010955_862a1b6a
 - species_common: Wandering Tattler
   species_scientific: Tringa incana
   banding_code: WATA
@@ -2105,6 +2075,21 @@
   notes: "Male & Female/Immature male (non-breeding plumage)"
   source_filename: 20260828_222535-COLLAGE.jpg
   source_id: 20260828_222535-COLLAGE.jpg_20260828T222535_0906842b
+- species_common: Horned Lark
+  species_scientific: Eremophila alpestris
+  banding_code: HOLA
+  slug: horned-lark
+  filename: horned-lark.webp
+  family: Alaudidae
+  sibley_category: Larks and Swallows
+  sibley_category_order: 22
+  taxonomic_order: 22710
+  ebird_code: horlar
+  date_taken: '2026-09-01T17:39:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20260902_090021-COLLAGE.jpg
+  source_id: 20260902_090021-COLLAGE.jpg_20260902T090021_4896e3a6
 - species_common: American Golden-Plover
   species_scientific: Pluvialis dominica
   banding_code: AMGP
@@ -2135,21 +2120,6 @@
   notes: "Male & Female"
   source_filename: 20260901_232837-COLLAGE.jpg
   source_id: 20260901_232837-COLLAGE.jpg_20260901T232837_599c2140
-- species_common: Horned Lark
-  species_scientific: Eremophila alpestris
-  banding_code: HOLA
-  slug: horned-lark
-  filename: horned-lark.webp
-  family: Alaudidae
-  sibley_category: Larks and Swallows
-  sibley_category_order: 22
-  taxonomic_order: 22710
-  ebird_code: horlar
-  date_taken: '2026-09-01T17:39:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260902_090021-COLLAGE.jpg
-  source_id: 20260902_090021-COLLAGE.jpg_20260902T090021_4896e3a6
 - species_common: Ruby-throated Hummingbird
   species_scientific: Archilochus colubris
   banding_code: RTHU
@@ -2180,6 +2150,21 @@
   notes: ""
   source_filename: DSCN6781.jpg
   source_id: DSCN6781.jpg_20260905T091311_b7456a04
+- species_common: Red-headed Woodpecker
+  species_scientific: Melanerpes erythrocephalus
+  banding_code: RHWO
+  slug: red-headed-woodpecker
+  filename: red-headed-woodpecker.webp
+  family: Picidae
+  sibley_category: Woodpeckers
+  sibley_category_order: 17
+  taxonomic_order: 11145
+  ebird_code: rehwoo
+  date_taken: '2026-09-07T08:26:00'
+  location: Ottawa County, MI
+  notes: "Immature & Adult"
+  source_filename: 20260930_104618-COLLAGE.jpg
+  source_id: 20260930_104618-COLLAGE.jpg_20260930T104618_d0ba5c0d
 - species_common: Wilson's Warbler
   species_scientific: Cardellina pusilla
   banding_code: WIWA
@@ -2330,6 +2315,21 @@
   notes: ""
   source_filename: DSCN9615.jpg
   source_id: DSCN9615.jpg_20260926T074055_e93b3910
+- species_common: Palm Warbler
+  species_scientific: Setophaga palmarum
+  banding_code: PAWA
+  slug: palm-warbler
+  filename: palm-warbler.webp
+  family: Parulidae
+  sibley_category: Wood-Warblers
+  sibley_category_order: 30
+  taxonomic_order: 34148
+  ebird_code: palwar
+  date_taken: '2026-09-26T08:24:00'
+  location: Kent County, MI
+  notes: "Breeding plumage & non-breeding plumage"
+  source_filename: 20260927_072344-COLLAGE.jpg
+  source_id: 20260927_072344-COLLAGE.jpg_20260927T072344_e96aa278
 - species_common: Lincoln's Sparrow
   species_scientific: Melospiza lincolnii
   banding_code: LISP
@@ -2405,21 +2405,6 @@
   notes: ""
   source_filename: DSCN0033.jpg
   source_id: DSCN0033.jpg_20260926T110239_9082a161
-- species_common: Palm Warbler
-  species_scientific: Setophaga palmarum
-  banding_code: PAWA
-  slug: palm-warbler
-  filename: palm-warbler.webp
-  family: Parulidae
-  sibley_category: Wood-Warblers
-  sibley_category_order: 30
-  taxonomic_order: 34148
-  ebird_code: palwar
-  date_taken: '2026-09-26T08:24:00'
-  location: Kent County, MI
-  notes: "Breeding plumage & non-breeding plumage"
-  source_filename: 20260927_072344-COLLAGE.jpg
-  source_id: 20260927_072344-COLLAGE.jpg_20260927T072344_e96aa278
 - species_common: Tennessee Warbler
   species_scientific: Leiothlypis peregrina
   banding_code: TEWA
@@ -2435,21 +2420,6 @@
   notes: "Male (breeding plumage) & Unknown (non-breeding plumage)"
   source_filename: 20260927_212551-COLLAGE.jpg
   source_id: 20260927_212551-COLLAGE.jpg_20260927T212551_3ea26bea
-- species_common: Red-headed Woodpecker
-  species_scientific: Melanerpes erythrocephalus
-  banding_code: RHWO
-  slug: red-headed-woodpecker
-  filename: red-headed-woodpecker.webp
-  family: Picidae
-  sibley_category: Woodpeckers
-  sibley_category_order: 17
-  taxonomic_order: 11145
-  ebird_code: rehwoo
-  date_taken: '2026-09-07T08:26:00'
-  location: Ottawa County, MI
-  notes: "Immature & Adult"
-  source_filename: 20260930_104618-COLLAGE.jpg
-  source_id: 20260930_104618-COLLAGE.jpg_20260930T104618_d0ba5c0d
 - species_common: Golden-crowned Kinglet
   species_scientific: Regulus satrapa
   banding_code: GCKI
@@ -2510,3 +2480,33 @@
   notes: "Male"
   source_filename: DSCN2920.jpg
   source_id: DSCN2920.jpg_20261011T130353_47b36edd
+- species_common: Chipping Sparrow
+  species_scientific: Spizella passerina
+  banding_code: CHSP
+  slug: chipping-sparrow
+  filename: chipping-sparrow.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 32990
+  ebird_code: chispa
+  date_taken: '2026-10-23T13:16:00'
+  location: Ottawa County, MI
+  notes: "Breeding plumage & non-breeding plumage"
+  source_filename: 20261023_142445-COLLAGE.jpg
+  source_id: 20261023_142445-COLLAGE.jpg_20261023T142445_e5f312a5
+- species_common: Dark-eyed Junco
+  species_scientific: Junco hyemalis
+  banding_code: DEJU
+  slug: dark-eyed-junco
+  filename: dark-eyed-junco.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 33124
+  ebird_code: daejun
+  date_taken: '2026-10-23T13:16:02'
+  location: Ottawa County, MI
+  notes: ""
+  source_filename: DSCN3702.jpg
+  source_id: DSCN3702.jpg_20261023T131602_c6c1221c
