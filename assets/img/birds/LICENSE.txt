@@ -1,0 +1,11 @@
+Copyright (c) Kyle Niewiada. All rights reserved.
+
+The bird photographs in this directory (assets/img/birds/) are NOT covered by
+the MIT License that applies to the rest of this repository's source code.
+
+No license is granted to copy, reproduce, modify, distribute, publicly display,
+or otherwise use these photographs, in whole or in part, for any purpose,
+including commercial use and use in training machine learning models, without
+prior written permission from the copyright holder.
+
+To request permission, contact Kyle Niewiada at https://www.kyleniewiada.org/contact/
