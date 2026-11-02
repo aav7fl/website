@@ -875,21 +875,6 @@
   notes: ""
   source_filename: DSCN1167.jpg
   source_id: DSCN1167.jpg_20260516T202152_7d52f474
-- species_common: Red-bellied Woodpecker
-  species_scientific: Melanerpes carolinus
-  banding_code: RBWO
-  slug: red-bellied-woodpecker
-  filename: red-bellied-woodpecker.webp
-  family: Picidae
-  sibley_category: Woodpeckers
-  sibley_category_order: 17
-  taxonomic_order: 11199
-  ebird_code: rebwoo
-  date_taken: '2026-05-17T07:12:00'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: 20260715_120442-COLLAGE.jpg
-  source_id: 20260715_120442-COLLAGE.jpg_20260715T120442_e50c91dc
 - species_common: Pine Warbler
   species_scientific: Setophaga pinus
   banding_code: PIWA
@@ -2505,8 +2490,53 @@
   sibley_category_order: 31
   taxonomic_order: 33124
   ebird_code: daejun
-  date_taken: '2026-10-23T13:16:02'
+  date_taken: '2026-10-24T15:28:00'
   location: Ottawa County, MI
+  notes: "Male & Female/Immature male"
+  source_filename: 20261024_212256-COLLAGE.jpg
+  source_id: 20261024_212256-COLLAGE.jpg_20261024T212256_2707f4e2
+- species_common: Red-bellied Woodpecker
+  species_scientific: Melanerpes carolinus
+  banding_code: RBWO
+  slug: red-bellied-woodpecker
+  filename: red-bellied-woodpecker.webp
+  family: Picidae
+  sibley_category: Woodpeckers
+  sibley_category_order: 17
+  taxonomic_order: 11199
+  ebird_code: rebwoo
+  date_taken: '2026-11-01T10:19:00'
+  location: Ottawa County, MI
+  notes: "Male & Female"
+  source_filename: 20261101_104453-COLLAGE.jpg
+  source_id: 20261101_104453-COLLAGE.jpg_20261101T104453_486fe9bf
+- species_common: American Bittern
+  species_scientific: Botaurus lentiginosus
+  banding_code: AMBI
+  slug: american-bittern
+  filename: american-bittern.webp
+  family: Ardeidae
+  sibley_category: Wading Birds
+  sibley_category_order: 6
+  taxonomic_order: 7560
+  ebird_code: amebit
+  date_taken: '2026-11-01T14:43:48'
+  location: Kent County, MI
   notes: ""
-  source_filename: DSCN3702.jpg
-  source_id: DSCN3702.jpg_20261023T131602_c6c1221c
+  source_filename: american-bittern_collage.png
+  source_id: american-bittern_collage.png_20261101T144348_c886995c
+- species_common: Limpkin
+  species_scientific: Aramus guarauna
+  banding_code: LIMP
+  slug: limpkin
+  filename: limpkin.webp
+  family: Aramidae
+  sibley_category: Rails, Coots, Cranes, and Allies
+  sibley_category_order: 8
+  taxonomic_order: 5671
+  ebird_code: limpki
+  date_taken: '2026-11-01T16:07:35'
+  location: Kent County, MI
+  notes: "Catching food"
+  source_filename: DSCN5030.jpg
+  source_id: DSCN5030.jpg_20261101T160735_a9f8e0d2
