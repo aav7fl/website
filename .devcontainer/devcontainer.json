@@ -17,7 +17,14 @@
 		// Puppeteer publishes no Chromium build for linux/arm64, so skip its
 		// download and use the Chromium that post-create.sh installs from apt.
 		"PUPPETEER_SKIP_DOWNLOAD": "true",
-		"PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium"
+		"PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium",
+		// Make every tool trust the system CA store, so extra CA certificates
+		// installed by post-create.sh (from .devcontainer/certs/) apply to Node,
+		// pip and Python too. OpenSSL/Ruby/curl use this file by default already.
+		"NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt",
+		"SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt",
+		"REQUESTS_CA_BUNDLE": "/etc/ssl/certs/ca-certificates.crt",
+		"PIP_CERT": "/etc/ssl/certs/ca-certificates.crt"
 	},
 
 	// Keep node_modules out of the bind mount so the container's Linux install

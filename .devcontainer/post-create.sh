@@ -1,6 +1,26 @@
 #!/bin/sh
 set -e # Halt on errors so failures don't cascade silently
 
+# Setup SUDO and non-interactive apt-get
+SUDO=""
+[ "$(id -u)" -ne 0 ] && SUDO="sudo"
+export DEBIAN_FRONTEND=noninteractive
+
+# Extra CA certificates (optional, gitignored). On a machine whose network does
+# TLS inspection (corporate proxy/VPN), export the root CA from the host into
+# .devcontainer/certs/*.crt so gem, npm, pip and apt can reach the internet.
+# This must run before anything below touches the network.
+# macOS: security find-certificate -c "<Root CA name>" -p /Library/Keychains/System.keychain > .devcontainer/certs/<name>.crt
+for cert in .devcontainer/certs/*.crt .devcontainer/certs/*.pem; do
+    [ -f "$cert" ] || continue
+    $SUDO mkdir -p /usr/local/share/ca-certificates/local
+    $SUDO cp "$cert" "/usr/local/share/ca-certificates/local/$(basename "$cert" .pem).crt"
+    EXTRA_CERTS=1
+done
+if [ -n "$EXTRA_CERTS" ]; then
+    $SUDO update-ca-certificates
+fi
+
 # Install the version of Bundler.
 if [ -f Gemfile.lock ] && grep "BUNDLED WITH" Gemfile.lock > /dev/null; then
     cat Gemfile.lock | tail -n 2 | grep -C2 "BUNDLED WITH" | tail -n 1 | xargs gem install bundler -v
@@ -11,11 +31,6 @@ fi
 if [ -f Gemfile ]; then
     bundle install
 fi
-
-# Setup SUDO and non-interactive apt-get
-SUDO=""
-[ "$(id -u)" -ne 0 ] && SUDO="sudo"
-export DEBIAN_FRONTEND=noninteractive
 
 # Update package lists once
 $SUDO apt-get update
