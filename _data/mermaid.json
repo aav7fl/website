@@ -3,15 +3,15 @@
   "diagrams": {
     "1e43a0c5e79afd99": {
       "src": "/assets/img/2025/05/examples-diagram-1.svg",
-      "width": 336,
-      "height": 371,
+      "width": 360,
+      "height": 406,
       "alt": "Example Description",
       "source": "_pages_standalone/examples.md",
       "structure": {
         "labels": 6,
         "text": "8ec868b2cbef",
         "paths": 11,
-        "groups": 30
+        "groups": 24
       }
     },
     "3f128b23e5289978": {
