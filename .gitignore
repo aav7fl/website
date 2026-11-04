@@ -11,6 +11,9 @@ vendor/
 
 .DS_Store
 
+# Machine-specific CA certificates for the dev container (see .devcontainer/post-create.sh)
+.devcontainer/certs/
+
 .idea/
 
 # Bird pipeline virtualenv & offline caches
