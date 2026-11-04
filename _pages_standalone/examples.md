@@ -59,6 +59,12 @@ Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapi
 
 ![BirdNET-Go main dashboard](/assets/img/2025/05/birdnet-go_main_dashboard.png)*My main dashboard on BirdNET-Go*
 
+## Add Border
+
+```bash
+magick image.jpg -resize 794x -bordercolor "#6c6c6c" -border 3x3 image.jpg
+```
+
 ## Remove Metadata
 
 ```bash
