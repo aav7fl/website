@@ -1370,16 +1370,16 @@
   notes: ""
   source_filename: DSCN1605.jpg
   source_id: DSCN1605.jpg_20260625T085034_f9f21644
-- species_common: Marsh Wren
+- species_common: Eastern Marsh Wren
   species_scientific: Cistothorus palustris
-  banding_code: MAWR
-  slug: marsh-wren
-  filename: marsh-wren.webp
+  banding_code: EAMW
+  slug: eastern-marsh-wren
+  filename: eastern-marsh-wren.webp
   family: Troglodytidae
   sibley_category: Wrens, Dippers, and Gnatcatchers
   sibley_category_order: 24
-  taxonomic_order: 27329
-  ebird_code: marwre
+  taxonomic_order: 27495
+  ebird_code: eamwre1
   date_taken: '2026-06-25T09:07:16'
   location: Oakland County, MI
   notes: ""
