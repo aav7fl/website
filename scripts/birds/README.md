@@ -92,6 +92,7 @@ Add or edit `notes:` on any entry in `_data/birds.yml` (for example `notes: 'Vag
 | `rake birds:update_deps` | Check for Python package updates now (normally automatic, about monthly) |
 | `rake birds:copyright` | Re-stamp the copyright tags into every photo (e.g. after changing the wording) |
 | `rake birds:compact_history` | Rare: remove old photo versions from git history (dry run unless `-- --apply`) |
+| `rake birds:update_taxonomy` | After an eBird taxonomy update: rebuild `taxonomy_sibley.csv` and the species embeddings (see "Updating the taxonomy") |
 
 `scripts/birds/import_birds.py --backfill-ebird-codes` (run with `/opt/venv-birds/bin/python`) re-adds eBird codes to every catalog entry, e.g. after codes are added to the taxonomy.
 
@@ -239,7 +240,17 @@ What the page does:
 6. **Check it.** `rake birds:doctor` should report the new species count and "Species embeddings cached for this model and taxonomy".
    - If the bird is regular in the US or Canada (ABA code 1–3), the AI can now suggest it. Otherwise it's available through fuzzy search, or AI suggestions with `--americas`.
 
-**Avoid `rake birds:setup -- --force` unless you mean it.** It rebuilds the whole taxonomy from eBird's current release, which can rename species and renumber `taxonomic_order`. Hand-added rows survive only if their family is in `sibley_family_map.json`, and, for species without a banding code, they're in `SPECIES_WITHOUT_BANDING_CODES`.
+### Updating the taxonomy
+eBird publishes a taxonomy update about once a year (splits, lumps, renames). `rake birds:setup` never touches an existing `taxonomy_sibley.csv`, so to pick up a new release run:
+
+    rake birds:update_taxonomy
+    rake birds:doctor
+
+This rebuilds the whole file from eBird's current release and then the species embeddings (the AI model itself is only verified, not re-downloaded). The file isn't merged: it's regenerated, so hand-added rows survive only if their family is in `sibley_family_map.json` and, for species without a banding code, their scientific name is in `SPECIES_WITHOUT_BANDING_CODES` (see "Adding a species" above). Check the `git diff` before committing: an update can rename species, change banding and eBird codes, and renumber `taxonomic_order` for most rows.
+
+The catalog keeps its own copy of each bird's names and codes, so after an update compare `_data/birds.yml` with the new file and correct renamed or split species by hand (e.g. the 2026 update split Marsh Wren into Eastern and Western, and moved Winter Wren to the genus *Nannus*).
+
+`rake birds:setup -- --force` isn't a shortcut: the setup task doesn't forward options. Running `setup_offline_assets.py --force` directly does the same rebuild but also re-downloads the AI model.
 
 ### Staying up to date (automatic)
 You never edit package versions. `requirements.in` / `requirements-ai.in` list what's needed. `requirements.txt` / `requirements-ai.txt` are generated lock files with the exact versions that last passed the checks.

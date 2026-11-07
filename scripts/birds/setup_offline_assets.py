@@ -4,7 +4,7 @@ Setup for the Bird Portfolio Pipeline. Safe to re-run; it only fetches what's mi
 1. US county boundaries (us_counties.geojson) are committed to the repo. Rebuilt from
    the US Census-derived source only with --refresh-counties.
 2. Taxonomy (taxonomy_sibley.csv) is committed. Rebuilt from eBird only if missing or
-   with --force, and older files get their eBird codes filled in.
+   with --refresh-taxonomy / --force, and older files get their eBird codes filled in.
 3. The AI model (optional): the pinned BioCLIP revision is downloaded once into
    scripts/birds/models/ and verified against model-checksums.txt (see bird_model.py),
    then the species text embeddings are pre-computed.
@@ -303,18 +303,19 @@ def main() -> None:
     parser.add_argument("--skip-models", action="store_true", help="Skip the AI model (imports still work with fuzzy search)")
     parser.add_argument("--refresh-counties", action="store_true", help="Re-download and rebuild the committed county boundaries")
     parser.add_argument("--refresh-aba", action="store_true", help="Re-download the ABA checklist (e.g. after a new version)")
+    parser.add_argument("--refresh-taxonomy", action="store_true", help="Rebuild the taxonomy from eBird's current release (e.g. after a taxonomy update) and its embeddings")
     args = parser.parse_args()
 
     if args.refresh_counties or not GEOJSON_PATH.exists():
         download_county_geojson(force=True)
     else:
         print(f"[OK] County boundaries present ({GEOJSON_PATH.name}, committed to the repo)")
-    taxonomy_updated = build_full_ebird_sibley_taxonomy(force=args.force)
+    taxonomy_updated = build_full_ebird_sibley_taxonomy(force=args.force or args.refresh_taxonomy)
     if not taxonomy_updated:
         add_ebird_codes_to_taxonomy()  # Older taxonomy files predate the ebird_code column
     download_aba_checklist(force=args.refresh_aba)
     if not args.skip_models:
-        cache_ai_models(force=args.force or taxonomy_updated)
+        cache_ai_models(force=args.force)
 
 
 if __name__ == "__main__":
