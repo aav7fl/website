@@ -13,7 +13,7 @@
   family: Corvidae
   sibley_category: Jays, Crows, Magpies, and Allies
   sibley_category_order: 21
-  taxonomic_order: 21309
+  taxonomic_order: 21410
   ebird_code: wooscj2
   date_taken: '2013-07-25T13:52:08'
   location: Coconino County, AZ
@@ -28,7 +28,7 @@
   family: Phasianidae
   sibley_category: Pheasants, Grouse, and Allies
   sibley_category_order: 2
-  taxonomic_order: 1274
+  taxonomic_order: 1296
   ebird_code: wiltur
   date_taken: '2025-04-12T09:09:00'
   location: Ottawa County, MI
@@ -43,7 +43,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34206
+  taxonomic_order: 34448
   ebird_code: towwar
   date_taken: '2025-07-21T11:29:36'
   location: Ketchikan Gateway Borough, AK
@@ -58,7 +58,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6449
+  taxonomic_order: 6491
   ebird_code: bklkit
   date_taken: '2025-07-24T07:05:09'
   location: Hoonah-Angoon CA, AK
@@ -73,7 +73,7 @@
   family: Corvidae
   sibley_category: Jays, Crows, Magpies, and Allies
   sibley_category_order: 21
-  taxonomic_order: 21624
+  taxonomic_order: 21721
   ebird_code: comrav
   date_taken: '2025-07-26T10:29:05'
   location: Anchorage, AK
@@ -88,7 +88,7 @@
   family: Podicipedidae
   sibley_category: Loons and Grebes
   sibley_category_order: 3
-  taxonomic_order: 6869
+  taxonomic_order: 6921
   ebird_code: rengre
   date_taken: '2025-07-26T16:24:01'
   location: Anchorage, AK
@@ -103,7 +103,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 382
+  taxonomic_order: 388
   ebird_code: truswa
   date_taken: '2025-07-26T17:00:24'
   location: Anchorage, AK
@@ -118,7 +118,7 @@
   family: Corvidae
   sibley_category: Jays, Crows, Magpies, and Allies
   sibley_category_order: 21
-  taxonomic_order: 21476
+  taxonomic_order: 21574
   ebird_code: bkbmag1
   date_taken: '2025-07-26T17:29:13'
   location: Anchorage, AK
@@ -133,7 +133,7 @@
   family: Rallidae
   sibley_category: Rails, Coots, Cranes, and Allies
   sibley_category_order: 8
-  taxonomic_order: 5500
+  taxonomic_order: 5538
   ebird_code: y00475
   date_taken: '2025-10-20T09:27:27'
   location: Benzie County, MI
@@ -148,7 +148,7 @@
   family: Accipitridae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 8278
+  taxonomic_order: 8337
   ebird_code: coohaw
   date_taken: '2025-10-25T12:35:18'
   location: Ottawa County, MI
@@ -163,7 +163,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33095
+  taxonomic_order: 33350
   ebird_code: amtspa
   date_taken: '2025-12-27T10:25:07'
   location: Ottawa County, MI
@@ -178,7 +178,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 545
+  taxonomic_order: 554
   ebird_code: mallar3
   date_taken: '2025-12-27T10:58:44'
   location: Ottawa County, MI
@@ -193,7 +193,7 @@
   family: Certhiidae
   sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
   sibley_category_order: 23
-  taxonomic_order: 27026
+  taxonomic_order: 27175
   ebird_code: brncre
   date_taken: '2025-12-27T11:13:25'
   location: Ottawa County, MI
@@ -208,7 +208,7 @@
   family: Sittidae
   sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
   sibley_category_order: 23
-  taxonomic_order: 26937
+  taxonomic_order: 27083
   ebird_code: rebnut
   date_taken: '2026-01-04T09:08:11'
   location: Ottawa County, MI
@@ -223,7 +223,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11400
+  taxonomic_order: 11477
   ebird_code: dowwoo
   date_taken: '2026-02-15T08:50:00'
   location: Ottawa County, MI
@@ -238,7 +238,7 @@
   family: Sturnidae
   sibley_category: Mockingbirds, Thrashers, and Starlings
   sibley_category_order: 26
-  taxonomic_order: 27813
+  taxonomic_order: 27986
   ebird_code: eursta
   date_taken: '2026-02-15T13:33:20'
   location: Ottawa County, MI
@@ -253,7 +253,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34515
+  taxonomic_order: 34768
   ebird_code: norcar
   date_taken: '2026-02-15T13:38:00'
   location: Ottawa County, MI
@@ -268,7 +268,7 @@
   family: Passeridae
   sibley_category: Old World Sparrows and Weaver Finches
   sibley_category_order: 35
-  taxonomic_order: 31534
+  taxonomic_order: 31772
   ebird_code: houspa
   date_taken: '2026-03-14T11:40:00'
   location: Ottawa County, MI
@@ -283,7 +283,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6064
+  taxonomic_order: 6105
   ebird_code: amewoo
   date_taken: '2026-04-04T20:49:29'
   location: Ottawa County, MI
@@ -298,7 +298,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33853
+  taxonomic_order: 34091
   ebird_code: comgra
   date_taken: '2026-04-11T11:54:51'
   location: Ottawa County, MI
@@ -313,7 +313,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33848
+  taxonomic_order: 34086
   ebird_code: rusbla
   date_taken: '2026-04-11T14:51:49'
   location: Ottawa County, MI
@@ -328,7 +328,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11126
+  taxonomic_order: 11197
   ebird_code: yebsap
   date_taken: '2026-04-11T15:25:59'
   location: Ottawa County, MI
@@ -343,7 +343,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33833
+  taxonomic_order: 34072
   ebird_code: bnhcow
   date_taken: '2026-04-12T09:43:00'
   location: Ottawa County, MI
@@ -358,7 +358,7 @@
   family: Troglodytidae
   sibley_category: Wrens, Dippers, and Gnatcatchers
   sibley_category_order: 24
-  taxonomic_order: 27348
+  taxonomic_order: 27505
   ebird_code: carwre
   date_taken: '2026-04-17T08:38:00'
   location: Ottawa County, MI
@@ -373,7 +373,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33315
+  taxonomic_order: 33564
   ebird_code: swaspa
   date_taken: '2026-04-17T10:01:10'
   location: Ottawa County, MI
@@ -388,7 +388,7 @@
   family: Regulidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 26844
+  taxonomic_order: 26988
   ebird_code: ruckin
   date_taken: '2026-04-17T10:08:00'
   location: Ottawa County, MI
@@ -403,7 +403,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28333
+  taxonomic_order: 28511
   ebird_code: herthr
   date_taken: '2026-04-21T18:06:23'
   location: Ottawa County, MI
@@ -418,7 +418,7 @@
   family: Bombycillidae
   sibley_category: Waxwings, Silky-flycatchers, and Allies
   sibley_category_order: 28
-  taxonomic_order: 29888
+  taxonomic_order: 30109
   ebird_code: cedwax
   date_taken: '2026-04-23T18:20:47'
   location: Ottawa County, MI
@@ -433,7 +433,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 17007
+  taxonomic_order: 17101
   ebird_code: easpho
   date_taken: '2026-04-24T08:14:39'
   location: Ottawa County, MI
@@ -448,7 +448,7 @@
   family: Strigidae
   sibley_category: Owls
   sibley_category_order: 14
-  taxonomic_order: 9219
+  taxonomic_order: 9282
   ebird_code: brdowl
   date_taken: '2026-04-24T09:01:04'
   location: Ottawa County, MI
@@ -463,7 +463,7 @@
   family: Fringillidae
   sibley_category: Finches and Allies
   sibley_category_order: 34
-  taxonomic_order: 32324
+  taxonomic_order: 32570
   ebird_code: purfin
   date_taken: '2026-04-24T09:19:00'
   location: Ottawa County, MI
@@ -478,7 +478,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33002
+  taxonomic_order: 33255
   ebird_code: fiespa
   date_taken: '2026-04-24T11:25:57'
   location: Ottawa County, MI
@@ -493,7 +493,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28126
+  taxonomic_order: 28305
   ebird_code: easblu
   date_taken: '2026-04-28T18:50:00'
   location: Ottawa County, MI
@@ -508,7 +508,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33277
+  taxonomic_order: 33527
   ebird_code: sonspa
   date_taken: '2026-05-01T07:35:54'
   location: Kent County, MI
@@ -523,7 +523,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 770
+  taxonomic_order: 791
   ebird_code: rebmer
   date_taken: '2026-05-01T09:39:32'
   location: Kent County, MI
@@ -538,7 +538,7 @@
   family: Charadriidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 5827
+  taxonomic_order: 5866
   ebird_code: killde
   date_taken: '2026-05-01T11:50:18'
   location: Kent County, MI
@@ -553,7 +553,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6126
+  taxonomic_order: 6167
   ebird_code: sposan
   date_taken: '2026-05-01T11:58:52'
   location: Kent County, MI
@@ -568,7 +568,7 @@
   family: Hirundinidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 24051
+  taxonomic_order: 24156
   ebird_code: banswa
   date_taken: '2026-05-04T15:55:33'
   location: Ottawa County, MI
@@ -583,7 +583,7 @@
   family: Troglodytidae
   sibley_category: Wrens, Dippers, and Gnatcatchers
   sibley_category_order: 24
-  taxonomic_order: 27191
+  taxonomic_order: 27347
   ebird_code: houwre
   date_taken: '2026-05-08T11:06:26'
   location: Ottawa County, MI
@@ -598,7 +598,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11427
+  taxonomic_order: 11504
   ebird_code: haiwoo
   date_taken: '2026-05-09T07:35:00'
   location: Ottawa County, MI
@@ -613,7 +613,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33962
+  taxonomic_order: 34201
   ebird_code: bawwar
   date_taken: '2026-05-09T09:42:01'
   location: Ottawa County, MI
@@ -628,7 +628,7 @@
   family: Hirundinidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 24064
+  taxonomic_order: 24169
   ebird_code: treswa
   date_taken: '2026-05-09T10:51:00'
   location: Ottawa County, MI
@@ -643,7 +643,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33770
+  taxonomic_order: 34011
   ebird_code: balori
   date_taken: '2026-05-09T10:54:00'
   location: Ottawa County, MI
@@ -658,7 +658,7 @@
   family: Hirundinidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 24187
+  taxonomic_order: 24292
   ebird_code: barswa
   date_taken: '2026-05-09T11:04:00'
   location: Kent County, MI
@@ -673,7 +673,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34098
+  taxonomic_order: 34328
   ebird_code: yelwar1
   date_taken: '2026-05-09T11:51:00'
   location: Ottawa County, MI
@@ -688,7 +688,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33415
+  taxonomic_order: 33661
   ebird_code: eastow
   date_taken: '2026-05-10T15:18:00'
   location: Ottawa County, MI
@@ -703,7 +703,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6129
+  taxonomic_order: 6170
   ebird_code: solsan
   date_taken: '2026-05-15T14:56:19'
   location: Manistee County, MI
@@ -718,7 +718,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6057
+  taxonomic_order: 6098
   ebird_code: shbdow
   date_taken: '2026-05-15T16:47:08'
   location: Benzie County, MI
@@ -733,7 +733,7 @@
   family: Rallidae
   sibley_category: Rails, Coots, Cranes, and Allies
   sibley_category_order: 8
-  taxonomic_order: 5297
+  taxonomic_order: 5334
   ebird_code: virrai
   date_taken: '2026-05-15T17:04:21'
   location: Benzie County, MI
@@ -748,7 +748,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 762
+  taxonomic_order: 783
   ebird_code: commer
   date_taken: '2026-05-16T09:59:18'
   location: Mackinac County, MI
@@ -763,7 +763,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6748
+  taxonomic_order: 6798
   ebird_code: comter
   date_taken: '2026-05-16T10:01:05'
   location: Mackinac County, MI
@@ -778,7 +778,7 @@
   family: Columbidae
   sibley_category: Pigeons and Doves
   sibley_category_order: 12
-  taxonomic_order: 1853
+  taxonomic_order: 1875
   ebird_code: rocpig
   date_taken: '2026-05-16T10:15:04'
   location: Mackinac County, MI
@@ -793,7 +793,7 @@
   family: Accipitridae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 8479
+  taxonomic_order: 8541
   ebird_code: brwhaw
   date_taken: '2026-05-16T13:29:00'
   location: Mackinac County, MI
@@ -808,7 +808,7 @@
   family: Phasianidae
   sibley_category: Pheasants, Grouse, and Allies
   sibley_category_order: 2
-  taxonomic_order: 1283
+  taxonomic_order: 1305
   ebird_code: rufgro
   date_taken: '2026-05-16T13:38:09'
   location: Mackinac County, MI
@@ -823,7 +823,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34063
+  taxonomic_order: 34303
   ebird_code: norpar
   date_taken: '2026-05-16T14:00:20'
   location: Mackinac County, MI
@@ -838,7 +838,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33946
+  taxonomic_order: 34185
   ebird_code: ovenbi1
   date_taken: '2026-05-16T14:29:31'
   location: Mackinac County, MI
@@ -853,7 +853,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33187
+  taxonomic_order: 33441
   ebird_code: whcspa
   date_taken: '2026-05-16T19:35:00'
   location: Mackinac County, MI
@@ -868,7 +868,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 32996
+  taxonomic_order: 33249
   ebird_code: clcspa
   date_taken: '2026-05-16T20:21:52'
   location: Mackinac County, MI
@@ -883,7 +883,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34153
+  taxonomic_order: 34394
   ebird_code: pinwar
   date_taken: '2026-05-17T08:37:58'
   location: Mackinac County, MI
@@ -898,7 +898,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34218
+  taxonomic_order: 34460
   ebird_code: btnwar
   date_taken: '2026-05-17T08:44:26'
   location: Mackinac County, MI
@@ -913,7 +913,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34060
+  taxonomic_order: 34300
   ebird_code: camwar
   date_taken: '2026-05-17T09:33:02'
   location: Mackinac County, MI
@@ -928,7 +928,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33981
+  taxonomic_order: 34220
   ebird_code: naswar
   date_taken: '2026-05-17T10:20:51'
   location: Mackinac County, MI
@@ -943,7 +943,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33956
+  taxonomic_order: 34195
   ebird_code: gowwar
   date_taken: '2026-05-18T07:18:41'
   location: Mackinac County, MI
@@ -958,7 +958,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34084
+  taxonomic_order: 34325
   ebird_code: bkbwar
   date_taken: '2026-05-18T08:11:01'
   location: Mackinac County, MI
@@ -973,7 +973,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34058
+  taxonomic_order: 34298
   ebird_code: amered
   date_taken: '2026-05-18T09:15:00'
   location: Mackinac County, MI
@@ -988,7 +988,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34439
+  taxonomic_order: 34690
   ebird_code: westan
   date_taken: '2026-05-18T10:02:21'
   location: Mackinac County, MI
@@ -1003,7 +1003,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34557
+  taxonomic_order: 34812
   ebird_code: robgro
   date_taken: '2026-05-18T10:03:00'
   location: Mackinac County, MI
@@ -1018,7 +1018,7 @@
   family: Vireonidae
   sibley_category: Shrikes and Vireos
   sibley_category_order: 20
-  taxonomic_order: 19245
+  taxonomic_order: 19341
   ebird_code: eawvir1
   date_taken: '2026-05-22T09:12:44'
   location: Ottawa County, MI
@@ -1033,7 +1033,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 17472
+  taxonomic_order: 17566
   ebird_code: easkin
   date_taken: '2026-05-22T09:13:52'
   location: Ottawa County, MI
@@ -1048,7 +1048,7 @@
   family: Cuculidae
   sibley_category: Cuckoos, Roadrunners, and Anis
   sibley_category_order: 13
-  taxonomic_order: 3243
+  taxonomic_order: 3272
   ebird_code: bkbcuc
   date_taken: '2026-05-22T09:16:46'
   location: Ottawa County, MI
@@ -1063,7 +1063,7 @@
   family: Accipitridae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 8506
+  taxonomic_order: 8569
   ebird_code: rethaw
   date_taken: '2026-05-22T11:33:00'
   location: Ottawa County, MI
@@ -1078,7 +1078,7 @@
   family: Cathartidae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 7815
+  taxonomic_order: 7873
   ebird_code: turvul
   date_taken: '2026-05-22T12:06:55'
   location: Ottawa County, MI
@@ -1093,7 +1093,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 754
+  taxonomic_order: 775
   ebird_code: hoomer
   date_taken: '2026-05-22T13:13:37'
   location: Ottawa County, MI
@@ -1108,7 +1108,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28633
+  taxonomic_order: 28813
   ebird_code: amerob
   date_taken: '2026-05-25T14:12:11'
   location: Ottawa County, MI
@@ -1123,7 +1123,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 16952
+  taxonomic_order: 17047
   ebird_code: wilfly
   date_taken: '2026-05-29T07:58:28'
   location: Ottawa County, MI
@@ -1138,7 +1138,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 342
+  taxonomic_order: 347
   ebird_code: cangoo
   date_taken: '2026-05-29T08:06:22'
   location: Ottawa County, MI
@@ -1153,7 +1153,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33679
+  taxonomic_order: 33927
   ebird_code: orcori
   date_taken: '2026-05-29T08:23:00'
   location: Ottawa County, MI
@@ -1168,7 +1168,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 377
+  taxonomic_order: 382
   ebird_code: mutswa
   date_taken: '2026-05-29T08:33:33'
   location: Ottawa County, MI
@@ -1183,7 +1183,7 @@
   family: Cuculidae
   sibley_category: Cuckoos, Roadrunners, and Anis
   sibley_category_order: 13
-  taxonomic_order: 3238
+  taxonomic_order: 3267
   ebird_code: yebcuc
   date_taken: '2026-05-29T10:06:30'
   location: Ottawa County, MI
@@ -1198,7 +1198,7 @@
   family: Strigidae
   sibley_category: Owls
   sibley_category_order: 14
-  taxonomic_order: 8910
+  taxonomic_order: 8975
   ebird_code: grhowl
   date_taken: '2026-05-30T13:58:33'
   location: Ottawa County, MI
@@ -1213,7 +1213,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28347
+  taxonomic_order: 28525
   ebird_code: woothr
   date_taken: '2026-06-05T07:05:29'
   location: Ottawa County, MI
@@ -1228,7 +1228,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 17334
+  taxonomic_order: 17428
   ebird_code: grcfly
   date_taken: '2026-06-05T07:47:26'
   location: Ottawa County, MI
@@ -1243,7 +1243,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33963
+  taxonomic_order: 34202
   ebird_code: prowar
   date_taken: '2026-06-05T08:26:25'
   location: Ottawa County, MI
@@ -1258,7 +1258,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 16951
+  taxonomic_order: 17046
   ebird_code: aldfly
   date_taken: '2026-06-05T09:28:47'
   location: Ottawa County, MI
@@ -1273,7 +1273,7 @@
   family: Paridae
   sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
   sibley_category_order: 23
-  taxonomic_order: 22160
+  taxonomic_order: 22261
   ebird_code: tuftit
   date_taken: '2026-06-08T12:09:08'
   location: Ottawa County, MI
@@ -1288,7 +1288,7 @@
   family: Corvidae
   sibley_category: Jays, Crows, Magpies, and Allies
   sibley_category_order: 21
-  taxonomic_order: 21294
+  taxonomic_order: 21395
   ebird_code: blujay
   date_taken: '2026-06-08T18:12:59'
   location: Ottawa County, MI
@@ -1303,7 +1303,7 @@
   family: Gruidae
   sibley_category: Rails, Coots, Cranes, and Allies
   sibley_category_order: 8
-  taxonomic_order: 5697
+  taxonomic_order: 5735
   ebird_code: sancra
   date_taken: '2026-06-13T18:56:59'
   location: Kent County, MI
@@ -1318,7 +1318,7 @@
   family: Mimidae
   sibley_category: Mockingbirds, Thrashers, and Starlings
   sibley_category_order: 26
-  taxonomic_order: 28037
+  taxonomic_order: 28214
   ebird_code: brnthr
   date_taken: '2026-06-13T20:12:42'
   location: Kent County, MI
@@ -1333,7 +1333,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 32943
+  taxonomic_order: 33196
   ebird_code: graspa
   date_taken: '2026-06-19T06:23:10'
   location: Kent County, MI
@@ -1348,7 +1348,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11900
+  taxonomic_order: 11980
   ebird_code: norfli
   date_taken: '2026-06-19T17:19:06'
   location: Kent County, MI
@@ -1363,7 +1363,7 @@
   family: Mimidae
   sibley_category: Mockingbirds, Thrashers, and Starlings
   sibley_category_order: 26
-  taxonomic_order: 28000
+  taxonomic_order: 28176
   ebird_code: grycat
   date_taken: '2026-06-25T08:50:34'
   location: Oakland County, MI
@@ -1393,7 +1393,7 @@
   family: Ardeidae
   sibley_category: Wading Birds
   sibley_category_order: 6
-  taxonomic_order: 7729
+  taxonomic_order: 7787
   ebird_code: greegr
   date_taken: '2026-06-25T10:30:33'
   location: Oakland County, MI
@@ -1408,7 +1408,7 @@
   family: Ardeidae
   sibley_category: Wading Birds
   sibley_category_order: 6
-  taxonomic_order: 7704
+  taxonomic_order: 7762
   ebird_code: grnher
   date_taken: '2026-06-26T07:59:20'
   location: Wayne County, MI
@@ -1423,7 +1423,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 455
+  taxonomic_order: 463
   ebird_code: wooduc
   date_taken: '2026-06-26T08:15:00'
   location: Wayne County, MI
@@ -1438,7 +1438,7 @@
   family: Apodidae
   sibley_category: Nightjars, Swifts, and Hummingbirds
   sibley_category_order: 15
-  taxonomic_order: 3896
+  taxonomic_order: 3931
   ebird_code: chiswi
   date_taken: '2026-06-26T09:15:00'
   location: Wayne County, MI
@@ -1453,7 +1453,7 @@
   family: Ardeidae
   sibley_category: Wading Birds
   sibley_category_order: 6
-  taxonomic_order: 7600
+  taxonomic_order: 7658
   ebird_code: bcnher
   date_taken: '2026-06-26T09:22:29'
   location: Wayne County, MI
@@ -1468,7 +1468,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33244
+  taxonomic_order: 33498
   ebird_code: savspa
   date_taken: '2026-07-03T06:34:18'
   location: Kent County, MI
@@ -1483,7 +1483,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33564
+  taxonomic_order: 33811
   ebird_code: boboli
   date_taken: '2026-07-03T06:37:00'
   location: Kent County, MI
@@ -1498,7 +1498,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34627
+  taxonomic_order: 34882
   ebird_code: dickci
   date_taken: '2026-07-03T09:28:00'
   location: Kent County, MI
@@ -1513,7 +1513,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33568
+  taxonomic_order: 33815
   ebird_code: easmea
   date_taken: '2026-07-03T11:13:53'
   location: Kent County, MI
@@ -1528,7 +1528,7 @@
   family: Fringillidae
   sibley_category: Finches and Allies
   sibley_category_order: 34
-  taxonomic_order: 32310
+  taxonomic_order: 32556
   ebird_code: houfin
   date_taken: '2026-07-05T14:38:00'
   location: Ottawa County, MI
@@ -1543,7 +1543,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33779
+  taxonomic_order: 34020
   ebird_code: rewbla
   date_taken: '2026-07-10T10:35:00'
   location: Kent County, MI
@@ -1558,7 +1558,7 @@
   family: Hirundinidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 24106
+  taxonomic_order: 24211
   ebird_code: nrwswa
   date_taken: '2026-07-10T11:38:00'
   location: Kent County, MI
@@ -1573,7 +1573,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34436
+  taxonomic_order: 34687
   ebird_code: scatan
   date_taken: '2026-07-11T15:07:18'
   location: Ottawa County, MI
@@ -1588,7 +1588,7 @@
   family: Paridae
   sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
   sibley_category_order: 23
-  taxonomic_order: 22065
+  taxonomic_order: 22164
   ebird_code: bkcchi
   date_taken: '2026-07-12T15:52:00'
   location: Ottawa County, MI
@@ -1603,7 +1603,7 @@
   family: Falconidae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 12114
+  taxonomic_order: 12194
   ebird_code: perfal
   date_taken: '2026-07-24T07:42:11'
   location: Kent County, MI
@@ -1618,7 +1618,7 @@
   family: Falconidae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 12028
+  taxonomic_order: 12108
   ebird_code: amekes
   date_taken: '2026-07-24T08:17:00'
   location: Kent County, MI
@@ -1633,7 +1633,7 @@
   family: Pandionidae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 7832
+  taxonomic_order: 7890
   ebird_code: osprey
   date_taken: '2026-07-24T10:54:18'
   location: Ottawa County, MI
@@ -1648,7 +1648,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34028
+  taxonomic_order: 34268
   ebird_code: comyel
   date_taken: '2026-07-31T08:21:00'
   location: Ottawa County, MI
@@ -1663,7 +1663,7 @@
   family: Fringillidae
   sibley_category: Finches and Allies
   sibley_category_order: 34
-  taxonomic_order: 32617
+  taxonomic_order: 32871
   ebird_code: amegfi
   date_taken: '2026-07-31T08:58:00'
   location: Ottawa County, MI
@@ -1678,7 +1678,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6226
+  taxonomic_order: 6267
   ebird_code: leasan
   date_taken: '2026-07-31T10:17:28'
   location: Ottawa County, MI
@@ -1693,7 +1693,7 @@
   family: Falconidae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 12062
+  taxonomic_order: 12142
   ebird_code: merlin
   date_taken: '2026-07-31T12:04:59'
   location: Ottawa County, MI
@@ -1708,7 +1708,7 @@
   family: Ardeidae
   sibley_category: Wading Birds
   sibley_category_order: 6
-  taxonomic_order: 7753
+  taxonomic_order: 7811
   ebird_code: grbher3
   date_taken: '2026-07-31T12:19:38'
   location: Ottawa County, MI
@@ -1723,7 +1723,7 @@
   family: Alcedinidae
   sibley_category: Trogons and Kingfishers
   sibley_category_order: 16
-  taxonomic_order: 10306
+  taxonomic_order: 10378
   ebird_code: belkin1
   date_taken: '2026-07-31T13:20:00'
   location: Ottawa County, MI
@@ -1738,7 +1738,7 @@
   family: Columbidae
   sibley_category: Pigeons and Doves
   sibley_category_order: 12
-  taxonomic_order: 2412
+  taxonomic_order: 2438
   ebird_code: moudov
   date_taken: '2026-08-04T13:04:30'
   location: Ottawa County, MI
@@ -1753,7 +1753,7 @@
   family: Phalacrocoracidae
   sibley_category: Pelicans, Boobies, Cormorants, and Allies
   sibley_category_order: 5
-  taxonomic_order: 7424
+  taxonomic_order: 7480
   ebird_code: doccor
   date_taken: '2026-08-14T08:18:05'
   location: Kent County, MI
@@ -1768,7 +1768,7 @@
   family: Hirundinidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 24081
+  taxonomic_order: 24186
   ebird_code: purmar
   date_taken: '2026-08-14T08:22:36'
   location: Kent County, MI
@@ -1783,7 +1783,7 @@
   family: Cardinalidae
   sibley_category: Tanagers, Cardinals, Grosbeaks, and Buntings
   sibley_category_order: 32
-  taxonomic_order: 34607
+  taxonomic_order: 34862
   ebird_code: indbun
   date_taken: '2026-08-14T08:33:40'
   location: Kent County, MI
@@ -1798,7 +1798,7 @@
   family: Polioptilidae
   sibley_category: Wrens, Dippers, and Gnatcatchers
   sibley_category_order: 24
-  taxonomic_order: 27123
+  taxonomic_order: 27278
   ebird_code: buggna
   date_taken: '2026-08-14T09:43:00'
   location: Kent County, MI
@@ -1813,7 +1813,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6227
+  taxonomic_order: 6268
   ebird_code: pecsan
   date_taken: '2026-08-21T08:13:57'
   location: Muskegon County, MI
@@ -1828,7 +1828,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 501
+  taxonomic_order: 509
   ebird_code: norsho
   date_taken: '2026-08-21T08:43:00'
   location: Muskegon County, MI
@@ -1843,7 +1843,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6145
+  taxonomic_order: 6186
   ebird_code: lesyel
   date_taken: '2026-08-21T09:06:35'
   location: Muskegon County, MI
@@ -1858,7 +1858,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6217
+  taxonomic_order: 6258
   ebird_code: baisan
   date_taken: '2026-08-21T09:32:53'
   location: Muskegon County, MI
@@ -1873,7 +1873,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6232
+  taxonomic_order: 6273
   ebird_code: semsan
   date_taken: '2026-08-21T09:33:07'
   location: Muskegon County, MI
@@ -1888,7 +1888,7 @@
   family: Charadriidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 5834
+  taxonomic_order: 5873
   ebird_code: semplo
   date_taken: '2026-08-21T09:47:35'
   location: Muskegon County, MI
@@ -1903,7 +1903,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6154
+  taxonomic_order: 6195
   ebird_code: greyel
   date_taken: '2026-08-21T10:08:34'
   location: Muskegon County, MI
@@ -1918,7 +1918,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6183
+  taxonomic_order: 6224
   ebird_code: stisan
   date_taken: '2026-08-21T10:32:07'
   location: Muskegon County, MI
@@ -1933,7 +1933,7 @@
   family: Accipitridae
   sibley_category: Diurnal Raptors
   sibley_category_order: 7
-  taxonomic_order: 8367
+  taxonomic_order: 8429
   ebird_code: baleag
   date_taken: '2026-08-21T11:23:00'
   location: Muskegon County, MI
@@ -1948,7 +1948,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 612
+  taxonomic_order: 625
   ebird_code: gnwtea
   date_taken: '2026-08-21T12:04:59'
   location: Muskegon County, MI
@@ -1963,7 +1963,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6462
+  taxonomic_order: 6504
   ebird_code: bongul
   date_taken: '2026-08-21T12:38:04'
   location: Muskegon County, MI
@@ -1978,7 +1978,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6521
+  taxonomic_order: 6564
   ebird_code: ribgul
   date_taken: '2026-08-21T12:44:00'
   location: Muskegon County, MI
@@ -1993,7 +1993,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6539
+  taxonomic_order: 6582
   ebird_code: amhgul1
   date_taken: '2026-08-21T12:44:00'
   location: Muskegon County, MI
@@ -2008,7 +2008,7 @@
   family: Anatidae
   sibley_category: Waterfowl
   sibley_category_order: 1
-  taxonomic_order: 485
+  taxonomic_order: 492
   ebird_code: buwtea
   date_taken: '2026-08-21T12:55:03'
   location: Muskegon County, MI
@@ -2023,7 +2023,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6134
+  taxonomic_order: 6175
   ebird_code: wantat1
   date_taken: '2026-08-24T12:22:00'
   location: Ottawa County, MI
@@ -2038,7 +2038,7 @@
   family: Scolopacidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 6188
+  taxonomic_order: 6229
   ebird_code: bubsan
   date_taken: '2026-08-28T10:21:29'
   location: Ottawa County, MI
@@ -2053,7 +2053,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34079
+  taxonomic_order: 34319
   ebird_code: magwar
   date_taken: '2026-08-28T12:33:00'
   location: Ottawa County, MI
@@ -2068,7 +2068,7 @@
   family: Alaudidae
   sibley_category: Larks and Swallows
   sibley_category_order: 22
-  taxonomic_order: 22710
+  taxonomic_order: 22812
   ebird_code: horlar
   date_taken: '2026-09-01T17:39:00'
   location: Ottawa County, MI
@@ -2083,7 +2083,7 @@
   family: Charadriidae
   sibley_category: Shorebirds
   sibley_category_order: 9
-  taxonomic_order: 5815
+  taxonomic_order: 5854
   ebird_code: amgplo
   date_taken: '2026-09-01T17:59:14'
   location: Ottawa County, MI
@@ -2098,7 +2098,7 @@
   family: Icteridae
   sibley_category: Blackbirds, Orioles, Grackles, and Cowbirds
   sibley_category_order: 33
-  taxonomic_order: 33851
+  taxonomic_order: 34089
   ebird_code: brebla
   date_taken: '2026-09-01T18:31:00'
   location: Ottawa County, MI
@@ -2113,7 +2113,7 @@
   family: Trochilidae
   sibley_category: Nightjars, Swifts, and Hummingbirds
   sibley_category_order: 15
-  taxonomic_order: 4802
+  taxonomic_order: 4839
   ebird_code: rthhum
   date_taken: '2026-09-04T17:27:00'
   location: Ottawa County, MI
@@ -2128,7 +2128,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 16924
+  taxonomic_order: 17019
   ebird_code: eawpew
   date_taken: '2026-09-05T09:13:11'
   location: Kent County, MI
@@ -2143,7 +2143,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11145
+  taxonomic_order: 11216
   ebird_code: rehwoo
   date_taken: '2026-09-07T08:26:00'
   location: Ottawa County, MI
@@ -2158,7 +2158,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34346
+  taxonomic_order: 34593
   ebird_code: wlswar
   date_taken: '2026-09-07T09:10:07'
   location: Ottawa County, MI
@@ -2173,7 +2173,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34133
+  taxonomic_order: 34374
   ebird_code: chswar
   date_taken: '2026-09-07T10:18:00'
   location: Ottawa County, MI
@@ -2188,7 +2188,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34083
+  taxonomic_order: 34323
   ebird_code: babwar
   date_taken: '2026-09-07T10:20:00'
   location: Ottawa County, MI
@@ -2203,7 +2203,7 @@
   family: Corvidae
   sibley_category: Jays, Crows, Magpies, and Allies
   sibley_category_order: 21
-  taxonomic_order: 21557
+  taxonomic_order: 21656
   ebird_code: amecro
   date_taken: '2026-09-10T19:44:41'
   location: Ottawa County, MI
@@ -2218,7 +2218,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28324
+  taxonomic_order: 28502
   ebird_code: swathr
   date_taken: '2026-09-11T10:17:26'
   location: Kent County, MI
@@ -2233,7 +2233,7 @@
   family: Sittidae
   sibley_category: Chickadees, Titmice, Nuthatches, and Creepers
   sibley_category_order: 23
-  taxonomic_order: 26889
+  taxonomic_order: 27033
   ebird_code: whbnut
   date_taken: '2026-09-11T11:13:26'
   location: Kent County, MI
@@ -2248,7 +2248,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 16949
+  taxonomic_order: 17044
   ebird_code: yebfly
   date_taken: '2026-09-11T13:30:04'
   location: Kent County, MI
@@ -2263,7 +2263,7 @@
   family: Tyrannidae
   sibley_category: Tyrant Flycatchers
   sibley_category_order: 19
-  taxonomic_order: 16963
+  taxonomic_order: 17057
   ebird_code: leafly
   date_taken: '2026-09-11T14:43:04'
   location: Kent County, MI
@@ -2278,7 +2278,7 @@
   family: Turdidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 28318
+  taxonomic_order: 28496
   ebird_code: gycthr
   date_taken: '2026-09-11T14:53:24'
   location: Kent County, MI
@@ -2286,14 +2286,14 @@
   source_filename: DSCN9496.jpg
   source_id: DSCN9496.jpg_20260911T145324_fbc66fd7
 - species_common: Winter Wren
-  species_scientific: Troglodytes hiemalis
+  species_scientific: Nannus hiemalis
   banding_code: WIWR
   slug: winter-wren
   filename: winter-wren.webp
   family: Troglodytidae
   sibley_category: Wrens, Dippers, and Gnatcatchers
   sibley_category_order: 24
-  taxonomic_order: 27295
+  taxonomic_order: 27455
   ebird_code: winwre3
   date_taken: '2026-09-26T07:40:55'
   location: Kent County, MI
@@ -2308,7 +2308,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34148
+  taxonomic_order: 34389
   ebird_code: palwar
   date_taken: '2026-09-26T08:24:00'
   location: Kent County, MI
@@ -2323,7 +2323,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33310
+  taxonomic_order: 33559
   ebird_code: linspa
   date_taken: '2026-09-26T10:10:09'
   location: Kent County, MI
@@ -2338,7 +2338,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33201
+  taxonomic_order: 33455
   ebird_code: whtspa
   date_taken: '2026-09-26T10:15:37'
   location: Kent County, MI
@@ -2353,7 +2353,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33973
+  taxonomic_order: 34212
   ebird_code: orcwar
   date_taken: '2026-09-26T10:20:21'
   location: Kent County, MI
@@ -2368,7 +2368,7 @@
   family: Vireonidae
   sibley_category: Shrikes and Vireos
   sibley_category_order: 20
-  taxonomic_order: 19226
+  taxonomic_order: 19322
   ebird_code: buhvir
   date_taken: '2026-09-26T10:28:30'
   location: Kent County, MI
@@ -2383,7 +2383,7 @@
   family: Vireonidae
   sibley_category: Shrikes and Vireos
   sibley_category_order: 20
-  taxonomic_order: 19267
+  taxonomic_order: 19363
   ebird_code: reevir1
   date_taken: '2026-09-26T11:02:39'
   location: Kent County, MI
@@ -2398,7 +2398,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 33972
+  taxonomic_order: 34211
   ebird_code: tenwar
   date_taken: '2026-09-27T21:25:51'
   location: Kent County, MI
@@ -2413,7 +2413,7 @@
   family: Regulidae
   sibley_category: Kinglets, Old World Warblers, and Thrush Allies
   sibley_category_order: 25
-  taxonomic_order: 26848
+  taxonomic_order: 26992
   ebird_code: gockin
   date_taken: '2026-10-03T09:34:00'
   location: Ottawa County, MI
@@ -2428,7 +2428,7 @@
   family: Laridae
   sibley_category: Gulls, Terns, Jaegers, and Skimmers
   sibley_category_order: 10
-  taxonomic_order: 6733
+  taxonomic_order: 6783
   ebird_code: arcter
   date_taken: '2026-10-08T17:52:00'
   location: Kent County, MI
@@ -2443,7 +2443,7 @@
   family: Parulidae
   sibley_category: Wood-Warblers
   sibley_category_order: 30
-  taxonomic_order: 34159
+  taxonomic_order: 34401
   ebird_code: yerwar
   date_taken: '2026-10-10T09:29:00'
   location: Ottawa County, MI
@@ -2458,7 +2458,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11762
+  taxonomic_order: 11840
   ebird_code: pilwoo
   date_taken: '2026-10-11T13:03:53'
   location: Ottawa County, MI
@@ -2473,7 +2473,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 32990
+  taxonomic_order: 33243
   ebird_code: chispa
   date_taken: '2026-10-23T13:16:00'
   location: Ottawa County, MI
@@ -2488,7 +2488,7 @@
   family: Passerellidae
   sibley_category: Towhees, Sparrows, and Juncos
   sibley_category_order: 31
-  taxonomic_order: 33124
+  taxonomic_order: 33379
   ebird_code: daejun
   date_taken: '2026-10-24T15:28:00'
   location: Ottawa County, MI
@@ -2503,7 +2503,7 @@
   family: Picidae
   sibley_category: Woodpeckers
   sibley_category_order: 17
-  taxonomic_order: 11199
+  taxonomic_order: 11270
   ebird_code: rebwoo
   date_taken: '2026-11-01T10:19:00'
   location: Ottawa County, MI
@@ -2518,7 +2518,7 @@
   family: Ardeidae
   sibley_category: Wading Birds
   sibley_category_order: 6
-  taxonomic_order: 7560
+  taxonomic_order: 7618
   ebird_code: amebit
   date_taken: '2026-11-01T14:43:48'
   location: Kent County, MI
@@ -2533,7 +2533,7 @@
   family: Aramidae
   sibley_category: Rails, Coots, Cranes, and Allies
   sibley_category_order: 8
-  taxonomic_order: 5671
+  taxonomic_order: 5709
   ebird_code: limpki
   date_taken: '2026-11-01T16:07:35'
   location: Kent County, MI

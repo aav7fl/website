@@ -141,6 +141,20 @@ def main() -> None:
                f"Catalog: {len(catalog)} birds" + (f", {locked} locked" if locked else "")
                + (f"; missing photos: {', '.join(missing[:5])}" if missing else ", every photo present"),
                "" if not missing else "restore the missing files in assets/img/birds/ from git")
+        by_code = {r["ebird_code"]: r for r in rows if r.get("ebird_code")}
+        stale = []
+        for b in catalog:
+            row = by_code.get(b.get("ebird_code"))
+            if not row or any(str(b.get(k)) != str(row.get(v)) for k, v in (
+                    ("species_common", "common_name"), ("species_scientific", "scientific_name"),
+                    ("banding_code", "banding_code"), ("taxonomic_order", "taxonomic_order"))):
+                stale.append(b.get("species_common", "?"))
+        if rows and stale:
+            report(WARN, f"{len(stale)} bird(s) don't match the taxonomy (renamed, split or re-ordered): "
+                   + ", ".join(stale[:5]) + (", ..." if len(stale) > 5 else ""),
+                   "rake birds:migrate_taxonomy")
+        elif rows:
+            report(OK, "Every bird matches the taxonomy")
     except Exception as exc:
         report(FAIL, f"Catalog unreadable ({exc})", "check _data/birds.yml for YAML errors")
 

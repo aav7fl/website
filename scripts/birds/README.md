@@ -92,7 +92,8 @@ Add or edit `notes:` on any entry in `_data/birds.yml` (for example `notes: 'Vag
 | `rake birds:update_deps` | Check for Python package updates now (normally automatic, about monthly) |
 | `rake birds:copyright` | Re-stamp the copyright tags into every photo (e.g. after changing the wording) |
 | `rake birds:compact_history` | Rare: remove old photo versions from git history (dry run unless `-- --apply`) |
-| `rake birds:update_taxonomy` | After an eBird taxonomy update: rebuild `taxonomy_sibley.csv` and the species embeddings (see "Updating the taxonomy") |
+| `rake birds:update_taxonomy` | After an eBird taxonomy update: rebuild `taxonomy_sibley.csv`, migrate the catalog to it, rebuild the embeddings (see "Updating the taxonomy") |
+| `rake birds:migrate_taxonomy` | Update the catalog to the current taxonomy only (`-- --check` to preview, `-- --yes` to skip the questions) |
 
 `scripts/birds/import_birds.py --backfill-ebird-codes` (run with `/opt/venv-birds/bin/python`) re-adds eBird codes to every catalog entry, e.g. after codes are added to the taxonomy.
 
@@ -246,9 +247,18 @@ eBird publishes a taxonomy update about once a year (splits, lumps, renames). `r
     rake birds:update_taxonomy
     rake birds:doctor
 
-This rebuilds the whole file from eBird's current release and then the species embeddings (the AI model itself is only verified, not re-downloaded). The file isn't merged: it's regenerated, so hand-added rows survive only if their family is in `sibley_family_map.json` and, for species without a banding code, their scientific name is in `SPECIES_WITHOUT_BANDING_CODES` (see "Adding a species" above). Check the `git diff` before committing: an update can rename species, change banding and eBird codes, and renumber `taxonomic_order` for most rows.
+This does three things:
 
-The catalog keeps its own copy of each bird's names and codes, so after an update compare `_data/birds.yml` with the new file and correct renamed or split species by hand (e.g. the 2026 update split Marsh Wren into Eastern and Western, and moved Winter Wren to the genus *Nannus*).
+1. **Rebuilds `taxonomy_sibley.csv`** from eBird's current release. The file isn't merged: it's regenerated, so hand-added rows survive only if their family is in `sibley_family_map.json` and, for species without a banding code, their scientific name is in `SPECIES_WITHOUT_BANDING_CODES` (see "Adding a species" above). An update can rename species, change banding and eBird codes, and renumber `taxonomic_order` for most rows.
+2. **Migrates the catalog** (`migrate_taxonomy.py`). Every bird in `_data/birds.yml` keeps its own copy of its names, codes and order, so each is matched to the new taxonomy by its eBird code (eBird's stable id, which survives renames and genus changes), then by scientific name, then by common name:
+   - a new taxonomic order, category, family or banding code is applied silently;
+   - a renamed species is shown and confirmed. A new common name also renames the slug and the photo file (with `git mv`), exactly as a fresh import would, so the bird's anchor on the page changes;
+   - a species whose eBird code is gone (split, lumped or retired) is shown with its likely successors to pick from: the same scientific or common name, names containing the old one (Marsh Wren -> Eastern or Western Marsh Wren), then the rest of its genus. `f` opens the fuzzy search, `s` leaves it as is;
+   - a bird with no match at all can be picked with the fuzzy search or skipped.
+   Notes, date, location, `locked` and the source fields are never touched. A species that only lost its name to a split (the 2026 Great Horned Owl split kept the name, scientific name and code for the North American bird) needs nothing.
+3. **Rebuilds the species embeddings.** The AI model itself is only verified, not re-downloaded.
+
+To migrate the catalog on its own (e.g. after fixing a skipped bird, or to preview): `rake birds:migrate_taxonomy -- --check` writes nothing; `-- --yes` answers every question with the default, taking the first candidate of a split, so check those. `rake birds:doctor` warns while any bird doesn't match the taxonomy. Review `git diff` (the taxonomy, the catalog and any renamed photos) before committing.
 
 `rake birds:setup -- --force` isn't a shortcut: the setup task doesn't forward options. Running `setup_offline_assets.py --force` directly does the same rebuild but also re-downloads the AI model.
 
@@ -351,6 +361,7 @@ Paths are relative to the repository root.
         evaluate_model.py                    # rake birds:evaluate
         update_deps.py                       # Automatic tested package updates (rake birds:update_deps)
         compact_history.py                   # rake birds:compact_history
+        migrate_taxonomy.py                  # rake birds:migrate_taxonomy (and part of update_taxonomy)
         taxonomy_sibley.csv                  # 2,065 species with Sibley category, taxonomic order, eBird code
         sibley_family_map.json               # Bird family -> Sibley category
         us_counties.geojson                  # US county boundaries (committed)

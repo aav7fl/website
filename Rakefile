@@ -157,6 +157,23 @@ namespace :birds do
     sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
   end
 
+  # Options after "--" go to the migration, e.g. -- --yes
+  desc "After an eBird taxonomy update: rebuild taxonomy_sibley.csv, migrate the catalog to it (renames, splits), rebuild embeddings"
+  task :update_taxonomy do
+    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
+    extra_args.each { |arg| task arg.to_sym do ; end }
+    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py --refresh-taxonomy --skip-models"
+    sh "#{BIRDS_PYTHON} scripts/birds/migrate_taxonomy.py #{extra_args.join(' ')}"
+    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
+  end
+
+  desc "Update _data/birds.yml to the current taxonomy_sibley.csv (options after --, e.g. -- --check or -- --yes)"
+  task :migrate_taxonomy do
+    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
+    extra_args.each { |arg| task arg.to_sym do ; end }
+    sh "#{BIRDS_PYTHON} scripts/birds/migrate_taxonomy.py #{extra_args.join(' ')}"
+  end
+
   desc "Import photos from _staging/ into assets/img/birds/ and _data/birds.yml (options after --, e.g. -- --americas)"
   task :import do
     # Capture any arguments passed after a "--" separator
