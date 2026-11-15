@@ -155,21 +155,6 @@
   notes: ""
   source_filename: DSCN0044.jpg
   source_id: DSCN0044.jpg_20251227T102507_45828ab6
-- species_common: Mallard
-  species_scientific: Anas platyrhynchos
-  banding_code: MALL
-  slug: mallard
-  filename: mallard.webp
-  family: Anatidae
-  sibley_category: Waterfowl
-  sibley_category_order: 1
-  taxonomic_order: 554
-  ebird_code: mallar3
-  date_taken: '2025-12-27T10:58:44'
-  location: Ottawa County, MI
-  notes: "Male & Female"
-  source_filename: DSCN0071.jpg
-  source_id: DSCN0071.jpg_20251227T105844_a9b874c3
 - species_common: Brown Creeper
   species_scientific: Certhia americana
   banding_code: BRCR
@@ -319,7 +304,7 @@
   location: Ottawa County, MI
   notes: ""
   source_filename: DSCN2309.jpg
-  source_id: DSCN2309.jpg_20260411T152559_926aa9fe
+  source_id: DSCN2309.jpg_20260411T152559_a83fa567
 - species_common: Brown-headed Cowbird
   species_scientific: Molothrus ater
   banding_code: BHCO
@@ -694,7 +679,7 @@
   location: Manistee County, MI
   notes: ""
   source_filename: DSCN9314.jpg
-  source_id: DSCN9314.jpg_20260515T145619_c61e065c
+  source_id: DSCN9314.jpg_20260515T145619_205a43e9
 - species_common: Short-billed Dowitcher
   species_scientific: Limnodromus griseus
   banding_code: SBDO
@@ -1039,7 +1024,7 @@
   location: Ottawa County, MI
   notes: ""
   source_filename: DSCN4404.jpg
-  source_id: DSCN4404.jpg_20260522T091646_9113731b
+  source_id: DSCN4404.jpg_20260522T091646_a456e254
 - species_common: Red-tailed Hawk
   species_scientific: Buteo jamaicensis
   banding_code: RTHA
@@ -1070,21 +1055,6 @@
   notes: ""
   source_filename: DSCN4711~2.jpg
   source_id: DSCN4711~2.jpg_20260522T120655_1d4aec48
-- species_common: Hooded Merganser
-  species_scientific: Lophodytes cucullatus
-  banding_code: HOME
-  slug: hooded-merganser
-  filename: hooded-merganser.webp
-  family: Anatidae
-  sibley_category: Waterfowl
-  sibley_category_order: 1
-  taxonomic_order: 775
-  ebird_code: hoomer
-  date_taken: '2026-05-22T13:13:37'
-  location: Ottawa County, MI
-  notes: ""
-  source_filename: DSCN4937.jpg
-  source_id: DSCN4937.jpg_20260522T131337_ea1ef50a
 - species_common: American Robin
   species_scientific: Turdus migratorius
   banding_code: AMRO
@@ -1310,21 +1280,6 @@
   notes: ""
   source_filename: DSCN9391.jpg
   source_id: DSCN9391.jpg_20260613T201242_ca4057ad
-- species_common: Grasshopper Sparrow
-  species_scientific: Ammodramus savannarum
-  banding_code: GRSP
-  slug: grasshopper-sparrow
-  filename: grasshopper-sparrow.webp
-  family: Passerellidae
-  sibley_category: Towhees, Sparrows, and Juncos
-  sibley_category_order: 31
-  taxonomic_order: 33196
-  ebird_code: graspa
-  date_taken: '2026-06-19T06:23:10'
-  location: Kent County, MI
-  notes: ""
-  source_filename: DSCN0074.jpg
-  source_id: DSCN0074.jpg_20260619T062310_46a28554
 - species_common: Northern Flicker
   species_scientific: Colaptes auratus
   banding_code: NOFL
@@ -1460,6 +1415,21 @@
   notes: ""
   source_filename: DSCN2955.jpg
   source_id: DSCN2955.jpg_20260703T063418_f91bb09f
+- species_common: Grasshopper Sparrow
+  species_scientific: Ammodramus savannarum
+  banding_code: GRSP
+  slug: grasshopper-sparrow
+  filename: grasshopper-sparrow.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 33196
+  ebird_code: graspa
+  date_taken: '2026-07-03T06:34:18'
+  location: Kent County, MI
+  notes: ""
+  source_filename: DSCN2955.jpg
+  source_id: DSCN2955.jpg_20260703T063418_f496016d
 - species_common: Bobolink
   species_scientific: Dolichonyx oryzivorus
   banding_code: BOBO
@@ -1549,7 +1519,7 @@
   location: Kent County, MI
   notes: ""
   source_filename: 20260715_215611-COLLAGE.jpg
-  source_id: 20260715_215611-COLLAGE.jpg_20260715T215611_2d43dcd2
+  source_id: 20260715_215611-COLLAGE.jpg_20260715T215611_e80e9026
 - species_common: Scarlet Tanager
   species_scientific: Piranga olivacea
   banding_code: SCTA
@@ -1895,21 +1865,6 @@
   notes: ""
   source_filename: DSCN2443.jpg
   source_id: DSCN2443.jpg_20260821T103207_eb39ed90
-- species_common: Bald Eagle
-  species_scientific: Haliaeetus leucocephalus
-  banding_code: BAEA
-  slug: bald-eagle
-  filename: bald-eagle.webp
-  family: Accipitridae
-  sibley_category: Diurnal Raptors
-  sibley_category_order: 7
-  taxonomic_order: 8429
-  ebird_code: baleag
-  date_taken: '2026-08-21T11:23:00'
-  location: Muskegon County, MI
-  notes: "Immature & Adult"
-  source_filename: 20260822_010955-COLLAGE.jpg
-  source_id: 20260822_010955-COLLAGE.jpg_20260822T010955_862a1b6a
 - species_common: Green-winged Teal
   species_scientific: Anas crecca
   banding_code: GWTE
@@ -1954,7 +1909,7 @@
   location: Muskegon County, MI
   notes: ""
   source_filename: photo-collage-ring-billed-gull.png
-  source_id: photo-collage-ring-billed-gull.png_20261018T183322_bc3244ac
+  source_id: photo-collage-ring-billed-gull.png_20261115T015040_bc3244ac
 - species_common: American Herring Gull
   species_scientific: Larus smithsonianus
   banding_code: AHGU
@@ -1969,7 +1924,7 @@
   location: Muskegon County, MI
   notes: ""
   source_filename: photo-collage.png.png
-  source_id: photo-collage.png.png_20261018T183324_feaef3dd
+  source_id: photo-collage.png.png_20261115T015040_feaef3dd
 - species_common: Blue-winged Teal
   species_scientific: Spatula discors
   banding_code: BWTE
@@ -2404,7 +2359,7 @@
   location: Kent County, MI
   notes: "Casual migrant"
   source_filename: arctic-tern-collage.png
-  source_id: arctic-tern-collage.png_20261018T183328_a5b6bcd0
+  source_id: arctic-tern-collage.png_20261115T015040_a5b6bcd0
 - species_common: Yellow-rumped Warbler
   species_scientific: Setophaga coronata
   banding_code: YRWA
@@ -2494,7 +2449,7 @@
   location: Kent County, MI
   notes: ""
   source_filename: american-bittern_collage.png
-  source_id: american-bittern_collage.png_20261101T144348_c886995c
+  source_id: american-bittern_collage.png_20261101T144348_2d1fab02
 - species_common: Limpkin
   species_scientific: Aramus guarauna
   banding_code: LIMP
@@ -2525,21 +2480,6 @@
   notes: ""
   source_filename: DSCN6023.jpg
   source_id: DSCN6023.jpg_20261108T122612_e2970230
-- species_common: Lesser Scaup
-  species_scientific: Aythya affinis
-  banding_code: LESC
-  slug: lesser-scaup
-  filename: lesser-scaup.webp
-  family: Anatidae
-  sibley_category: Waterfowl
-  sibley_category_order: 1
-  taxonomic_order: 719
-  ebird_code: lessca
-  date_taken: '2026-11-08T12:47:44'
-  location: Muskegon County, MI
-  notes: "Males"
-  source_filename: DSCN6078.jpg
-  source_id: DSCN6078.jpg_20261108T124744_d4a6d4eb
 - species_common: Northern Shoveler
   species_scientific: Spatula clypeata
   banding_code: NSHO
@@ -2659,4 +2599,139 @@
   location: Muskegon County, MI
   notes: "Females"
   source_filename: DSCN7878.jpg
-  source_id: DSCN7878.jpg_20261108T170459_e0008bdf
+  source_id: DSCN7878.jpg_20261108T170459_45db9a17
+- species_common: Mallard
+  species_scientific: Anas platyrhynchos
+  banding_code: MALL
+  slug: mallard
+  filename: mallard.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 554
+  ebird_code: mallar3
+  date_taken: '2026-11-14T07:59:00'
+  location: Muskegon County, MI
+  notes: "Males, Females, and Mallard x American Black Duck hybrid"
+  source_filename: 20261114_233431-COLLAGE.jpg
+  source_id: 20261114_233431-COLLAGE.jpg_20261114T233431_82820311
+- species_common: Wilson's Snipe
+  species_scientific: Gallinago delicata
+  banding_code: WISN
+  slug: wilsons-snipe
+  filename: wilsons-snipe.webp
+  family: Scolopacidae
+  sibley_category: Shorebirds
+  sibley_category_order: 9
+  taxonomic_order: 6145
+  ebird_code: wilsni1
+  date_taken: '2026-11-14T08:22:10'
+  location: Muskegon County, MI
+  notes: ""
+  source_filename: DSCN8137.jpg
+  source_id: DSCN8137.jpg_20261114T082210_b43b6a47
+- species_common: Common Goldeneye
+  species_scientific: Bucephala clangula
+  banding_code: COGO
+  slug: common-goldeneye
+  filename: common-goldeneye.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 764
+  ebird_code: comgol
+  date_taken: '2026-11-14T08:48:14'
+  location: Muskegon County, MI
+  notes: "Female"
+  source_filename: DSCN8154.jpg
+  source_id: DSCN8154.jpg_20261114T084814_ba81e80c
+- species_common: Lesser Scaup
+  species_scientific: Aythya affinis
+  banding_code: LESC
+  slug: lesser-scaup
+  filename: lesser-scaup.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 719
+  ebird_code: lessca
+  date_taken: '2026-11-14T12:28:00'
+  location: Muskegon County, MI
+  notes: "Male & Female"
+  source_filename: 20261114_232225-COLLAGE.jpg
+  source_id: 20261114_232225-COLLAGE.jpg_20261114T232225_4e4c5c21
+- species_common: Ring-necked Duck
+  species_scientific: Aythya collaris
+  banding_code: RNDU
+  slug: ring-necked-duck
+  filename: ring-necked-duck.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 690
+  ebird_code: rinduc
+  date_taken: '2026-11-14T13:10:54'
+  location: Muskegon County, MI
+  notes: "Female & Male"
+  source_filename: DSCN9076.jpg
+  source_id: DSCN9076.jpg_20261114T131054_5aae7549
+- species_common: Bald Eagle
+  species_scientific: Haliaeetus leucocephalus
+  banding_code: BAEA
+  slug: bald-eagle
+  filename: bald-eagle.webp
+  family: Accipitridae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 8429
+  ebird_code: baleag
+  date_taken: '2026-11-14T13:17:49'
+  location: Muskegon County, MI
+  notes: "(Probably) Male & Female"
+  source_filename: DSCN9187.jpg
+  source_id: DSCN9187.jpg_20261114T131749_f7bf3435
+- species_common: Northern Harrier
+  species_scientific: Circus hudsonius
+  banding_code: NOHA
+  slug: northern-harrier
+  filename: northern-harrier.webp
+  family: Accipitridae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 8383
+  ebird_code: norhar2
+  date_taken: '2026-11-14T13:43:27'
+  location: Muskegon County, MI
+  notes: ""
+  source_filename: DSCN9317.jpg
+  source_id: DSCN9317.jpg_20261114T134327_192b292c
+- species_common: Hooded Merganser
+  species_scientific: Lophodytes cucullatus
+  banding_code: HOME
+  slug: hooded-merganser
+  filename: hooded-merganser.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 775
+  ebird_code: hoomer
+  date_taken: '2026-11-14T14:06:13'
+  location: Muskegon County, MI
+  notes: "Males & Females"
+  source_filename: DSCN9614.jpg
+  source_id: DSCN9614.jpg_20261114T140613_2e988c07
+- species_common: Ross's Goose
+  species_scientific: Anser rossii
+  banding_code: ROGO
+  slug: rosss-goose
+  filename: rosss-goose.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 273
+  ebird_code: rosgoo
+  date_taken: '2026-11-14T14:46:00'
+  location: Muskegon County, MI
+  notes: ""
+  source_filename: 20261114_231839-COLLAGE.jpg
+  source_id: 20261114_231839-COLLAGE.jpg_20261114T231839_8931af5d
