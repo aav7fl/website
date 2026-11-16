@@ -2645,6 +2645,21 @@
   notes: "Female"
   source_filename: DSCN8154.jpg
   source_id: DSCN8154.jpg_20261114T084814_ba81e80c
+- species_common: American Black Duck
+  species_scientific: Anas rubripes
+  banding_code: ABDU
+  slug: american-black-duck
+  filename: american-black-duck.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 581
+  ebird_code: ambduc
+  date_taken: '2026-11-14T10:14:41'
+  location: Muskegon County, MI
+  notes: "Female & Male. Also present; Gadwall"
+  source_filename: DSCN8559.jpg
+  source_id: DSCN8559.jpg_20261114T101441_d047f1af
 - species_common: Lesser Scaup
   species_scientific: Aythya affinis
   banding_code: LESC

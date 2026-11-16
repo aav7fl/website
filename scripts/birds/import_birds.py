@@ -11,7 +11,10 @@ Features:
 - Resolves GPS EXIF offline to "County, ST" via US Census GeoJSON + Shapely
 - Converts colorspace to sRGB, resizes to 800px wide, exports WebP, and strips all EXIF/ICC metadata
   (GPS, camera, timestamps), then writes back only copyright tags (see stamp_copyright)
-- Preserves or wipes user-authored 'notes' field when replacing an existing species photo
+- Shows a small preview of each photo in the terminal: the real image where the terminal can draw
+  one, colored blocks where it can't (see --preview)
+- Asks for an optional note on each import; when replacing a photo that has a note, keeps it,
+  wipes it, or takes a new one
 - Asks for the real date and time of Google Photos collages (e.g. 20261023_142445-COLLAGE.jpg),
   whose own timestamp is when the collage was made, not when the photos were taken
 - Never replaces a species whose catalog entry has `locked: true` (warns and leaves the file staged)
@@ -19,11 +22,13 @@ Features:
 """
 
 import argparse
+import base64
 import csv
 import datetime
 import hashlib
 import json
 import re
+import select
 import shutil
 import subprocess
 import sys
@@ -57,6 +62,11 @@ GEOJSON_PATH = SCRIPT_DIR / "us_counties.geojson"
 
 # --auto only accepts the AI's top suggestion above this confidence (percent)
 AUTO_MIN_CONFIDENCE = 90.0
+
+# Terminal preview of each staged photo (see show_preview)
+PREVIEW_MODES = ("auto", "image", "blocks", "off")
+PREVIEW_COLUMNS = 56  # Widest a preview gets, in terminal columns
+PREVIEW_ROWS = 20     # Tallest a preview gets, in terminal rows
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp", ".heic"}
 
@@ -209,6 +219,161 @@ def prompt_collage_timestamp(filepath: Path, file_timestamp: str) -> Optional[st
                 continue
         console.print(f"  [dim]Using {timestamp.replace('T', ' ')} as the date taken.[/dim]")
         return timestamp
+
+
+def _magick_thumbnail(filepath: Path, box: str, output: str) -> bytes:
+    """A small, upright copy of the photo that fits `box` (e.g. "56x40"), in ImageMagick's `output` format."""
+    magick_bin = "magick" if shutil.which("magick") else "convert"
+    cmd = [
+        magick_bin,
+        f"{filepath}[0]",  # First frame only (multi-image HEIC/TIFF)
+        "-auto-orient",
+        "-thumbnail",
+        box,
+        "-colorspace",
+        "sRGB",
+        "-alpha",
+        "remove",
+        "-depth",
+        "8",
+        "-quality",
+        "80",  # Only matters for the JPEG sent to the terminal
+        output,
+    ]
+    return subprocess.run(cmd, capture_output=True, check=True).stdout
+
+
+def _preview_blocks(filepath: Path) -> str:
+    """
+    The photo as colored half blocks: each character is two pixels, the top one in
+    the foreground color of "▀" and the bottom one in its background. Needs only a
+    24-bit color terminal, which VS Code's is.
+    """
+    ppm = _magick_thumbnail(filepath, f"{PREVIEW_COLUMNS}x{PREVIEW_ROWS * 2}", "ppm:-")
+    # Binary PPM: "P6 <width> <height> <maxval>" then one whitespace byte and raw RGB
+    header = re.match(rb"P6\s+(?:#[^\n]*\n\s*)*(\d+)\s+(\d+)\s+(\d+)\s", ppm)
+    if not header:
+        raise ValueError("unexpected thumbnail format")
+    width, height = int(header.group(1)), int(header.group(2))
+    pixels = ppm[header.end():]
+    if len(pixels) < width * height * 3:
+        raise ValueError("truncated thumbnail")
+
+    def pixel(x: int, y: int) -> Tuple[int, int, int]:
+        offset = (y * width + x) * 3
+        return pixels[offset], pixels[offset + 1], pixels[offset + 2]
+
+    lines = []
+    for y in range(0, height, 2):
+        cells = []
+        for x in range(width):
+            r, g, b = pixel(x, y)
+            cell = f"\x1b[38;2;{r};{g};{b}m"
+            if y + 1 < height:
+                r, g, b = pixel(x, y + 1)
+                cell += f"\x1b[48;2;{r};{g};{b}m"
+            cells.append(cell + "▀\x1b[0m")
+        lines.append("  " + "".join(cells))
+    return "\n".join(lines) + "\n"
+
+
+def _preview_image(filepath: Path) -> str:
+    """
+    The real photo, drawn by the terminal with the iTerm2 inline image protocol.
+    VS Code's terminal supports it when "terminal.integrated.enableImages" is on.
+    """
+    jpeg = _magick_thumbnail(filepath, "640x480", "jpg:-")
+    payload = base64.b64encode(jpeg).decode("ascii")
+    return (
+        f"  \x1b]1337;File=inline=1;size={len(jpeg)};height={PREVIEW_ROWS};preserveAspectRatio=1:"
+        f"{payload}\x07\n"
+    )
+
+
+def _terminal_attributes(in_fd: int, out_fd: int, timeout: float = 0.5) -> List[str]:
+    """
+    Ask the terminal what it supports (the "primary device attributes" query, which
+    every terminal answers) and return the attribute codes from its reply, e.g.
+    ["62", "4", "9", "22"]. Empty if it doesn't answer in time.
+    """
+    import termios
+    import tty
+
+    saved = termios.tcgetattr(in_fd)
+    reply = b""
+    try:
+        tty.setcbreak(in_fd)  # Read the reply as it arrives, without echoing it
+        os.write(out_fd, b"\x1b[c")
+        deadline = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+        while not reply.endswith(b"c"):
+            remaining = (deadline - datetime.datetime.now()).total_seconds()
+            if remaining <= 0 or not select.select([in_fd], [], [], remaining)[0]:
+                break
+            chunk = os.read(in_fd, 64)
+            if not chunk:
+                break
+            reply += chunk
+    finally:
+        termios.tcsetattr(in_fd, termios.TCSADRAIN, saved)
+    match = re.search(rb"\x1b\[\?([0-9;]*)c", reply)
+    return match.group(1).decode("ascii").split(";") if match else []
+
+
+def detect_preview_mode() -> str:
+    """
+    'image' if this terminal can draw inline images (see _preview_image), else 'blocks'.
+    iTerm2 and WezTerm always can. VS Code can only with "terminal.integrated.enableImages"
+    on, and then it reports graphics support (attribute 4) when asked, which is how the
+    setting is detected from inside the dev container.
+    """
+    if os.environ.get("TERM_PROGRAM") in {"iTerm.app", "WezTerm"} or os.environ.get("LC_TERMINAL") == "iTerm2":
+        return "image"
+    in_vscode = os.environ.get("TERM_PROGRAM") == "vscode" or "VSCODE_IPC_HOOK_CLI" in os.environ
+    if in_vscode and sys.stdin.isatty() and sys.stdout.isatty():
+        try:
+            if "4" in _terminal_attributes(sys.stdin.fileno(), sys.stdout.fileno()):
+                return "image"
+        except Exception:
+            pass  # No termios (not Unix) or an odd terminal: blocks work anywhere
+    return "blocks"
+
+
+def show_preview(filepath: Path, mode: str) -> None:
+    """Print a small preview of a staged photo. Never fatal: a failure only prints a dim note."""
+    if mode == "off" or not sys.stdout.isatty():
+        return
+    try:
+        rendered = _preview_image(filepath) if mode == "image" else _preview_blocks(filepath)
+    except Exception as exc:
+        console.print(f"  [dim]No preview ({type(exc).__name__}).[/dim]")
+        return
+    sys.stdout.write(rendered)
+    sys.stdout.flush()
+
+
+def prompt_note(species_name: str, existing_note: str) -> str:
+    """
+    Ask for the bird's note. A new bird (or one without a note) gets an optional
+    note. When the photo being replaced has one, it can be retained, wiped, or
+    swapped for a new one typed right here.
+    """
+    if existing_note:
+        console.print(f"  [bold yellow]Existing note on {species_name}:[/bold yellow] \"{existing_note}\"")
+        while True:
+            action = prompt("  [r]etain it, [w]ipe it, or write a [n]ew note? [R/w/n]: ").strip().lower() or "r"
+            if action in {"r", "retain"}:
+                console.print("  [dim]Retained existing note.[/dim]")
+                return existing_note
+            if action in {"w", "wipe"}:
+                console.print("  [dim]Wiped existing note.[/dim]")
+                return ""
+            if action in {"n", "new"}:
+                break
+            console.print("[red]  Type r, w or n.[/red]")
+        note = prompt("  New note (Enter to leave it empty): ").strip()
+        console.print("  [dim]Replaced the note.[/dim]" if note else "  [dim]Wiped existing note.[/dim]")
+        return note
+    return prompt(f"  Note for {species_name} (Enter for none): ").strip()
 
 
 def build_source_id(filepath: Path, iso_timestamp: str) -> str:
@@ -531,9 +696,15 @@ def main() -> None:
                         help="AI considers all of North and Central America (the whole taxonomy, ~2,000 species, incl. strays), "
                              "not just regular US/Canada birds. For trips to Mexico or Central America; not worldwide")
     parser.add_argument("--auto", action="store_true", help=f"Import only confident (>{AUTO_MIN_CONFIDENCE:.0f}%%) AI matches of new species with GPS, without prompts; everything else stays staged")
+    parser.add_argument("--preview", choices=PREVIEW_MODES, default=os.environ.get("BIRDS_PREVIEW", "auto"),
+                        help="Terminal preview of each photo: 'auto' (the real photo if the terminal can draw it, else blocks), "
+                             "'image' (the real photo; in VS Code needs the terminal.integrated.enableImages setting), "
+                             "'blocks' (colored characters, works anywhere) or 'off'. Default: auto, or $BIRDS_PREVIEW")
     parser.add_argument("--stamp-copyright", action="store_true", help="Write copyright tags into every photo already imported, then exit")
     parser.add_argument("--backfill-ebird-codes", action="store_true", help="Add eBird species codes to every bird already imported, then exit")
     args = parser.parse_args()
+    if args.preview not in PREVIEW_MODES:  # A mistyped $BIRDS_PREVIEW
+        parser.error(f"BIRDS_PREVIEW must be one of: {', '.join(PREVIEW_MODES)}")
 
     if args.stamp_copyright:
         stamp_existing_photos(args.dest, load_catalog(args.yaml))
@@ -600,6 +771,15 @@ def main() -> None:
     # Species whose photo is held in place with `locked: true` in the catalog
     locked_slugs = {slug for slug, entry in by_slug.items() if entry.get("locked")}
 
+    preview_mode = args.preview
+    if preview_mode == "auto" and not args.auto:
+        preview_mode = detect_preview_mode()
+        if preview_mode == "blocks" and os.environ.get("TERM_PROGRAM") == "vscode":
+            console.print(
+                "[dim]Previews are colored blocks. For real photos, turn on VS Code's "
+                "\"terminal.integrated.enableImages\" setting.[/dim]"
+            )
+
     recent_locations = ["Ottawa County, MI", "Kent County, MI", "Allegan County, MI", "Muskegon County, MI"]
     modified_count = 0
 
@@ -635,6 +815,9 @@ def main() -> None:
                 "  [yellow][AUTO-SKIP][/yellow] Collages need their real date typed in. Left in staging for a manual run."
             )
             continue
+
+        if not args.auto:
+            show_preview(filepath, preview_mode)
 
         chosen_species: Optional[Dict[str, Any]] = None
         predictions = classifier.predict_top_k(filepath, k=3)
@@ -689,7 +872,6 @@ def main() -> None:
         dest_path = args.dest / dest_filename
 
         existing_entry = by_slug.get(slug)
-        retained_note = ""
 
         if existing_entry and existing_entry.get("locked"):
             # Checked before anything is processed, so a locked photo and its entry are never touched
@@ -719,21 +901,6 @@ def main() -> None:
             if confirm != "y":
                 console.print("  [dim]Kept existing photo. Skipping.[/dim]")
                 continue
-
-            existing_note = str(existing_entry.get("notes", "") or "").strip()
-            if existing_note:
-                console.print(
-                    f"  [bold yellow]Existing note on {chosen_species['common_name']}:[/bold yellow] \"{existing_note}\""
-                )
-                note_action = prompt(
-                    "  Do you want to [r]etain or [w]ipe the existing note? [R/w]: "
-                ).strip().lower() or "r"
-                if note_action == "w":
-                    retained_note = ""
-                    console.print("  [dim]Wiped existing note.[/dim]")
-                else:
-                    retained_note = existing_note
-                    console.print("  [dim]Retained existing note.[/dim]")
 
         # The source_id above keeps the collage's own timestamp, so the same file is
         # still recognised as imported on later runs
@@ -766,6 +933,13 @@ def main() -> None:
             if county_state not in recent_locations:
                 recent_locations.insert(0, county_state)
 
+        # Asked last, so a photo skipped at an earlier question never costs a typed note.
+        # Auto mode only imports new species, and never asks anything.
+        note = ""
+        if not args.auto:
+            existing_note = str(existing_entry.get("notes", "") or "").strip() if existing_entry else ""
+            note = prompt_note(chosen_species["common_name"], existing_note)
+
         console.print(
             f"  [dim]Generating 800px sRGB WebP and stripping metadata -> {display_path(dest_path)}[/dim]"
         )
@@ -784,7 +958,7 @@ def main() -> None:
             "ebird_code": chosen_species.get("ebird_code", ""),
             "date_taken": iso_dt,
             "location": county_state,
-            "notes": retained_note,
+            "notes": note,
             "source_filename": filepath.name,
             "source_id": source_id,
         }

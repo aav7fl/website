@@ -24,13 +24,15 @@ Everything runs in the dev container. Commands are Rake tasks; options go after 
 For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes before `DSC_0100`):
 
 1. **Already imported?** If this exact photo is a bird's current photo, it's skipped (`[SKIP]`).
-2. **Species.** The AI shows its top 3 guesses with confidence. Press `1`, `2` or `3` to pick one, `f` to search by name, or `s` to skip the photo.
+2. **Preview.** A small preview of the photo is drawn in the terminal. See [Photo preview](#photo-preview).
+3. **Species.** The AI shows its top 3 guesses with confidence. Press `1`, `2` or `3` to pick one, `f` to search by name, or `s` to skip the photo.
    - Fuzzy search matches the common name, scientific name or 4-letter banding code across every species, even ones the AI isn't considering.
    - Guesses are marked "(already in catalog)" or "(locked, can't be replaced)".
-3. **Replacing a photo.** If the species is already in the catalog, it asks before overwriting. If that bird has a note, choose `r` to keep it or `w` to wipe it.
-4. **Collage date.** For a Google Photos collage (named like `20261023_142445-COLLAGE.jpg`), it asks when the photos were taken. See [Collages](#collages).
-5. **Location.** The county comes from the photo's GPS, offline. Without GPS, pick one of your recent counties or type `County, ST`.
-6. **Saved.** The photo is converted and stamped, the catalog entry is written, and the staged original is removed.
+4. **Replacing a photo.** If the species is already in the catalog, it asks before overwriting.
+5. **Collage date.** For a Google Photos collage (named like `20261023_142445-COLLAGE.jpg`), it asks when the photos were taken. See [Collages](#collages).
+6. **Location.** The county comes from the photo's GPS, offline. Without GPS, pick one of your recent counties or type `County, ST`.
+7. **Note.** Type a note for the bird, or press Enter for none. If the photo being replaced has a note, choose `r` to keep it, `w` to wipe it, or `n` to type a new one.
+8. **Saved.** The photo is converted and stamped, the catalog entry is written, and the staged original is removed.
 
 ### Options
 
@@ -39,6 +41,7 @@ For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes be
 | `rake birds:import` | Interactive import (AI suggestions limited to regular US/Canada birds) |
 | `rake birds:import -- --americas` | AI considers all 2,065 species of North and Central America, including strays. For trips to Mexico or Central America (not worldwide) |
 | `rake birds:import -- --no-ai` | Skip the AI; go straight to fuzzy search |
+| `rake birds:import -- --preview blocks` | Force the photo preview to `blocks`, `image` or `off` instead of detecting what the terminal can draw. See [Photo preview](#photo-preview) |
 | `rake birds:import -- --no-update` | Skip this run's monthly package update check |
 | `rake birds:reimport` | `--force`: re-import photos even if they're already a bird's current photo |
 | `rake birds:auto` | Import only the safe cases with no prompts (see below) |
@@ -70,8 +73,18 @@ To keep a species' photo from ever being replaced, add `locked: true` to its ent
 
 If an import picks a locked species, it prints a warning naming the protected photo and how to unlock it, then skips the file (it stays in `_staging/`). This holds even with `--force` and in auto mode. To replace it later, remove the line and import again.
 
+### Photo preview
+Each staged photo is previewed in the terminal before you pick the species (not in `rake birds:auto`), at most 56 columns by 20 rows:
+
+- `auto` (default): the real photo if the terminal can draw it, otherwise blocks. iTerm2 and WezTerm always can. VS Code can once you turn on the **Terminal › Integrated: Enable Images** setting (`terminal.integrated.enableImages`, with GPU acceleration left on); the import asks the terminal whether it's on, which works from inside the dev container, and says so when it falls back to blocks.
+- `image`: always the real photo. A terminal that can't draw it shows nothing.
+- `blocks`: the photo as colored half-block characters. Rough, but it needs no setup and works in any 24-bit color terminal.
+- `off`: no preview.
+
+Force one with `rake birds:import -- --preview blocks`, or set `BIRDS_PREVIEW=blocks` in your shell.
+
 ### Notes
-Add or edit `notes:` on any entry in `_data/birds.yml` (for example `notes: 'Vagrant!'`). Notes show on the bird's card and in the full-size photo viewer, and are kept (or wiped, your choice) when you replace that bird's photo.
+Add or edit `notes:` on any entry in `_data/birds.yml` (for example `notes: 'Vagrant!'`). Notes show on the bird's card and in the full-size photo viewer, and the import asks for one each time: a new bird gets an optional note, and when you replace a photo that has one you can keep it, wipe it, or type a new one.
 
 ### Fixing a mistake
 - **Wrong date or location:** edit `date_taken` or `location` in `_data/birds.yml`. Photos are recognised by their `source_id`, not by these fields, so editing them never causes a re-import.
