@@ -1235,21 +1235,6 @@
   notes: ""
   source_filename: DSCN8424.jpg
   source_id: DSCN8424.jpg_20260608T120908_1d84910c
-- species_common: Blue Jay
-  species_scientific: Cyanocitta cristata
-  banding_code: BLJA
-  slug: blue-jay
-  filename: blue-jay.webp
-  family: Corvidae
-  sibley_category: Jays, Crows, Magpies, and Allies
-  sibley_category_order: 21
-  taxonomic_order: 21395
-  ebird_code: blujay
-  date_taken: '2026-06-08T18:12:59'
-  location: Ottawa County, MI
-  notes: ""
-  source_filename: DSCN8545.jpg
-  source_id: DSCN8545.jpg_20260608T181259_c27bd2f2
 - species_common: Sandhill Crane
   species_scientific: Antigone canadensis
   banding_code: SACR
@@ -1952,7 +1937,7 @@
   ebird_code: wantat1
   date_taken: '2026-08-24T12:22:00'
   location: Ottawa County, MI
-  notes: "(Unconfirmed) First time this bird has been recorded in Michigan!"
+  notes: "Vagrant. (Unconfirmed) First state record for Michigan!"
   source_filename: 20260824_151109-COLLAGE.jpg
   source_id: 20260824_151109-COLLAGE.jpg_20260824T151109_5ba6e798
 - species_common: Buff-breasted Sandpiper
@@ -2462,7 +2447,7 @@
   ebird_code: limpki
   date_taken: '2026-11-01T16:07:35'
   location: Kent County, MI
-  notes: "Catching food"
+  notes: "Vagrant. Catching food"
   source_filename: DSCN5030.jpg
   source_id: DSCN5030.jpg_20261101T160735_a9f8e0d2
 - species_common: Rough-legged Hawk
@@ -2750,3 +2735,48 @@
   notes: ""
   source_filename: 20261114_231839-COLLAGE.jpg
   source_id: 20261114_231839-COLLAGE.jpg_20261114T231839_8931af5d
+- species_common: Blue Jay
+  species_scientific: Cyanocitta cristata
+  banding_code: BLJA
+  slug: blue-jay
+  filename: blue-jay.webp
+  family: Corvidae
+  sibley_category: Jays, Crows, Magpies, and Allies
+  sibley_category_order: 21
+  taxonomic_order: 21395
+  ebird_code: blujay
+  date_taken: '2026-11-18T07:54:28'
+  location: Macomb County, MI
+  notes: ""
+  source_filename: DSC_3479.jpg
+  source_id: DSC_3479.jpg_20261118T075428_79c40655
+- species_common: Black-chinned Hummingbird
+  species_scientific: Archilochus alexandri
+  banding_code: BCHU
+  slug: black-chinned-hummingbird
+  filename: black-chinned-hummingbird.webp
+  family: Trochilidae
+  sibley_category: Nightjars, Swifts, and Hummingbirds
+  sibley_category_order: 15
+  taxonomic_order: 4840
+  ebird_code: bkchum
+  date_taken: '2026-11-18T09:31:04'
+  location: Macomb County, MI
+  notes: "Vagrant immature male. (Unconfirmed) Second state record for Michigan."
+  source_filename: DSC_4058.jpg
+  source_id: DSC_4058.jpg_20261118T093104_b1363dcc
+- species_common: Fox Sparrow
+  species_scientific: Passerella iliaca
+  banding_code: FOSP
+  slug: fox-sparrow
+  filename: fox-sparrow.webp
+  family: Passerellidae
+  sibley_category: Towhees, Sparrows, and Juncos
+  sibley_category_order: 31
+  taxonomic_order: 33354
+  ebird_code: foxspa
+  date_taken: '2026-11-18T10:01:51'
+  location: Macomb County, MI
+  notes: "Red subspecies"
+  source_filename: DSC_4142.jpg
+  source_id: DSC_4142.jpg_20261118T100151_0f9456a0
