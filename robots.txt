@@ -1,0 +1,40 @@
+User-agent: *
+Disallow: /example/
+Disallow: /examples/
+
+# AI training and AI search crawlers: kept away from the bird photos, which are
+# all rights reserved (assets/img/birds/LICENSE.txt). The blog stays open to them.
+# A crawler that matches a group below follows only that group, so the
+# /examples/ rules are repeated.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: FacebookBot
+User-agent: Amazonbot
+User-agent: PerplexityBot
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: ImagesiftBot
+User-agent: Omgilibot
+User-agent: Timpibot
+User-agent: AI2Bot
+User-agent: YouBot
+Disallow: /birds/
+Disallow: /assets/img/birds/
+Disallow: /example/
+Disallow: /examples/
+
+# The Internet Archive is welcome everywhere, so the site can be preserved
+User-agent: ia_archiver
+User-agent: archive.org_bot
+Allow: /
+Disallow: /example/
+Disallow: /examples/
