@@ -1877,7 +1877,7 @@
   ebird_code: bongul
   date_taken: '2026-08-21T12:38:04'
   location: Muskegon County, MI
-  notes: "Non-breeding adult"
+  notes: "Nonbreeding adult"
   source_filename: 000153.jpg
   source_id: 000153.jpg_20260821T123804_acdc0e9e
 - species_common: Ring-billed Gull
@@ -1967,7 +1967,7 @@
   ebird_code: magwar
   date_taken: '2026-08-28T12:33:00'
   location: Ottawa County, MI
-  notes: "Male & Female/Immature male (non-breeding plumage)"
+  notes: "Male & Female/Immature male (Nonbreeding plumage)"
   source_filename: 20260828_222535-COLLAGE.jpg
   source_id: 20260828_222535-COLLAGE.jpg_20260828T222535_0906842b
 - species_common: Horned Lark
@@ -2087,7 +2087,7 @@
   ebird_code: chswar
   date_taken: '2026-09-07T10:18:00'
   location: Ottawa County, MI
-  notes: "Male & Female/Immature male (non-breeding plumage)"
+  notes: "Male & Female/Immature male (Nonbreeding plumage)"
   source_filename: 20260907_163002-COLLAGE.jpg
   source_id: 20260907_163002-COLLAGE.jpg_20260907T163002_098e5168
 - species_common: Bay-breasted Warbler
@@ -2102,7 +2102,7 @@
   ebird_code: babwar
   date_taken: '2026-09-07T10:20:00'
   location: Ottawa County, MI
-  notes: "Male (breeding plumage) & Male (Non-breeding plumage)"
+  notes: "Male (Breeding plumage) & Male (Nonbreeding plumage)"
   source_filename: 20260907_163708-COLLAGE.jpg
   source_id: 20260907_163708-COLLAGE.jpg_20260907T163708_3f1d5309
 - species_common: American Crow
@@ -2222,7 +2222,7 @@
   ebird_code: palwar
   date_taken: '2026-09-26T08:24:00'
   location: Kent County, MI
-  notes: "Breeding plumage & non-breeding plumage"
+  notes: "Breeding plumage & Nonbreeding plumage"
   source_filename: 20260927_072344-COLLAGE.jpg
   source_id: 20260927_072344-COLLAGE.jpg_20260927T072344_e96aa278
 - species_common: Lincoln's Sparrow
@@ -2312,7 +2312,7 @@
   ebird_code: tenwar
   date_taken: '2026-09-27T21:25:51'
   location: Kent County, MI
-  notes: "Male (breeding plumage) & Unknown (non-breeding plumage)"
+  notes: "Male (Breeding plumage) & Unknown (Nonbreeding plumage)"
   source_filename: 20260927_212551-COLLAGE.jpg
   source_id: 20260927_212551-COLLAGE.jpg_20260927T212551_3ea26bea
 - species_common: Golden-crowned Kinglet
@@ -2357,7 +2357,7 @@
   ebird_code: yerwar
   date_taken: '2026-10-10T09:29:00'
   location: Ottawa County, MI
-  notes: "Male (breeding plumage) & Female/Immature (non-breeding plumage)"
+  notes: "Male (Breeding plumage) & Female/Immature (Nonbreeding plumage)"
   source_filename: 20261010_123454-COLLAGE.jpg
   source_id: 20261010_123454-COLLAGE.jpg_20261010T123454_cb75e919
 - species_common: Pileated Woodpecker
@@ -2387,7 +2387,7 @@
   ebird_code: chispa
   date_taken: '2026-10-23T13:16:00'
   location: Ottawa County, MI
-  notes: "Breeding plumage & non-breeding plumage"
+  notes: "Breeding plumage & Nonbreeding plumage"
   source_filename: 20261023_142445-COLLAGE.jpg
   source_id: 20261023_142445-COLLAGE.jpg_20261023T142445_e5f312a5
 - species_common: Dark-eyed Junco
@@ -2780,3 +2780,18 @@
   notes: "Red subspecies"
   source_filename: DSC_4142.jpg
   source_id: DSC_4142.jpg_20261118T100151_0f9456a0
+- species_common: Pied-billed Grebe
+  species_scientific: Podilymbus podiceps
+  banding_code: PBGR
+  slug: pied-billed-grebe
+  filename: pied-billed-grebe.webp
+  family: Podicipedidae
+  sibley_category: Loons and Grebes
+  sibley_category_order: 3
+  taxonomic_order: 6907
+  ebird_code: pibgre
+  date_taken: '2026-11-21T15:27:14'
+  location: Kent County, MI
+  notes: "Nonbreeding plumage"
+  source_filename: DSCN9928.jpg
+  source_id: DSCN9928.jpg_20261121T152714_aebbe3e3
