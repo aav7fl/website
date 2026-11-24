@@ -2795,3 +2795,18 @@
   notes: "Nonbreeding plumage"
   source_filename: DSCN9928.jpg
   source_id: DSCN9928.jpg_20261121T152714_aebbe3e3
+- species_common: Short-eared Owl
+  species_scientific: Asio flammeus
+  banding_code: SEOW
+  slug: short-eared-owl
+  filename: short-eared-owl.webp
+  family: Strigidae
+  sibley_category: Owls
+  sibley_category_order: 14
+  taxonomic_order: 9339
+  ebird_code: sheowl
+  date_taken: '2026-11-23T17:39:32'
+  location: Ottawa County, MI
+  notes: ""
+  source_filename: short-eared-owl-collage.png
+  source_id: short-eared-owl-collage.png_20261123T173932_bf4a0aef
