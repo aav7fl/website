@@ -1,7 +1,7 @@
 ---
 title: Backyard Bird Tracking With AI-Powered BirdNET-Go
 date: '2025-05-26 21:58'
-updated: '2026-07-29 12:03'
+updated: '2026-11-26 08:00'
 comments: true
 image:
   path: /assets/img/2025/05/birdwatching_0.jpg
@@ -43,6 +43,7 @@ There was an itch I wanted to scratch though. What if I were able to detect bird
 > - 2026-07-13: Update cards to only display ebird links when the `species_code` is exactly 6 characters (likely indicating a bird). Adjust relative datetime field in cards to work with `BirdNET-Go 20260712`.
 > - 2026-07-17: Adjust ebird url to accept `species_code` lengths >= 1 and <=7. This captures birds like `sora` and `easowl1`. This will _probably_ correctly cover 99% of the `species_code`/URLs.
 > - 2026-07-29: Update rare bird notification automation to work with updated timestamps.
+> - 2026-11-26: Fix automations to handle taxonomy updates.
 
 ## Continuous Bird Detection
 
@@ -1072,7 +1073,7 @@ The downside is that this will only send a notification for each bird species _o
 
 {% raw %}
 ```yaml
-# version 1.1
+# version 1.2
 alias: Notify on First Detection of New BirdNET Bird Species
 description: >-
   Send a notification to kyle when a new bird species is detected that
@@ -1084,54 +1085,77 @@ triggers:
     attribute: species_list
 conditions:
   - condition: template
+    alias: Both current and previous species lists are valid and non-empty
     value_template: >-
-      {{ trigger.to_state.attributes.species_list is defined and
-      trigger.to_state.attributes.species_list is iterable and
-      trigger.to_state.attributes.species_list is not string and
-      trigger.from_state.state != 'unavailable' }}
+      {{ trigger.to_state is not none and trigger.from_state is not none and
+      trigger.from_state.state not in ['unavailable', 'unknown'] and
+      trigger.to_state.attributes.get('species_list') is iterable and
+      trigger.to_state.attributes.get('species_list') is not string and
+      trigger.from_state.attributes.get('species_list') is iterable and
+      trigger.from_state.attributes.get('species_list') is not string and
+      (trigger.from_state.attributes.get('species_list') | length) > 0 }}
 actions:
   - variables:
-      current_species_list: >-
-        {% set csl = trigger.to_state.attributes.get('species_list') if
-        trigger.to_state and trigger.to_state.attributes else none %} {% if csl
-        is iterable and csl is not string %}
-          {{ csl }}
-        {% else %}
-          []
-        {% endif %}
-      previous_species_list: >-
-        {% set psl = trigger.from_state.attributes.get('species_list') if
-        trigger.from_state and trigger.from_state.attributes else none %} {% if
-        psl is iterable and psl is not string %}
-          {{ psl }}
-        {% else %}
-          []
-        {% endif %}
-      current_common_names: "{{ current_species_list | map(attribute='common_name') | list }}"
-      previous_common_names: "{{ previous_species_list | map(attribute='common_name') | list }}"
+      current_species_list: '{{ trigger.to_state.attributes.get(''species_list'', []) }}'
+      previous_species_list: '{{ trigger.from_state.attributes.get(''species_list'', []) }}'
+      new_species: >-
+        {% set prev_codes = previous_species_list
+          | selectattr('species_code', 'defined')
+          | map(attribute='species_code')
+          | select('string')
+          | reject('eq', '')
+          | list %}
+        {% set prev_names = previous_species_list
+          | selectattr('common_name', 'defined')
+          | map(attribute='common_name')
+          | select('string')
+          | map('lower')
+          | reject('eq', '')
+          | list %}
+        {% set ns = namespace(found=[], seen_codes=[], seen_names=[]) %} {% for
+        bird in current_species_list %}
+          {% set code = bird.species_code if (bird.species_code is defined and bird.species_code is string) else '' %}
+          {% set name = bird.common_name if (bird.common_name is defined and bird.common_name is string) else '' %}
+          {% set name_lower = name | lower %}
+          {% set code_known = (code != '' and (code in prev_codes or code in ns.seen_codes)) %}
+          {% set name_known = (name_lower != '' and (name_lower in prev_names or name_lower in ns.seen_names)) %}
+          {% if not code_known and not name_known and (name != '' or code != '') %}
+            {% set ns.found = ns.found + [bird] %}
+            {% if code != '' %}
+              {% set ns.seen_codes = ns.seen_codes + [code] %}
+            {% endif %}
+            {% if name_lower != '' %}
+              {% set ns.seen_names = ns.seen_names + [name_lower] %}
+            {% endif %}
+          {% endif %}
+        {% endfor %} {{ ns.found }}
+  - condition: template
+    alias: At least one truly new species detected
+    value_template: '{{ new_species | length > 0 }}'
   - repeat:
-      for_each: "{{ current_species_list }}"
+      for_each: '{{ new_species }}'
       sequence:
-        - sequence:
-            - condition: template
-              value_template: "{{ repeat.item.common_name not in previous_common_names }}"
-            - action: notify.kyle
-              metadata: {}
-              data:
-                title: 🐦 New Bird Species Alert!
-                message: >-
-                  The {{repeat.item.common_name}} has been detected for the
-                  first time!
-                data:
-                  notification_icon: mdi:bird
-                  group: birdnet-alert
-                  channel: birdnet-alert
-                  tag: birdnet-alert
-                  ttl: 0
-                  priority: high
-                  push:
-                    interruption-level: time-sensitive
-mode: single
+        - action: notify.kyle
+          metadata: {}
+          data:
+            title: 🐦 New Bird Species Alert!
+            message: >-
+              The {{ repeat.item.common_name |
+              default(repeat.item.scientific_name, true) }} has been detected
+              for the first time!
+            data:
+              notification_icon: mdi:bird
+              group: birdnet-alert
+              channel: birdnet-alert
+              tag: birdnet-alert
+              ttl: 0
+              priority: high
+              push:
+                interruption-level: time-sensitive
+                sound: bert.wav
+          enabled: true
+mode: queued
+max: 10
 ```
 {% endraw %}
 </details>
@@ -1146,9 +1170,9 @@ Over time, the BirdNET-Go instance will stop accumulating _brand new_ birds as i
 
 To solve this problem, I created an automation that notifies me when a bird that hasn't been detected in a while is detected again. Think of it like the first time you see a yellow-rumped warbler in the spring after not seeing it all winter. It's neat to be notified when any bird is back in the area after a long absence.
 
-By default, the automation sets a window of 60 days. As I've only had my BirdNET-Go instance running for a couple of months, I have no idea if this is a sane number or not. But I'll find out!
+By default, the automation sets a window of 180 days. As I've only had my BirdNET-Go instance running for a couple of months, I have no idea if this is a sane number or not. But I'll find out!
 
-This can easily be adjusted in the automation below on the {% raw %}`{{ difference_in_days > 60 }}`{% endraw %} line.
+This can easily be adjusted in the automation below on the `threshold_days: 180` line.
 
 <details markdown="block">
 
@@ -1156,99 +1180,104 @@ This can easily be adjusted in the automation below on the {% raw %}`{{ differen
 
 {% raw %}
 ```yaml
-# version 1.5
+# version 1.6
 alias: Notify rare bird detection
 description: >-
-  Notify the family when a bird that hasn't been detected for a large number of days
-  is detected again.
+  Notify Kyle when a bird that hasn't been detected for a large number of
+  days is detected again.
 triggers:
   - trigger: state
     entity_id:
       - sensor.birdnet_species_summary_persisted_data
-    attribute: species_list
 conditions:
   - condition: template
+    alias: Both current and previous species lists are valid
     value_template: >-
-      {{ trigger.to_state.attributes.species_list is defined and
-      trigger.to_state.attributes.species_list is iterable and
-      trigger.to_state.attributes.species_list is not string and
-      trigger.from_state.state != 'unavailable' }}
-    alias: Is a valid list
+      {{ trigger.to_state is not none and
+      trigger.from_state is not none and
+      trigger.from_state.state not in ['unavailable', 'unknown'] and
+      trigger.to_state.attributes.get('species_list') is iterable and
+      trigger.to_state.attributes.get('species_list') is not string and
+      trigger.from_state.attributes.get('species_list') is iterable and
+      trigger.from_state.attributes.get('species_list') is not string }}
 actions:
   - variables:
-      current_species_list: >-
-        {% set csl = trigger.to_state.attributes.get('species_list') if
-        trigger.to_state and trigger.to_state.attributes else none %} {% if csl
-        is iterable and csl is not string %}
-          {{ csl }}
-        {% else %}
-          []
-        {% endif %}
-      previous_species_list: >-
-        {% set psl = trigger.from_state.attributes.get('species_list') if
-        trigger.from_state and trigger.from_state.attributes else none %} {% if
-        psl is iterable and psl is not string %}
-          {{ psl }}
-        {% else %}
-          []
-        {% endif %}
-      current_common_names: "{{ current_species_list | map(attribute='common_name') | list }}"
-      previous_common_names: "{{ previous_species_list | map(attribute='common_name') | list }}"
-  - repeat:
-      for_each: "{{ current_species_list }}"
-      sequence:
-        - condition: template
-          value_template: >-
-            {{ previous_species_list | selectattr('species_code', 'eq',
-            repeat.item.species_code) | list | length > 0 }}
-        - condition: template
-          value_template: >-
-            {% set current_bird = repeat.item %}
+      threshold_days: 180
+      current_species_list: "{{ trigger.to_state.attributes.get('species_list', []) }}"
+      previous_species_list: "{{ trigger.from_state.attributes.get('species_list', []) }}"
+      returning_rare_birds: >-
+        {% set ns = namespace(alerts=[], seen=[]) %}
+        {% for current_bird in current_species_list %}
+          {% if current_bird.last_heard is defined and current_bird.last_heard is string %}
+            {% set current_dt = current_bird.last_heard | as_datetime %}
+            {% if current_dt is not none %}
+              {% set prev_exact_list = previous_species_list
+                | selectattr('scientific_name', 'defined')
+                | selectattr('scientific_name', 'eq', current_bird.scientific_name)
+                | list
+                if (current_bird.scientific_name is defined and current_bird.scientific_name)
+                else [] %}
+              {% set prev_exact = prev_exact_list[0] if prev_exact_list | length > 0 else none %}
+              {% set prev_exact_dt = prev_exact.last_heard | as_datetime
+                if (prev_exact is not none and prev_exact.last_heard is defined and prev_exact.last_heard is string)
+                else none %}
 
-            {% set previous_bird_data_list = previous_species_list |
-            selectattr('species_code', 'eq', current_bird.species_code) | list
-            %}
+              {% set prev_code_matches = previous_species_list
+                | selectattr('species_code', 'defined')
+                | selectattr('species_code', 'eq', current_bird.species_code)
+                | list
+                if (current_bird.species_code is defined and current_bird.species_code)
+                else ([prev_exact] if prev_exact is not none else []) %}
 
-            {% if previous_bird_data_list | length > 0 %}
-              {% set previous_bird = previous_bird_data_list[0] %}
+              {% set is_updated_row = (prev_exact is not none and prev_exact_dt is not none and current_dt > prev_exact_dt) %}
+              {% set is_renamed_row = (prev_exact is none and prev_code_matches | length > 0) %}
 
-              {% if current_bird.last_heard is defined and current_bird.last_heard is string and 
-                    previous_bird.last_heard is defined and previous_bird.last_heard is string %}
-                
-                {% set current_last_heard_dt = current_bird.last_heard | as_datetime %}
-                {% set previous_last_heard_dt = previous_bird.last_heard | as_datetime %}
+              {% if is_updated_row or is_renamed_row %}
+                {% set best = namespace(dt=none, raw=none) %}
+                {% for pb in prev_code_matches %}
+                  {% if pb.last_heard is defined and pb.last_heard is string %}
+                    {% set dt = pb.last_heard | as_datetime %}
+                    {% if dt is not none and (best.dt is none or dt > best.dt) %}
+                      {% set best.dt = dt %}
+                      {% set best.raw = pb.last_heard %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
 
-                {% if current_last_heard_dt != none and previous_last_heard_dt != none and current_last_heard_dt > previous_last_heard_dt %}
-                  {% set difference_in_seconds = (current_last_heard_dt - previous_last_heard_dt).total_seconds() %}
-                  {% set difference_in_days = difference_in_seconds / (60*60*24) %}
-                  {{ difference_in_days > 180 }}
-                {% else %}
-                  {# current_last_heard is not more recent than previous_last_heard #}
-                  false
+                {% if best.dt is not none and current_dt > best.dt %}
+                  {% set diff_days = (current_dt - best.dt).total_seconds() / 86400 %}
+                  {% set dedupe_key = current_bird.species_code
+                    if (current_bird.species_code is defined and current_bird.species_code)
+                    else (current_bird.common_name | lower) %}
+                  {% if diff_days > threshold_days and dedupe_key not in ns.seen %}
+                    {% set ns.seen = ns.seen + [dedupe_key] %}
+                    {% set ns.alerts = ns.alerts + [{
+                      'common_name': current_bird.common_name,
+                      'previous_last_heard': best.raw,
+                      'days_between': (current_dt - best.dt).days
+                    }] %}
+                  {% endif %}
                 {% endif %}
-              {% else %}
-                false
               {% endif %}
-            {% else %}
-              false
             {% endif %}
-        - variables:
-            bird_last_heard: >-
-              {{ (previous_species_list | selectattr('species_code', 'eq',
-              repeat.item.species_code) | list)[0].last_heard }}
-            bird_recently_heard: "{{ repeat.item.last_heard }}"
-            days_between_detection: >-
-              {{ (bird_recently_heard | as_datetime - bird_last_heard |
-              as_datetime).days }}
-        - data:
+          {% endif %}
+        {% endfor %}
+        {{ ns.alerts }}
+  - condition: template
+    alias: At least one returning rare bird detected
+    value_template: "{{ returning_rare_birds | length > 0 }}"
+  - repeat:
+      for_each: "{{ returning_rare_birds }}"
+      sequence:
+        - action: notify.kyle
+          enabled: true
+          data:
             title: >-
-              🐦 {{ repeat.item.common_name }} is back
-              ({{days_between_detection}} days)!
+              🐦 {{ repeat.item.common_name }} is back ({{ repeat.item.days_between }} days)!
             message: |
               {{ repeat.item.common_name }} has been heard again!
-              Previously heard: {{ bird_last_heard | as_timestamp |
-              timestamp_custom('%b %d, %Y') }}
-              That's a gap of {{ days_between_detection }} days!
+              Previously heard: {{ repeat.item.previous_last_heard | as_timestamp | timestamp_custom('%b %d, %Y') }}
+              That's a gap of {{ repeat.item.days_between }} days!
             data:
               notification_icon: mdi:bird
               group: birdnet-alert
@@ -1258,7 +1287,6 @@ actions:
               priority: high
               push:
                 interruption-level: time-sensitive
-          action: notify.kyle
 # Queued as we might be running slow with our timestamp
 mode: queued
 max: 10
