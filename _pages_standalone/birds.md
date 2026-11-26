@@ -33,4 +33,6 @@ Questions, ID corrections, or sightings to share? [Join the discussion below](#d
 - **Pixel 9 Pro**: Sometimes strapped to Vortex Diamondback HD 8x42 binoculars.
 - **Nikon Z50II**: Occasionally borrowed 💃.
 
+If you'd like to know which specific camera or settings I used for a photo, there's a good chance I uploaded it with the original metadata [on eBird](https://media.ebird.org/catalog?unconfirmed=incl&mediaType=photo&userId=USER4399017&view=list). 
+
 </details>
