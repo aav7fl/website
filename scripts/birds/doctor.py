@@ -10,6 +10,7 @@ a broken AI setup is reported but doesn't fail, since imports work without it.
 
 import argparse
 import csv
+import datetime
 import json
 import re
 import shutil
@@ -17,15 +18,19 @@ import subprocess
 import sys
 from importlib import metadata
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[1]
 sys.path.insert(0, str(SCRIPT_DIR))
 
+import bird_common
+
 OK, FAIL, WARN = "✓", "✗", "!"
 core_ok = True
 ai_ok = True
+
+_ISO_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")
 
 
 def report(status: str, message: str, fix: str = "", ai: bool = False) -> None:
@@ -40,19 +45,172 @@ def report(status: str, message: str, fix: str = "", ai: bool = False) -> None:
             core_ok = False
 
 
-def pins(path: Path) -> Dict[str, str]:
-    """{normalised name: version} from a requirements file's `name==version` lines."""
-    found = {}
-    for line in path.read_text(encoding="utf-8").splitlines():
-        match = re.match(r"^\s*([A-Za-z0-9_.\-]+)==([^\s#]+)", line)
-        if match:
-            found[re.sub(r"[-_.]+", "-", match.group(1)).lower()] = match.group(2)
-    return found
+def _preview_list(items: List[str], limit: int = 5) -> str:
+    return ", ".join(items[:limit]) + (", ..." if len(items) > limit else "")
 
 
-def check_packages(path: Path, ai: bool) -> None:
+pins = bird_common.parse_requirements_pins
+in_names = bird_common.parse_requirements_in
+
+
+def audit_catalog_integrity(catalog: List[Dict[str, Any]], photos_dir: Path) -> Dict[str, List[str]]:
+    """
+    Pure integrity audit of catalog entries against photos_dir.
+    Returns lists of issues for missing_photos, orphan_photos, duplicates,
+    invalid_dates, missing_locations, and slug_mismatches.
+    """
+    missing_photos: List[str] = []
+    seen_missing: set = set()
+    referenced_filenames: set = set()
+    duplicates: List[str] = []
+    seen_field_values: Dict[str, set] = {
+        "slug": set(),
+        "filename": set(),
+        "source_id": set(),
+        "species_common": set(),
+    }
+    recorded_duplicates: set = set()
+    invalid_dates: List[str] = []
+    missing_locations: List[str] = []
+    slug_mismatches: List[str] = []
+
+    now = datetime.datetime.now()
+
+    for entry in catalog:
+        label = str(entry.get("species_common") or entry.get("slug") or "?")
+
+        # Missing photo files
+        fname = str(entry.get("filename") or "").strip()
+        if fname:
+            referenced_filenames.add(fname)
+            if not (photos_dir / fname).is_file() and fname not in seen_missing:
+                missing_photos.append(fname)
+                seen_missing.add(fname)
+        else:
+            marker = f"<missing filename: {label}>"
+            if marker not in seen_missing:
+                missing_photos.append(marker)
+                seen_missing.add(marker)
+
+        # Duplicates across key identifying fields
+        for field, seen in seen_field_values.items():
+            val = str(entry.get(field) or "").strip()
+            if not val:
+                continue
+            if val in seen:
+                dup_label = f"{field}: {val}"
+                if dup_label not in recorded_duplicates:
+                    duplicates.append(dup_label)
+                    recorded_duplicates.add(dup_label)
+            else:
+                seen.add(val)
+
+        # Date validation: exact YYYY-MM-DDTHH:MM:SS and not in the future
+        raw_date = entry.get("date_taken")
+        if not isinstance(raw_date, str) or not _ISO_TIMESTAMP_RE.match(raw_date):
+            invalid_dates.append(f"{label}: {raw_date!r}")
+        else:
+            try:
+                parsed = datetime.datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S")
+            except ValueError:
+                invalid_dates.append(f"{label}: {raw_date!r}")
+            else:
+                if parsed > now:
+                    invalid_dates.append(f"{label}: {raw_date} (future)")
+
+        # Missing location
+        if not str(entry.get("location") or "").strip():
+            missing_locations.append(label)
+
+        # Slug vs species_common consistency
+        common = str(entry.get("species_common") or "")
+        slug = str(entry.get("slug") or "")
+        expected_slug = bird_common.slugify(common)
+        if slug != expected_slug:
+            slug_mismatches.append(f"{common}: {slug!r} (expected {expected_slug!r})")
+
+    orphan_photos: List[str] = []
+    if photos_dir.is_dir():
+        orphan_photos = sorted(
+            p.name
+            for p in photos_dir.glob("*.webp")
+            if p.is_file() and p.name not in referenced_filenames
+        )
+
+    return {
+        "missing_photos": missing_photos,
+        "orphan_photos": orphan_photos,
+        "duplicates": duplicates,
+        "invalid_dates": invalid_dates,
+        "missing_locations": missing_locations,
+        "slug_mismatches": slug_mismatches,
+    }
+
+
+def audit_photo_metadata(photos_dir: Path) -> Tuple[List[str], List[str]]:
+    """
+    Runs one batched exiftool call across all *.webp files in photos_dir.
+    Returns (gps_leaks, missing_copyright) as sorted lists of filenames.
+    Returns ([], []) if exiftool isn't installed or there are no .webp files.
+    """
+    if not shutil.which("exiftool") or not photos_dir.is_dir():
+        return [], []
+    webps = sorted(p for p in photos_dir.glob("*.webp") if p.is_file())
+    if not webps:
+        return [], []
+
+    cmd = [
+        "exiftool",
+        "-j",
+        "-FileName",
+        "-GPSLatitude",
+        "-GPSLongitude",
+        "-EXIF:Copyright",
+        "-XMP-dc:Rights",
+        *(str(p) for p in webps),
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    if not res.stdout.strip():
+        return [], []
+    try:
+        records = json.loads(res.stdout)
+    except json.JSONDecodeError:
+        return [], []
+
+    gps_leaks: List[str] = []
+    missing_copyright: List[str] = []
+    for rec in records:
+        name = rec.get("FileName") or Path(rec.get("SourceFile", "")).name
+        if rec.get("GPSLatitude") not in (None, "") or rec.get("GPSLongitude") not in (None, ""):
+            gps_leaks.append(name)
+        has_exif_copy = bool(str(rec.get("Copyright") or "").strip())
+        has_xmp_rights = bool(str(rec.get("Rights") or "").strip())
+        if not (has_exif_copy and has_xmp_rights):
+            missing_copyright.append(name)
+
+    return sorted(gps_leaks), sorted(missing_copyright)
+
+
+def check_packages(path: Path, ai: bool, check_in: bool = False) -> None:
+    label = path.name
+    fix = f"/opt/venv-birds/bin/pip install -r scripts/birds/{label}  (or rebuild the dev container)"
+    if check_in:
+        names = in_names(path)
+        missing = []
+        for name in names:
+            try:
+                metadata.version(name)
+            except metadata.PackageNotFoundError:
+                missing.append(name)
+        if missing:
+            report(FAIL, f"{label}: not installed: {', '.join(missing)}", fix, ai=ai)
+        else:
+            report(OK, f"{label}: all {len(names)} direct packages installed")
+        return
+
     missing, drift = [], []
-    for name, wanted in pins(path).items():
+    pinned = pins(path)
+    for name, wanted in pinned.items():
         try:
             have = metadata.version(name)
         except metadata.PackageNotFoundError:
@@ -60,14 +218,12 @@ def check_packages(path: Path, ai: bool) -> None:
             continue
         if have != wanted:
             drift.append(f"{name} {have} (pinned {wanted})")
-    label = path.name
-    fix = f"/opt/venv-birds/bin/pip install -r scripts/birds/{label}  (or rebuild the dev container)"
     if missing:
         report(FAIL, f"{label}: not installed: {', '.join(missing)}", fix, ai=ai)
     elif drift:
         report(WARN, f"{label}: versions differ from the pins: {', '.join(drift)}", fix)
     else:
-        report(OK, f"{label}: all {len(pins(path))} packages installed at their pinned versions")
+        report(OK, f"{label}: all {len(pinned)} packages installed at their pinned versions")
 
 
 def tool_version(cmd: List[str]) -> Tuple[bool, str]:
@@ -80,6 +236,7 @@ def tool_version(cmd: List[str]) -> Tuple[bool, str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Check the bird pipeline's dependencies.")
     parser.add_argument("--require-ai", action="store_true", help="Also fail (exit 1) if AI suggestions aren't ready (used by update_deps.py)")
+    parser.add_argument("--check-in", action="store_true", help="Check direct packages from requirements*.in instead of exact lock pins (used by update_deps.py)")
     args = parser.parse_args()
 
     print("System tools")
@@ -93,8 +250,12 @@ def main() -> None:
     print(f"  {OK} Python {sys.version.split()[0]} ({sys.executable})")
 
     print("\nPython packages")
-    check_packages(SCRIPT_DIR / "requirements.txt", ai=False)
-    check_packages(SCRIPT_DIR / "requirements-ai.txt", ai=True)
+    if args.check_in:
+        check_packages(SCRIPT_DIR / "requirements.in", ai=False, check_in=True)
+        check_packages(SCRIPT_DIR / "requirements-ai.in", ai=True, check_in=True)
+    else:
+        check_packages(SCRIPT_DIR / "requirements.txt", ai=False)
+        check_packages(SCRIPT_DIR / "requirements-ai.txt", ai=True)
 
     try:
         import update_deps
@@ -131,16 +292,53 @@ def main() -> None:
         report(FAIL, f"Taxonomy unreadable ({exc})", "git checkout scripts/birds/taxonomy_sibley.csv")
 
     catalog = []
+    photos = REPO_ROOT / "assets" / "img" / "birds"
     try:
         import yaml
         catalog = yaml.safe_load((REPO_ROOT / "_data" / "birds.yml").read_text(encoding="utf-8")) or []
-        photos = REPO_ROOT / "assets" / "img" / "birds"
-        missing = [b["filename"] for b in catalog if not (photos / b["filename"]).is_file()]
+        integrity = audit_catalog_integrity(catalog, photos)
+        missing = integrity["missing_photos"]
         locked = sum(1 for b in catalog if b.get("locked"))
-        report(OK if not missing else FAIL,
-               f"Catalog: {len(catalog)} birds" + (f", {locked} locked" if locked else "")
-               + (f"; missing photos: {', '.join(missing[:5])}" if missing else ", every photo present"),
-               "" if not missing else "restore the missing files in assets/img/birds/ from git")
+        report(
+            OK if not missing else FAIL,
+            f"Catalog: {len(catalog)} birds"
+            + (f", {locked} locked" if locked else "")
+            + (f"; missing photos: {_preview_list(missing)}" if missing else ", every photo present"),
+            "" if not missing else "restore the missing files in assets/img/birds/ from git",
+        )
+        if integrity["duplicates"]:
+            report(
+                FAIL,
+                f"Catalog duplicates ({len(integrity['duplicates'])}): {_preview_list(integrity['duplicates'])}",
+                "deduplicate the conflicting entries in _data/birds.yml",
+            )
+        if integrity["orphan_photos"]:
+            report(
+                WARN,
+                f"{len(integrity['orphan_photos'])} orphan photo(s) not in catalog: {_preview_list(integrity['orphan_photos'])}",
+                "remove unused .webp files from assets/img/birds/ or add them to _data/birds.yml",
+            )
+        if integrity["invalid_dates"]:
+            report(
+                WARN,
+                f"{len(integrity['invalid_dates'])} bird(s) with invalid or future date_taken: {_preview_list(integrity['invalid_dates'])}",
+                "fix date_taken (YYYY-MM-DDTHH:MM:SS) in _data/birds.yml",
+            )
+        if integrity["missing_locations"]:
+            report(
+                WARN,
+                f"{len(integrity['missing_locations'])} bird(s) missing location: {_preview_list(integrity['missing_locations'])}",
+                "fill in location in _data/birds.yml",
+            )
+        if integrity["slug_mismatches"]:
+            report(
+                WARN,
+                f"{len(integrity['slug_mismatches'])} bird(s) with slug mismatch: {_preview_list(integrity['slug_mismatches'])}",
+                "update slug (and photo filename if needed) in _data/birds.yml, or run rake birds:migrate_taxonomy",
+            )
+        if not any(integrity.values()):
+            report(OK, "Catalog integrity: no duplicates, orphans, bad dates, missing locations, or slug mismatches")
+
         by_code = {r["ebird_code"]: r for r in rows if r.get("ebird_code")}
         stale = []
         for b in catalog:
@@ -151,12 +349,33 @@ def main() -> None:
                 stale.append(b.get("species_common", "?"))
         if rows and stale:
             report(WARN, f"{len(stale)} bird(s) don't match the taxonomy (renamed, split or re-ordered): "
-                   + ", ".join(stale[:5]) + (", ..." if len(stale) > 5 else ""),
+                   + _preview_list(stale),
                    "rake birds:migrate_taxonomy")
         elif rows:
             report(OK, "Every bird matches the taxonomy")
     except Exception as exc:
         report(FAIL, f"Catalog unreadable ({exc})", "check _data/birds.yml for YAML errors")
+
+    if shutil.which("exiftool") and photos.is_dir():
+        webp_count = sum(1 for p in photos.glob("*.webp") if p.is_file())
+        if webp_count:
+            gps_leaks, missing_copyright = audit_photo_metadata(photos)
+            if gps_leaks:
+                report(
+                    FAIL,
+                    f"Metadata audit: GPS tags found in {len(gps_leaks)} photo(s): {_preview_list(gps_leaks)}",
+                    "strip GPS metadata with exiftool -overwrite_original -GPS:all= assets/img/birds/<file> (or re-import)",
+                )
+            if missing_copyright:
+                report(
+                    WARN,
+                    f"Metadata audit: {len(missing_copyright)} photo(s) missing copyright tags: {_preview_list(missing_copyright)}",
+                    "rake birds:copyright",
+                )
+            if not gps_leaks and not missing_copyright:
+                report(OK, f"Metadata audit: {webp_count} photos checked, zero GPS tags, all copyright-stamped")
+            elif not gps_leaks:
+                report(OK, f"Metadata audit: {webp_count} photos checked, zero GPS tags")
 
     print("\nAI suggestions (optional)")
     try:
@@ -194,25 +413,18 @@ def smoke_test(bird_model, rows, catalog) -> None:
                "if it persists run rake birds:update_deps; see 'Staying up to date (automatic)' in scripts/birds/README.md", ai=True)
         return
 
-    names = [r["common_name"] for r in rows]
-    cache_valid = False
-    if bird_model.EMBEDDINGS_PATH.exists():
-        try:
-            cached = torch.load(bird_model.EMBEDDINGS_PATH, map_location="cpu", weights_only=True)
-            cache_valid = cached.get("model_revision") == bird_model.MODEL_REVISION and cached.get("common_names") == names
-        except Exception:
-            pass
-    if cache_valid:
+    if bird_model.embeddings_cache_valid(rows):
         report(OK, "Species embeddings cached for this model and taxonomy")
     else:
         report(WARN, "Species embeddings missing or stale (rebuilt automatically, ~1 min)", "rake birds:setup")
 
-    sample = next((b for b in catalog if "COLLAGE" not in str(b.get("source_filename", ""))), None)
-    if not sample:
+    sample = next((b for b in catalog if not bird_common.is_collage(str(b.get("source_filename", "")))), None)
+    if not sample or not rows:
         return
     embeddings = bird_model.text_embeddings(model, tokenizer, rows, cache_key=bird_model.MODEL_REVISION)
     photo = REPO_ROOT / "assets" / "img" / "birds" / sample["filename"]
-    top = bird_model.predict(model, preprocess, embeddings, rows, photo, k=3)
+    allowed, _ = bird_model.allowed_species(rows, always_include=[b.get("species_common", "") for b in catalog])
+    top = bird_model.predict(model, preprocess, embeddings, rows, photo, k=3, allowed=allowed)
     guesses = [r["common_name"] for r, _ in top]
     if sample["species_common"] in guesses:
         rank = guesses.index(sample["species_common"]) + 1

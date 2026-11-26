@@ -211,7 +211,9 @@ def migrate(catalog: List[Dict[str, Any]], taxonomy: List[Dict[str, Any]], dest_
             console.print(f"\n[bold]{name}[/bold] -> [bold green]{row['common_name']}[/bold green] ({row['scientific_name']})")
             console.print(f"  {describe_changes(changes)}")
             if "species_common" in changes:
-                console.print(f"  slug: {entry.get('slug')!r} -> {slugify(row['common_name'])!r}, photo renamed to match")
+                preview_slug = slugify(row["common_name"])
+                if f"{preview_slug}.webp" != entry.get("filename"):
+                    console.print(f"  slug: {entry.get('slug')!r} -> {preview_slug!r}, photo renamed to match")
             if not confirm("Apply?", assume_yes):
                 skipped.append(name)
                 continue
@@ -226,9 +228,10 @@ def migrate(catalog: List[Dict[str, Any]], taxonomy: List[Dict[str, Any]], dest_
                               f"Delete one of them and re-import if they're the same species.[/red]")
                 skipped.append(name)
                 continue
-            if not rename_photo(dest_dir, entry.get("filename", ""), new_filename, dry_run):
-                skipped.append(name)
-                continue
+            if new_filename != entry.get("filename"):
+                if not rename_photo(dest_dir, entry.get("filename", ""), new_filename, dry_run):
+                    skipped.append(name)
+                    continue
             slugs.discard(entry.get("slug"))
             slugs.add(new_slug)
             entry["slug"] = new_slug

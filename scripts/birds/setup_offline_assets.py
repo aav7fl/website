@@ -16,6 +16,7 @@ import csv
 import io
 import json
 import re
+import urllib.parse
 import urllib.request
 import zipfile
 from typing import Dict, List
@@ -110,7 +111,9 @@ def download_aba_checklist(force: bool = False) -> None:
                 page = resp.read().decode("utf-8", "replace")
             links = re.findall(r'href="([^"]+ABA_Checklist[^"]*\.csv\.zip)"', page)
             if links:
-                url = links[0]
+                candidate = urllib.parse.urljoin(ABA_CHECKLIST_PAGE, links[0])
+                if candidate.startswith("https://"):
+                    url = candidate
         except Exception as exc:
             print(f"[WARN] Couldn't read {ABA_CHECKLIST_PAGE} ({exc}); trying the last known checklist URL")
         print(f"Downloading the ABA checklist from {url}...")
@@ -206,21 +209,7 @@ def build_full_ebird_sibley_taxonomy(force: bool = False) -> bool:
     with open(MAP_PATH, "r", encoding="utf-8") as f:
         family_map = json.load(f)
 
-    extra_families = {
-        "Burhinidae": {"sibley_category": "Shorebirds", "sibley_category_order": 9},
-        "Glareolidae": {"sibley_category": "Shorebirds", "sibley_category_order": 9},
-        "Trogonidae": {"sibley_category": "Trogons and Kingfishers", "sibley_category_order": 16},
-        "Upupidae": {"sibley_category": "Trogons and Kingfishers", "sibley_category_order": 16},
-        "Psittacidae": {"sibley_category": "Parrots", "sibley_category_order": 18},
-        "Locustellidae": {"sibley_category": "Kinglets, Old World Warblers, and Thrush Allies", "sibley_category_order": 25},
-        "Acrocephalidae": {"sibley_category": "Kinglets, Old World Warblers, and Thrush Allies", "sibley_category_order": 25},
-        "Prunellidae": {"sibley_category": "Wagtails and Pipits", "sibley_category_order": 27},
-        "Emberizidae": {"sibley_category": "Towhees, Sparrows, and Juncos", "sibley_category_order": 31},
-        "Viduidae": {"sibley_category": "Old World Sparrows and Weaver Finches", "sibley_category_order": 35},
-    }
-    for k, v in extra_families.items():
-        family_map.setdefault(k, v)
-
+    aba = bird_model.aba_codes()
     reader = download_ebird_taxonomy()
     output_rows = []
     seen_common = set()
@@ -236,7 +225,8 @@ def build_full_ebird_sibley_taxonomy(force: bool = False) -> bool:
         raw_banding = (row.get("BANDING_CODES") or "").strip()
         common_name = (row.get("COMMON_NAME") or "").strip()
         sci_name = (row.get("SCIENTIFIC_NAME") or "").strip()
-        if not raw_banding and sci_name not in SPECIES_WITHOUT_BANDING_CODES:
+        in_aba = sci_name.lower() in aba or common_name.lower() in aba
+        if not raw_banding and sci_name not in SPECIES_WITHOUT_BANDING_CODES and not in_aba:
             continue
         if not common_name or not sci_name or common_name in seen_common:
             continue

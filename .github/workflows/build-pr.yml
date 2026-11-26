@@ -17,6 +17,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Bird pipeline unit tests
+        run: python3 -m unittest discover -s scripts/birds -p 'test_*.py' -v
       - name: Verify Mermaid diagrams are pre-rendered
         # Diagram SVGs are committed, so this only checks that none are missing
         # or stale. Rendering here would mean downloading Chromium every run.

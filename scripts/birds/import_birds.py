@@ -8,33 +8,37 @@ Features:
 - Tracks imported photos via source_id ({filename}_{timestamp}_{sha256[:8]}); a replaced photo
   is forgotten, so it can be imported again later (e.g. under the correct species)
 - Offline AI species top-3 suggestion (pinned local BioCLIP, see bird_model.py) with Fuzzy Search fallback
-- Resolves GPS EXIF offline to "County, ST" via US Census GeoJSON + Shapely
-- Converts colorspace to sRGB, resizes to 800px wide, exports WebP, and strips all EXIF/ICC metadata
-  (GPS, camera, timestamps), then writes back only copyright tags (see stamp_copyright)
-- Shows a small preview of each photo in the terminal: the real image where the terminal can draw
-  one, colored blocks where it can't (see --preview)
+- Resolves GPS EXIF offline to "County, ST" via US Census GeoJSON + Shapely STRtree
+- Orients upright, converts ICC profiles (e.g. Display P3) to sRGB, shrinks to at most 800px wide
+  (without upscaling small crops), exports WebP, and strips all EXIF/ICC metadata (GPS, camera,
+  timestamps), writing back only copyright tags in a single exiftool pass (see stamp_copyright)
+- Shows a small preview of each photo in the terminal (and previews the existing catalog photo
+  before confirming an overwrite): real image where supported, colored blocks where not (--preview)
+- Lets you discard rejected photos from _staging/ with 'd' (after confirmation)
 - Asks for an optional note on each import; when replacing a photo that has a note, keeps it,
   wipes it, or takes a new one
-- Asks for the real date and time of Google Photos collages (e.g. 20261023_142445-COLLAGE.jpg),
-  whose own timestamp is when the collage was made, not when the photos were taken
+- Warns and asks for the real date and time when a photo is missing EXIF capture dates, and for
+  Google Photos collages (e.g. 20261023_142445-COLLAGE.jpg), whose own timestamp is when the
+  collage was made rather than when the photos were taken
 - Never replaces a species whose catalog entry has `locked: true` (warns and leaves the file staged)
 - Outputs chronologically sorted _data/birds.yml for Jekyll consumption
 """
 
 import argparse
 import base64
-import csv
 import datetime
-import hashlib
 import json
+import os
 import re
 import select
 import shutil
+import signal
 import subprocess
 import sys
+import tempfile
+from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-import os
 
 # Force Hugging Face to strictly use the local cache and prevent network update checks
 os.environ["HF_HUB_OFFLINE"] = "1"
@@ -46,19 +50,34 @@ from prompt_toolkit.completion import FuzzyWordCompleter
 from rich.console import Console
 from rich.panel import Panel
 
+from bird_common import (  # Shared stdlib-only helpers (scripts/birds/bird_common.py)
+    COLLAGE_NAME_RE,
+    COPYRIGHT_HOLDER,
+    COPYRIGHT_LICENSE_URL,
+    DEFAULT_DEST_DIR,
+    DEFAULT_STAGING_DIR,
+    DEFAULT_YAML_PATH,
+    GEOJSON_PATH,
+    REPO_ROOT,
+    SCRIPT_DIR,
+    TAXONOMY_CSV_PATH,
+    build_source_id,
+    compute_sha256_prefix,
+    display_path,
+    extract_timestamp,
+    is_collage,
+    load_taxonomy,
+    normalize_timestamp,
+    parse_user_timestamp,
+    process_image_to_webp,
+    sanitize_staged_filename,
+    slugify,
+    stamp_copyright,
+)
 import bird_model  # The pinned, local AI model (scripts/birds/bird_model.py)
 import update_deps  # Tested, automatic package updates (scripts/birds/update_deps.py)
 
 console = Console()
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-SCRIPT_DIR = Path(__file__).resolve().parent
-
-DEFAULT_STAGING_DIR = REPO_ROOT / "_staging"
-DEFAULT_DEST_DIR = REPO_ROOT / "assets" / "img" / "birds"
-DEFAULT_YAML_PATH = REPO_ROOT / "_data" / "birds.yml"
-TAXONOMY_CSV_PATH = SCRIPT_DIR / "taxonomy_sibley.csv"
-GEOJSON_PATH = SCRIPT_DIR / "us_counties.geojson"
 
 # --auto only accepts the AI's top suggestion above this confidence (percent)
 AUTO_MIN_CONFIDENCE = 90.0
@@ -70,33 +89,15 @@ PREVIEW_ROWS = 20     # Tallest a preview gets, in terminal rows
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp", ".heic"}
 
-# Embedded in every exported photo. The photos are all rights reserved
-# (see assets/img/birds/LICENSE.txt), unlike the MIT-licensed code.
-COPYRIGHT_HOLDER = "Kyle Niewiada"
-COPYRIGHT_LICENSE_URL = "https://www.kyleniewiada.org/assets/img/birds/LICENSE.txt"
+# Sentinel returned when the user chooses to discard (delete) a staged photo
+_DISCARD = object()
 
-
-def display_path(path: Path) -> str:
-    """Path relative to the repo when possible, for shorter messages."""
-    try:
-        return str(path.resolve().relative_to(REPO_ROOT))
-    except ValueError:
-        return str(path)
-
-
-def slugify(text: str) -> str:
-    slug = text.lower().strip()
-    slug = re.sub(r"['’]", "", slug)
-    slug = re.sub(r"[^a-z0-9]+", "-", slug)
-    return slug.strip("-")
-
-
-def compute_sha256_prefix(filepath: Path, length: int = 8) -> str:
-    h = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        while chunk := f.read(65536):
-            h.update(chunk)
-    return h.hexdigest()[:length]
+DEFAULT_RECENT_LOCATIONS = [
+    "Ottawa County, MI",
+    "Kent County, MI",
+    "Allegan County, MI",
+    "Muskegon County, MI",
+]
 
 
 def extract_exif(filepath: Path) -> Dict[str, Any]:
@@ -122,89 +123,26 @@ def extract_exif(filepath: Path) -> Dict[str, Any]:
         return {}
 
 
-def normalize_timestamp(exif: Dict[str, Any], filepath: Path) -> str:
-    """Return ISO-8601 timestamp YYYY-MM-DDTHH:MM:SS from EXIF or file mtime."""
-    raw_dt = (
-        exif.get("DateTimeOriginal")
-        or exif.get("CreateDate")
-        or exif.get("ModifyDate")
-    )
-    if raw_dt and isinstance(raw_dt, str):
-        raw_dt = raw_dt.strip()
-        match = re.match(
-            r"^(\d{4})[:\-](\d{2})[:\-](\d{2})[ T](\d{2}):(\d{2}):(\d{2})", raw_dt
-        )
-        if match:
-            y, m, d, hh, mm, ss = match.groups()
-            return f"{y}-{m}-{d}T{hh}:{mm}:{ss}"
-
-    mtime = datetime.datetime.fromtimestamp(filepath.stat().st_mtime)
-    return mtime.strftime("%Y-%m-%dT%H:%M:%S")
-
-
-# Google Photos names the collages it makes like 20261023_142445-COLLAGE.jpg. Their
-# timestamp (EXIF and file name) is when the collage was made, and Google Photos
-# doesn't export the date its info panel shows for them, so the importer asks.
-COLLAGE_NAME_RE = re.compile(r"-COLLAGE\b", re.IGNORECASE)
-
-
-def is_collage(filepath: Path) -> bool:
-    return bool(COLLAGE_NAME_RE.search(filepath.stem))
-
-
-def parse_user_timestamp(text: str) -> Optional[str]:
+def prompt_manual_timestamp(
+    filepath: Path,
+    fallback_timestamp: str,
+    *,
+    reason_banner: str,
+    keep_label: str,
+    warn_if_after_fallback: bool = False,
+) -> Optional[str]:
     """
-    Parse a typed date and time into YYYY-MM-DDTHH:MM:SS, or None if it isn't one.
-    Accepts 24-hour or am/pm times, with or without seconds, e.g.
-    "2025-04-12 09:09", "2025-04-12 9:09 am", "2025-04-12T21:09:30", and the
-    style of the collage captions in Google Photos: "October 23, 2026 @ 1:16 PM"
-    (month names may be abbreviated, and "at" works in place of "@").
+    Ask the user for the real date and time a photo was taken. Returns the timestamp,
+    or None to skip the photo. Typing 'k' keeps fallback_timestamp.
     """
-    time_part = r"(\d{1,2}):(\d{2})(?::(\d{2}))?\s*([ap]\.?m\.?)?"
-    numeric = re.fullmatch(r"\s*(\d{4})-(\d{1,2})-(\d{1,2})[ T]+" + time_part + r"\s*", text, re.IGNORECASE)
-    written = re.fullmatch(r"\s*([a-z]+)\.?\s+(\d{1,2}),?\s+(\d{4})\s*(?:@|at|,)?\s*" + time_part + r"\s*", text, re.IGNORECASE)
-    if numeric:
-        year, month, day, hour, minute, second, meridiem = numeric.groups()
-    elif written:
-        month_name, day, year, hour, minute, second, meridiem = written.groups()
-        months = [datetime.date(2000, m, 1).strftime("%B").lower() for m in range(1, 13)]
-        # Full names, or abbreviations of at least three letters ("Oct", "Sept")
-        month = next((i for i, name in enumerate(months, start=1)
-                      if len(month_name) >= 3 and name.startswith(month_name.lower())), None)
-        if not month:
-            return None
-    else:
-        return None
-    hour = int(hour)
-    if meridiem:
-        if not 1 <= hour <= 12:
-            return None
-        hour = hour % 12 + (12 if meridiem.lower().startswith("p") else 0)
-    try:
-        parsed = datetime.datetime(int(year), int(month), int(day), hour, int(minute), int(second or 0))
-    except ValueError:
-        return None
-    return parsed.strftime("%Y-%m-%dT%H:%M:%S")
-
-
-def prompt_collage_timestamp(filepath: Path, file_timestamp: str) -> Optional[str]:
-    """
-    Ask for when a collage's photos were taken. Returns the timestamp, or None to
-    skip the photo. Typing 'k' keeps the collage's own timestamp.
-    """
-    made = file_timestamp.replace("T", " ")
-    console.print(
-        f"  [bold yellow]{filepath.name} is a Google Photos collage.[/bold yellow] Its timestamp ({made}) is when the "
-        "collage was made.\n"
-        "  Enter the date and time of the most recent photo in it (shown in Google Photos' info panel), "
-        "e.g. [bold]2025-04-12 9:09 am[/bold] or [bold]April 12, 2025 @ 9:09 AM[/bold]."
-    )
+    fallback_display = fallback_timestamp.replace("T", " ")
+    console.print(reason_banner)
     while True:
-        answer = prompt("  Date and time taken ('k' to keep the collage's, 's' to skip): ").strip()
+        answer = prompt(f"  Date and time taken ('k' to keep {keep_label}, 's' to skip): ").strip()
         if answer.lower() == "s":
             return None
         if answer.lower() == "k":
-            return file_timestamp
+            return fallback_timestamp
         timestamp = parse_user_timestamp(answer)
         if not timestamp:
             console.print("[red]  Not a date and time. Use YYYY-MM-DD HH:MM (am/pm optional) or October 23, 2026 @ 1:16 PM.[/red]")
@@ -212,13 +150,49 @@ def prompt_collage_timestamp(filepath: Path, file_timestamp: str) -> Optional[st
         if timestamp > datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"):
             console.print("[red]  That's in the future. Check the date and try again.[/red]")
             continue
-        if timestamp > file_timestamp:
+        if warn_if_after_fallback and timestamp > fallback_timestamp:
             # The photos must be older than the collage made from them, unless its own date is off
-            confirm = prompt(f"  That's after the collage was made ({made}). Use it anyway? [y/N]: ").strip().lower()
+            confirm = prompt(f"  That's after the collage was made ({fallback_display}). Use it anyway? [y/N]: ").strip().lower()
             if confirm != "y":
                 continue
         console.print(f"  [dim]Using {timestamp.replace('T', ' ')} as the date taken.[/dim]")
         return timestamp
+
+
+def prompt_collage_timestamp(filepath: Path, file_timestamp: str) -> Optional[str]:
+    """Ask for when a Google Photos collage's photos were taken."""
+    made = file_timestamp.replace("T", " ")
+    banner = (
+        f"  [bold yellow]{filepath.name} is a Google Photos collage.[/bold yellow] Its timestamp ({made}) is when the "
+        "collage was made.\n"
+        "  Enter the date and time of the most recent photo in it (shown in Google Photos' info panel), "
+        "e.g. [bold]2025-04-12 9:09 am[/bold] or [bold]April 12, 2025 @ 9:09 AM[/bold]."
+    )
+    return prompt_manual_timestamp(
+        filepath,
+        file_timestamp,
+        reason_banner=banner,
+        keep_label="the collage's",
+        warn_if_after_fallback=True,
+    )
+
+
+def prompt_missing_exif_timestamp(filepath: Path, file_timestamp: str) -> Optional[str]:
+    """Warn that EXIF capture date is missing and ask for the real date and time."""
+    mtime_display = file_timestamp.replace("T", " ")
+    banner = (
+        f"  [bold yellow]Warning: {filepath.name} has no EXIF date.[/bold yellow] "
+        f"Its fallback timestamp ({mtime_display}) is the file's modified time.\n"
+        "  Enter the real date and time it was taken, e.g. [bold]2025-04-12 9:09 am[/bold] "
+        "or [bold]April 12, 2025 @ 9:09 AM[/bold]."
+    )
+    return prompt_manual_timestamp(
+        filepath,
+        file_timestamp,
+        reason_banner=banner,
+        keep_label="file modified time",
+        warn_if_after_fallback=False,
+    )
 
 
 def _magick_thumbnail(filepath: Path, box: str, output: str) -> bytes:
@@ -376,18 +350,14 @@ def prompt_note(species_name: str, existing_note: str) -> str:
     return prompt(f"  Note for {species_name} (Enter for none): ").strip()
 
 
-def build_source_id(filepath: Path, iso_timestamp: str) -> str:
-    compact_ts = re.sub(r"[^0-9T]", "", iso_timestamp)
-    sha_prefix = compute_sha256_prefix(filepath, 8)
-    return f"{filepath.name}_{compact_ts}_{sha_prefix}"
-
-
 class CountyLocator:
-    """Offline point-in-polygon resolver using US Census County GeoJSON and Shapely."""
+    """Offline point-in-polygon resolver using US Census County GeoJSON and Shapely STRtree."""
 
     def __init__(self, geojson_path: Path) -> None:
         self.geojson_path = geojson_path
-        self.polygons: List[Tuple[Any, str]] = []
+        self.polygons: List[Any] = []
+        self.labels: List[str] = []
+        self._tree: Any = None
         self._loaded = False
 
     def _ensure_loaded(self) -> None:
@@ -401,6 +371,7 @@ class CountyLocator:
             )
             return
 
+        from shapely import STRtree
         from shapely.geometry import shape
 
         with open(self.geojson_path, "r", encoding="utf-8") as f:
@@ -411,29 +382,31 @@ class CountyLocator:
             props = feat.get("properties", {})
             label = props.get("county_state")
             if geom and label:
-                self.polygons.append((shape(geom), label))
+                self.polygons.append(shape(geom))
+                self.labels.append(label)
+
+        if self.polygons:
+            self._tree = STRtree(self.polygons)
 
     def resolve(self, lat: Optional[float], lon: Optional[float]) -> Optional[str]:
         if lat is None or lon is None:
             return None
         self._ensure_loaded()
-        if not self.polygons:
+        if not self.polygons or self._tree is None:
             return None
 
         from shapely.geometry import Point
 
         pt = Point(float(lon), float(lat))
-        for poly, label in self.polygons:
-            if poly.contains(pt):
-                return label
-        best_label = None
-        best_dist = 0.15
-        for poly, label in self.polygons:
-            dist = poly.distance(pt)
-            if dist < best_dist:
-                best_dist = dist
-                best_label = label
-        return best_label
+        # intersects matches both interior and exact boundary points
+        hits = self._tree.query(pt, predicate="intersects")
+        if len(hits) > 0:
+            return self.labels[int(hits[0])]
+
+        nearest_idx = int(self._tree.nearest(pt))
+        if self.polygons[nearest_idx].distance(pt) < 0.15:
+            return self.labels[nearest_idx]
+        return None
 
 
 class OfflineBirdClassifier:
@@ -476,18 +449,11 @@ class OfflineBirdClassifier:
         self._lazy_init()
         if not self.enabled or self.model is None or self.text_features is None:
             return []
-        return bird_model.predict(self.model, self.preprocess, self.text_features, self.taxonomy_rows, image_path, k, self.allowed)
-
-
-def load_taxonomy(csv_path: Path) -> List[Dict[str, Any]]:
-    rows = []
-    with open(csv_path, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            row["sibley_category_order"] = int(row["sibley_category_order"])
-            row["taxonomic_order"] = int(row["taxonomic_order"])
-            rows.append(row)
-    return rows
+        try:
+            return bird_model.predict(self.model, self.preprocess, self.text_features, self.taxonomy_rows, image_path, k, self.allowed)
+        except Exception as exc:
+            console.print(f"  [yellow]AI couldn't read {image_path.name} ({exc}); falling back to fuzzy search.[/yellow]")
+            return []
 
 
 def load_catalog(yaml_path: Path) -> List[Dict[str, Any]]:
@@ -527,24 +493,49 @@ def save_catalog(yaml_path: Path, entries: List[Dict[str, Any]]) -> None:
         "# Notes are in double quotes, so apostrophes need no escaping; write a double quote as \\\".\n"
         "# Add 'locked: true' to an entry to stop any import from replacing its photo.\n\n"
     )
-    with open(yaml_path, "w", encoding="utf-8") as f:
-        f.write(header)
-        yaml.dump(
-            sorted_entries,
-            f,
-            Dumper=_CatalogDumper,
-            sort_keys=False,
-            allow_unicode=True,
-            default_flow_style=False,
-            width=4096,  # Keeps each note on one line, for easy hand editing
-        )
+    fd, tmp_name = tempfile.mkstemp(dir=yaml_path.parent, prefix=f".{yaml_path.name}.", suffix=".tmp")
+    tmp_path = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(header)
+            yaml.dump(
+                sorted_entries,
+                f,
+                Dumper=_CatalogDumper,
+                sort_keys=False,
+                allow_unicode=True,
+                default_flow_style=False,
+                width=4096,  # Keeps each note on one line, for easy hand editing
+            )
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, yaml_path)
+    except Exception:
+        tmp_path.unlink(missing_ok=True)
+        raise
+
+
+def confirm_discard(filepath: Path) -> bool:
+    """Confirm and delete a rejected photo from staging. Returns True if deleted."""
+    confirm = prompt(f"  Delete {filepath.name} from staging? [y/N]: ").strip().lower()
+    if confirm != "y":
+        console.print("  [dim]Left in staging.[/dim]")
+        return False
+    try:
+        filepath.unlink()
+        console.print(f"  [dim]Discarded {filepath.name} from staging.[/dim]")
+        return True
+    except OSError as exc:
+        console.print(f"  [red]Failed to delete {filepath.name}: {exc}[/red]")
+        return False
 
 
 def prompt_fuzzy_species(
     taxonomy_rows: List[Dict[str, Any]],
     existing_slugs: set,
     locked_slugs: Optional[set] = None,
-) -> Optional[Dict[str, Any]]:
+    allow_discard: bool = False,
+) -> Any:
     """Interactive fuzzy search across Common Name, 4-letter Banding Code, and Scientific Name."""
     lookup_map: Dict[str, Dict[str, Any]] = {}
     display_words: List[str] = []
@@ -559,13 +550,16 @@ def prompt_fuzzy_species(
         display_words.append(label)
 
     completer = FuzzyWordCompleter(display_words, WORD=True)
+    hint = "'s' to skip, 'd' to discard" if allow_discard else "'s' to skip"
     while True:
         user_input = prompt(
-            "  Fuzzy search species (type common name or 4-letter code, or 's' to skip): ",
+            f"  Fuzzy search species (type common name or 4-letter code, or {hint}): ",
             completer=completer,
         ).strip()
         if not user_input or user_input.lower() == "s":
             return None
+        if allow_discard and user_input.lower() == "d":
+            return _DISCARD
         if user_input in lookup_map:
             return lookup_map[user_input]
         if user_input.lower() in lookup_map:
@@ -578,68 +572,6 @@ def prompt_fuzzy_species(
         if len(matches) == 1:
             return matches[0]
         console.print("[red]  No exact match found. Pick from the autocomplete dropdown or try again.[/red]")
-
-
-def stamp_copyright(dest_path: Path, year: str) -> None:
-    """
-    Write copyright tags into an exported WebP: EXIF Artist/Copyright plus the XMP
-    fields (dc:creator, dc:rights, xmpRights:Marked/WebStatement) that image search
-    and photo apps read. Nothing else is added, so GPS and camera data stay stripped.
-    Compact XMP keeps this to under 1 KB per photo (default padding adds ~3 KB).
-    """
-    notice = f"© {year} {COPYRIGHT_HOLDER}. All rights reserved."
-    cmd_exif = [
-        "exiftool",
-        "-overwrite_original",
-        "-api",
-        "Compact=All",
-        f"-EXIF:Artist={COPYRIGHT_HOLDER}",
-        f"-EXIF:Copyright={notice}",
-        f"-XMP-dc:Creator={COPYRIGHT_HOLDER}",
-        f"-XMP-dc:Rights={notice}",
-        "-XMP-xmpRights:Marked=True",
-        f"-XMP-xmpRights:WebStatement={COPYRIGHT_LICENSE_URL}",
-        str(dest_path),
-    ]
-    subprocess.run(cmd_exif, capture_output=True, check=True)
-
-
-def process_image_to_webp(src_path: Path, dest_path: Path, year: str, width: int = 800, quality: int = 84) -> None:
-    """
-    Convert image to sRGB, resize to 800px wide, sharpen subtly, strip metadata & color profiles,
-    and run exiftool -all= as a belt-and-suspenders pass. Then write back only the copyright
-    tags, using the year the photo was taken.
-    """
-    dest_path.parent.mkdir(parents=True, exist_ok=True)
-    magick_bin = "magick" if shutil.which("magick") else "convert"
-
-    cmd_magick = [
-        magick_bin,
-        str(src_path),
-        "-colorspace",
-        "sRGB",
-        "-filter",
-        "Lanczos",
-        "-resize",
-        f"{width}x",
-        "-unsharp",
-        "0x0.75+0.75+0.008",
-        "-strip",
-        "-quality",
-        str(quality),
-        str(dest_path),
-    ]
-    subprocess.run(cmd_magick, check=True)
-
-    cmd_exif = [
-        "exiftool",
-        "-all=",
-        "-overwrite_original",
-        str(dest_path),
-    ]
-    subprocess.run(cmd_exif, capture_output=True, check=True)
-
-    stamp_copyright(dest_path, year)
 
 
 def backfill_ebird_codes(yaml_path: Path, catalog: List[Dict[str, Any]], taxonomy_rows: List[Dict[str, Any]]) -> None:
@@ -672,19 +604,316 @@ def backfill_ebird_codes(yaml_path: Path, catalog: List[Dict[str, Any]], taxonom
 
 
 def stamp_existing_photos(dest_dir: Path, catalog: List[Dict[str, Any]]) -> None:
-    """Write the copyright tags into every photo already in the catalog (e.g. after changing the notice)."""
-    stamped = 0
+    """Write copyright tags into every photo already in the catalog, batched by year."""
+    by_year: Dict[str, List[Path]] = defaultdict(list)
     for entry in catalog:
         photo = dest_dir / str(entry.get("filename", ""))
         if not photo.is_file():
             console.print(f"  [yellow]Missing photo for {entry.get('species_common')}: {photo.name}[/yellow]")
             continue
-        stamp_copyright(photo, str(entry.get("date_taken", ""))[:4])
-        stamped += 1
+        year = str(entry.get("date_taken", ""))[:4]
+        by_year[year].append(photo)
+    stamped = 0
+    for year, photos in sorted(by_year.items()):
+        stamp_copyright(photos, year)
+        stamped += len(photos)
     console.print(f"[bold green]Stamped copyright into {stamped} of {len(catalog)} photos.[/bold green]")
 
 
+def seed_recent_locations(catalog: List[Dict[str, Any]]) -> List[str]:
+    """Build recent location choices from the catalog's most recent entries, plus defaults."""
+    seen: List[str] = []
+    for entry in reversed(catalog):
+        loc = str(entry.get("location") or "").strip()
+        if loc and loc not in seen:
+            seen.append(loc)
+    for loc in DEFAULT_RECENT_LOCATIONS:
+        if loc not in seen:
+            seen.append(loc)
+    return seen
+
+
+def choose_species(
+    predictions: List[Tuple[Dict[str, Any], float]],
+    taxonomy_rows: List[Dict[str, Any]],
+    by_slug: Dict[str, Dict[str, Any]],
+    locked_slugs: set,
+    auto: bool,
+) -> Any:
+    """Pick a species via --auto threshold, AI suggestions menu, or fuzzy search. Returns row, None, or _DISCARD."""
+    if auto:
+        if predictions and predictions[0][1] > AUTO_MIN_CONFIDENCE:
+            chosen = predictions[0][0]
+            console.print(f"  [bold green][AUTO][/bold green] Selected {chosen['common_name']} ({predictions[0][1]:.1f}%)")
+            return chosen
+        conf = predictions[0][1] if predictions else 0.0
+        console.print(
+            f"  [yellow][AUTO-SKIP][/yellow] Highest confidence {conf:.1f}% is not above "
+            f"{AUTO_MIN_CONFIDENCE:.0f}%. Left in staging for a manual run."
+        )
+        return None
+
+    if predictions:
+        for rank, (sp, conf) in enumerate(predictions, start=1):
+            sp_entry = by_slug.get(slugify(sp["common_name"]))
+            exists_badge = (
+                " [bold red](locked, can't be replaced)[/bold red]"
+                if sp_entry and sp_entry.get("locked")
+                else " [bold yellow](already in catalog)[/bold yellow]"
+                if sp_entry
+                else ""
+            )
+            console.print(
+                f"    [[bold green]{rank}[/bold green]] {sp['common_name']} "
+                f"[dim]({sp['scientific_name']})[/dim] — {conf:.1f}%{exists_badge}"
+            )
+        console.print("    [[bold cyan]f[/bold cyan]] Fuzzy search taxonomy manually")
+        console.print("    [[bold red]s[/bold red]] Skip this image (leave in staging)")
+        console.print("    [[bold magenta]d[/bold magenta]] Discard this image (delete from staging)")
+
+        choice = prompt("  Select option [1/2/3/f/s/d, default: 1]: ").strip().lower() or "1"
+        if choice in {"1", "2", "3"} and int(choice) <= len(predictions):
+            return predictions[int(choice) - 1][0]
+        if choice == "s":
+            return None
+        if choice == "d":
+            return _DISCARD
+
+    return prompt_fuzzy_species(taxonomy_rows, set(by_slug.keys()), locked_slugs, allow_discard=True)
+
+
+def confirm_overwrite(
+    species_name: str,
+    existing_entry: Dict[str, Any],
+    dest_path: Path,
+    preview_mode: str,
+) -> str:
+    """Preview the existing catalog photo and ask whether to 'overwrite', 'skip', or 'discard'."""
+    old_src = existing_entry.get("source_filename", "unknown")
+    old_dt = existing_entry.get("date_taken", "unknown")
+    console.print(
+        f"  [bold yellow]Current catalog photo for {species_name}[/bold yellow] "
+        f"[dim](from {old_src} on {old_dt}):[/dim]"
+    )
+    if dest_path.is_file():
+        show_preview(dest_path, preview_mode)
+    confirm = prompt(
+        f"  Overwrite '{species_name}' with the new photo? "
+        "[y]es, [N]o (keep staged), [d]iscard staged [y/N/d]: "
+    ).strip().lower()
+    if confirm == "y":
+        return "overwrite"
+    if confirm == "d":
+        return "discard"
+    return "skip"
+
+
+def resolve_location(
+    exif: Dict[str, Any],
+    locator: CountyLocator,
+    recent_locations: List[str],
+    auto: bool,
+) -> Optional[str]:
+    """Resolve county/state offline via GPS, or prompt interactively when GPS is absent/outside US."""
+    lat = exif.get("GPSLatitude")
+    lon = exif.get("GPSLongitude")
+    county_state = locator.resolve(lat, lon)
+    if county_state:
+        console.print(f"  [dim]Offline GPS County Match:[/dim] [bold green]{county_state}[/bold green]")
+        return county_state
+    if auto:
+        console.print("  [yellow][AUTO-SKIP][/yellow] No GPS location in the photo. Left in staging for a manual run.")
+        return None
+
+    if lat is not None and lon is not None:
+        console.print(
+            f"  [yellow]GPS ({float(lat):.4f}, {float(lon):.4f}) is outside US county boundaries.[/yellow]"
+        )
+    else:
+        console.print("  [yellow]No GPS coordinates found in EXIF.[/yellow]")
+    for i, loc in enumerate(recent_locations[:4], start=1):
+        console.print(f"    [{i}] {loc}")
+    loc_choice = prompt(
+        "  Select location [1-4] or type custom 'County, ST' [default: 1]: "
+    ).strip() or "1"
+    if loc_choice.isdigit() and 1 <= int(loc_choice) <= len(recent_locations[:4]):
+        county_state = recent_locations[int(loc_choice) - 1]
+    else:
+        county_state = loc_choice
+    if county_state not in recent_locations:
+        recent_locations.insert(0, county_state)
+    return county_state
+
+
+def import_single_photo(
+    idx: int,
+    total: int,
+    filepath: Path,
+    *,
+    args: argparse.Namespace,
+    taxonomy_rows: List[Dict[str, Any]],
+    catalog: List[Dict[str, Any]],
+    by_slug: Dict[str, Dict[str, Any]],
+    known_sources: Dict[str, str],
+    locked_slugs: set,
+    locator: CountyLocator,
+    classifier: OfflineBirdClassifier,
+    recent_locations: List[str],
+    preview_mode: str,
+) -> bool:
+    """Process one staged photo. Mutates catalog/indexes in place and returns True if imported."""
+    filepath = sanitize_staged_filename(filepath)
+
+    exif = extract_exif(filepath)
+    iso_dt, from_exif = extract_timestamp(exif, filepath)
+    source_id = build_source_id(filepath, iso_dt)
+
+    if source_id in known_sources and not args.force:
+        console.print(
+            f"[yellow][SKIP] [{idx}/{total}] {filepath.name} "
+            f"already imported as {known_sources[source_id]} ({source_id})[/yellow]"
+        )
+        return False
+
+    console.rule(f"[bold cyan]File [{idx}/{total}]: {filepath.name}[/bold cyan]")
+    collage = is_collage(filepath)
+    if collage:
+        captured_note = "  [yellow](collage: when it was made; you'll be asked for the real date)[/yellow]"
+    elif not from_exif:
+        captured_note = "  [bold yellow](NO EXIF DATE — file modified time!)[/bold yellow]"
+    else:
+        captured_note = ""
+    console.print(f"  [dim]Captured:[/dim] {iso_dt}{captured_note}   [dim]Source ID:[/dim] {source_id}")
+
+    if collage and args.auto:
+        console.print(
+            "  [yellow][AUTO-SKIP][/yellow] Collages need their real date typed in. Left in staging for a manual run."
+        )
+        return False
+    if not from_exif and args.auto:
+        console.print(
+            "  [yellow][AUTO-SKIP][/yellow] Photo has no EXIF capture date (only file modified time). "
+            "Left in staging for a manual run."
+        )
+        return False
+
+    if not args.auto:
+        show_preview(filepath, preview_mode)
+
+    predictions = classifier.predict_top_k(filepath, k=3)
+    chosen_species = choose_species(predictions, taxonomy_rows, by_slug, locked_slugs, args.auto)
+    if chosen_species is _DISCARD:
+        confirm_discard(filepath)
+        return False
+    if not chosen_species:
+        if not args.auto:
+            console.print("  [dim]Skipped.[/dim]")
+        return False
+
+    slug = slugify(chosen_species["common_name"])
+    dest_filename = f"{slug}.webp"
+    dest_path = args.dest / dest_filename
+    existing_entry = by_slug.get(slug)
+
+    if existing_entry and existing_entry.get("locked"):
+        console.print(
+            f"  [bold red]WARNING: {chosen_species['common_name']} is locked, so this photo can't replace it.[/bold red]\n"
+            f"  [yellow]Its entry in {display_path(args.yaml)} has 'locked: true', which holds the current photo "
+            f"({existing_entry.get('source_filename', 'unknown')}, taken {existing_entry.get('date_taken', 'unknown')}) in place.\n"
+            f"  {filepath.name} was left in {display_path(args.staging)}/ untouched. To replace the photo, remove "
+            f"'locked: true' from that entry (or set it to false) and run the import again.[/yellow]"
+        )
+        return False
+
+    if existing_entry and args.auto:
+        console.print(
+            f"  [yellow][AUTO-SKIP][/yellow] {chosen_species['common_name']} is already in the catalog. "
+            "Auto mode never replaces a photo; left in staging for a manual run."
+        )
+        return False
+
+    if existing_entry:
+        decision = confirm_overwrite(chosen_species["common_name"], existing_entry, dest_path, preview_mode)
+        if decision == "discard":
+            confirm_discard(filepath)
+            return False
+        if decision != "overwrite":
+            console.print("  [dim]Kept existing photo. Skipping.[/dim]")
+            return False
+
+    # source_id keeps the original/fallback timestamp so the same file stays recognised on later runs
+    if collage:
+        iso_dt = prompt_collage_timestamp(filepath, iso_dt)
+        if not iso_dt:
+            console.print("  [dim]Skipped.[/dim]")
+            return False
+    elif not from_exif:
+        iso_dt = prompt_missing_exif_timestamp(filepath, iso_dt)
+        if not iso_dt:
+            console.print("  [dim]Skipped.[/dim]")
+            return False
+
+    county_state = resolve_location(exif, locator, recent_locations, args.auto)
+    if not county_state:
+        return False
+
+    note = ""
+    if not args.auto:
+        existing_note = str(existing_entry.get("notes", "") or "").strip() if existing_entry else ""
+        note = prompt_note(chosen_species["common_name"], existing_note)
+
+    console.print(
+        f"  [dim]Generating sRGB WebP (<=800px) and stripping metadata -> {display_path(dest_path)}[/dim]"
+    )
+    try:
+        process_image_to_webp(filepath, dest_path, year=iso_dt[:4])
+    except (subprocess.CalledProcessError, OSError) as exc:
+        console.print(
+            f"  [bold red]Failed to convert {filepath.name} ({exc}). Left in staging.[/bold red]"
+        )
+        return False
+
+    new_entry: Dict[str, Any] = {
+        "species_common": chosen_species["common_name"],
+        "species_scientific": chosen_species["scientific_name"],
+        "banding_code": chosen_species["banding_code"],
+        "slug": slug,
+        "filename": dest_filename,
+        "family": chosen_species["family"],
+        "sibley_category": chosen_species["sibley_category"],
+        "sibley_category_order": int(chosen_species["sibley_category_order"]),
+        "taxonomic_order": int(chosen_species["taxonomic_order"]),
+        "ebird_code": chosen_species.get("ebird_code", ""),
+        "date_taken": iso_dt,
+        "location": county_state,
+        "notes": note,
+        "source_filename": filepath.name,
+        "source_id": source_id,
+    }
+
+    if existing_entry:
+        known_sources.pop(existing_entry.get("source_id", ""), None)
+        catalog[:] = [e for e in catalog if e.get("slug") != slug]
+    catalog.append(new_entry)
+    by_slug[slug] = new_entry
+    known_sources[source_id] = chosen_species["common_name"]
+
+    save_catalog(args.yaml, catalog)
+    console.print(f"  [bold green]Saved {chosen_species['common_name']} ({dest_filename})[/bold green]")
+
+    try:
+        filepath.unlink()
+        console.print("  [dim]Removed original file from staging.[/dim]")
+    except Exception as e:
+        console.print(f"  [red]Failed to remove original file: {e}[/red]")
+    return True
+
+
 def main() -> None:
+    if hasattr(signal, "SIGHUP"):
+        # Ensure closing a terminal tab kills this process instead of leaving a ~1.5 GB model in RAM
+        signal.signal(signal.SIGHUP, signal.SIG_DFL)
+
     parser = argparse.ArgumentParser(description="Ingest staged bird photos into Jekyll portfolio.")
     parser.add_argument("--staging", type=Path, default=DEFAULT_STAGING_DIR, help="Staging folder path")
     parser.add_argument("--dest", type=Path, default=DEFAULT_DEST_DIR, help="Destination images folder")
@@ -780,208 +1009,34 @@ def main() -> None:
                 "\"terminal.integrated.enableImages\" setting.[/dim]"
             )
 
-    recent_locations = ["Ottawa County, MI", "Kent County, MI", "Allegan County, MI", "Muskegon County, MI"]
+    recent_locations = seed_recent_locations(catalog)
     modified_count = 0
 
-    for idx, filepath in enumerate(staged_files, start=1):
-        # --- NEW SANITIZATION BLOCK ---
-        # ImageMagick interprets square brackets as frame modifiers. 
-        # Sanitize them out of the filename before processing.
-        if "[" in filepath.name or "]" in filepath.name:
-            clean_name = filepath.name.replace("[", "").replace("]", "")
-            new_filepath = filepath.with_name(clean_name)
-            filepath.rename(new_filepath)
-            filepath = new_filepath
-        # ------------------------------
-
-        exif = extract_exif(filepath)
-        iso_dt = normalize_timestamp(exif, filepath)
-        source_id = build_source_id(filepath, iso_dt)
-
-        if source_id in known_sources and not args.force:
-            console.print(
-                f"[yellow][SKIP] [{idx}/{len(staged_files)}] {filepath.name} "
-                f"already imported as {known_sources[source_id]} ({source_id})[/yellow]"
+    try:
+        for idx, filepath in enumerate(staged_files, start=1):
+            imported = import_single_photo(
+                idx,
+                len(staged_files),
+                filepath,
+                args=args,
+                taxonomy_rows=taxonomy_rows,
+                catalog=catalog,
+                by_slug=by_slug,
+                known_sources=known_sources,
+                locked_slugs=locked_slugs,
+                locator=locator,
+                classifier=classifier,
+                recent_locations=recent_locations,
+                preview_mode=preview_mode,
             )
-            continue
-
-        console.rule(f"[bold cyan]File [{idx}/{len(staged_files)}]: {filepath.name}[/bold cyan]")
-        collage = is_collage(filepath)
-        captured_note = "  [yellow](collage: when it was made; you'll be asked for the real date)[/yellow]" if collage else ""
-        console.print(f"  [dim]Captured:[/dim] {iso_dt}{captured_note}   [dim]Source ID:[/dim] {source_id}")
-
-        if collage and args.auto:
-            console.print(
-                "  [yellow][AUTO-SKIP][/yellow] Collages need their real date typed in. Left in staging for a manual run."
-            )
-            continue
-
-        if not args.auto:
-            show_preview(filepath, preview_mode)
-
-        chosen_species: Optional[Dict[str, Any]] = None
-        predictions = classifier.predict_top_k(filepath, k=3)
-
-        if args.auto:
-            # Only a confident top suggestion is taken without asking; anything else
-            # stays in staging for a manual run
-            if predictions and predictions[0][1] > AUTO_MIN_CONFIDENCE:
-                chosen_species = predictions[0][0]
-                console.print(f"  [bold green][AUTO][/bold green] Selected {chosen_species['common_name']} ({predictions[0][1]:.1f}%)")
-            else:
-                conf = predictions[0][1] if predictions else 0.0
-                console.print(
-                    f"  [yellow][AUTO-SKIP][/yellow] Highest confidence {conf:.1f}% is not above "
-                    f"{AUTO_MIN_CONFIDENCE:.0f}%. Left in staging for a manual run."
-                )
-                continue
-        elif predictions:
-            for rank, (sp, conf) in enumerate(predictions, start=1):
-                sp_entry = by_slug.get(slugify(sp["common_name"]))
-                exists_badge = (
-                    " [bold red](locked, can't be replaced)[/bold red]"
-                    if sp_entry and sp_entry.get("locked")
-                    else " [bold yellow](already in catalog)[/bold yellow]"
-                    if sp_entry
-                    else ""
-                )
-                console.print(
-                    f"    [[bold green]{rank}[/bold green]] {sp['common_name']} "
-                    f"[dim]({sp['scientific_name']})[/dim] — {conf:.1f}%{exists_badge}"
-                )
-            console.print("    [[bold cyan]f[/bold cyan]] Fuzzy search taxonomy manually")
-            console.print("    [[bold red]s[/bold red]] Skip this image")
-
-            choice = prompt("  Select option [1/2/3/f/s, default: 1]: ").strip().lower() or "1"
-            if choice in {"1", "2", "3"} and int(choice) <= len(predictions):
-                chosen_species = predictions[int(choice) - 1][0]
-            elif choice == "s":
-                console.print("  [dim]Skipped.[/dim]")
-                continue
-            else:
-                chosen_species = prompt_fuzzy_species(taxonomy_rows, set(by_slug.keys()), locked_slugs)
-        else:
-            chosen_species = prompt_fuzzy_species(taxonomy_rows, set(by_slug.keys()), locked_slugs)
-
-        if not chosen_species:
-            console.print("  [dim]Skipped.[/dim]")
-            continue
-
-        slug = slugify(chosen_species["common_name"])
-        dest_filename = f"{slug}.webp"
-        dest_path = args.dest / dest_filename
-
-        existing_entry = by_slug.get(slug)
-
-        if existing_entry and existing_entry.get("locked"):
-            # Checked before anything is processed, so a locked photo and its entry are never touched
-            console.print(
-                f"  [bold red]WARNING: {chosen_species['common_name']} is locked, so this photo can't replace it.[/bold red]\n"
-                f"  [yellow]Its entry in {display_path(args.yaml)} has 'locked: true', which holds the current photo "
-                f"({existing_entry.get('source_filename', 'unknown')}, taken {existing_entry.get('date_taken', 'unknown')}) in place.\n"
-                f"  {filepath.name} was left in {display_path(args.staging)}/ untouched. To replace the photo, remove "
-                f"'locked: true' from that entry (or set it to false) and run the import again.[/yellow]"
-            )
-            continue
-
-        if existing_entry and args.auto:
-            console.print(
-                f"  [yellow][AUTO-SKIP][/yellow] {chosen_species['common_name']} is already in the catalog. "
-                "Auto mode never replaces a photo; left in staging for a manual run."
-            )
-            continue
-
-        if existing_entry:
-            old_src = existing_entry.get("source_filename", "unknown")
-            old_dt = existing_entry.get("date_taken", "unknown")
-            confirm = prompt(
-                f"  '{chosen_species['common_name']}' already exists (from {old_src} on {old_dt}). "
-                "Overwrite with this photo? [y/N]: "
-            ).strip().lower()
-            if confirm != "y":
-                console.print("  [dim]Kept existing photo. Skipping.[/dim]")
-                continue
-
-        # The source_id above keeps the collage's own timestamp, so the same file is
-        # still recognised as imported on later runs
-        if collage:
-            iso_dt = prompt_collage_timestamp(filepath, iso_dt)
-            if not iso_dt:
-                console.print("  [dim]Skipped.[/dim]")
-                continue
-
-        lat = exif.get("GPSLatitude")
-        lon = exif.get("GPSLongitude")
-        county_state = locator.resolve(lat, lon)
-
-        if county_state:
-            console.print(f"  [dim]Offline GPS County Match:[/dim] [bold green]{county_state}[/bold green]")
-        elif args.auto:
-            console.print("  [yellow][AUTO-SKIP][/yellow] No GPS location in the photo. Left in staging for a manual run.")
-            continue
-        else:
-            console.print("  [yellow]No GPS coordinates found in EXIF (or outside US county boundaries).[/yellow]")
-            for i, loc in enumerate(recent_locations[:4], start=1):
-                console.print(f"    [{i}] {loc}")
-            loc_choice = prompt(
-                "  Select location [1-4] or type custom 'County, ST' [default: 1]: "
-            ).strip() or "1"
-            if loc_choice.isdigit() and 1 <= int(loc_choice) <= len(recent_locations[:4]):
-                county_state = recent_locations[int(loc_choice) - 1]
-            else:
-                county_state = loc_choice
-            if county_state not in recent_locations:
-                recent_locations.insert(0, county_state)
-
-        # Asked last, so a photo skipped at an earlier question never costs a typed note.
-        # Auto mode only imports new species, and never asks anything.
-        note = ""
-        if not args.auto:
-            existing_note = str(existing_entry.get("notes", "") or "").strip() if existing_entry else ""
-            note = prompt_note(chosen_species["common_name"], existing_note)
-
+            if imported:
+                modified_count += 1
+    except (KeyboardInterrupt, EOFError):
         console.print(
-            f"  [dim]Generating 800px sRGB WebP and stripping metadata -> {display_path(dest_path)}[/dim]"
+            f"\n[yellow]Interrupted. Already saved {modified_count} photo(s) to {display_path(args.yaml)}; "
+            "remaining files were left in staging.[/yellow]"
         )
-        process_image_to_webp(filepath, dest_path, year=iso_dt[:4])
-
-        new_entry: Dict[str, Any] = {
-            "species_common": chosen_species["common_name"],
-            "species_scientific": chosen_species["scientific_name"],
-            "banding_code": chosen_species["banding_code"],
-            "slug": slug,
-            "filename": dest_filename,
-            "family": chosen_species["family"],
-            "sibley_category": chosen_species["sibley_category"],
-            "sibley_category_order": int(chosen_species["sibley_category_order"]),
-            "taxonomic_order": int(chosen_species["taxonomic_order"]),
-            "ebird_code": chosen_species.get("ebird_code", ""),
-            "date_taken": iso_dt,
-            "location": county_state,
-            "notes": note,
-            "source_filename": filepath.name,
-            "source_id": source_id,
-        }
-
-        if existing_entry:
-            catalog = [e for e in catalog if e.get("slug") != slug]
-        catalog.append(new_entry)
-        by_slug[slug] = new_entry
-        known_sources[source_id] = chosen_species["common_name"]
-        modified_count += 1
-
-        save_catalog(args.yaml, catalog)
-        console.print(
-            f"  [bold green]Saved {chosen_species['common_name']} ({dest_filename})[/bold green]"
-        )
-
-        # Remove the original file from the _staging folder now that it's processed
-        try:
-            filepath.unlink()
-            console.print("  [dim]Removed original file from staging.[/dim]")
-        except Exception as e:
-            console.print(f"  [red]Failed to remove original file: {e}[/red]")
-        # --------------------------
+        return
 
     console.rule("[bold green]Import Complete[/bold green]")
     console.print(f"Processed and updated [bold]{modified_count}[/bold] photo(s) in {args.yaml}.")

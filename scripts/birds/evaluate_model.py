@@ -27,8 +27,9 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 import yaml  # noqa: E402
 
+import bird_common  # noqa: E402
 import bird_model  # noqa: E402
-from import_birds import load_taxonomy, TAXONOMY_CSV_PATH  # noqa: E402
+from bird_common import TAXONOMY_CSV_PATH, load_taxonomy  # noqa: E402
 
 
 def main() -> None:
@@ -65,7 +66,7 @@ def main() -> None:
     misses = []
     started = time.perf_counter()
     for i, bird in enumerate(catalog, start=1):
-        kind = "collage" if "COLLAGE" in str(bird.get("source_filename", "")) else "single"
+        kind = "collage" if bird_common.is_collage(str(bird.get("source_filename", ""))) else "single"
         photo = REPO_ROOT / "assets" / "img" / "birds" / bird["filename"]
         top = bird_model.predict(model, preprocess, embeddings, rows, photo, k=3, allowed=allowed)
         guesses = [r["common_name"] for r, _ in top]

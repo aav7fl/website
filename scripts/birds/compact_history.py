@@ -139,21 +139,29 @@ def main() -> None:
     print(f"Saving backup bundle to {backup} ...")
     git("bundle", "create", str(backup), "--all", capture=False)
 
-    # git-filter-repo removes the 'origin' remote as a safety measure; put it back afterwards
-    origin_url = ""
-    if "origin" in git("remote").split():
-        origin_url = git("remote", "get-url", "origin").strip()
+    # git-filter-repo removes remotes as a safety measure; put them back afterwards
+    remotes: Dict[str, Tuple[str, str]] = {}
+    for name in git("remote").split():
+        fetch_url = git("remote", "get-url", name).strip()
+        push_url = git("remote", "get-url", "--push", name).strip()
+        remotes[name] = (fetch_url, push_url)
 
     filter_repo = shutil.which("git-filter-repo") or str(Path(sys.executable).with_name("git-filter-repo"))
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
         f.write("\n".join(old) + "\n")
         ids_file = f.name
-    print("Rewriting history with git-filter-repo ...")
-    subprocess.run([filter_repo, "--strip-blobs-with-ids", ids_file, "--force"], cwd=REPO_ROOT, check=True)
-    Path(ids_file).unlink()
+    try:
+        print("Rewriting history with git-filter-repo ...")
+        subprocess.run([filter_repo, "--strip-blobs-with-ids", ids_file, "--force"], cwd=REPO_ROOT, check=True)
+    finally:
+        Path(ids_file).unlink(missing_ok=True)
 
-    if origin_url and "origin" not in git("remote").split():
-        git("remote", "add", "origin", origin_url)
+    existing_remotes = set(git("remote").split())
+    for name, (fetch_url, push_url) in remotes.items():
+        if name not in existing_remotes and fetch_url:
+            git("remote", "add", name, fetch_url)
+            if push_url and push_url != fetch_url:
+                git("remote", "set-url", "--push", name, push_url)
 
     print(f"\nDone. Repository object size now: {repo_size_mb():.1f} MB")
     print(f"Backup bundle: {backup}  (restore with: git clone {backup} restored-repo)")

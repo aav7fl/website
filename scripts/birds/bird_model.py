@@ -17,7 +17,12 @@ rest of the pipeline works without the optional AI packages.
 
 import csv
 import hashlib
+import io
+import os
 import re
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -130,32 +135,86 @@ def species_prompt(row: Dict[str, Any]) -> str:
     return f"a photo of {row['common_name']} ({row['scientific_name']}), family {row['family']}"
 
 
+def prompts_hash(rows: List[Dict[str, Any]]) -> str:
+    """SHA-256 of every rendered species prompt, so taxonomy/prompt edits invalidate cached embeddings."""
+    joined = "\n".join(species_prompt(r) for r in rows)
+    return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+
+def _cache_matches(cached: Dict[str, Any], cache_key: str, names: List[str], expected_hash: str) -> bool:
+    """True if a loaded embeddings dict matches this model revision, species list, and prompts."""
+    if cached.get("model_revision") != cache_key or cached.get("common_names") != names:
+        return False
+    stored_hash = cached.get("prompt_hash")
+    # Accept legacy cache files that predate prompt_hash instead of forcing a surprise rebuild
+    return stored_hash is None or stored_hash == expected_hash
+
+
+def embeddings_cache_valid(rows: List[Dict[str, Any]], cache_key: str = MODEL_REVISION) -> bool:
+    """True if EMBEDDINGS_PATH exists and matches this model revision and rendered species prompts."""
+    if not EMBEDDINGS_PATH.exists():
+        return False
+    import torch
+
+    names = [r["common_name"] for r in rows]
+    expected_hash = prompts_hash(rows)
+    try:
+        cached = torch.load(EMBEDDINGS_PATH, map_location="cpu", weights_only=True)
+    except Exception:
+        return False
+    return _cache_matches(cached, cache_key, names, expected_hash)
+
+
 def text_embeddings(model: Any, tokenizer: Any, rows: List[Dict[str, Any]], cache_key: Optional[str] = None) -> Any:
     """
     Normalised text embeddings for every species in the taxonomy. With a cache_key
     (the pinned model's revision), they're cached in EMBEDDINGS_PATH and rebuilt
-    whenever the model revision or the species list changes.
+    whenever the model revision, species list, or prompt text changes.
     """
     import torch
 
     names = [r["common_name"] for r in rows]
+    expected_hash = prompts_hash(rows)
     if cache_key and EMBEDDINGS_PATH.exists():
         try:
             cached = torch.load(EMBEDDINGS_PATH, map_location="cpu", weights_only=True)
-            if cached.get("model_revision") == cache_key and cached.get("common_names") == names:
+            if _cache_matches(cached, cache_key, names, expected_hash):
                 return cached["embeddings"]
         except Exception:
             pass
 
+    if cache_key:
+        print(
+            f"Rebuilding species embeddings cache for {len(rows)} species (~1 min, one-time)...",
+            flush=True,
+        )
+
     feats = []
     with torch.no_grad():
-        for start in range(0, len(rows), 256):
-            batch = model.encode_text(tokenizer([species_prompt(r) for r in rows[start:start + 256]]))
+        # Batch size 64 keeps peak CPU RAM low in memory-constrained containers
+        for start in range(0, len(rows), 64):
+            batch = model.encode_text(tokenizer([species_prompt(r) for r in rows[start:start + 64]]))
             feats.append((batch / batch.norm(dim=-1, keepdim=True)).cpu())
     embeddings = torch.cat(feats, dim=0)
 
     if cache_key:
-        torch.save({"model_revision": cache_key, "common_names": names, "embeddings": embeddings}, EMBEDDINGS_PATH)
+        fd, tmp_name = tempfile.mkstemp(dir=EMBEDDINGS_PATH.parent, prefix=".embeddings.", suffix=".pt")
+        os.close(fd)
+        tmp_path = Path(tmp_name)
+        try:
+            torch.save(
+                {
+                    "model_revision": cache_key,
+                    "common_names": names,
+                    "prompt_hash": expected_hash,
+                    "embeddings": embeddings,
+                },
+                tmp_path,
+            )
+            os.replace(tmp_path, EMBEDDINGS_PATH)
+        except Exception:
+            tmp_path.unlink(missing_ok=True)
+            raise
     return embeddings
 
 
@@ -227,6 +286,30 @@ def allowed_species(rows: List[Dict[str, Any]], always_include: Iterable[str] = 
     return allowed, f"{len(allowed)} species (ABA checklist codes 1-{ABA_MAX_CODE}, US/Canada; --americas for Mexico/Central America)"
 
 
+def _open_rgb_image(image_path: Path) -> Any:
+    """
+    Load an upright RGB PIL Image. Applies EXIF orientation so portrait photos aren't
+    classified sideways, and falls back to ImageMagick for formats Pillow can't decode
+    directly (such as HEIC without pillow-heif).
+    """
+    from PIL import Image, ImageOps, UnidentifiedImageError
+
+    try:
+        with Image.open(image_path) as img:
+            return ImageOps.exif_transpose(img).convert("RGB")
+    except UnidentifiedImageError:
+        magick_bin = shutil.which("magick") or shutil.which("convert")
+        if not magick_bin:
+            raise
+        res = subprocess.run(
+            [magick_bin, f"{image_path.resolve()}[0]", "-auto-orient", "png:-"],
+            capture_output=True,
+            check=True,
+        )
+        with Image.open(io.BytesIO(res.stdout)) as img:
+            return img.convert("RGB")
+
+
 def predict(model: Any, preprocess: Any, embeddings: Any, rows: List[Dict[str, Any]], image_path: Path, k: int = 3, allowed: Optional[List[int]] = None) -> List[Tuple[Dict[str, Any], float]]:
     """
     Top-k (species row, confidence %) for one photo, averaging the full frame and a
@@ -234,13 +317,11 @@ def predict(model: Any, preprocess: Any, embeddings: Any, rows: List[Dict[str, A
     confidences are relative to plausible species.
     """
     import torch
-    from PIL import Image
 
-    with Image.open(image_path) as img:
-        rgb = img.convert("RGB")
-        w, h = rgb.size
-        centre = rgb.crop((int(w * 0.15), int(h * 0.15), int(w * 0.85), int(h * 0.85)))
-        batch = torch.stack([preprocess(rgb), preprocess(centre)])
+    rgb = _open_rgb_image(image_path)
+    w, h = rgb.size
+    centre = rgb.crop((int(w * 0.15), int(h * 0.15), int(w * 0.85), int(h * 0.85)))
+    batch = torch.stack([preprocess(rgb), preprocess(centre)])
 
     with torch.no_grad():
         feats = model.encode_image(batch)

@@ -151,79 +151,93 @@ task :default => [:serve]
 # over the bind mount added ~45s to every `rake serve` start.
 BIRDS_PYTHON = '/opt/venv-birds/bin/python'
 
+def run_birds_script(script, *default_args, forward_extra: true)
+  extra_args = if forward_extra
+                 args = ARGV.drop_while { |arg| arg != '--' }.drop(1)
+                 args.each { |arg| task(arg.to_sym) {} unless Rake::Task.task_defined?(arg) }
+                 args
+               else
+                 []
+               end
+  sh(BIRDS_PYTHON, "scripts/birds/#{script}", *default_args, *extra_args) do |ok, status|
+    next if ok
+
+    if status&.signaled?
+      sig = status.termsig
+      name = Signal.signame(sig) || sig.to_s
+      exit(128 + sig) if name == 'INT'
+      hint = if name == 'KILL'
+               ' (usually out of memory in the container; check `ps aux` for a leftover python process or restart the container)'
+             else
+               ''
+             end
+      abort "scripts/birds/#{script} was killed by signal #{sig} (SIG#{name})#{hint}"
+    end
+    exit(status&.exitstatus || 1)
+  end
+end
+
 namespace :birds do
   desc "Set up offline data: eBird codes, ABA checklist, the pinned AI model and its embeddings (safe to re-run)"
   task :setup do
-    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
+    run_birds_script('setup_offline_assets.py')
   end
 
   # Options after "--" go to the migration, e.g. -- --yes
   desc "After an eBird taxonomy update: rebuild taxonomy_sibley.csv, migrate the catalog to it (renames, splits), rebuild embeddings"
   task :update_taxonomy do
-    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
-    extra_args.each { |arg| task arg.to_sym do ; end }
-    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py --refresh-taxonomy --skip-models"
-    sh "#{BIRDS_PYTHON} scripts/birds/migrate_taxonomy.py #{extra_args.join(' ')}"
-    sh "#{BIRDS_PYTHON} scripts/birds/setup_offline_assets.py"
+    run_birds_script('setup_offline_assets.py', '--refresh-taxonomy', '--skip-models', forward_extra: false)
+    run_birds_script('migrate_taxonomy.py')
+    run_birds_script('setup_offline_assets.py', forward_extra: false)
   end
 
   desc "Update _data/birds.yml to the current taxonomy_sibley.csv (options after --, e.g. -- --check or -- --yes)"
   task :migrate_taxonomy do
-    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
-    extra_args.each { |arg| task arg.to_sym do ; end }
-    sh "#{BIRDS_PYTHON} scripts/birds/migrate_taxonomy.py #{extra_args.join(' ')}"
+    run_birds_script('migrate_taxonomy.py')
   end
 
   desc "Import photos from _staging/ into assets/img/birds/ and _data/birds.yml (options after --, e.g. -- --americas)"
   task :import do
-    # Capture any arguments passed after a "--" separator
-    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
-    
-    # Prevent Rake from trying to execute those arguments as if they were task names
-    extra_args.each { |arg| task arg.to_sym do ; end }
-
-    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py #{extra_args.join(' ')}"
+    run_birds_script('import_birds.py')
   end
 
   desc "Report (or, with -- --apply, remove) old bird photo versions from git history. Rewrites history!"
   task :compact_history do
-    # Capture any arguments passed after a "--" separator (e.g. --apply)
-    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
-    extra_args.each { |arg| task arg.to_sym do ; end }
-
-    sh "#{BIRDS_PYTHON} scripts/birds/compact_history.py #{extra_args.join(' ')}"
+    run_birds_script('compact_history.py')
   end
 
   desc "Run auto-ingestion for high-confidence AI matches (>90%)"
   task :auto do
-    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --auto"
+    run_birds_script('import_birds.py', '--auto')
   end
 
   desc "Update the bird pipeline's Python packages now (only switches if the new versions pass the checks)"
   task :update_deps do
-    sh "#{BIRDS_PYTHON} scripts/birds/update_deps.py"
+    run_birds_script('update_deps.py')
   end
 
   desc "Check every bird pipeline dependency and explain how to fix anything broken"
   task :doctor do
-    sh "#{BIRDS_PYTHON} scripts/birds/doctor.py"
+    run_birds_script('doctor.py')
+  end
+
+  desc "Run the bird pipeline's unit test suite"
+  task :test do
+    sh BIRDS_PYTHON, '-m', 'unittest', 'discover', '-s', 'scripts/birds', '-p', 'test_*.py', '-v'
   end
 
   desc "Measure the AI model's accuracy on the catalog photos (try a candidate with -- --model-dir DIR)"
   task :evaluate do
-    extra_args = ARGV.drop_while { |arg| arg != "--" }.drop(1)
-    extra_args.each { |arg| task arg.to_sym do ; end }
-
-    sh "#{BIRDS_PYTHON} scripts/birds/evaluate_model.py #{extra_args.join(' ')}"
+    run_birds_script('evaluate_model.py')
   end
 
   desc "Write copyright tags into every already-imported bird photo"
   task :copyright do
-    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --stamp-copyright"
+    run_birds_script('import_birds.py', '--stamp-copyright')
   end
 
   desc "Force re-import of all photos in _staging/"
   task :reimport do
-    sh "#{BIRDS_PYTHON} scripts/birds/import_birds.py --force"
+    run_birds_script('import_birds.py', '--force')
   end
 end

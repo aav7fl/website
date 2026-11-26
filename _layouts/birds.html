@@ -32,9 +32,11 @@ layout: default
 
   <!-- Key stats as small pills right under the title -->
   {% if latest_bird %}
+    {% assign latest_bird_slug = latest_bird.slug | default: "" | strip %}
+    {% if latest_bird_slug == "" %}{% assign latest_bird_slug = latest_bird.species_common | slugify %}{% endif %}
     <ul class="no-list bird-stats" role="list">
       <li><strong>{{ site.data.birds.size }}</strong> species photographed</li>
-      <li>Last updated: <a href="#{{ latest_bird.species_common | slugify }}">{{ latest_bird.species_common }}</a> <time datetime="{{ latest_bird.date_taken | date: '%Y-%m-%d' }}">({{ latest_bird.date_taken | date: "%b %-d, %Y" }})</time></li>
+      <li>Last updated: <a href="#{{ latest_bird_slug }}">{{ latest_bird.species_common }}</a> <time datetime="{{ latest_bird.date_taken | date: '%Y-%m-%d' }}">({{ latest_bird.date_taken | date: "%b %-d, %Y" }})</time></li>
     </ul>
   {% endif %}
 
@@ -87,7 +89,8 @@ layout: default
           <div class="bird-grid">
             {% assign category_birds = category.items | sort: "taxonomic_order" %}
             {% for bird in category_birds %}
-              {% assign bird_slug = bird.species_common | slugify %}
+              {% assign bird_slug = bird.slug | default: "" | strip %}
+              {% if bird_slug == "" %}{% assign bird_slug = bird.species_common | slugify %}{% endif %}
               <!-- Collages (several photos combined into one image) say so in their alt text -->
               {% if bird.source_filename contains "COLLAGE" %}
                 {% capture bird_alt %}Collage of {{ bird.species_common }} photos{% endcapture %}

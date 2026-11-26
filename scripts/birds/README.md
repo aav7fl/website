@@ -25,11 +25,11 @@ For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes be
 
 1. **Already imported?** If this exact photo is a bird's current photo, it's skipped (`[SKIP]`).
 2. **Preview.** A small preview of the photo is drawn in the terminal. See [Photo preview](#photo-preview).
-3. **Species.** The AI shows its top 3 guesses with confidence. Press `1`, `2` or `3` to pick one, `f` to search by name, or `s` to skip the photo.
+3. **Species.** The AI shows its top 3 guesses with confidence. Press `1`, `2` or `3` to pick one, `f` to search by name, `s` to skip the photo (leaving it staged), or `d` to discard (delete it from `_staging/` after confirmation).
    - Fuzzy search matches the common name, scientific name or 4-letter banding code across every species, even ones the AI isn't considering.
    - Guesses are marked "(already in catalog)" or "(locked, can't be replaced)".
-4. **Replacing a photo.** If the species is already in the catalog, it asks before overwriting.
-5. **Collage date.** For a Google Photos collage (named like `20261023_142445-COLLAGE.jpg`), it asks when the photos were taken. See [Collages](#collages).
+4. **Replacing a photo.** If the species is already in the catalog, it previews the current catalog photo right in the terminal and asks before overwriting (`y` to replace, `n` to keep staged, `d` to discard the staged photo).
+5. **Collage or missing EXIF date.** For a Google Photos collage (named like `20261023_142445-COLLAGE.jpg`), or any photo missing an EXIF capture date, it warns you and asks when the photo was taken. See [Collages](#collages).
 6. **Location.** The county comes from the photo's GPS, offline. Without GPS, pick one of your recent counties or type `County, ST`.
 7. **Note.** Type a note for the bird, or press Enter for none. If the photo being replaced has a note, choose `r` to keep it, `w` to wipe it, or `n` to type a new one.
 8. **Saved.** The photo is converted and stamped, the catalog entry is written, and the staged original is removed.
@@ -50,7 +50,8 @@ For each photo in `_staging/` (in natural filename order, so `DSC_0099` comes be
 Imports without any prompts, but only when it's safe:
 - the AI's top suggestion is above 90% confidence,
 - the species isn't already in the catalog (auto mode never replaces a photo), and
-- the photo has GPS, so the county is known, and
+- the photo has GPS, so the county is known,
+- the photo has an EXIF capture date (not just a file modified time), and
 - it isn't a collage, whose date has to be typed in.
 
 Everything else is logged as `[AUTO-SKIP]` with the reason and left in `_staging/`, so a normal `rake birds:import` afterwards handles just the leftovers.
@@ -100,7 +101,8 @@ Add or edit `notes:` on any entry in `_data/birds.yml` (for example `notes: 'Vag
 | `rake birds:import` | Interactive import (see "Options" above) |
 | `rake birds:auto` | No-prompt import of the safe cases |
 | `rake birds:reimport` | Import with `--force` |
-| `rake birds:doctor` | Health check of every dependency, with the fix for anything broken |
+| `rake birds:doctor` | Health check of every dependency, catalog integrity, and EXIF/GPS privacy audit |
+| `rake birds:test` | Run the fast unit test suite (`scripts/birds/test_birds.py`) |
 | `rake birds:evaluate` | AI accuracy on your own catalog photos. Options: `-- --limit N`, `--americas`, `--model-dir DIR` |
 | `rake birds:update_deps` | Check for Python package updates now (normally automatic, about monthly) |
 | `rake birds:copyright` | Re-stamp the copyright tags into every photo (e.g. after changing the wording) |
@@ -126,7 +128,8 @@ The AI model lives on your Mac's disk (`scripts/birds/models/`), so it survives 
 Run `rake birds:doctor`. It checks:
 - the system tools (exiftool, ImageMagick)
 - every locked package
-- the county map, the taxonomy and the catalog's photo files
+- the county map, the taxonomy, and catalog integrity (missing/orphan photos, duplicates, dates, locations, slugs)
+- EXIF/XMP metadata audit across all published photos (zero GPS leaks, copyright tags present)
 - the ABA checklist
 - the AI model (checksums, loading, and recognising a known photo)
 - the last automatic update check
@@ -155,18 +158,19 @@ The photo's GPS position is matched offline against US county boundaries (`us_co
 
 ### Conversion, privacy and copyright
 1. **ImageMagick:**
-   - converts to sRGB first, so wide-gamut photos don't look washed out
-   - resizes to 800px wide (Lanczos)
-   - sharpens lightly and strips profiles
-   - saves WebP at quality 84
-2. **exiftool removes all metadata:** GPS, camera and original timestamps never reach the site.
-3. **Copyright tags are written back** (`stamp_copyright`):
-   - EXIF Artist and Copyright
-   - XMP creator, rights, "copyrighted", and a link to `assets/img/birds/LICENSE.txt`
-   - the year comes from when the photo was taken
-   - compact XMP keeps this under 1 KB per photo
+   - takes only the first frame (`[0]`, safe for multi-frame HEIC/TIFF/motion photos) and orients upright (`-auto-orient`)
+   - converts embedded wide-gamut ICC profiles (Display P3, Adobe RGB) to sRGB via an ICC profile transform before stripping, so colors don't look washed out
+   - shrinks photos wider than 800px (`800x>`, Lanczos) without upscaling smaller crops
+   - sharpens lightly, strips profiles, and saves WebP at quality 84
+2. **Single-pass exiftool strip & copyright stamp (`stamp_copyright`):**
+   - removes all remaining metadata (GPS, camera, original timestamps never reach the site) and writes back only:
+     - EXIF Artist and Copyright
+     - XMP creator, rights, "copyrighted", and a link to `assets/img/birds/LICENSE.txt`
+     - the year comes from when the photo was taken
+     - compact XMP keeps this under 1 KB per photo
+   - writes atomically via a temporary file so interrupted runs never leave a partial WebP
 
-   `rake birds:copyright` re-stamps every existing photo.
+   `rake birds:copyright` re-stamps every existing photo (batched by year).
 
 ---
 
@@ -273,7 +277,7 @@ This does three things:
 
 To migrate the catalog on its own (e.g. after fixing a skipped bird, or to preview): `rake birds:migrate_taxonomy -- --check` writes nothing; `-- --yes` answers every question with the default, taking the first candidate of a split, so check those. `rake birds:doctor` warns while any bird doesn't match the taxonomy. Review `git diff` (the taxonomy, the catalog and any renamed photos) before committing.
 
-`rake birds:setup -- --force` isn't a shortcut: the setup task doesn't forward options. Running `setup_offline_assets.py --force` directly does the same rebuild but also re-downloads the AI model.
+`rake birds:setup -- --force` rebuilds the taxonomy and re-downloads the AI model; `rake birds:setup -- --refresh-taxonomy --skip-models` rebuilds only the taxonomy without touching the model.
 
 ### Staying up to date (automatic)
 You never edit package versions. `requirements.in` / `requirements-ai.in` list what's needed. `requirements.txt` / `requirements-ai.txt` are generated lock files with the exact versions that last passed the checks.
@@ -368,13 +372,15 @@ Paths are relative to the repository root.
     Rakefile                                 # rake birds:* tasks
     scripts/birds/
         import_birds.py                      # The import (rake birds:import / auto / reimport / copyright)
+        bird_common.py                       # Shared stdlib-only helpers (slugs, dates, image conversion, requirements)
         bird_model.py                        # The pinned AI model: download, verify, load, species list, predict
         setup_offline_assets.py              # rake birds:setup
-        doctor.py                            # rake birds:doctor
+        doctor.py                            # rake birds:doctor (dependencies, catalog integrity, privacy audit)
         evaluate_model.py                    # rake birds:evaluate
         update_deps.py                       # Automatic tested package updates (rake birds:update_deps)
         compact_history.py                   # rake birds:compact_history
         migrate_taxonomy.py                  # rake birds:migrate_taxonomy (and part of update_taxonomy)
+        test_birds.py                        # Unit test suite (rake birds:test, also run in CI and update_deps)
         taxonomy_sibley.csv                  # 2,065 species with Sibley category, taxonomic order, eBird code
         sibley_family_map.json               # Bird family -> Sibley category
         us_counties.geojson                  # US county boundaries (committed)
