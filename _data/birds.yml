@@ -1850,21 +1850,6 @@
   notes: ""
   source_filename: DSCN2443.jpg
   source_id: DSCN2443.jpg_20260821T103207_eb39ed90
-- species_common: Green-winged Teal
-  species_scientific: Anas crecca
-  banding_code: GWTE
-  slug: green-winged-teal
-  filename: green-winged-teal.webp
-  family: Anatidae
-  sibley_category: Waterfowl
-  sibley_category_order: 1
-  taxonomic_order: 625
-  ebird_code: gnwtea
-  date_taken: '2026-08-21T12:04:59'
-  location: Muskegon County, MI
-  notes: ""
-  source_filename: DSCN2951.jpg
-  source_id: DSCN2951.jpg_20260821T120459_36e85530
 - species_common: Bonaparte's Gull
   species_scientific: Chroicocephalus philadelphia
   banding_code: BOGU
@@ -2645,21 +2630,6 @@
   notes: "Female & Male. Also present; Gadwall"
   source_filename: DSCN8559.jpg
   source_id: DSCN8559.jpg_20261114T101441_d047f1af
-- species_common: Lesser Scaup
-  species_scientific: Aythya affinis
-  banding_code: LESC
-  slug: lesser-scaup
-  filename: lesser-scaup.webp
-  family: Anatidae
-  sibley_category: Waterfowl
-  sibley_category_order: 1
-  taxonomic_order: 719
-  ebird_code: lessca
-  date_taken: '2026-11-14T12:28:00'
-  location: Muskegon County, MI
-  notes: "Male & Female"
-  source_filename: 20261114_232225-COLLAGE.jpg
-  source_id: 20261114_232225-COLLAGE.jpg_20261114T232225_4e4c5c21
 - species_common: Ring-necked Duck
   species_scientific: Aythya collaris
   banding_code: RNDU
@@ -2690,21 +2660,6 @@
   notes: "(Probably) Male & Female"
   source_filename: DSCN9187.jpg
   source_id: DSCN9187.jpg_20261114T131749_f7bf3435
-- species_common: Northern Harrier
-  species_scientific: Circus hudsonius
-  banding_code: NOHA
-  slug: northern-harrier
-  filename: northern-harrier.webp
-  family: Accipitridae
-  sibley_category: Diurnal Raptors
-  sibley_category_order: 7
-  taxonomic_order: 8383
-  ebird_code: norhar2
-  date_taken: '2026-11-14T13:43:47'
-  location: Muskegon County, MI
-  notes: ""
-  source_filename: DSCN9327.jpg
-  source_id: DSCN9327.jpg_20261114T134347_06c6c018
 - species_common: Hooded Merganser
   species_scientific: Lophodytes cucullatus
   banding_code: HOME
@@ -2810,3 +2765,78 @@
   notes: ""
   source_filename: short-eared-owl-collage.png
   source_id: short-eared-owl-collage.png_20261123T173932_bf4a0aef
+- species_common: Green-winged Teal
+  species_scientific: Anas crecca
+  banding_code: GWTE
+  slug: green-winged-teal
+  filename: green-winged-teal.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 625
+  ebird_code: gnwtea
+  date_taken: '2026-11-27T14:14:00'
+  location: Muskegon County, MI
+  notes: "Male & Female"
+  source_filename: 20261127_222503-COLLAGE.jpg
+  source_id: 20261127_222503-COLLAGE.jpg_20261127T222503_8562b118
+- species_common: Tundra Swan
+  species_scientific: Cygnus columbianus
+  banding_code: TUSW
+  slug: tundra-swan
+  filename: tundra-swan.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 390
+  ebird_code: tunswa
+  date_taken: '2026-11-27T14:21:16'
+  location: Muskegon County, MI
+  notes: "Adults and Juvenile"
+  source_filename: DSCN0121.jpg
+  source_id: DSCN0121.jpg_20261127T142116_4586e436
+- species_common: Glaucous Gull
+  species_scientific: Larus hyperboreus
+  banding_code: GLGU
+  slug: glaucous-gull
+  filename: glaucous-gull.webp
+  family: Laridae
+  sibley_category: Gulls, Terns, Jaegers, and Skimmers
+  sibley_category_order: 10
+  taxonomic_order: 6612
+  ebird_code: glagul
+  date_taken: '2026-11-27T15:21:00'
+  location: Muskegon County, MI
+  notes: ""
+  source_filename: DSCN0261.jpg
+  source_id: DSCN0261.jpg_20261127T152100_78e2f899
+- species_common: Lesser Scaup
+  species_scientific: Aythya affinis
+  banding_code: LESC
+  slug: lesser-scaup
+  filename: lesser-scaup.webp
+  family: Anatidae
+  sibley_category: Waterfowl
+  sibley_category_order: 1
+  taxonomic_order: 719
+  ebird_code: lessca
+  date_taken: '2026-11-27T15:26:00'
+  location: Muskegon County, MI
+  notes: "Male & Female"
+  source_filename: 20261127_221744-COLLAGE.jpg
+  source_id: 20261127_221744-COLLAGE.jpg_20261127T221744_b1e8a8b0
+- species_common: Northern Harrier
+  species_scientific: Circus hudsonius
+  banding_code: NOHA
+  slug: northern-harrier
+  filename: northern-harrier.webp
+  family: Accipitridae
+  sibley_category: Diurnal Raptors
+  sibley_category_order: 7
+  taxonomic_order: 8383
+  ebird_code: norhar2
+  date_taken: '2026-11-27T15:39:00'
+  location: Muskegon County, MI
+  notes: ""
+  source_filename: 20261127_224222-COLLAGE.jpg
+  source_id: 20261127_224222-COLLAGE.jpg_20261127T224222_4d611785
